@@ -671,3 +671,126 @@ body.dark {
   opacity: 0.6;
   font-size: 0.9rem;
 }
+
+/* ===== ULTRA POLISH ===== */
+
+/* Hero CTA buttons equal width on mobile */
+@media (max-width: 500px) {
+  .hero__cta {
+    flex-direction: column;
+    width: 100%;
+    padding: 0 20px;
+  }
+  .hero__cta .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* Smooth hover for all cards */
+.product-card,
+.testimonial-card,
+.ad-banner,
+.rating-card {
+  transition: transform 0.3s cubic-bezier(0.2, 0.9, 0.4, 1),
+              box-shadow 0.3s ease,
+              border-color 0.2s ease;
+}
+
+/* Active state for buttons (pressed effect) */
+.btn:active,
+.product-card__btn:active,
+.tab-btn:active,
+.cart-fab:active {
+  transform: scale(0.96) !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1) !important;
+}
+
+/* Cart sidebar entrance animation */
+.cart-sidebar {
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Ensure ripple is above background but below text */
+.ripple {
+  isolation: isolate;
+}
+.ripple > * {
+  position: relative;
+  z-index: 2;
+}
+.ripple::after {
+  z-index: 1;
+}
+
+/* Category description animation */
+.category-header {
+  transition: opacity 0.2s ease;
+}
+
+/* Testimonial card glow on hover */
+.testimonial-card:hover {
+  box-shadow: 0 0 25px rgba(212, 175, 55, 0.2);
+  border-left-width: 8px;
+}
+
+/* Footer links underline animation */
+.footer__links a {
+  position: relative;
+  padding-bottom: 4px;
+}
+.footer__links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--primary);
+  transition: width 0.3s ease;
+}
+.footer__links a:hover::after {
+  width: 100%;
+}
+
+/* Ad banner pulse animation */
+.ad-banner {
+  animation: softPulse 3s infinite alternate;
+}
+@keyframes softPulse {
+  0% { box-shadow: 0 5px 20px rgba(212, 175, 55, 0.1); }
+  100% { box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3); }
+}
+
+/* Tab bar sticky shadow */
+.tabs {
+  transition: box-shadow 0.3s ease;
+}
+.tabs.sticky-shadow {
+  box-shadow: 0 10px 20px -10px rgba(0,0,0,0.1);
+}
+
+/* Product card price animation on hover */
+.product-card:hover .product-card__price {
+  transform: scale(1.05);
+  transition: transform 0.2s ease;
+}
+
+/* Toast entrance animation */
+.toast {
+  animation: slideUpToast 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+@keyframes slideUpToast {
+  0% { transform: translateY(20px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+/* Floating orbs mouse parallax (desktop) */
+@media (min-width: 768px) {
+  body {
+    perspective: 1000px;
+  }
+  .hero__glow {
+    transition: transform 0.1s ease-out;
+  }
+}
