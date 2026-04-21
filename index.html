@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rattle Empire | Second Hand Deals in Uganda</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container header__container">
+            <a href="#" class="logo">
+                <span class="logo__icon">👑</span>
+                <span class="logo__text">Rattle Empire</span>
+            </a>
+            <div style="display: flex; gap: 12px; align-items: center;">
+                <button class="theme-toggle ripple" id="themeToggle">
+                    <i class="fas fa-moon"></i> Dark
+                </button>
+                <button class="btn btn--secondary ripple" id="authBtn">
+                    <i class="fas fa-user"></i> Sign In
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero__glow"></div>
+        <div class="container">
+            <div class="hero__badge">Uganda's #1</div>
+            <h1 class="hero__title">Second Hand Marketplace</h1>
+            <p class="hero__subtitle">Quality electronics, furniture & luxury items — certified and delivered.</p>
+            <div class="hero__cta">
+                <a href="#deals" class="btn btn--primary ripple">
+                    <i class="fas fa-shopping-bag"></i> Shop Deals
+                </a>
+                <a href="https://wa.me/256752937558" class="btn btn--secondary ripple" target="_blank">
+                    <i class="fab fa-whatsapp"></i> Contact
+                </a>            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container" id="deals">
+        <!-- Tabs -->
+        <div class="tabs">
+            <div class="tabs__scroller">
+                <button class="tab-btn active ripple" data-tab="electronics">
+                    <i class="fas fa-laptop"></i> Electronics
+                </button>
+                <button class="tab-btn ripple" data-tab="furniture">
+                    <i class="fas fa-couch"></i> Furniture
+                </button>
+                <button class="tab-btn ripple" data-tab="luxury">
+                    <i class="fas fa-gem"></i> Luxury
+                </button>
+                <button class="tab-btn ripple" data-tab="academy">
+                    <i class="fas fa-graduation-cap"></i> Academy
+                </button>
+                <button class="tab-btn ripple" data-tab="tech">
+                    <i class="fas fa-microchip"></i> Tigertec
+                </button>
+                <button class="tab-btn ripple" data-tab="blog">
+                    <i class="fas fa-newspaper"></i> Blog
+                </button>
+            </div>
+        </div>
+
+        <!-- Search & Sort -->
+        <div class="search-bar">
+            <input type="text" class="search-input" id="searchInput" placeholder="🔍 Search products...">
+            <select class="sort-select" id="sortSelect">
+                <option value="default">Sort by</option>
+                <option value="price-asc">Price: Low to High</option>
+                <option value="price-desc">Price: High to Low</option>
+                <option value="name">Name</option>
+            </select>
+        </div>
+
+        <!-- Category Header -->
+        <div class="category-header">
+            <h2 class="category-title" id="categoryTitle">
+                <i class="fas fa-laptop"></i> <span>Electronics</span>
+            </h2>
+            <p class="category-desc" id="categoryDesc">Certified pre-owned tech — phones, laptops, and accessories.</p>
+        </div>
+
+        <!-- Product Grid -->        <div class="product-grid" id="productGrid"></div>
+
+        <!-- Ad Banner -->
+        <div class="ad-banner">
+            📢 Advertise with Rattle Empire — Contact 0752937558
+        </div>
+
+        <!-- Testimonials Sidebar (Desktop) -->
+        <div class="testimonials-sidebar">
+            <h3 style="font-size: 1.2rem; margin-bottom: 10px;">
+                <i class="fas fa-star" style="color: var(--primary);"></i> Customer Love
+            </h3>
+            <div class="testimonial-card" id="testimonialCard"></div>
+        </div>
+    </main>
+
+    <!-- Cart Sidebar -->
+    <aside class="cart-sidebar" id="cartSidebar">
+        <div class="cart__header">
+            <h2><i class="fas fa-shopping-basket"></i> Your Basket</h2>
+            <button class="cart__close" id="closeCart">&times;</button>
+        </div>
+        <div class="cart__items" id="cartItems">
+            <p style="text-align: center; opacity: 0.6; margin-top: 40px;">Your basket is empty</p>
+        </div>
+        <div class="cart__footer">
+            <div class="cart__total">Total: <span id="cartTotal">UGX 0</span></div>
+            <button class="btn btn--primary btn--full ripple" id="checkoutBtn">
+                <i class="fas fa-credit-card"></i> Checkout (MoMo)
+            </button>
+        </div>
+    </aside>
+
+    <!-- Payment Modal -->
+    <div class="payment-modal" id="paymentModal">
+        <div class="payment-modal__content">
+            <h2 style="margin-bottom: 20px;"><i class="fas fa-mobile-alt"></i> Mobile Money Checkout</h2>
+            <p style="margin-bottom: 20px; opacity: 0.8;">Total: <strong id="modalTotal" style="color: var(--primary); font-size: 1.4rem;">UGX 0</strong></p>
+            <input type="tel" class="payment-input" id="phoneNumber" placeholder="Phone Number (e.g., 0772123456)">
+            <select class="payment-select" id="networkSelect">
+                <option value="MTN">MTN Mobile Money</option>
+                <option value="Airtel">Airtel Money</option>
+            </select>
+            <div style="display: flex; gap: 12px; margin-top: 20px;">
+                <button class="btn btn--secondary btn--full ripple" id="cancelPayment" style="flex: 1;">Cancel</button>
+                <button class="btn btn--primary btn--full ripple" id="confirmPayment" style="flex: 1;">
+                    <i class="fas fa-check"></i> Confirm Payment
+                </button>
+            </div>
+        </div>    </div>
+
+    <!-- Admin Panel -->
+    <div class="admin-panel" id="adminPanel" style="display: none; position: fixed; bottom: 110px; right: 30px; background: var(--card-light); backdrop-filter: blur(20px); border: 1px solid var(--border-light); border-radius: 24px; padding: 20px; z-index: 999; box-shadow: var(--shadow); max-width: 350px;">
+        <h3 style="margin-bottom: 15px;"><i class="fas fa-cog"></i> Admin Dashboard</h3>
+        <button class="btn btn--primary btn--full ripple" onclick="addNewProduct()" style="margin-bottom: 10px;">
+            <i class="fas fa-plus"></i> Add Product
+        </button>
+        <div id="adminProductList" style="max-height: 300px; overflow-y: auto; margin-top: 15px;"></div>
+        <button class="btn btn--secondary btn--full ripple" onclick="toggleAdminPanel()" style="margin-top: 15px;">
+            Close
+        </button>
+    </div>
+
+    <!-- Floating Cart Button -->
+    <button class="cart-fab ripple" id="cartFab">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="cart-count" id="cartCount">0</span>
+    </button>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__grid">
+                <div>
+                    <h3 style="margin-bottom: 10px; font-size: 1.4rem;">
+                        <span style="color: var(--primary);">👑</span> Rattle Empire
+                    </h3>
+                    <p style="opacity: 0.8;">Uganda's trusted second‑hand marketplace.</p>
+                </div>
+                <div class="footer__links">
+                    <a href="https://wa.me/256752937558" target="_blank">WhatsApp</a>
+                    <a href="#">TigerTech</a>
+                    <a href="#" id="adminTrigger">Admin</a>
+                </div>
+            </div>
+            <div class="footer__copy">
+                © 2026 MADE WITH LOVE BY RATTLE AND TREVOR LABS. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
