@@ -12,12 +12,12 @@
         .glass { background: rgba(15, 15, 30, 0.6); backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.08); }
     </style>
 </head>
-<body class="bg-[#0f0f1e] text-white min-h-screen">
+<body class="bg-[#0f0f1e] text-white min-h-screen pb-20">
     <header class="fixed top-0 w-full z-50 glass border-b border-white/10 p-4 flex justify-between items-center">
         <h1 class="text-2xl font-bold text-purple-500 animate-float">👑 Rattle Empire</h1>
         <nav class="space-x-4">
             <a href="#sellers" class="hover:text-purple-400">Top Sellers</a>
-            <a href="#cart" class="text-purple-400 font-bold">Cart (0)</a>
+            <a href="#affiliate" class="hover:text-purple-400">Affiliate</a>
         </nav>
     </header>
 
@@ -32,40 +32,54 @@
             <div id="seller-list" class="space-y-4"></div>
         </section>
 
-        <section class="glass p-6 rounded-xl">
-            <h2 class="text-2xl mb-4">Support & Affiliation</h2>
-            <div class="grid md:grid-cols-2 gap-4">
-                <div>
-                    <h3 class="text-purple-400 font-bold">Helplines</h3>
-                    <p>Derrick: <a href="https://wa.me/256775374095" class="text-blue-400">0775 374 095</a></p>
-                    <p>Shawn: <a href="https://wa.me/256744341738" class="text-blue-400">0744 341 738</a></p>
+        <section id="affiliate" class="glass p-8 rounded-xl border border-purple-500/30">
+            <h2 class="text-3xl mb-6 gradient-text">Affiliate & Commission Program</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="space-y-4">
+                    <h3 class="text-xl font-bold text-purple-400">How it Works</h3>
+                    <ul class="list-disc ml-5 space-y-2 text-gray-300">
+                        <li>Refer customers and earn commission on every successful sale.</li>
+                        <li>High commission tiers for electronics & luxury goods.</li>
+                        <li>Real-time tracking of your referrals.</li>
+                        <li>Instant payouts via MTN or Airtel Money.</li>
+                    </ul>
+                    <a href="https://wa.me/256752937558?text=I want to join the affiliate program" class="inline-block bg-purple-600 hover:bg-purple-700 px-6 py-3 rounded-lg font-bold">Join Affiliate Program</a>
                 </div>
-                <div>
-                    <h3 class="text-purple-400 font-bold">Direct Management</h3>
-                    <p>Trevor (CEO): <a href="tel:0752937558" class="text-green-400">0752 937 558</a></p>
-                    <p>Becca (Manager): <a href="tel:0703162884" class="text-green-400">0703 162 884</a></p>
+                <div class="glass p-6 rounded-lg bg-white/5">
+                    <h3 class="text-xl font-bold mb-4">Commission Structure</h3>
+                    <table class="w-full text-left">
+                        <thead><tr class="border-b border-white/10 text-gray-400"><th>Category</th><th>Commission</th></tr></thead>
+                        <tbody>
+                            <tr><td class="py-2">Electronics</td><td>5%</td></tr>
+                            <tr><td class="py-2">Furniture</td><td>8%</td></tr>
+                            <tr><td class="py-2">Luxury Items</td><td>10%</td></tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </section>
+
+        <footer class="mt-12 text-center text-gray-500">
+            <p>Managed by Rattle Empire © 2026</p>
+        </footer>
     </main>
 
     <script>
-        const products = [
-            { id: 1, name: "iPhone X 256GB", price: 850000, seller: "Derrick", loc: "Kampala" },
-            { id: 2, name: "HP EliteBook G3", price: 1200000, seller: "Shawn", loc: "Entebbe" }
+        // Placeholder data
+        const sellers = [
+            { name: "Derrick", location: "Kampala", rank: 1, sales: 150 },
+            { name: "Shawn", location: "Entebbe", rank: 2, sales: 120 }
         ];
 
-        const render = () => {
-            document.getElementById('product-grid').innerHTML = products.map(p => `
-                <div class="glass p-4 rounded-lg">
-                    <h3 class="font-bold">${p.name}</h3>
-                    <p class="text-purple-400">UGX ${p.price.toLocaleString()}</p>
-                    <button onclick="alert('Added to local cart!')" class="mt-2 w-full bg-purple-600 p-2 rounded">Add to Cart</button>
-                    <a href="https://wa.me/256775374095?text=I'm interested in ${p.name}" class="block mt-2 text-center text-sm text-green-400">WhatsApp Inquiry</a>
+        document.getElementById('seller-list').innerHTML = sellers.sort((a,b) => b.rank - a.rank).map(s => `
+            <div class="flex justify-between items-center p-4 bg-white/5 rounded-lg">
+                <div>
+                    <span class="font-bold">#${s.rank} ${s.name}</span>
+                    <span class="text-sm text-gray-400 block">${s.location}</span>
                 </div>
-            `).join('');
-        };
-        render();
+                <span class="text-purple-400 font-bold">${s.sales} Sales</span>
+            </div>
+        `).join('');
     </script>
 </body>
 </html>
