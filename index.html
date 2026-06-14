@@ -1,96 +1,739 @@
 <!DOCTYPE html>
 <html lang="en" class="dark">
 <head>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="description" content="Uganda's #1 Second Hand Marketplace. Quality electronics, furniture & luxury items — certified and delivered. Shop now on Rattle Empire.">
+    <meta name="keywords" content="Rattle Empire, Uganda, second hand, marketplace, electronics, furniture, luxury, Kampala, deals">
+    <meta name="author" content="Rattle Empire">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Rattle Empire | Uganda's #1 Marketplace">
+    <meta property="og:description" content="Quality electronics, furniture & luxury items — certified and delivered.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://rattleempire.github.io/">
+    <meta name="theme-color" content="#7000ff">
+    <title>Rattle Empire | Uganda's #1 Marketplace</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='80'>👑</text></svg>">
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "WebSite",
       "name": "Rattle Empire",
       "url": "https://rattleempire.github.io/",
-      "description": "Uganda's #1 Second Hand Marketplace for Electronics, Furniture, and Luxury items."
+      "description": "Uganda's #1 Second Hand Marketplace for Electronics, Furniture, and Luxury items.",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://rattleempire.github.io/?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
     }
     </script>
-
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rattle Empire | Uganda's #1 Marketplace</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/lucide@latest"></script>
     <style>
-        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
-        .animate-float { animation: float 3s ease-in-out infinite; }
-        .glass { background: rgba(15, 15, 30, 0.6); backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.08); }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+        * { font-family: 'Inter', sans-serif; -webkit-tap-highlight-color: transparent; }
+
+        :root {
+            --empire: #7000ff;
+            --empire-light: #9d4edd;
+            --empire-glow: rgba(112, 0, 255, 0.25);
+            --cyan: #00d4ff;
+            --gold: #fbbf24;
+            --glass-bg: rgba(15, 15, 30, 0.65);
+            --glass-border: rgba(255, 255, 255, 0.08);
+        }
+
+        body { background: #0a0a1a; color: #fff; overflow-x: hidden; }
+
+        /* ===== WATER GLASS AESTHETICS ===== */
+        .glass {
+            background: var(--glass-bg);
+            backdrop-filter: blur(24px) saturate(1.4);
+            -webkit-backdrop-filter: blur(24px) saturate(1.4);
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255,255,255,0.05);
+        }
+
+        .glass-strong {
+            background: rgba(15, 15, 30, 0.85);
+            backdrop-filter: blur(40px) saturate(1.6);
+            -webkit-backdrop-filter: blur(40px) saturate(1.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* ===== LIQUID TOUCH EFFECTS ===== */
+        .touch-water {
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            cursor: pointer;
+        }
+        .touch-water:active {
+            transform: scale(0.96);
+            box-shadow: 0 0 30px var(--empire-glow), inset 0 0 20px rgba(112, 0, 255, 0.1);
+        }
+
+        .btn-water {
+            transition: all 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-water::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 50%);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .btn-water:hover::before { opacity: 1; }
+        .btn-water:active { transform: scale(0.95); }
+
+        /* ===== ANIMATIONS ===== */
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            33% { transform: translateY(-6px) rotate(1deg); }
+            66% { transform: translateY(-3px) rotate(-1deg); }
+        }
+        .animate-float { animation: float 4s ease-in-out infinite; }
+
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+        .animate-shimmer {
+            background: linear-gradient(90deg, transparent 0%, rgba(112, 0, 255, 0.06) 50%, transparent 100%);
+            background-size: 200% 100%;
+            animation: shimmer 3s linear infinite;
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 20px var(--empire-glow); }
+            50% { box-shadow: 0 0 40px var(--empire-glow), 0 0 60px rgba(112, 0, 255, 0.1); }
+        }
+        .animate-pulse-glow { animation: pulse-glow 2s ease-in-out infinite; }
+
+        @keyframes slide-up {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-slide-up { animation: slide-up 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; }
+
+        @keyframes ripple {
+            0% { transform: scale(0); opacity: 0.5; }
+            100% { transform: scale(4); opacity: 0; }
+        }
+
+        /* ===== GRADIENT TEXT ===== */
+        .gradient-text {
+            background: linear-gradient(135deg, #7000ff, #00d4ff, #9d4edd);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: gradient-shift 4s ease infinite;
+        }
+        @keyframes gradient-shift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .gradient-text-gold {
+            background: linear-gradient(135deg, #fbbf24, #f59e0b, #d97706);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        /* ===== SCROLL SNAP ===== */
+        .scroll-snap-x {
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+        .scroll-snap-x::-webkit-scrollbar { display: none; }
+        .scroll-snap-item { scroll-snap-align: start; }
+
+        /* ===== PRODUCT CARD ===== */
+        .product-card {
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .product-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 60px rgba(112, 0, 255, 0.2), 0 0 0 1px rgba(112, 0, 255, 0.1);
+        }
+        .product-card:active { transform: scale(0.98); }
+
+        /* ===== SELLER RANK BADGES ===== */
+        .rank-1 { background: linear-gradient(135deg, #fbbf24, #f59e0b); color: #000; }
+        .rank-2 { background: linear-gradient(135deg, #94a3b8, #cbd5e1); color: #000; }
+        .rank-3 { background: linear-gradient(135deg, #b45309, #d97706); color: #fff; }
+
+        /* ===== MOBILE BOTTOM NAV ===== */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 50;
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+
+        /* ===== SECTION DIVIDERS ===== */
+        .section-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(112, 0, 255, 0.3), transparent);
+        }
+
+        /* ===== CUSTOM SCROLLBAR ===== */
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: rgba(112, 0, 255, 0.3); border-radius: 999px; }
+
+        /* ===== NOISE TEXTURE ===== */
+        .noise::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 0;
+        }
     </style>
 </head>
-<body class="bg-[#0f0f1e] text-white min-h-screen pb-20">
-    <header class="fixed top-0 w-full z-50 glass border-b border-white/10 p-4 flex justify-between items-center">
-        <h1 class="text-2xl font-bold text-purple-500 animate-float">👑 Rattle Empire</h1>
-        <nav class="space-x-4">
-            <a href="#sellers" class="hover:text-purple-400">Top Sellers</a>
-            <a href="#affiliate" class="hover:text-purple-400">Affiliate</a>
-        </nav>
+<body class="noise min-h-screen pb-24">
+
+    <!-- ===== HEADER ===== -->
+    <header class="fixed top-0 w-full z-50 glass-strong border-b border-white/5">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <span class="text-3xl animate-float">👑</span>
+                <div>
+                    <h1 class="text-xl font-black gradient-text leading-tight">Rattle Empire</h1>
+                    <p class="text-[10px] text-gray-500 tracking-widest uppercase">Uganda's #1 Marketplace</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-3">
+                <button onclick="toggleSearch()" class="p-2 rounded-full glass touch-water">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                </button>
+                <button onclick="toggleCart()" class="relative p-2 rounded-full glass touch-water">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
+                    <span id="cart-badge" class="absolute -top-1 -right-1 bg-purple-600 text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center hidden">0</span>
+                </button>
+            </div>
+        </div>
+        <!-- Search Bar (hidden by default) -->
+        <div id="search-bar" class="hidden px-4 pb-3">
+            <input type="text" id="search-input" placeholder="Search products, sellers, locations..." 
+                class="w-full px-4 py-3 rounded-xl glass text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500/50"
+                oninput="filterProducts(this.value)">
+        </div>
     </header>
 
-    <main class="pt-24 px-4 max-w-6xl mx-auto">
-        <section id="deals" class="mb-12">
-            <h2 class="text-3xl mb-6">Featured Deals</h2>
-            <div id="product-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6"></div>
-        </section>
+    <main class="pt-20 px-4 max-w-6xl mx-auto relative z-10">
 
-        <section id="sellers" class="mb-12 glass p-6 rounded-xl">
-            <h2 class="text-3xl mb-6">Highest Ranked Sellers</h2>
-            <div id="seller-list" class="space-y-4"></div>
-        </section>
-
-        <section id="affiliate" class="glass p-8 rounded-xl border border-purple-500/30">
-            <h2 class="text-3xl mb-6 gradient-text">Affiliate & Commission Program</h2>
-            <div class="grid md:grid-cols-2 gap-8">
-                <div class="space-y-4">
-                    <h3 class="text-xl font-bold text-purple-400">How it Works</h3>
-                    <ul class="list-disc ml-5 space-y-2 text-gray-300">
-                        <li>Refer customers and earn commission on every successful sale.</li>
-                        <li>High commission tiers for electronics & luxury goods.</li>
-                        <li>Real-time tracking of your referrals.</li>
-                        <li>Instant payouts via MTN or Airtel Money.</li>
-                    </ul>
-                    <a href="https://wa.me/256752937558?text=I want to join the affiliate program" class="inline-block bg-purple-600 hover:bg-purple-700 px-6 py-3 rounded-lg font-bold">Join Affiliate Program</a>
-                </div>
-                <div class="glass p-6 rounded-lg bg-white/5">
-                    <h3 class="text-xl font-bold mb-4">Commission Structure</h3>
-                    <table class="w-full text-left">
-                        <thead><tr class="border-b border-white/10 text-gray-400"><th>Category</th><th>Commission</th></tr></thead>
-                        <tbody>
-                            <tr><td class="py-2">Electronics</td><td>5%</td></tr>
-                            <tr><td class="py-2">Furniture</td><td>8%</td></tr>
-                            <tr><td class="py-2">Luxury Items</td><td>10%</td></tr>
-                        </tbody>
-                    </table>
+        <!-- ===== HERO SECTION ===== -->
+        <section class="mb-10 animate-slide-up">
+            <div class="glass rounded-2xl p-8 text-center animate-pulse-glow relative overflow-hidden">
+                <div class="absolute inset-0 animate-shimmer"></div>
+                <div class="relative z-10">
+                    <h2 class="text-4xl md:text-5xl font-black mb-3 gradient-text">Uganda's #1</h2>
+                    <h3 class="text-2xl md:text-3xl font-bold text-white mb-4">Second Hand Marketplace</h3>
+                    <p class="text-gray-400 mb-6 max-w-lg mx-auto">Quality electronics, furniture & luxury items — certified and delivered to your doorstep.</p>
+                    <div class="flex flex-wrap justify-center gap-3">
+                        <a href="#deals" class="btn-water bg-purple-600 hover:bg-purple-700 px-8 py-3 rounded-xl font-bold text-white">Shop Deals</a>
+                        <a href="https://wa.me/256752937558" class="btn-water glass px-8 py-3 rounded-xl font-bold text-white">Contact Us</a>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <footer class="mt-12 text-center text-gray-500">
-            <p>Managed by Rattle Empire © 2026</p>
+        <!-- ===== LIVE STATS BAR ===== -->
+        <section class="mb-10 animate-slide-up" style="animation-delay: 0.1s">
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-3">
+                <div class="glass rounded-xl p-4 text-center touch-water">
+                    <div class="text-2xl font-black gradient-text" id="stat-products">22</div>
+                    <div class="text-xs text-gray-500 uppercase tracking-wider">Products</div>
+                </div>
+                <div class="glass rounded-xl p-4 text-center touch-water">
+                    <div class="text-2xl font-black gradient-text" id="stat-sellers">6</div>
+                    <div class="text-xs text-gray-500 uppercase tracking-wider">Sellers</div>
+                </div>
+                <div class="glass rounded-xl p-4 text-center touch-water">
+                    <div class="text-2xl font-black gradient-text" id="stat-reviews">19</div>
+                    <div class="text-xs text-gray-500 uppercase tracking-wider">Reviews</div>
+                </div>
+                <div class="glass rounded-xl p-4 text-center touch-water">
+                    <div class="text-2xl font-black gradient-text" id="stat-rating">4.8</div>
+                    <div class="text-xs text-gray-500 uppercase tracking-wider">Avg Rating</div>
+                </div>
+                <div class="glass rounded-xl p-4 text-center touch-water col-span-2 md:col-span-1">
+                    <div class="text-2xl font-black gradient-text" id="stat-orders">500+</div>
+                    <div class="text-xs text-gray-500 uppercase tracking-wider">Orders</div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider mb-10"></div>
+
+        <!-- ===== CATEGORY FILTERS ===== -->
+        <section class="mb-6">
+            <div class="flex gap-2 overflow-x-auto scroll-snap-x pb-2" id="category-filters">
+                <button onclick="setCategory('all')" class="category-btn active scroll-snap-item flex-shrink-0 px-5 py-2.5 rounded-full glass btn-water text-sm font-semibold bg-purple-600 text-white" data-cat="all">All</button>
+                <button onclick="setCategory('electronics')" class="category-btn scroll-snap-item flex-shrink-0 px-5 py-2.5 rounded-full glass btn-water text-sm font-semibold text-gray-300" data-cat="electronics">📱 Electronics</button>
+                <button onclick="setCategory('furniture')" class="category-btn scroll-snap-item flex-shrink-0 px-5 py-2.5 rounded-full glass btn-water text-sm font-semibold text-gray-300" data-cat="furniture">🛋️ Furniture</button>
+                <button onclick="setCategory('luxury')" class="category-btn scroll-snap-item flex-shrink-0 px-5 py-2.5 rounded-full glass btn-water text-sm font-semibold text-gray-300" data-cat="luxury">💎 Luxury</button>
+                <button onclick="setCategory('academy')" class="category-btn scroll-snap-item flex-shrink-0 px-5 py-2.5 rounded-full glass btn-water text-sm font-semibold text-gray-300" data-cat="academy">🎓 Academy</button>
+                <button onclick="setCategory('tigertec')" class="category-btn scroll-snap-item flex-shrink-0 px-5 py-2.5 rounded-full glass btn-water text-sm font-semibold text-gray-300" data-cat="tigertec">⚡ Tigertec</button>
+            </div>
+        </section>
+
+        <!-- ===== FEATURED DEALS ===== -->
+        <section id="deals" class="mb-12">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-bold">🔥 Featured Deals</h2>
+                <select id="sort-select" onchange="sortProducts(this.value)" class="glass px-3 py-2 rounded-lg text-sm text-gray-300 focus:outline-none">
+                    <option value="rating">Top Rated</option>
+                    <option value="price-low">Price: Low → High</option>
+                    <option value="price-high">Price: High → Low</option>
+                    <option value="newest">Newest</option>
+                </select>
+            </div>
+            <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"></div>
+        </section>
+
+        <div class="section-divider mb-10"></div>
+
+        <!-- ===== TOP SELLERS RANKING ===== -->
+        <section id="sellers" class="mb-12">
+            <h2 class="text-2xl font-bold mb-6">🏆 Top Sellers</h2>
+            <div class="grid md:grid-cols-2 gap-4" id="seller-list"></div>
+        </section>
+
+        <div class="section-divider mb-10"></div>
+
+        <!-- ===== AFFILIATE & COMMISSION ===== -->
+        <section id="affiliate" class="mb-12">
+            <div class="glass rounded-2xl p-8 border border-purple-500/20 relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-64 h-64 bg-purple-600/10 rounded-full blur-3xl"></div>
+                <div class="relative z-10">
+                    <h2 class="text-3xl font-black mb-2 gradient-text">Affiliate & Commission</h2>
+                    <p class="text-gray-400 mb-8">Join the Rattle Empire network and earn on every sale you refer.</p>
+                    
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div class="space-y-4">
+                            <h3 class="text-lg font-bold text-purple-400">How It Works</h3>
+                            <ul class="space-y-3 text-gray-300">
+                                <li class="flex items-start gap-3">
+                                    <span class="text-purple-500 mt-1">✓</span>
+                                    <span>Refer customers and earn commission on every successful sale</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <span class="text-purple-500 mt-1">✓</span>
+                                    <span>High commission tiers for electronics & luxury goods</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <span class="text-purple-500 mt-1">✓</span>
+                                    <span>Real-time tracking of your referrals and earnings</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <span class="text-purple-500 mt-1">✓</span>
+                                    <span>Instant payouts via MTN or Airtel Money</span>
+                                </li>
+                            </ul>
+                            <a href="https://wa.me/256752937558?text=I%20want%20to%20join%20the%20Rattle%20Empire%20affiliate%20program" 
+                                class="inline-block btn-water bg-purple-600 hover:bg-purple-700 px-8 py-3 rounded-xl font-bold text-white mt-4">
+                                Join Affiliate Program
+                            </a>
+                        </div>
+                        <div class="glass rounded-xl p-6">
+                            <h3 class="text-lg font-bold mb-4 text-white">Commission Structure</h3>
+                            <table class="w-full text-left">
+                                <thead>
+                                    <tr class="border-b border-white/10 text-gray-500 text-sm">
+                                        <th class="pb-3">Category</th>
+                                        <th class="pb-3 text-right">Rate</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="text-gray-300">
+                                    <tr class="border-b border-white/5"><td class="py-3">📱 Electronics</td><td class="py-3 text-right font-bold text-green-400">5%</td></tr>
+                                    <tr class="border-b border-white/5"><td class="py-3">🛋️ Furniture</td><td class="py-3 text-right font-bold text-green-400">8%</td></tr>
+                                    <tr class="border-b border-white/5"><td class="py-3">💎 Luxury Items</td><td class="py-3 text-right font-bold text-green-400">10%</td></tr>
+                                    <tr class="border-b border-white/5"><td class="py-3">🎓 Academy</td><td class="py-3 text-right font-bold text-green-400">6%</td></tr>
+                                    <tr><td class="py-3">⚡ Tigertec</td><td class="py-3 text-right font-bold text-green-400">7%</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider mb-10"></div>
+
+        <!-- ===== CONTACT & SUPPORT ===== -->
+        <section id="contact" class="mb-12">
+            <h2 class="text-2xl font-bold mb-6">📞 Contact & Support</h2>
+            <div class="grid md:grid-cols-2 gap-4">
+                <div class="glass rounded-xl p-6">
+                    <h3 class="text-lg font-bold text-purple-400 mb-4">Helplines</h3>
+                    <div class="space-y-3">
+                        <a href="https://wa.me/256775374095" class="flex items-center gap-3 p-3 rounded-lg bg-white/5 touch-water hover:bg-white/10">
+                            <span class="text-2xl">📱</span>
+                            <div>
+                                <div class="font-semibold">Derrick</div>
+                                <div class="text-sm text-gray-400">0775 374 095</div>
+                            </div>
+                            <span class="ml-auto text-green-400 text-sm font-bold">WhatsApp</span>
+                        </a>
+                        <a href="https://wa.me/256744341738" class="flex items-center gap-3 p-3 rounded-lg bg-white/5 touch-water hover:bg-white/10">
+                            <span class="text-2xl">📱</span>
+                            <div>
+                                <div class="font-semibold">Shawn</div>
+                                <div class="text-sm text-gray-400">0744 341 738</div>
+                            </div>
+                            <span class="ml-auto text-green-400 text-sm font-bold">WhatsApp</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="glass rounded-xl p-6">
+                    <h3 class="text-lg font-bold text-purple-400 mb-4">Management</h3>
+                    <div class="space-y-3">
+                        <a href="tel:0752937558" class="flex items-center gap-3 p-3 rounded-lg bg-white/5 touch-water hover:bg-white/10">
+                            <span class="text-2xl">👑</span>
+                            <div>
+                                <div class="font-semibold">Trevor <span class="text-xs text-gray-500">(CEO)</span></div>
+                                <div class="text-sm text-gray-400">0752 937 558</div>
+                            </div>
+                            <span class="ml-auto text-blue-400 text-sm font-bold">Call</span>
+                        </a>
+                        <a href="tel:0703162884" class="flex items-center gap-3 p-3 rounded-lg bg-white/5 touch-water hover:bg-white/10">
+                            <span class="text-2xl">⭐</span>
+                            <div>
+                                <div class="font-semibold">Becca <span class="text-xs text-gray-500">(Manager)</span></div>
+                                <div class="text-sm text-gray-400">0703 162 884</div>
+                            </div>
+                            <span class="ml-auto text-blue-400 text-sm font-bold">Call</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== FOOTER ===== -->
+        <footer class="text-center text-gray-600 text-sm py-8">
+            <p class="mb-2">👑 Rattle Empire © 2026 — Uganda's #1 Marketplace</p>
+            <p class="text-gray-700">All rights reserved. Quality certified products.</p>
         </footer>
     </main>
 
+    <!-- ===== MOBILE BOTTOM NAV ===== -->
+    <nav class="bottom-nav glass-strong border-t border-white/5">
+        <div class="flex justify-around items-center py-2 max-w-md mx-auto">
+            <a href="#deals" class="flex flex-col items-center gap-1 p-2 text-purple-400">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+                <span class="text-[10px] font-semibold">Shop</span>
+            </a>
+            <a href="#sellers" class="flex flex-col items-center gap-1 p-2 text-gray-500 hover:text-purple-400">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
+                <span class="text-[10px] font-semibold">Rankings</span>
+            </a>
+            <a href="#affiliate" class="flex flex-col items-center gap-1 p-2 text-gray-500 hover:text-purple-400">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                <span class="text-[10px] font-semibold">Affiliate</span>
+            </a>
+            <a href="https://wa.me/256752937558" class="flex flex-col items-center gap-1 p-2 text-green-500">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+                <span class="text-[10px] font-semibold">Chat</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- ===== CART SHEET ===== -->
+    <div id="cart-overlay" class="fixed inset-0 bg-black/60 z-50 hidden" onclick="toggleCart()"></div>
+    <div id="cart-sheet" class="fixed right-0 top-0 bottom-0 w-full max-w-md glass-strong z-50 transform translate-x-full transition-transform duration-300 flex flex-col">
+        <div class="p-4 border-b border-white/10 flex justify-between items-center">
+            <h3 class="text-lg font-bold">🛒 Your Cart</h3>
+            <button onclick="toggleCart()" class="p-2 rounded-full glass touch-water">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+            </button>
+        </div>
+        <div id="cart-items" class="flex-1 overflow-y-auto p-4 space-y-3"></div>
+        <div class="p-4 border-t border-white/10">
+            <div class="flex justify-between items-center mb-4">
+                <span class="text-gray-400">Total</span>
+                <span id="cart-total" class="text-2xl font-black gradient-text">UGX 0</span>
+            </div>
+            <a id="checkout-btn" href="#" class="block w-full btn-water bg-green-600 hover:bg-green-700 py-3 rounded-xl font-bold text-center text-white">
+                Checkout via WhatsApp
+            </a>
+        </div>
+    </div>
+
+    <!-- ===== PRODUCT DETAIL MODAL ===== -->
+    <div id="product-modal" class="fixed inset-0 bg-black/70 z-50 hidden flex items-end md:items-center justify-center" onclick="closeProductModal(event)">
+        <div class="glass-strong w-full max-w-lg max-h-[90vh] overflow-y-auto rounded-t-2xl md:rounded-2xl p-6 animate-slide-up" onclick="event.stopPropagation()">
+            <div id="modal-content"></div>
+        </div>
+    </div>
+
     <script>
-        // Placeholder data
-        const sellers = [
-            { name: "Derrick", location: "Kampala", rank: 1, sales: 150 },
-            { name: "Shawn", location: "Entebbe", rank: 2, sales: 120 }
+        // ===== DATA =====
+        const products = [
+            { id: 1, name: "iPhone X 256GB", price: 850000, originalPrice: 1200000, category: "electronics", condition: "Excellent", seller: "Derrick", sellerLoc: "Kampala", rating: 4.8, reviews: 12, sold: 45, featured: true, image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400&h=300&fit=crop" },
+            { id: 2, name: "HP EliteBook G3", price: 1200000, originalPrice: 1800000, category: "electronics", condition: "Very Good", seller: "Shawn", sellerLoc: "Entebbe", rating: 4.6, reviews: 8, sold: 32, featured: true, image: "https://images.unsplash.com/photo-1593642632823-8f785ba67e45?w=400&h=300&fit=crop" },
+            { id: 3, name: "Samsung 4K TV 55\"", price: 1500000, originalPrice: 2200000, category: "electronics", condition: "Good", seller: "Derrick", sellerLoc: "Kampala", rating: 4.9, reviews: 15, sold: 28, featured: true, image: "https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?w=400&h=300&fit=crop" },
+            { id: 4, name: "Leather Sofa Set", price: 800000, originalPrice: 1500000, category: "furniture", condition: "Excellent", seller: "Shawn", sellerLoc: "Entebbe", rating: 4.7, reviews: 6, sold: 18, featured: true, image: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400&h=300&fit=crop" },
+            { id: 5, name: "Rolex Submariner", price: 5500000, originalPrice: 8000000, category: "luxury", condition: "Mint", seller: "Derrick", sellerLoc: "Kampala", rating: 5.0, reviews: 3, sold: 5, featured: true, image: "https://images.unsplash.com/photo-1523170335258-f5ed11844a49?w=400&h=300&fit=crop" },
+            { id: 6, name: "MacBook Pro 2019", price: 2800000, originalPrice: 4500000, category: "electronics", condition: "Very Good", seller: "Shawn", sellerLoc: "Entebbe", rating: 4.5, reviews: 10, sold: 22, featured: false, image: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=400&h=300&fit=crop" },
+            { id: 7, name: "Dining Table Set", price: 650000, originalPrice: 1000000, category: "furniture", condition: "Good", seller: "Derrick", sellerLoc: "Kampala", rating: 4.4, reviews: 5, sold: 14, featured: false, image: "https://images.unsplash.com/photo-1617806118233-18e1de247200?w=400&h=300&fit=crop" },
+            { id: 8, name: "iPad Air 4", price: 950000, originalPrice: 1400000, category: "electronics", condition: "Excellent", seller: "Shawn", sellerLoc: "Entebbe", rating: 4.7, reviews: 9, sold: 35, featured: true, image: "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=400&h=300&fit=crop" },
+            { id: 9, name: "Gaming Chair", price: 350000, originalPrice: 600000, category: "furniture", condition: "Very Good", seller: "Derrick", sellerLoc: "Kampala", rating: 4.3, reviews: 7, sold: 20, featured: false, image: "https://images.unsplash.com/photo-1592078615290-033ee584e267?w=400&h=300&fit=crop" },
+            { id: 10, name: "AirPods Pro", price: 250000, originalPrice: 450000, category: "electronics", condition: "Mint", seller: "Shawn", sellerLoc: "Entebbe", rating: 4.9, reviews: 14, sold: 55, featured: true, image: "https://images.unsplash.com/photo-1606220588913-b3aacb4d2f46?w=400&h=300&fit=crop" },
+            { id: 11, name: "Designer Handbag", price: 450000, originalPrice: 800000, category: "luxury", condition: "Excellent", seller: "Derrick", sellerLoc: "Kampala", rating: 4.6, reviews: 4, sold: 12, featured: false, image: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=400&h=300&fit=crop" },
+            { id: 12, name: "Tigertec Power Bank", price: 85000, originalPrice: 150000, category: "tigertec", condition: "New", seller: "Shawn", sellerLoc: "Entebbe", rating: 4.8, reviews: 20, sold: 80, featured: true, image: "https://images.unsplash.com/photo-1609091839311-d5365f9ff1c5?w=400&h=300&fit=crop" },
         ];
 
-        document.getElementById('seller-list').innerHTML = sellers.sort((a,b) => b.rank - a.rank).map(s => `
-            <div class="flex justify-between items-center p-4 bg-white/5 rounded-lg">
-                <div>
-                    <span class="font-bold">#${s.rank} ${s.name}</span>
-                    <span class="text-sm text-gray-400 block">${s.location}</span>
+        const sellers = [
+            { name: "Derrick", location: "Kampala", rank: 1, sales: 150, rating: 4.9, verified: true, specialty: "Electronics & Luxury" },
+            { name: "Shawn", location: "Entebbe", rank: 2, sales: 120, rating: 4.8, verified: true, specialty: "Electronics & Furniture" },
+            { name: "Trevor", location: "Kampala", rank: 3, sales: 85, rating: 4.7, verified: true, specialty: "Management" },
+            { name: "Becca", location: "Kampala", rank: 4, sales: 60, rating: 4.6, verified: true, specialty: "Operations" },
+        ];
+
+        // ===== STATE =====
+        let cart = [];
+        let currentCategory = 'all';
+        let currentSort = 'rating';
+
+        // ===== CART FUNCTIONS =====
+        function addToCart(product) {
+            const existing = cart.find(c => c.id === product.id);
+            if (existing) {
+                existing.quantity++;
+            } else {
+                cart.push({ ...product, quantity: 1 });
+            }
+            updateCartUI();
+            showToast(`${product.name} added to cart!`);
+        }
+
+        function removeFromCart(id) {
+            cart = cart.filter(c => c.id !== id);
+            updateCartUI();
+        }
+
+        function updateQuantity(id, delta) {
+            const item = cart.find(c => c.id === id);
+            if (item) {
+                item.quantity += delta;
+                if (item.quantity <= 0) removeFromCart(id);
+                else updateCartUI();
+            }
+        }
+
+        function updateCartUI() {
+            const badge = document.getElementById('cart-badge');
+            const items = document.getElementById('cart-items');
+            const total = document.getElementById('cart-total');
+            const checkoutBtn = document.getElementById('checkout-btn');
+
+            const count = cart.reduce((s, c) => s + c.quantity, 0);
+            const totalPrice = cart.reduce((s, c) => s + c.price * c.quantity, 0);
+
+            badge.textContent = count;
+            badge.classList.toggle('hidden', count === 0);
+            total.textContent = `UGX ${totalPrice.toLocaleString()}`;
+
+            if (cart.length === 0) {
+                items.innerHTML = '<div class="text-center text-gray-500 py-8">Your cart is empty</div>';
+                checkoutBtn.href = '#';
+                return;
+            }
+
+            items.innerHTML = cart.map(c => `
+                <div class="flex gap-3 p-3 glass rounded-xl">
+                    <img src="${c.image}" class="w-16 h-16 rounded-lg object-cover" alt="${c.name}">
+                    <div class="flex-1">
+                        <div class="font-semibold text-sm">${c.name}</div>
+                        <div class="text-purple-400 text-sm font-bold">UGX ${c.price.toLocaleString()}</div>
+                        <div class="flex items-center gap-2 mt-1">
+                            <button onclick="updateQuantity(${c.id}, -1)" class="w-6 h-6 rounded-full glass flex items-center justify-center text-xs">-</button>
+                            <span class="text-sm">${c.quantity}</span>
+                            <button onclick="updateQuantity(${c.id}, 1)" class="w-6 h-6 rounded-full glass flex items-center justify-center text-xs">+</button>
+                        </div>
+                    </div>
+                    <button onclick="removeFromCart(${c.id})" class="text-red-400 p-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
+                    </button>
                 </div>
-                <span class="text-purple-400 font-bold">${s.sales} Sales</span>
-            </div>
-        `).join('');
+            `).join('');
+
+            const msg = cart.map(c => `${c.name} x${c.quantity} = UGX ${(c.price * c.quantity).toLocaleString()}`).join('%0a');
+            checkoutBtn.href = `https://wa.me/256752937558?text=Hi! I'd like to order:%0a${msg}%0a%0aTotal: UGX ${totalPrice.toLocaleString()}`;
+        }
+
+        function toggleCart() {
+            const sheet = document.getElementById('cart-sheet');
+            const overlay = document.getElementById('cart-overlay');
+            const isOpen = !sheet.classList.contains('translate-x-full');
+            sheet.classList.toggle('translate-x-full');
+            overlay.classList.toggle('hidden');
+        }
+
+        // ===== PRODUCT RENDERING =====
+        function renderProducts() {
+            const grid = document.getElementById('product-grid');
+            let filtered = currentCategory === 'all' ? [...products] : products.filter(p => p.category === currentCategory);
+
+            // Sort
+            if (currentSort === 'price-low') filtered.sort((a, b) => a.price - b.price);
+            else if (currentSort === 'price-high') filtered.sort((a, b) => b.price - a.price);
+            else if (currentSort === 'rating') filtered.sort((a, b) => b.rating - a.rating);
+            else if (currentSort === 'newest') filtered.sort((a, b) => b.id - a.id);
+
+            grid.innerHTML = filtered.map((p, i) => {
+                const discount = p.originalPrice ? Math.round(((p.originalPrice - p.price) / p.originalPrice) * 100) : 0;
+                return `
+                <div class="product-card glass rounded-xl overflow-hidden animate-slide-up" style="animation-delay: ${i * 0.05}s">
+                    <div class="relative">
+                        <img src="${p.image}" alt="${p.name}" class="w-full h-48 object-cover" loading="lazy" onerror="this.src='https://via.placeholder.com/400x300/1a1a2e/7000ff?text=${encodeURIComponent(p.name)}'">
+                        ${discount > 0 ? `<span class="absolute top-2 left-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full">-${discount}%</span>` : ''}
+                        ${p.featured ? `<span class="absolute top-2 right-2 bg-purple-600 text-white text-xs font-bold px-2 py-1 rounded-full">🔥 Hot</span>` : ''}
+                        <span class="absolute bottom-2 left-2 bg-black/60 backdrop-blur-sm text-[10px] px-2 py-1 rounded-full">${p.condition}</span>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-bold text-white mb-1">${p.name}</h3>
+                        <div class="flex items-center gap-1 mb-2">
+                            ${[1,2,3,4,5].map(s => `<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="${s <= Math.round(p.rating) ? '#fbbf24' : 'none'}" stroke="#fbbf24" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`).join('')}
+                            <span class="text-xs text-gray-500 ml-1">(${p.reviews})</span>
+                        </div>
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="text-lg font-black gradient-text">UGX ${p.price.toLocaleString()}</span>
+                            ${p.originalPrice ? `<span class="text-sm text-gray-500 line-through">UGX ${p.originalPrice.toLocaleString()}</span>` : ''}
+                        </div>
+                        <div class="flex items-center gap-1 text-xs text-gray-500 mb-3">
+                            <span>📍 ${p.sellerLoc}</span>
+                            <span>•</span>
+                            <span>👤 ${p.seller}</span>
+                        </div>
+                        <div class="flex gap-2">
+                            <button onclick="addToCart(products.find(x=>x.id===${p.id}))" class="flex-1 btn-water bg-purple-600 hover:bg-purple-700 py-2.5 rounded-lg font-bold text-sm text-white">
+                                Add to Cart
+                            </button>
+                            <a href="https://wa.me/256775374095?text=Hi! I'm interested in ${encodeURIComponent(p.name)} (UGX ${p.price.toLocaleString()})" class="btn-water bg-green-600 hover:bg-green-700 p-2.5 rounded-lg text-white">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            `}).join('');
+        }
+
+        function setCategory(cat) {
+            currentCategory = cat;
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                const isActive = btn.dataset.cat === cat;
+                btn.classList.toggle('bg-purple-600', isActive);
+                btn.classList.toggle('text-white', isActive);
+                btn.classList.toggle('text-gray-300', !isActive);
+            });
+            renderProducts();
+        }
+
+        function sortProducts(val) {
+            currentSort = val;
+            renderProducts();
+        }
+
+        function filterProducts(query) {
+            const q = query.toLowerCase();
+            const grid = document.getElementById('product-grid');
+            const filtered = products.filter(p =>
+                p.name.toLowerCase().includes(q) ||
+                p.category.toLowerCase().includes(q) ||
+                p.seller.toLowerCase().includes(q) ||
+                p.sellerLoc.toLowerCase().includes(q)
+            );
+            // Re-render with filtered
+            grid.innerHTML = filtered.map((p, i) => {
+                const discount = p.originalPrice ? Math.round(((p.originalPrice - p.price) / p.originalPrice) * 100) : 0;
+                return `
+                <div class="product-card glass rounded-xl overflow-hidden animate-slide-up">
+                    <div class="relative">
+                        <img src="${p.image}" alt="${p.name}" class="w-full h-48 object-cover" loading="lazy" onerror="this.src='https://via.placeholder.com/400x300/1a1a2e/7000ff?text=${encodeURIComponent(p.name)}'">
+                        ${discount > 0 ? `<span class="absolute top-2 left-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full">-${discount}%</span>` : ''}
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-bold text-white mb-1">${p.name}</h3>
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="text-lg font-black gradient-text">UGX ${p.price.toLocaleString()}</span>
+                        </div>
+                        <div class="flex gap-2">
+                            <button onclick="addToCart(products.find(x=>x.id===${p.id}))" class="flex-1 btn-water bg-purple-600 hover:bg-purple-700 py-2.5 rounded-lg font-bold text-sm text-white">Add to Cart</button>
+                            <a href="https://wa.me/256775374095?text=Hi! I'm interested in ${encodeURIComponent(p.name)}" class="btn-water bg-green-600 hover:bg-green-700 p-2.5 rounded-lg text-white">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            `}).join('');
+        }
+
+        // ===== SELLER RENDERING =====
+        function renderSellers() {
+            const list = document.getElementById('seller-list');
+            const sorted = [...sellers].sort((a, b) => a.rank - b.rank);
+            list.innerHTML = sorted.map(s => {
+                const rankClass = s.rank === 1 ? 'rank-1' : s.rank === 2 ? 'rank-2' : s.rank === 3 ? 'rank-3' : 'bg-gray-700';
+                return `
+                <div class="glass rounded-xl p-5 flex items-center gap-4 touch-water">
+                    <div class="w-12 h-12 rounded-full ${rankClass} flex items-center justify-center text-lg font-black">
+                        #${s.rank}
+                    </div>
+                    <div class="flex-1">
+                        <div class="flex items-center gap-2">
+                            <span class="font-bold text-lg">${s.name}</span>
+                            ${s.verified ? '<span class="text-blue-400 text-xs">✓ Verified</span>' : ''}
+                        </div>
+                        <div class="text-sm text-gray-400">📍 ${s.location} • ${s.specialty}</div>
+                        <div class="flex items-center gap-3 mt-1">
+                            <span class="text-yellow-400 text-sm">★ ${s.rating}</span>
+                            <span class="text-purple-400 text-sm font-bold">${s.sales} sales</span>
+                        </div>
+                    </div>
+                    <a href="https://wa.me/256775374095?text=Hi ${s.name}! I'm interested in your products on Rattle Empire" class="btn-water bg-green-600 hover:bg-green-700 px-4 py-2 rounded-lg text-sm font-bold text-white">
+                        Contact
+                    </a>
+                </div>
+            `}).join('');
+        }
+
+        // ===== UI HELPERS =====
+        function toggleSearch() {
+            const bar = document.getElementById('search-bar');
+            bar.classList.toggle('hidden');
+            if (!bar.classList.contains('hidden')) document.getElementById('search-input').focus();
+        }
+
+        function showToast(msg) {
+            const toast = document.createElement('div');
+            toast.className = 'fixed bottom-24 left-1/2 -translate-x-1/2 glass px-6 py-3 rounded-xl text-sm font-semibold z-50 animate-slide-up';
+            toast.textContent = msg;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 2500);
+        }
+
+        function closeProductModal(e) {
+            if (e.target.id === 'product-modal') {
+                document.getElementById('product-modal').classList.add('hidden');
+            }
+        }
+
+        // ===== INIT =====
+        renderProducts();
+        renderSellers();
+        updateCartUI();
     </script>
 </body>
 </html>
