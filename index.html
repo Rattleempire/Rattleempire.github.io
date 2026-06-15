@@ -46,19 +46,62 @@
 
         body { background: #0a0a1a; color: #fff; overflow-x: hidden; }
 
-        /* Glass */
+        /* ===== HAZE BACKGROUND (pure CSS, zero JS) ===== */
+        .haze-bg {
+            position: fixed; inset: 0; z-index: 0; pointer-events: none;
+            overflow: hidden;
+        }
+        .haze-bg .orb {
+            position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.12;
+            will-change: transform;
+        }
+        .haze-bg .orb-1 {
+            width: 600px; height: 600px; top: -10%; left: -10%;
+            background: radial-gradient(circle, #7000ff 0%, transparent 70%);
+            animation: haze-drift-1 25s ease-in-out infinite alternate;
+        }
+        .haze-bg .orb-2 {
+            width: 500px; height: 500px; top: 30%; right: -15%;
+            background: radial-gradient(circle, #00d4ff 0%, transparent 70%);
+            animation: haze-drift-2 30s ease-in-out infinite alternate;
+        }
+        .haze-bg .orb-3 {
+            width: 700px; height: 700px; bottom: -20%; left: 20%;
+            background: radial-gradient(circle, #9d4edd 0%, transparent 70%);
+            animation: haze-drift-3 35s ease-in-out infinite alternate;
+        }
+        .haze-bg .orb-4 {
+            width: 400px; height: 400px; top: 60%; left: 50%;
+            background: radial-gradient(circle, #00d4ff 0%, transparent 70%);
+            animation: haze-drift-4 20s ease-in-out infinite alternate;
+            opacity: 0.06;
+        }
+        @keyframes haze-drift-1 {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(80px, 60px) scale(1.15); }
+        }
+        @keyframes haze-drift-2 {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(-60px, -40px) scale(1.1); }
+        }
+        @keyframes haze-drift-3 {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(50px, -70px) scale(1.2); }
+        }
+        @keyframes haze-drift-4 {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(-40px, 30px) scale(0.9); }
+        }
+
+        /* Glass — NO backdrop-filter for performance */
         .glass {
-            background: var(--glass-bg);
-            backdrop-filter: blur(24px) saturate(1.4);
-            -webkit-backdrop-filter: blur(24px) saturate(1.4);
+            background: rgba(15, 15, 30, 0.72);
             border: 1px solid var(--glass-border);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255,255,255,0.05);
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255,255,255,0.04);
         }
         .glass-strong {
-            background: rgba(15, 15, 30, 0.85);
-            backdrop-filter: blur(40px) saturate(1.6);
-            -webkit-backdrop-filter: blur(40px) saturate(1.6);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(15, 15, 30, 0.88);
+            border: 1px solid rgba(255, 255, 255, 0.08);
         }
 
         /* Touch */
@@ -79,9 +122,8 @@
 
         /* Animations */
         @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            33% { transform: translateY(-6px) rotate(1deg); }
-            66% { transform: translateY(-3px) rotate(-1deg); }
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
         }
         .animate-float { animation: float 4s ease-in-out infinite; }
 
@@ -96,10 +138,10 @@
         }
 
         @keyframes pulse-glow {
-            0%, 100% { box-shadow: 0 0 20px var(--empire-glow); }
-            50% { box-shadow: 0 0 40px var(--empire-glow), 0 0 60px rgba(112, 0, 255, 0.1); }
+            0%, 100% { box-shadow: 0 0 15px var(--empire-glow); }
+            50% { box-shadow: 0 0 25px var(--empire-glow), 0 0 40px rgba(112, 0, 255, 0.08); }
         }
-        .animate-pulse-glow { animation: pulse-glow 2s ease-in-out infinite; }
+        .animate-pulse-glow { animation: pulse-glow 3s ease-in-out infinite; }
 
         @keyframes slide-up {
             from { opacity: 0; transform: translateY(30px); }
@@ -125,11 +167,11 @@
             50% { background-position: 100% 50%; }
         }
 
-        /* Product card */
-        .product-card { transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+        /* Product card — optimized for GPU */
+        .product-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
         .product-card:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 20px 60px rgba(112, 0, 255, 0.2), 0 0 0 1px rgba(112, 0, 255, 0.1);
+            transform: translate3d(0, -6px, 0) scale(1.01);
+            box-shadow: 0 12px 40px rgba(112, 0, 255, 0.15);
         }
         .product-card:active { transform: scale(0.98); }
 
@@ -170,19 +212,19 @@
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: rgba(112, 0, 255, 0.3); border-radius: 999px; }
 
-        /* Noise */
+        /* Noise — ultra-light */
         .noise::before {
             content: ''; position: fixed; inset: 0;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.02'/%3E%3C/svg%3E");
             pointer-events: none; z-index: 0;
         }
 
         /* Marquee */
         @keyframes marquee {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
+            0% { transform: translate3d(0, 0, 0); }
+            100% { transform: translate3d(-50%, 0, 0); }
         }
-        .animate-marquee { animation: marquee 20s linear infinite; }
+        .animate-marquee { animation: marquee 25s linear infinite; will-change: transform; }
 
         /* Loading skeleton */
         .skeleton {
@@ -197,6 +239,13 @@
     </style>
 </head>
 <body class="noise min-h-screen pb-24">
+    <!-- Haze Background -->
+    <div class="haze-bg">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+        <div class="orb orb-4"></div>
+    </div>
 
     <!-- HEADER -->
     <header class="fixed top-0 w-full z-50 glass-strong border-b border-white/5">
