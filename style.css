@@ -20,7 +20,6 @@ body {
     background: #0a0a1a;
     color: #fff;
     overflow-x: hidden;
-    display: flex;
     min-height: 100dvh;
 }
 
@@ -186,10 +185,10 @@ body {
 /* ===== MAIN CONTENT ===== */
 .main-content {
     margin-left: var(--sidebar-w);
-    flex: 1;
-    min-height: 100vh;
+    min-height: 100dvh;
     position: relative;
     z-index: 1;
+    width: calc(100% - var(--sidebar-w));
 }
 
 /* ===== TOP BAR ===== */
@@ -1311,7 +1310,7 @@ body {
     .sidebar { transform: translateX(-100%); }
     .sidebar.open { transform: translateX(0); }
     .sidebar-overlay { display: block; }
-    .main-content { margin-left: 0; }
+    .main-content { margin-left: 0; width: 100%; }
     .stats-row { grid-template-columns: repeat(3, 1fr); }
     .hero-carousel .carousel-slide { height: 300px; }
     .hero-carousel .carousel-slide .slide-content h2 { font-size: 32px; }
@@ -1321,6 +1320,7 @@ body {
 }
 @media (max-width: 768px) {
     :root { --sidebar-w: 240px; }
+    .main-content { margin-left: 0; width: 100%; }
     #content-area { padding: 16px 12px; }
     .stats-row { grid-template-columns: repeat(2, 1fr); }
     .product-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 10px; }
