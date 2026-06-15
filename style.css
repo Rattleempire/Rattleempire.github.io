@@ -846,8 +846,8 @@ body {
 
 .course-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-    gap: 16px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
 }
 .course-card {
     background: rgba(255,255,255,0.05);
@@ -1297,28 +1297,31 @@ body {
     background: rgba(0,0,0,0.5);
     z-index: 99;
     opacity: 0;
-    transition: opacity 0.3s;
-}
-.sidebar-overlay.open { opacity: 1; display: block; }
-
-/* ===== RESPONSIVE ===== */
-@media (max-width: 1200px) {
-    .product-grid { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
-    .stats-row { grid-template-columns: repeat(5, 1fr); }
-}
-@media (max-width: 1024px) {
-    .hamburger { display: flex; }
-    .sidebar { transform: translateX(-100%); }
-    .sidebar.open { transform: translateX(0); }
-    .sidebar-overlay { display: block; }
-    .main-content { margin-left: 0; width: 100%; }
-    .stats-row { grid-template-columns: repeat(3, 1fr); }
-    .hero-carousel .carousel-slide { height: 300px; }
-    .hero-carousel .carousel-slide .slide-content h2 { font-size: 32px; }
-    .cat-grid { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); }
-    .sellers-grid { grid-template-columns: 1fr; }
-    .contact-grid { grid-template-columns: 1fr; }
-}
+    .course-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 14px;
+    }
+    @media (max-width: 1200px) {
+        .product-grid { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
+        .stats-row { grid-template-columns: repeat(5, 1fr); }
+        .course-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 1024px) {
+        .hamburger { display: flex; }
+        .sidebar { transform: translateX(-100%); }
+        .sidebar.open { transform: translateX(0); }
+        .sidebar-overlay { display: block; }
+        .main-content { margin-left: 0; width: 100%; }
+        .stats-row { grid-template-columns: repeat(3, 1fr); }
+        .hero-carousel .carousel-slide { height: 300px; }
+        .hero-carousel .carousel-slide .slide-content h2 { font-size: 32px; }
+        .cat-grid { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); }
+        .sellers-grid { grid-template-columns: 1fr; }
+        .contact-grid { grid-template-columns: 1fr; }
+        .course-grid { grid-template-columns: repeat(2, 1fr); }
+        .affiliate-section .affiliate-grid { grid-template-columns: 1fr; gap: 24px; }
+    }
 @media (max-width: 768px) {
     :root { --sidebar-w: 240px; }
     .main-content { margin-left: 0; width: 100%; }
@@ -1422,7 +1425,7 @@ body {
     margin-top: 32px;
     margin-bottom: 24px;
     position: relative;
-    overflow: hidden;
+    overflow: visible;
     box-shadow: 0 4px 30px rgba(112,0,255,0.08), inset 0 1px 0 rgba(255,255,255,0.04);
 }
 .academy-courses-panel .panel-glow {
