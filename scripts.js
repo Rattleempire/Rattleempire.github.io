@@ -922,7 +922,6 @@ function renderTestimonials() {
             </div>
             <div class="book-controls">
                 <button class="book-btn" onclick="flipTestimonial(-1)"><i class="fas fa-chevron-left"></i></button>
-                <span class="book-counter"><span id="current-page">1</span> / <span id="total-pages">${testimonials.length}</span></span>
                 <button class="book-btn" onclick="flipTestimonial(1)"><i class="fas fa-chevron-right"></i></button>
             </div>
         </div>`;
@@ -943,9 +942,8 @@ function renderTestimonialCard(t) {
 }
 
 function flipTestimonial(dir) {
-    if (isFlipping) return; // Prevent double-clicks during animation
+    if (isFlipping) return;
     const page = document.getElementById('testimonial-page');
-    const counter = document.getElementById('current-page');
     if (!page) return;
 
     isFlipping = true;
@@ -955,10 +953,9 @@ function flipTestimonial(dir) {
     setTimeout(() => {
         currentTestimonial = (currentTestimonial + dir + testimonials.length) % testimonials.length;
         page.innerHTML = renderTestimonialCard(testimonials[currentTestimonial]);
-        if (counter) counter.textContent = currentTestimonial + 1;
         page.classList.remove(animClass);
         isFlipping = false;
-    }, 600); // Match animation duration
+    }, 600);
 
     startTestimonialAutoFlip();
 }
@@ -973,208 +970,122 @@ function initGameCanvas() {
     const canvas = document.getElementById('game-bg');
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
-    let width, height, animId;
+    let W, H;
     const stickmen = [];
-    const mazeWalls = [];
-    const neonColors = ['#00f0ff', '#ff00ff', '#00ff88', '#ffaa00', '#ff3366', '#8833ff', '#00ffcc', '#ff6600', '#33ccff', '#ff0099', '#66ff33', '#cc00ff'];
+    const neonColors = ['#00f0ff','#ff00ff','#00ff88','#ffaa00','#ff3366','#8833ff','#00ffcc','#ff6600','#33ccff','#ff0099','#66ff33','#cc00ff','#00ccff','#ff4488','#44ff88'];
 
     function resize() {
-        width = canvas.width = window.innerWidth;
-        height = canvas.height = window.innerHeight;
-        generateMaze();
+        W = canvas.width = window.innerWidth;
+        H = canvas.height = window.innerHeight;
     }
 
-    function generateMaze() {
-        mazeWalls.length = 0;
-        const cols = 12, rows = 8;
-        const cellW = width / cols;
-        const cellH = height / rows;
-        for (let r = 0; r < rows; r++) {
-            for (let c = 0; c < cols; c++) {
-                if (Math.random() > 0.6) {
-                    mazeWalls.push({
-                        x: c * cellW, y: r * cellH,
-                        w: cellW - 4, h: cellH - 4,
-                        color: neonColors[Math.floor(Math.random() * neonColors.length)]
-                    });
-                }
-            }
-        }
-    }
-
-    // Create stickmen with more energy
-    for (let i = 0; i < 15; i++) {
+    // Create 20 stickmen
+    for (let i = 0; i < 20; i++) {
         const angle = Math.random() * Math.PI * 2;
         stickmen.push({
-            x: Math.random() * width,
-            y: Math.random() * height,
-            vx: Math.cos(angle) * (Math.random() * 2 + 1),
-            vy: Math.sin(angle) * (Math.random() * 2 + 1),
+            x: Math.random() * W, y: Math.random() * H,
+            vx: Math.cos(angle) * (Math.random() * 1.5 + 0.8),
+            vy: Math.sin(angle) * (Math.random() * 1.5 + 0.8),
             color: neonColors[i % neonColors.length],
-            size: Math.random() * 6 + 10,
-            angle: angle,
-            speed: Math.random() * 0.03 + 0.02,
-            climbPhase: Math.random() * Math.PI * 2,
-            trail: [],
-            pulsePhase: Math.random() * Math.PI * 2
+            size: 12 + Math.random() * 8,
+            phase: Math.random() * Math.PI * 2,
+            speed: 0.02 + Math.random() * 0.02,
+            trail: []
         });
     }
 
-    function drawNeonStickman(x, y, size, color, angle, climbPhase, pulsePhase) {
+    function drawStickman(s) {
+        const { x, y, size, color, phase } = s;
+        const pulse = 0.7 + Math.sin(s.phase) * 0.3;
+
+        // Glow layers
         ctx.save();
-        ctx.translate(x, y);
-        ctx.rotate(angle);
-
-        // Pulsing glow intensity
-        const pulse = 0.6 + Math.sin(pulsePhase) * 0.4;
-
-        // Outer glow (multiple layers for neon effect)
-        for (let g = 3; g >= 1; g--) {
-            ctx.globalAlpha = 0.15 * pulse / g;
-            ctx.strokeStyle = color;
-            ctx.lineWidth = g * 4;
-            ctx.lineCap = 'round';
+        for (let g = 4; g >= 1; g--) {
+            ctx.globalAlpha = 0.08 * pulse / g;
+            ctx.fillStyle = color;
             ctx.beginPath();
-            ctx.arc(0, -size * 1.3, size * 0.4, 0, Math.PI * 2);
-            ctx.stroke();
-            ctx.beginPath();
-            ctx.moveTo(0, -size * 0.9);
-            ctx.lineTo(0, size * 0.6);
-            ctx.stroke();
+            ctx.arc(x, y - size * 1.4, size * 0.5 + g * 3, 0, Math.PI * 2);
+            ctx.fill();
         }
 
-        // Main stickman — bright neon
+        // Main body
         ctx.globalAlpha = pulse;
         ctx.strokeStyle = color;
-        ctx.fillStyle = color;
         ctx.lineWidth = 2.5;
         ctx.lineCap = 'round';
-        ctx.shadowColor = color;
-        ctx.shadowBlur = 15;
 
         // Head
-        ctx.beginPath();
-        ctx.arc(0, -size * 1.3, size * 0.4, 0, Math.PI * 2);
-        ctx.stroke();
-
+        ctx.beginPath(); ctx.arc(x, y - size * 1.4, size * 0.4, 0, Math.PI * 2); ctx.stroke();
         // Body
-        ctx.beginPath();
-        ctx.moveTo(0, -size * 0.9);
-        ctx.lineTo(0, size * 0.6);
-        ctx.stroke();
-
-        // Arms — animated climbing
-        const armSwing = Math.sin(climbPhase) * 1.0;
-        ctx.beginPath();
-        ctx.moveTo(0, -size * 0.55);
-        ctx.lineTo(-size * 0.7 * Math.cos(armSwing), -size * 0.15 - size * 0.5 * Math.sin(armSwing));
-        ctx.stroke();
-        ctx.beginPath();
-        ctx.moveTo(0, -size * 0.55);
-        ctx.lineTo(size * 0.7 * Math.cos(-armSwing), -size * 0.15 - size * 0.5 * Math.sin(-armSwing));
-        ctx.stroke();
-
-        // Legs — animated walking
-        const legSwing = Math.sin(climbPhase * 1.8) * 0.8;
-        ctx.beginPath();
-        ctx.moveTo(0, size * 0.6);
-        ctx.lineTo(-size * 0.6 * Math.sin(legSwing), size * 0.6 + size * 0.6 * Math.cos(legSwing));
-        ctx.stroke();
-        ctx.beginPath();
-        ctx.moveTo(0, size * 0.6);
-        ctx.lineTo(size * 0.6 * Math.sin(-legSwing), size * 0.6 + size * 0.6 * Math.cos(-legSwing));
-        ctx.stroke();
-
-        // Eyes — glowing dots
-        ctx.globalAlpha = pulse;
+        ctx.beginPath(); ctx.moveTo(x, y - size); ctx.lineTo(x, y + size * 0.6); ctx.stroke();
+        // Arms
+        const armA = Math.sin(phase) * 0.9;
+        ctx.beginPath(); ctx.moveTo(x, y - size * 0.6); ctx.lineTo(x - size * 0.7 * Math.cos(armA), y - size * 0.2 - size * 0.5 * Math.sin(armA)); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(x, y - size * 0.6); ctx.lineTo(x + size * 0.7 * Math.cos(-armA), y - size * 0.2 - size * 0.5 * Math.sin(-armA)); ctx.stroke();
+        // Legs
+        const legA = Math.sin(phase * 1.6) * 0.7;
+        ctx.beginPath(); ctx.moveTo(x, y + size * 0.6); ctx.lineTo(x - size * 0.6 * Math.sin(legA), y + size * 0.6 + size * 0.6 * Math.cos(legA)); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(x, y + size * 0.6); ctx.lineTo(x + size * 0.6 * Math.sin(-legA), y + size * 0.6 + size * 0.6 * Math.cos(-legA)); ctx.stroke();
+        // Eyes
         ctx.fillStyle = '#fff';
-        ctx.shadowBlur = 10;
-        ctx.beginPath();
-        ctx.arc(-size * 0.12, -size * 1.35, size * 0.08, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.beginPath();
-        ctx.arc(size * 0.12, -size * 1.35, size * 0.08, 0, Math.PI * 2);
-        ctx.fill();
+        ctx.beginPath(); ctx.arc(x - size*0.13, y - size*1.45, size*0.08, 0, Math.PI*2); ctx.fill();
+        ctx.beginPath(); ctx.arc(x + size*0.13, y - size*1.45, size*0.08, 0, Math.PI*2); ctx.fill();
 
         ctx.restore();
     }
 
-    function drawMaze() {
-        for (const wall of mazeWalls) {
-            // Wall fill
-            ctx.globalAlpha = 0.04;
-            ctx.fillStyle = wall.color;
-            ctx.fillRect(wall.x + 2, wall.y + 2, wall.w, wall.h);
-
-            // Wall border glow
-            ctx.globalAlpha = 0.12;
-            ctx.strokeStyle = wall.color;
-            ctx.lineWidth = 1;
-            ctx.shadowColor = wall.color;
-            ctx.shadowBlur = 4;
-            ctx.strokeRect(wall.x + 2, wall.y + 2, wall.w, wall.h);
-            ctx.shadowBlur = 0;
+    function drawMazeGrid() {
+        const cols = 10, rows = 7;
+        const cw = W / cols, ch = H / rows;
+        ctx.globalAlpha = 0.06;
+        ctx.strokeStyle = '#00f0ff';
+        ctx.lineWidth = 1;
+        for (let r = 0; r < rows; r++) {
+            for (let c = 0; c < cols; c++) {
+                if ((r + c) % 3 === 0) {
+                    ctx.fillStyle = neonColors[(r * cols + c) % neonColors.length];
+                    ctx.globalAlpha = 0.03;
+                    ctx.fillRect(c * cw + 3, r * ch + 3, cw - 6, ch - 6);
+                    ctx.globalAlpha = 0.06;
+                    ctx.strokeRect(c * cw + 3, r * ch + 3, cw - 6, ch - 6);
+                }
+            }
         }
         ctx.globalAlpha = 1;
     }
 
-    function update() {
-        ctx.clearRect(0, 0, width, height);
+    function frame() {
+        ctx.clearRect(0, 0, W, H);
+        drawMazeGrid();
 
-        // Draw maze walls
-        drawMaze();
-
-        // Update and draw stickmen
         for (const s of stickmen) {
-            s.x += s.vx;
-            s.y += s.vy;
-            s.climbPhase += s.speed;
-            s.pulsePhase += 0.05;
-            s.angle = Math.atan2(s.vy, s.vx);
-
-            // Bounce off edges
-            if (s.x < 30 || s.x > width - 30) s.vx *= -1;
-            if (s.y < 30 || s.y > height - 30) s.vy *= -1;
-
-            // Random direction changes — more active
-            if (Math.random() < 0.008) {
-                const newAngle = Math.random() * Math.PI * 2;
-                const speed = Math.random() * 2 + 1;
-                s.vx = Math.cos(newAngle) * speed;
-                s.vy = Math.sin(newAngle) * speed;
+            s.x += s.vx; s.y += s.vy; s.phase += s.speed;
+            if (s.x < 40 || s.x > W - 40) s.vx *= -1;
+            if (s.y < 40 || s.y > H - 40) s.vy *= -1;
+            if (Math.random() < 0.006) {
+                const a = Math.random() * Math.PI * 2;
+                const sp = Math.random() * 1.5 + 0.8;
+                s.vx = Math.cos(a) * sp; s.vy = Math.sin(a) * sp;
             }
-
-            // Climbing bursts
-            if (Math.random() < 0.015) {
-                s.vy = -Math.abs(s.vy) - 1.5;
-            }
-
-            // Draw neon trail
+            // Trail
             s.trail.push({ x: s.x, y: s.y });
-            if (s.trail.length > 25) s.trail.shift();
+            if (s.trail.length > 15) s.trail.shift();
             for (let i = 0; i < s.trail.length; i++) {
-                const alpha = (i / s.trail.length) * 0.2;
-                const trailSize = (i / s.trail.length) * 3;
-                ctx.globalAlpha = alpha;
+                ctx.globalAlpha = (i / s.trail.length) * 0.15;
                 ctx.fillStyle = s.color;
-                ctx.shadowColor = s.color;
-                ctx.shadowBlur = 8;
                 ctx.beginPath();
-                ctx.arc(s.trail[i].x, s.trail[i].y, trailSize, 0, Math.PI * 2);
+                ctx.arc(s.trail[i].x, s.trail[i].y, (i / s.trail.length) * 2.5, 0, Math.PI * 2);
                 ctx.fill();
             }
-            ctx.shadowBlur = 0;
-
-            // Draw the stickman
-            drawNeonStickman(s.x, s.y, s.size, s.color, s.angle, s.climbPhase, s.pulsePhase);
+            ctx.globalAlpha = 1;
+            drawStickman(s);
         }
-
-        animId = requestAnimationFrame(update);
+        requestAnimationFrame(frame);
     }
 
     window.addEventListener('resize', resize);
     resize();
-    update();
+    frame();
 }
 
 // ===== FLOATING PARTICLES =====
