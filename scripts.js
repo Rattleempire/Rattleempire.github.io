@@ -832,18 +832,18 @@ const testimonialTexts = [
     "The gaming chair I bought is so comfortable. My back pain is gone! Great investment.",
     "Ordered a dining table set for my new apartment. Delivery was free and setup was included!",
     "MrGoViral helped me grow my business page from 500 to 5K followers. Incredible results!",
-    "The Anker power bank I bought charges my phone 5 times on a single charge. Quality product!",
+    "The Anker power bank charges my phone 5 times on a single charge. Quality product!",
     "I love the Academy section! The free resources have helped me learn so much about tech.",
     "Bought a designer handbag for my wife's birthday. She was thrilled! Authentic and beautiful.",
     "The wireless charger pad works flawlessly. Fast charging and looks great on my desk.",
     "My Sony headphones sound amazing. Noise cancellation is top-notch. Worth every shilling!",
-    "The KYC process was smooth and secure. I felt safe sharing my information with Rattle Empire.",
+    "The verification process was smooth and secure. I felt safe sharing my information.",
     "I've referred 3 friends to the affiliate program and earned commission on all their purchases!",
     "The Apple Watch I bought tracks everything perfectly. Health features are incredible.",
     "Found a marble top dining table at half the price of other stores. Absolutely stunning!",
     "The customer support team resolved my issue within minutes. Very professional service!",
     "My JBL speaker is perfect for outdoor parties. Sound quality is amazing for the price!",
-    "The floating wall shelves I bought transformed my living room. Easy to install too!",
+    "The floating wall shelves transformed my living room. Easy to install too!",
     "Bought a phone case premium set for the whole family. Great quality and fast shipping!",
     "The car phone mount is sturdy and holds my phone perfectly. No more dropping it while driving!",
     "My Fitbit fitness band helps me stay on track with health goals. Love the sleep tracking!",
@@ -854,23 +854,56 @@ const testimonialTexts = [
     "The crystal chandelier dining set I ordered is absolutely breathtaking. Worth every penny!",
     "My Fitbit Charge 6 tracks everything perfectly. The battery life is incredible!",
     "The PopSockets set I bought for my kids is durable and fun. They love changing the designs!",
-    "Rattle Empire's WhatsApp checkout is the smoothest online payment experience I've had in Uganda!"
+    "Rattle Empire's WhatsApp checkout is the smoothest online payment experience I've had in Uganda!",
+    "The Italian leather sectional I ordered is the most comfortable sofa I've ever sat on!",
+    "Bought a Samsung 65W super fast charger. Charges my phone from zero to full in 45 minutes!",
+    "The solid oak king bed I ordered is beautifully crafted. My bedroom looks like a palace!",
+    "Found a Gucci Dionysus bag at a fraction of the retail price. Authenticated and gorgeous!",
+    "The MrGoViral YouTube growth service got my channel monetized in just 3 months!",
+    "My Cartier Love Bracelet arrived in the original box with certificate. Stunning piece!",
+    "The handcrafted teak desk is now my home office centerpiece. The craftsmanship is incredible!",
+    "Bought a Tiffany diamond necklace for our anniversary. My wife couldn't believe the price!",
+    "The modular corner sofa fits perfectly in my living room. Delivery team was so professional!",
+    "MrGoViral's Instagram reposts feature helped me reach audiences I never thought possible!",
+    "The Audemars Piguet Royal Oak I found here is a dream come true. Authenticated and perfect!",
+    "My Hermès Kelly bag arrived with full documentation. I'm a customer for life!",
+    "The bar cabinet I ordered stores all my bottles beautifully. My friends are all jealous!",
+    "Found a Tudor Black Bay 58 at an unbeatable price. The seller was incredibly knowledgeable!",
+    "The dining table with crystal chandelier transformed my entire home. Absolutely magnificent!"
 ];
-const reviewColors = ["#a855f7","#00d4ff","#fbbf24","#4ade80","#f472b6","#f87171","#c084fc","#38bdf8","#34d399","#fb923c"];
+const reviewColors = ["#00f0ff","#ff00ff","#00ff88","#ffaa00","#ff3366","#8833ff","#00ffcc","#ff6600","#33ccff","#ff0099","#66ff33","#cc00ff"];
+
+// Fisher-Yates shuffle for unique ordering
+function shuffleArray(arr) {
+    const a = [...arr];
+    for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+}
 
 function generateReviews() {
-    const count = Math.floor(Math.random() * 15) + 40; // 40-54 reviews
+    // Shuffle all arrays to guarantee uniqueness
+    const shuffledTexts = shuffleArray(testimonialTexts);
+    const shuffledNames = shuffleArray(reviewNames);
+    const shuffledRoles = shuffleArray(reviewRoles);
+    const shuffledColors = shuffleArray(reviewColors);
+
+    // Use ALL texts (54 unique reviews) — no repetition
+    const count = shuffledTexts.length;
     const reviews = [];
     for (let i = 0; i < count; i++) {
         reviews.push({
-            name: reviewNames[Math.floor(Math.random() * reviewNames.length)],
-            role: reviewRoles[Math.floor(Math.random() * reviewRoles.length)],
-            text: testimonialTexts[Math.floor(Math.random() * testimonialTexts.length)],
-            stars: Math.random() > 0.1 ? 5 : 4, // 90% 5-star, 10% 4-star
-            color: reviewColors[Math.floor(Math.random() * reviewColors.length)]
+            name: shuffledNames[i % shuffledNames.length] + (i >= shuffledNames.length ? " " + (Math.floor(i / shuffledNames.length) + 1) : ""),
+            role: shuffledRoles[i % shuffledRoles.length],
+            text: shuffledTexts[i], // Each text used exactly once
+            stars: Math.random() > 0.08 ? 5 : 4,
+            color: shuffledColors[i % shuffledColors.length]
         });
     }
-    return reviews;
+    // Shuffle the final reviews array for random page order
+    return shuffleArray(reviews);
 }
 
 let testimonials = [];
