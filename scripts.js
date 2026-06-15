@@ -797,21 +797,89 @@ function initCountUp() {
 }
 
 // ===== TESTIMONIALS — PAGE FLIP BOOK =====
-const testimonials = [
-    { name: "Sarah K.", role: "Kampala", text: "Just received my iPhone X! Amazing quality and fast delivery. Rattle Empire is the real deal! 🔥", stars: 5, color: "#a855f7" },
-    { name: "Brian T.", role: "Entebbe", text: "Ordered a Samsung 4K TV, delivered the next day. The seller was super professional. Will buy again!", stars: 5, color: "#00d4ff" },
-    { name: "Grace M.", role: "Jinja", text: "Best marketplace in Uganda! Found exactly what I was looking for at a great price. Highly recommend!", stars: 5, color: "#fbbf24" },
-    { name: "Daniel O.", role: "Gulu", text: "MrGoViral SMM panel boosted my Instagram from 2K to 10K followers in one month. The AI tools are insane!", stars: 5, color: "#4ade80" },
-    { name: "Faith N.", role: "Mbarara", text: "Quality products, fair prices, and excellent customer support. Rattle Empire never disappoints!", stars: 5, color: "#f472b6" },
-    { name: "Michael J.", role: "Kampala", text: "I've ordered 3 times now and every experience has been smooth. The WhatsApp checkout is so convenient!", stars: 5, color: "#f87171" },
-    { name: "Patricia A.", role: "Kira", text: "Found a beautiful Rolex Submariner at an incredible price. Authentic and certified. Love this platform!", stars: 5, color: "#a855f7" },
-    { name: "John D.", role: "Wakiso", text: "The affiliate program is amazing. I've already earned my first commission. Easy to refer and earn!", stars: 5, color: "#00d4ff" },
+const reviewNames = [
+    "Sarah K.", "Brian T.", "Grace M.", "Daniel O.", "Faith N.", "Michael J.", "Patricia A.", "John D.",
+    "Esther W.", "David L.", "Martha C.", "Peter H.", "Joyce R.", "Samuel K.", "Diana F.", "Alex B.",
+    "Catherine P.", "Frank I.", "Lillian G.", "Henry V.", "Irene S.", "Kevin Z.", "Monica Y.", "Oscar X.",
+    "Rachel Q.", "Thomas U.", "Victoria E.", "William O.", "Zoe T.", "Chris M.", "Brenda N.", "Derrick S.",
+    "Evelyn T.", "Felix O.", "Gloria P.", "Isaac R.", "Janet L.", "Kennedy M.", "Laura N.", "Martin O.",
+    "Nancy P.", "Patrick Q."
 ];
+const reviewRoles = [
+    "Kampala", "Entebbe", "Jinja", "Gulu", "Mbarara", "Kira", "Wakiso", "Mukono",
+    "Kira Town", "Nsasa", "Kyanja", "Naalya", "Kireka", "Bweyogerere", "Kansanga", "Ntinda",
+    "Kiwatule", "Naguru", "Kololo", "Bugolobi", "Luzira", "Muyenga", "Kasubi", "Wandegeya",
+    "Makerere", "Nakawa", "Kawempe", "Rubaga", "Makindye", "Bukoto", "Kisasi", "Lubowa",
+    "Munyonyo", "Ggaba", "Kabojja", "Nansana", "Kira Town", "Entebbe", "Masaka", "Mbale",
+    "Fort Portal", "Lira"
+];
+const testimonialTexts = [
+    "Just received my iPhone X! Amazing quality and fast delivery. Rattle Empire is the real deal!",
+    "Ordered a Samsung 4K TV, delivered the next day. The seller was super professional!",
+    "Best marketplace in Uganda! Found exactly what I was looking for at a great price.",
+    "MrGoViral SMM panel boosted my Instagram from 2K to 10K followers. The AI tools are insane!",
+    "Quality products, fair prices, and excellent customer support. Rattle Empire never disappoints!",
+    "I've ordered 3 times now and every experience has been smooth. WhatsApp checkout is so convenient!",
+    "Found a beautiful Rolex Submariner at an incredible price. Authentic and certified. Love this!",
+    "The affiliate program is amazing. Already earned my first commission. Easy to refer and earn!",
+    "My MacBook Pro arrived in mint condition. Exactly as described. Highly recommend this platform!",
+    "Fast delivery to Entebbe! The leather sofa set looks even better in person. 5 stars!",
+    "Bought AirPods Pro for my daughter. She loves them! Great price compared to other shops.",
+    "The HP EliteBook I ordered works perfectly. Saved me thousands compared to buying new.",
+    "Rattle Empire made it so easy to find what I needed. The search feature is spot on!",
+    "I was skeptical about buying luxury items online but the certification process gave me confidence.",
+    "My iPad Air 4 arrived sealed and brand new. The seller communicated throughout. Thank you!",
+    "The gaming chair I bought is so comfortable. My back pain is gone! Great investment.",
+    "Ordered a dining table set for my new apartment. Delivery was free and setup was included!",
+    "MrGoViral helped me grow my business page from 500 to 5K followers. Incredible results!",
+    "The Anker power bank I bought charges my phone 5 times on a single charge. Quality product!",
+    "I love the Academy section! The free resources have helped me learn so much about tech.",
+    "Bought a designer handbag for my wife's birthday. She was thrilled! Authentic and beautiful.",
+    "The wireless charger pad works flawlessly. Fast charging and looks great on my desk.",
+    "My Sony headphones sound amazing. Noise cancellation is top-notch. Worth every shilling!",
+    "The KYC process was smooth and secure. I felt safe sharing my information with Rattle Empire.",
+    "I've referred 3 friends to the affiliate program and earned commission on all their purchases!",
+    "The Apple Watch I bought tracks everything perfectly. Health features are incredible.",
+    "Found a marble top dining table at half the price of other stores. Absolutely stunning!",
+    "The customer support team resolved my issue within minutes. Very professional service!",
+    "My JBL speaker is perfect for outdoor parties. Sound quality is amazing for the price!",
+    "The floating wall shelves I bought transformed my living room. Easy to install too!",
+    "Bought a phone case premium set for the whole family. Great quality and fast shipping!",
+    "The car phone mount is sturdy and holds my phone perfectly. No more dropping it while driving!",
+    "My Fitbit fitness band helps me stay on track with health goals. Love the sleep tracking!",
+    "The selfie stick with remote is perfect for group photos. Bluetooth connection is reliable!",
+    "I love how Rattle Empire verifies every product. It gives me peace of mind when shopping.",
+    "The velvet chaise lounge I bought is the centerpiece of my living room. Everyone compliments it!",
+    "MrGoViral's TikTok growth service helped my business reach 50K views on my first viral video!",
+    "The crystal chandelier dining set I ordered is absolutely breathtaking. Worth every penny!",
+    "My Fitbit Charge 6 tracks everything perfectly. The battery life is incredible!",
+    "The PopSockets set I bought for my kids is durable and fun. They love changing the designs!",
+    "Rattle Empire's WhatsApp checkout is the smoothest online payment experience I've had in Uganda!"
+];
+const reviewColors = ["#a855f7","#00d4ff","#fbbf24","#4ade80","#f472b6","#f87171","#c084fc","#38bdf8","#34d399","#fb923c"];
 
+function generateReviews() {
+    const count = Math.floor(Math.random() * 15) + 40; // 40-54 reviews
+    const reviews = [];
+    for (let i = 0; i < count; i++) {
+        reviews.push({
+            name: reviewNames[Math.floor(Math.random() * reviewNames.length)],
+            role: reviewRoles[Math.floor(Math.random() * reviewRoles.length)],
+            text: testimonialTexts[Math.floor(Math.random() * testimonialTexts.length)],
+            stars: Math.random() > 0.1 ? 5 : 4, // 90% 5-star, 10% 4-star
+            color: reviewColors[Math.floor(Math.random() * reviewColors.length)]
+        });
+    }
+    return reviews;
+}
+
+let testimonials = [];
 let currentTestimonial = 0;
 let testimonialInterval;
+let isFlipping = false;
 
 function renderTestimonials() {
+    testimonials = generateReviews();
     const track = document.getElementById('testimonial-track');
     if (!track) return;
     track.innerHTML = `
@@ -821,7 +889,7 @@ function renderTestimonials() {
             </div>
             <div class="book-controls">
                 <button class="book-btn" onclick="flipTestimonial(-1)"><i class="fas fa-chevron-left"></i></button>
-                <span class="book-counter"><span id="current-page">1</span> / ${testimonials.length}</span>
+                <span class="book-counter"><span id="current-page">1</span> / <span id="total-pages">${testimonials.length}</span></span>
                 <button class="book-btn" onclick="flipTestimonial(1)"><i class="fas fa-chevron-right"></i></button>
             </div>
         </div>`;
@@ -842,20 +910,23 @@ function renderTestimonialCard(t) {
 }
 
 function flipTestimonial(dir) {
+    if (isFlipping) return; // Prevent double-clicks during animation
     const page = document.getElementById('testimonial-page');
     const counter = document.getElementById('current-page');
+    if (!page) return;
 
-    // Add flip animation class
-    page.classList.add(dir > 0 ? 'flip-left' : 'flip-right');
+    isFlipping = true;
+    const animClass = dir > 0 ? 'flip-forward' : 'flip-backward';
+    page.classList.add(animClass);
 
     setTimeout(() => {
         currentTestimonial = (currentTestimonial + dir + testimonials.length) % testimonials.length;
         page.innerHTML = renderTestimonialCard(testimonials[currentTestimonial]);
         if (counter) counter.textContent = currentTestimonial + 1;
-        page.classList.remove('flip-left', 'flip-right');
-    }, 300);
+        page.classList.remove(animClass);
+        isFlipping = false;
+    }, 600); // Match animation duration
 
-    // Reset auto-flip timer
     startTestimonialAutoFlip();
 }
 
@@ -864,12 +935,189 @@ function startTestimonialAutoFlip() {
     testimonialInterval = setInterval(() => flipTestimonial(1), 4000);
 }
 
+// ===== GAME CANVAS — STICKMEN MAZE =====
+function initGameCanvas() {
+    const canvas = document.getElementById('game-bg');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    let width, height;
+    const cols = 15, rows = 10;
+    const stickmen = [];
+    const maze = [];
+    const cellColors = ['rgba(112,0,255,0.08)', 'rgba(0,212,255,0.06)', 'rgba(157,78,221,0.07)', 'rgba(251,191,36,0.04)'];
+
+    function resize() {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+        generateMaze();
+    }
+
+    function generateMaze() {
+        maze.length = 0;
+        const cellW = width / cols;
+        const cellH = height / rows;
+        for (let r = 0; r < rows; r++) {
+            maze[r] = [];
+            for (let c = 0; c < cols; c++) {
+                // Create maze walls with gaps
+                const isWall = Math.random() > 0.65;
+                maze[r][c] = {
+                    x: c * cellW, y: r * cellH,
+                    w: cellW, h: cellH,
+                    isWall: isWall,
+                    color: maze[Math.floor(Math.random() * maze.length)] && Math.random() > 0.5 ? stickmen[0]?.color : cellColors[Math.floor(Math.random() * cellColors.length)]
+                };
+            }
+        }
+    }
+
+    // Create stickmen
+    const stickmanColors = ['#7000ff', '#00d4ff', '#fbbf24', '#4ade80', '#f472b6', '#a855f7', '#38bdf8', '#fb923c'];
+    for (let i = 0; i < 12; i++) {
+        stickmen.push({
+            x: Math.random() * width,
+            y: Math.random() * height,
+            vx: (Math.random() - 0.5) * 1.5,
+            vy: (Math.random() - 0.5) * 1.5,
+            color: stickmanColors[i % stickmanColors.length],
+            size: Math.random() * 4 + 6,
+            angle: Math.random() * Math.PI * 2,
+            speed: Math.random() * 0.02 + 0.01,
+            climbPhase: Math.random() * Math.PI * 2,
+            trail: []
+        });
+    }
+
+    function drawStickman(x, y, size, color, angle, climbPhase) {
+        ctx.save();
+        ctx.translate(x, y);
+        ctx.rotate(angle);
+        ctx.globalAlpha = 0.7;
+        ctx.strokeStyle = color;
+        ctx.fillStyle = color;
+        ctx.lineWidth = 2;
+        ctx.lineCap = 'round';
+
+        // Head
+        ctx.beginPath();
+        ctx.arc(0, -size * 1.2, size * 0.35, 0, Math.PI * 2);
+        ctx.stroke();
+
+        // Body
+        ctx.beginPath();
+        ctx.moveTo(0, -size * 0.85);
+        ctx.lineTo(0, size * 0.5);
+        ctx.stroke();
+
+        // Arms — animated climbing
+        const armAngle = Math.sin(climbPhase) * 0.8;
+        ctx.beginPath();
+        ctx.moveTo(0, -size * 0.5);
+        ctx.lineTo(-size * 0.6 * Math.cos(armAngle), -size * 0.2 - size * 0.4 * Math.sin(armAngle));
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(0, -size * 0.5);
+        ctx.lineTo(size * 0.6 * Math.cos(-armAngle), -size * 0.2 - size * 0.4 * Math.sin(-armAngle));
+        ctx.stroke();
+
+        // Legs — animated walking
+        const legAngle = Math.sin(climbPhase * 1.5) * 0.6;
+        ctx.beginPath();
+        ctx.moveTo(0, size * 0.5);
+        ctx.lineTo(-size * 0.5 * Math.sin(legAngle), size * 0.5 + size * 0.5 * Math.cos(legAngle));
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(0, size * 0.5);
+        ctx.lineTo(size * 0.5 * Math.sin(-legAngle), size * 0.5 + size * 0.5 * Math.cos(-legAngle));
+        ctx.stroke();
+
+        ctx.restore();
+    }
+
+    function drawMaze() {
+        const cellW = width / cols;
+        const cellH = height / rows;
+        ctx.globalAlpha = 0.15;
+        for (let r = 0; r < rows; r++) {
+            for (let c = 0; c < cols; c++) {
+                if (maze[r] && maze[r][c] && maze[r][c].isWall) {
+                    // Draw maze wall blocks
+                    ctx.fillStyle = stickmanColors[(r + c) % stickmanColors.length];
+                    ctx.globalAlpha = 0.06;
+                    ctx.fillRect(c * cellW + 2, r * cellH + 2, cellW - 4, cellH - 4);
+
+                    // Draw maze lines
+                    ctx.strokeStyle = stickmanColors[(r + c) % stickmanColors.length];
+                    ctx.globalAlpha = 0.1;
+                    ctx.lineWidth = 1;
+                    ctx.strokeRect(c * cellW + 4, r * cellH + 4, cellW - 8, cellH - 8);
+                }
+            }
+        }
+        ctx.globalAlpha = 1;
+    }
+
+    function update() {
+        ctx.clearRect(0, 0, width, height);
+
+        // Draw maze
+        drawMaze();
+
+        // Draw and update stickmen
+        for (const s of stickmen) {
+            // Move
+            s.x += s.vx;
+            s.y += s.vy;
+            s.climbPhase += s.speed;
+            s.angle = Math.atan2(s.vy, s.vx);
+
+            // Bounce off edges
+            if (s.x < 20 || s.x > width - 20) s.vx *= -1;
+            if (s.y < 20 || s.y > height - 20) s.vy *= -1;
+
+            // Random direction change
+            if (Math.random() < 0.005) {
+                s.vx = (Math.random() - 0.5) * 2;
+                s.vy = (Math.random() - 0.5) * 2;
+            }
+
+            // Climbing behavior — occasionally move upward more
+            if (Math.random() < 0.01) {
+                s.vy = -Math.abs(s.vy) - 0.5;
+            }
+
+            // Draw trail
+            s.trail.push({ x: s.x, y: s.y });
+            if (s.trail.length > 20) s.trail.shift();
+            ctx.globalAlpha = 0.15;
+            ctx.strokeStyle = s.color;
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            for (let i = 0; i < s.trail.length; i++) {
+                ctx.globalAlpha = (i / s.trail.length) * 0.15;
+                if (i === 0) ctx.moveTo(s.trail[i].x, s.trail[i].y);
+                else ctx.lineTo(s.trail[i].x, s.trail[i].y);
+            }
+            ctx.stroke();
+
+            // Draw stickman
+            drawStickman(s.x, s.y, s.size, s.color, s.angle, s.climbPhase);
+        }
+
+        requestAnimationFrame(update);
+    }
+
+    window.addEventListener('resize', resize);
+    resize();
+    update();
+}
+
 // ===== FLOATING PARTICLES =====
 function initParticles() {
     const container = document.getElementById('particles');
     if (!container) return;
     const colors = ['rgba(112,0,255,0.3)', 'rgba(0,212,255,0.25)', 'rgba(157,78,221,0.2)', 'rgba(251,191,36,0.15)'];
-    for (let i = 0; i < 25; i++) {
+    for (let i = 0; i < 20; i++) {
         const p = document.createElement('div');
         p.className = 'particle';
         const size = Math.random() * 4 + 2;
@@ -897,4 +1145,5 @@ document.addEventListener('DOMContentLoaded', () => {
     initScrollAnimations();
     initCountUp();
     initParticles();
+    initGameCanvas();
 });
