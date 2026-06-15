@@ -17,7 +17,7 @@
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; -webkit-tap-highlight-color: transparent; }
 
 body {
-    background: #0a0a1a;
+    background: #050510;
     color: #fff;
     overflow-x: hidden;
     min-height: 100dvh;
@@ -26,7 +26,7 @@ body {
 /* ===== GAME CANVAS BACKGROUND ===== */
 #game-bg {
     position: fixed; inset: 0; z-index: 0; pointer-events: none;
-    opacity: 0.6;
+    opacity: 0.85;
 }
 
 /* ===== SCROLLBAR ===== */
@@ -44,32 +44,32 @@ body {
 }
 .haze-bg .orb-1 {
     width: 700px; height: 700px; top: -15%; left: -8%;
-    background: radial-gradient(circle, rgba(112,0,255,0.25) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(0,200,255,0.15) 0%, transparent 70%);
     animation: haze1 20s infinite alternate;
 }
 .haze-bg .orb-2 {
     width: 600px; height: 600px; top: 25%; right: -12%;
-    background: radial-gradient(circle, rgba(0,212,255,0.2) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(0,100,200,0.18) 0%, transparent 70%);
     animation: haze2 25s infinite alternate;
 }
 .haze-bg .orb-3 {
     width: 800px; height: 800px; bottom: -20%; left: 10%;
-    background: radial-gradient(circle, rgba(157,78,221,0.2) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(0,50,150,0.15) 0%, transparent 70%);
     animation: haze3 30s infinite alternate;
 }
 .haze-bg .orb-4 {
     width: 500px; height: 500px; top: 50%; left: 45%;
-    background: radial-gradient(circle, rgba(0,212,255,0.12) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(0,180,255,0.1) 0%, transparent 70%);
     animation: haze4 22s infinite alternate;
 }
 .haze-bg .orb-5 {
     width: 550px; height: 550px; top: 10%; left: 30%;
-    background: radial-gradient(circle, rgba(251,191,36,0.1) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(0,255,200,0.08) 0%, transparent 70%);
     animation: haze5 28s infinite alternate;
 }
 .haze-bg .orb-6 {
     width: 450px; height: 450px; bottom: 10%; right: 5%;
-    background: radial-gradient(circle, rgba(168,85,247,0.15) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(0,120,255,0.12) 0%, transparent 70%);
     animation: haze6 26s infinite alternate;
 }
 @keyframes haze1 { 0% { transform: translate(0,0) scale(1); } 100% { transform: translate(100px,80px) scale(1.2); } }
