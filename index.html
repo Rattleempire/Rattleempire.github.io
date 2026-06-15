@@ -35,6 +35,7 @@
             <h1>Rattle Empire</h1>
             <p class="tagline">Uganda's #1 Marketplace</p>
         </div>
+        <button class="hamburger" style="margin-left:auto;display:none;" id="sidebar-close" onclick="toggleSidebar()"><i class="fas fa-xmark"></i></button>
     </div>
 
     <nav class="sidebar-nav">
@@ -97,6 +98,7 @@
 
     <!-- TOP BAR -->
     <div class="top-bar">
+        <button class="hamburger" id="hamburger" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
         <div class="search-box">
             <i class="fas fa-search"></i>
             <input type="text" id="search-input" placeholder="Search products, sellers, locations..." oninput="filterProducts(this.value)">
@@ -406,7 +408,7 @@
                         <div class="contact-info"><div class="contact-name">Trevor</div><div class="contact-role">CEO • 0752 937 558</div></div>
                         <span class="contact-action" style="background:rgba(59,130,246,0.15);color:#3b82f6;">Call</span>
                     </a>
-                    <a href="https://wa.me/256748162246" target="_blank" class="contact-item">
+                    <a href="https://wa.me/256782832407" target="_blank" class="contact-item">
                         <div class="contact-icon" style="background:rgba(168,85,247,0.15);color:#a855f7;"><i class="fas fa-star"></i></div>
                         <div class="contact-info"><div class="contact-name">Alexus</div><div class="contact-role">CEO • MrGoViral SMM</div></div>
                         <span class="contact-action" style="background:rgba(37,211,102,0.15);color:#25d366;">WhatsApp</span>
@@ -454,6 +456,9 @@
         <div id="modal-content"></div>
     </div>
 </div>
+
+<!-- SIDEBAR OVERLAY -->
+<div class="sidebar-overlay" id="sidebar-overlay" onclick="toggleSidebar()"></div>
 
 <!-- NOTIFICATION AREA -->
 <div class="notification-area" id="notification-area"></div>

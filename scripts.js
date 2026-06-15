@@ -413,7 +413,7 @@ function renderSellers() {
     const sorted = [...sellers].sort((a, b) => a.rank - b.rank);
     list.innerHTML = sorted.map(s => {
         const rankClass = s.rank === 1 ? 'r1' : s.rank === 2 ? 'r2' : s.rank === 3 ? 'r3' : 'r4';
-        const waNum = s.name === 'Derrick' ? '256775374095' : s.name === 'Shawn' ? '256744341738' : s.name === 'Trevor' ? '256752937558' : s.name === 'Alexus' ? '256748162246' : '256703162884';
+        const waNum = s.name === 'Derrick' ? '256775374095' : s.name === 'Shawn' ? '256744341738' : s.name === 'Trevor' ? '256752937558' : s.name === 'Alexus' ? '256782832407' : '256703162884';
         return `
         <div class="seller-card">
             <div class="rank-badge ${rankClass}">#${s.rank}</div>
@@ -556,6 +556,12 @@ function openProductModal(id) {
 
 function closeProductModal(e) {
     if (e.target.id === 'product-modal') document.getElementById('product-modal').classList.remove('open');
+}
+
+// ===== SIDEBAR TOGGLE =====
+function toggleSidebar() {
+    document.getElementById('sidebar').classList.toggle('open');
+    document.getElementById('sidebar-overlay').classList.toggle('open');
 }
 
 // ===== SCROLL =====
