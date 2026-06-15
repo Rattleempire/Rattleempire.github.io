@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Uganda's #1 Marketplace — Quality electronics, furniture, luxury items & SMM services. Certified, verified, delivered.">
+    <meta name="description" content="Uganda's #1 Marketplace — Quality electronics, furniture, luxury items & SMM services.">
     <meta name="keywords" content="Rattle Empire, Uganda, marketplace, electronics, furniture, luxury, SMM panel, Kampala">
     <meta name="author" content="Rattle Empire">
     <meta property="og:title" content="Rattle Empire | Uganda's #1 Marketplace">
@@ -35,55 +35,25 @@
             <h1>Rattle Empire</h1>
             <p class="tagline">Uganda's #1 Marketplace</p>
         </div>
-        <button class="hamburger" style="margin-left:auto;display:none;" id="sidebar-close" onclick="toggleSidebar()"><i class="fas fa-xmark"></i></button>
+        <button class="hamburger sidebar-close-btn" id="sidebar-close" onclick="toggleSidebar()"><i class="fas fa-xmark"></i></button>
     </div>
-
     <nav class="sidebar-nav">
         <div class="nav-section-title">Main</div>
-        <a href="#" class="active" onclick="scrollToSection('hero'); return false;">
-            <i class="fas fa-home"></i> Home
-        </a>
-        <a href="#" onclick="scrollToSection('products-section'); return false;">
-            <i class="fas fa-fire"></i> Products
-            <span class="badge" id="nav-product-count">54</span>
-        </a>
-        <a href="#" onclick="scrollToSection('sellers'); return false;">
-            <i class="fas fa-trophy"></i> Top Sellers
-        </a>
-        <a href="#" onclick="scrollToSection('academy'); return false;">
-            <i class="fas fa-graduation-cap"></i> Academy
-        </a>
-
+        <a href="#" class="active" onclick="scrollToSection('hero'); return false;"><i class="fas fa-home"></i> Home</a>
+        <a href="#" onclick="scrollToSection('products-section'); return false;"><i class="fas fa-fire"></i> Products <span class="badge">54</span></a>
+        <a href="#" onclick="scrollToSection('sellers'); return false;"><i class="fas fa-trophy"></i> Top Sellers</a>
+        <a href="#" onclick="scrollToSection('academy'); return false;"><i class="fas fa-graduation-cap"></i> Academy</a>
         <div class="nav-section-title">Categories</div>
-        <a href="#" onclick="setCategory('all'); return false;">
-            <i class="fas fa-border-all"></i> All Products
-        </a>
-        <a href="#" onclick="setCategory('electronics'); return false;">
-            <i class="fas fa-mobile-screen"></i> Electronics
-        </a>
-        <a href="#" onclick="setCategory('furniture'); return false;">
-            <i class="fas fa-couch"></i> Furniture
-        </a>
-        <a href="#" onclick="setCategory('luxury'); return false;">
-            <i class="fas fa-gem"></i> Luxury
-        </a>
-        <a href="#" onclick="setCategory('tigertec'); return false;">
-            <i class="fas fa-bolt"></i> Tigertec
-        </a>
-
+        <a href="#" onclick="setCategory('all'); return false;"><i class="fas fa-border-all"></i> All Products</a>
+        <a href="#" onclick="setCategory('electronics'); return false;"><i class="fas fa-mobile-screen"></i> Electronics</a>
+        <a href="#" onclick="setCategory('furniture'); return false;"><i class="fas fa-couch"></i> Furniture</a>
+        <a href="#" onclick="setCategory('luxury'); return false;"><i class="fas fa-gem"></i> Luxury</a>
+        <a href="#" onclick="setCategory('tigertec'); return false;"><i class="fas fa-bolt"></i> Tigertec</a>
         <div class="nav-section-title">Services</div>
-        <a href="https://mrgoviral.com" target="_blank">
-            <i class="fas fa-share-nodes"></i> SMM Panel
-            <span class="badge" style="background:#25d366">New</span>
-        </a>
-        <a href="#" onclick="scrollToSection('affiliate'); return false;">
-            <i class="fas fa-handshake"></i> Affiliate
-        </a>
-        <a href="#" onclick="scrollToSection('contact'); return false;">
-            <i class="fas fa-headset"></i> Contact
-        </a>
+        <a href="https://mrgoviral.com" target="_blank"><i class="fas fa-share-nodes"></i> SMM Panel <span class="badge" style="background:#25d366">New</span></a>
+        <a href="#" onclick="scrollToSection('affiliate'); return false;"><i class="fas fa-handshake"></i> Affiliate</a>
+        <a href="#" onclick="scrollToSection('contact'); return false;"><i class="fas fa-headset"></i> Contact</a>
     </nav>
-
     <div class="sidebar-footer">
         <div class="social-links">
             <a href="https://wa.me/256752937558" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
@@ -104,61 +74,51 @@
             <input type="text" id="search-input" placeholder="Search products, sellers, locations..." oninput="filterProducts(this.value)">
         </div>
         <div class="top-actions">
-            <a href="https://mrgoviral.com" target="_blank" title="SMM Panel">
-                <i class="fas fa-share-nodes"></i>
-            </a>
-            <button onclick="toggleCart()" title="Cart">
-                <i class="fas fa-cart-shopping"></i>
-                <span class="cart-count" id="cart-count">0</span>
-            </button>
+            <a href="https://mrgoviral.com" target="_blank" title="SMM Panel"><i class="fas fa-share-nodes"></i></a>
+            <button onclick="toggleCart()" title="Cart"><i class="fas fa-cart-shopping"></i><span class="cart-count" id="cart-count">0</span></button>
         </div>
     </div>
 
     <!-- CONTENT AREA -->
-    <div style="padding: 24px 32px; max-width: 1400px; margin: 0 auto;" id="content-area">
+    <div id="content-area">
 
         <!-- HERO CAROUSEL -->
         <section class="hero-carousel" id="hero">
             <div class="carousel-track" id="carousel-track">
+                <!-- Slide 1: Uganda's #1 -->
                 <div class="carousel-slide">
-                    <div class="slide-bg" style="background: linear-gradient(135deg, #1a0533 0%, #0a0a1a 60%, #001a2e 100%);"></div>
+                    <div class="slide-bg" style="background:linear-gradient(135deg,#1a0533 0%,#0a0a1a 40%,#001a2e 100%);"></div>
                     <div class="slide-content">
                         <div class="slide-tag"><span class="live-dot"></span> Trusted by 1000+ Buyers</div>
                         <h2><span class="gradient-text">Uganda's #1</span><br>Marketplace</h2>
                         <p>Quality electronics, furniture & luxury items — certified, verified, and delivered to your doorstep. Now with integrated SMM services.</p>
                         <div class="slide-actions">
-                            <button onclick="scrollToSection('products-section')" style="padding:12px 28px;border-radius:10px;background:var(--empire);color:#fff;border:none;font-size:14px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:8px;">
-                                <i class="fas fa-fire"></i> Shop Now
-                            </button>
-                            <a href="https://wa.me/256752937558" style="padding:12px 28px;border-radius:10px;background:rgba(255,255,255,0.05);border:1px solid var(--glass-border);color:#fff;text-decoration:none;font-size:14px;font-weight:700;display:flex;align-items:center;gap:8px;">
-                                <i class="fab fa-whatsapp" style="color:#25d366"></i> WhatsApp Us
-                            </a>
+                            <button onclick="scrollToSection('products-section')" class="btn-slide-primary"><i class="fas fa-fire"></i> Shop Now</button>
+                            <a href="https://wa.me/256752937558" class="btn-slide-outline"><i class="fab fa-whatsapp"></i> WhatsApp Us</a>
                         </div>
                     </div>
                 </div>
+                <!-- Slide 2: SMM Growth -->
                 <div class="carousel-slide">
-                    <div class="slide-bg" style="background: linear-gradient(135deg, #001a2e 0%, #0a0a1a 60%, #1a0533 100%);"></div>
+                    <div class="slide-bg" style="background:linear-gradient(135deg,#001a2e 0%,#0a0a1a 40%,#0d2818 100%);"></div>
                     <div class="slide-content">
-                        <div class="slide-tag"><i class="fas fa-bolt" style="color:#fbbf24"></i> New Service</div>
-                        <h2><span class="gradient-text">SMM Growth</span><br>Panel</h2>
+                        <div class="slide-tag" style="background:rgba(37,211,102,0.15);border-color:rgba(37,211,102,0.3);color:#4ade80;"><i class="fas fa-bolt"></i> New Service</div>
+                        <h2><span class="gradient-text" style="background:linear-gradient(135deg,#25d366,#1da851);-webkit-background-clip:text;background-clip:text;color:transparent;">SMM Growth</span><br>Panel</h2>
                         <p>Boost your social media presence with MrGoViral — the cheapest & most reliable SMM panel in Uganda. Instagram, TikTok, YouTube, Facebook & more.</p>
                         <div class="slide-actions">
-                            <a href="https://mrgoviral.com" target="_blank" style="padding:12px 28px;border-radius:10px;background:linear-gradient(135deg,#25d366,#1da851);color:#fff;text-decoration:none;font-size:14px;font-weight:700;display:flex;align-items:center;gap:8px;">
-                                <i class="fas fa-rocket"></i> Visit MrGoViral
-                            </a>
+                            <a href="https://mrgoviral.com" target="_blank" class="btn-slide-primary" style="background:linear-gradient(135deg,#25d366,#1da851);"><i class="fas fa-rocket"></i> Visit MrGoViral</a>
                         </div>
                     </div>
                 </div>
+                <!-- Slide 3: Luxury -->
                 <div class="carousel-slide">
-                    <div class="slide-bg" style="background: linear-gradient(135deg, #1a0533 0%, #2d1b69 50%, #0a0a1a 100%);"></div>
+                    <div class="slide-bg" style="background:linear-gradient(135deg,#1a0533 0%,#2d1b69 40%,#0a0a1a 100%);"></div>
                     <div class="slide-content">
-                        <div class="slide-tag"><i class="fas fa-crown" style="color:#fbbf24"></i> Luxury Collection</div>
+                        <div class="slide-tag" style="background:rgba(251,191,36,0.15);border-color:rgba(251,191,36,0.3);color:#fbbf24;"><i class="fas fa-crown"></i> Luxury Collection</div>
                         <h2><span class="gradient-text">Downtown</span> &<br><span class="gradient-text">Tycoon</span> Tiers</h2>
                         <p>From flushy affordable finds to premium no-limit flex — discover curated luxury collections for every level of taste.</p>
                         <div class="slide-actions">
-                            <button onclick="setCategory('luxury'); scrollToSection('products-section')" style="padding:12px 28px;border-radius:10px;background:linear-gradient(135deg,#fbbf24,#d97706);color:#000;border:none;font-size:14px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:8px;">
-                                <i class="fas fa-gem"></i> Explore Luxury
-                            </button>
+                            <button onclick="setCategory('luxury'); scrollToSection('products-section')" class="btn-slide-primary" style="background:linear-gradient(135deg,#fbbf24,#d97706);color:#000;"><i class="fas fa-gem"></i> Explore Luxury</button>
                         </div>
                     </div>
                 </div>
@@ -183,11 +143,11 @@
                 <div class="marquee-item"><i class="fas fa-share-nodes"></i> SMM Panel</div>
                 <div class="marquee-item"><i class="fas fa-star" style="color:#fbbf24"></i> 4.8 Rating</div>
                 <div class="marquee-item"><i class="fas fa-box"></i> 54+ Products</div>
-                <div class="marquee-item"><i class="fas fa-badge-check" style="color:#3b82f6"></i> Verified Sellers</div>
+                <div class="marquee-item"><i class="fas fa-badge-check" style="color:#3b82f6"></i> Verified</div>
                 <div class="marquee-item"><i class="fas fa-truck"></i> Free Delivery</div>
-                <div class="marquee-item"><i class="fas fa-lock"></i> Secure Payments</div>
+                <div class="marquee-item"><i class="fas fa-lock"></i> Secure</div>
                 <div class="marquee-item"><i class="fas fa-headset"></i> 24/7 Support</div>
-                <!-- Duplicate for seamless loop -->
+                <!-- Duplicate for loop -->
                 <div class="marquee-item"><i class="fas fa-mobile-screen"></i> Electronics</div>
                 <div class="marquee-item"><i class="fas fa-couch"></i> Furniture</div>
                 <div class="marquee-item"><i class="fas fa-gem"></i> Luxury</div>
@@ -196,35 +156,20 @@
                 <div class="marquee-item"><i class="fas fa-share-nodes"></i> SMM Panel</div>
                 <div class="marquee-item"><i class="fas fa-star" style="color:#fbbf24"></i> 4.8 Rating</div>
                 <div class="marquee-item"><i class="fas fa-box"></i> 54+ Products</div>
-                <div class="marquee-item"><i class="fas fa-badge-check" style="color:#3b82f6"></i> Verified Sellers</div>
+                <div class="marquee-item"><i class="fas fa-badge-check" style="color:#3b82f6"></i> Verified</div>
                 <div class="marquee-item"><i class="fas fa-truck"></i> Free Delivery</div>
-                <div class="marquee-item"><i class="fas fa-lock"></i> Secure Payments</div>
+                <div class="marquee-item"><i class="fas fa-lock"></i> Secure</div>
                 <div class="marquee-item"><i class="fas fa-headset"></i> 24/7 Support</div>
             </div>
         </div>
 
         <!-- STATS -->
         <div class="stats-row">
-            <div class="stat-card">
-                <div class="stat-number">54</div>
-                <div class="stat-label">Products</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">6</div>
-                <div class="stat-label">Sellers</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">19</div>
-                <div class="stat-label">Reviews</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">4.8</div>
-                <div class="stat-label">Avg Rating</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">500+</div>
-                <div class="stat-label">Orders</div>
-            </div>
+            <div class="stat-card"><div class="stat-number">54</div><div class="stat-label">Products</div></div>
+            <div class="stat-card"><div class="stat-number">6</div><div class="stat-label">Sellers</div></div>
+            <div class="stat-card"><div class="stat-number">19</div><div class="stat-label">Reviews</div></div>
+            <div class="stat-card"><div class="stat-number">4.8</div><div class="stat-label">Avg Rating</div></div>
+            <div class="stat-card"><div class="stat-number">500+</div><div class="stat-label">Orders</div></div>
         </div>
 
         <div class="section-divider"></div>
@@ -238,48 +183,47 @@
             <div class="cat-grid" id="category-thumbs"></div>
         </section>
 
-        <!-- ACADEMY -->
+        <!-- ===== ACADEMY SECTION ===== -->
         <section id="academy" class="academy-section">
             <div class="section-header">
                 <h2><i class="fas fa-graduation-cap"></i> Academy Resource Hub</h2>
             </div>
-            <p style="color:#666;font-size:13px;margin-bottom:20px;">Free tools & platforms to level up your skills. Click any card to explore.</p>
+            <p style="color:#999;font-size:14px;margin-bottom:24px;">Free tools & platforms to level up your skills. Click any card to explore.</p>
             <div class="resource-grid" id="resource-grid"></div>
 
-            <div style="background:rgba(15,15,30,0.72);border:1px solid rgba(112,0,255,0.2);border-radius:16px;padding:28px;margin-top:24px;position:relative;overflow:hidden;">
-                <div style="position:absolute;top:-40px;right:-40px;width:250px;height:250px;background:rgba(112,0,255,0.08);border-radius:50%;filter:blur(60px);"></div>
-                <div style="position:relative;z-index:1;">
-                    <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
-                        <div style="width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,#7000ff,#4f46e5);display:flex;align-items:center;justify-content:center;font-size:18px;">🎯</div>
+            <!-- Rattle Academy Courses -->
+            <div class="academy-courses-panel">
+                <div class="panel-glow"></div>
+                <div class="panel-content">
+                    <div class="panel-header">
+                        <div class="panel-icon-wrap"><i class="fas fa-bullseye"></i></div>
                         <div>
-                            <h3 style="font-size:20px;font-weight:900;background:linear-gradient(135deg,#7000ff,#00d4ff);-webkit-background-clip:text;background-clip:text;color:transparent;">Rattle Academy Courses</h3>
-                            <p style="color:#666;font-size:12px;">Curated learning paths for the curious & ambitious</p>
+                            <h3>Rattle Academy Courses</h3>
+                            <p>Curated learning paths for the curious & ambitious</p>
                         </div>
                     </div>
-                    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px;">
-                        <span style="font-size:11px;padding:4px 12px;border-radius:99px;background:rgba(239,68,68,0.1);color:#f87171;font-weight:600;border:1px solid rgba(239,68,68,0.15);">🛡️ Cybersecurity</span>
-                        <span style="font-size:11px;padding:4px 12px;border-radius:99px;background:rgba(236,72,153,0.1);color:#f472b6;font-weight:600;border:1px solid rgba(236,72,153,0.15);">📱 TikTok Monetization</span>
-                        <span style="font-size:11px;padding:4px 12px;border-radius:99px;background:rgba(168,85,247,0.1);color:#c084fc;font-weight:600;border:1px solid rgba(168,85,247,0.15);">🤖 AI & ChatGPT</span>
-                        <span style="font-size:11px;padding:4px 12px;border-radius:99px;background:rgba(59,130,246,0.1);color:#60a5fa;font-weight:600;border:1px solid rgba(59,130,246,0.15);">💻 Web Development</span>
-                        <span style="font-size:11px;padding:4px 12px;border-radius:99px;background:rgba(251,191,36,0.1);color:#fbbf24;font-weight:600;border:1px solid rgba(251,191,36,0.15);">₿ Crypto & DeFi</span>
-                        <span style="font-size:11px;padding:4px 12px;border-radius:99px;background:rgba(34,197,94,0.1);color:#4ade80;font-weight:600;border:1px solid rgba(34,197,94,0.15);">🔍 OSINT</span>
+                    <div class="course-tags">
+                        <span class="tag tag-red"><i class="fas fa-shield-halved"></i> Cybersecurity</span>
+                        <span class="tag tag-pink"><i class="fas fa-mobile-screen"></i> TikTok Monetization</span>
+                        <span class="tag tag-purple"><i class="fas fa-robot"></i> AI & ChatGPT</span>
+                        <span class="tag tag-blue"><i class="fas fa-code"></i> Web Development</span>
+                        <span class="tag tag-gold"><i class="fas fa-bitcoin-sign"></i> Crypto & DeFi</span>
+                        <span class="tag tag-green"><i class="fas fa-magnifying-glass"></i> OSINT</span>
                     </div>
                     <div class="course-grid" id="course-grid"></div>
                 </div>
             </div>
 
-            <!-- Coming Soon -->
-            <div style="background:rgba(15,15,30,0.72);border:1px dashed rgba(112,0,255,0.3);border-radius:16px;padding:32px;text-align:center;margin-top:24px;position:relative;overflow:hidden;">
-                <div style="position:relative;z-index:1;">
-                    <div style="width:64px;height:64px;border-radius:50%;background:rgba(15,15,30,0.72);border:1px solid var(--glass-border);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:28px;box-shadow:0 0 25px rgba(112,0,255,0.2);">🚀</div>
-                    <h3 style="font-size:20px;font-weight:900;background:linear-gradient(135deg,#7000ff,#00d4ff);-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:8px;">Full Courses Portal Coming Soon</h3>
-                    <p style="color:#666;max-width:400px;margin:0 auto 20px;font-size:13px;">Interactive learning dashboard with progress tracking, quizzes, certificates & community.</p>
-                    <div style="display:flex;gap:10px;justify-content:center;max-width:360px;margin:0 auto;">
-                        <input type="text" id="notify-email" placeholder="Your email or WhatsApp..." style="flex:1;padding:10px 16px;border-radius:10px;background:rgba(255,255,255,0.05);border:1px solid var(--glass-border);color:#fff;font-size:13px;outline:none;">
-                        <button onclick="notifyMe()" style="padding:10px 20px;border-radius:10px;background:var(--empire);color:#fff;border:none;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;">🔔 Notify Me</button>
-                    </div>
-                    <div id="notify-toast" style="margin-top:12px;color:#4ade80;font-size:13px;font-weight:600;display:none;">✅ You're on the list!</div>
+            <!-- Full Courses Portal Coming Soon -->
+            <div class="academy-coming-soon">
+                <div class="rocket-icon"><i class="fas fa-rocket"></i></div>
+                <h3>Full Courses Portal <span style="color:#fbbf24;">Coming Soon</span></h3>
+                <p>Interactive learning dashboard with progress tracking, quizzes, certificates & community.</p>
+                <div class="notify-row">
+                    <input type="text" id="notify-email" placeholder="Your email or WhatsApp...">
+                    <button onclick="notifyMe()"><i class="fas fa-bell"></i> Notify Me</button>
                 </div>
+                <div id="notify-toast" class="notify-toast">✅ You're on the list!</div>
             </div>
         </section>
 
@@ -287,7 +231,7 @@
         <section id="products-section">
             <div class="section-header">
                 <h2 id="products-heading"><i class="fas fa-fire"></i> 🔥 Fresh Picks</h2>
-                <select id="sort-select" onchange="sortProducts(this.value)" style="background:rgba(15,15,30,0.72);border:1px solid var(--glass-border);padding:8px 14px;border-radius:8px;color:#999;font-size:12px;outline:none;cursor:pointer;">
+                <select id="sort-select" onchange="sortProducts(this.value)">
                     <option value="random">🎲 Random</option>
                     <option value="rating">⭐ Top Rated</option>
                     <option value="price-low">💰 Low → High</option>
@@ -295,84 +239,62 @@
                     <option value="newest">🆕 Newest</option>
                 </select>
             </div>
-
-            <!-- Tier containers -->
             <div id="tier-starter" style="display:none;">
-                <div class="tier-header">
-                    <div class="tier-icon starter">🌱</div>
-                    <div><h3>Starter Collection</h3><p>Beautiful finds that won't break the bank</p></div>
-                </div>
+                <div class="tier-header"><div class="tier-icon starter">🌱</div><div><h3>Starter Collection</h3><p>Beautiful finds that won't break the bank</p></div></div>
                 <div id="starter-grid" class="product-grid"></div>
             </div>
             <div id="tier-elite" style="display:none;">
-                <div class="tier-header">
-                    <div class="tier-icon elite">👑</div>
-                    <div><h3>Elite Collection</h3><p>Luxury pieces for those who want the best</p></div>
-                </div>
+                <div class="tier-header"><div class="tier-icon elite">👑</div><div><h3>Elite Collection</h3><p>Luxury pieces for those who want the best</p></div></div>
                 <div id="elite-grid" class="product-grid"></div>
             </div>
             <div id="tier-downtown" style="display:none;">
-                <div class="tier-header">
-                    <div class="tier-icon downtown">🏙️</div>
-                    <div><h3>Downtown Collection</h3><p>Flushy looks that won't empty your pockets</p></div>
-                </div>
+                <div class="tier-header"><div class="tier-icon downtown">🏙️</div><div><h3>Downtown Collection</h3><p>Flushy looks that won't empty your pockets</p></div></div>
                 <div id="downtown-grid" class="product-grid"></div>
             </div>
             <div id="tier-tycoon" style="display:none;">
-                <div class="tier-header">
-                    <div class="tier-icon tycoon">👑</div>
-                    <div><h3>Tycoon Collection</h3><p>Premium flex for those who don't check price tags</p></div>
-                </div>
+                <div class="tier-header"><div class="tier-icon tycoon">👑</div><div><h3>Tycoon Collection</h3><p>Premium flex for those who don't check price tags</p></div></div>
                 <div id="tycoon-grid" class="product-grid"></div>
             </div>
-            <div id="all-grid-container">
-                <div id="product-grid" class="product-grid"></div>
-            </div>
+            <div id="all-grid-container"><div id="product-grid" class="product-grid"></div></div>
         </section>
 
         <div class="section-divider"></div>
 
         <!-- TOP SELLERS -->
         <section id="sellers">
-            <div class="section-header">
-                <h2><i class="fas fa-trophy"></i> Top Sellers</h2>
-            </div>
+            <div class="section-header"><h2><i class="fas fa-trophy"></i> Top Sellers</h2></div>
             <div class="sellers-grid" id="seller-list"></div>
         </section>
 
         <div class="section-divider"></div>
 
-        <!-- AFFILIATE -->
+        <!-- AFFILIATE & COMMISSION -->
         <section id="affiliate" class="affiliate-section">
-            <div class="glow-bg"></div>
-            <div style="position:relative;z-index:1;">
-                <h2 style="font-size:24px;font-weight:900;background:linear-gradient(135deg,#7000ff,#00d4ff);-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:8px;">
-                    <i class="fas fa-handshake"></i> Affiliate & Commission
-                </h2>
-                <p style="color:#666;margin-bottom:24px;font-size:14px;">Join the Rattle Empire network and earn on every sale you refer.</p>
-                <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;">
+            <div class="affiliate-glow"></div>
+            <div class="affiliate-inner">
+                <h2><i class="fas fa-handshake"></i> Affiliate & Commission</h2>
+                <p>Join the Rattle Empire network and earn on every sale you refer.</p>
+                <div class="affiliate-grid">
                     <div>
-                        <h3 style="font-size:16px;font-weight:700;color:var(--empire-light);margin-bottom:16px;">How It Works</h3>
-                        <ul style="list-style:none;padding:0;">
-                            <li style="display:flex;align-items:flex-start;gap:10px;margin-bottom:12px;color:#ccc;font-size:13px;"><i class="fas fa-check" style="color:var(--empire);margin-top:3px;"></i> Refer customers and earn commission on every successful sale</li>
-                            <li style="display:flex;align-items:flex-start;gap:10px;margin-bottom:12px;color:#ccc;font-size:13px;"><i class="fas fa-check" style="color:var(--empire);margin-top:3px;"></i> High commission tiers for electronics & luxury goods</li>
-                            <li style="display:flex;align-items:flex-start;gap:10px;margin-bottom:12px;color:#ccc;font-size:13px;"><i class="fas fa-check" style="color:var(--empire);margin-top:3px;"></i> Real-time tracking of your referrals and earnings</li>
-                            <li style="display:flex;align-items:flex-start;gap:10px;margin-bottom:16px;color:#ccc;font-size:13px;"><i class="fas fa-check" style="color:var(--empire);margin-top:3px;"></i> Instant payouts via MTN or Airtel Money</li>
+                        <h3>How It Works</h3>
+                        <ul class="affiliate-list">
+                            <li><i class="fas fa-check-circle"></i> Refer customers and earn commission on every successful sale</li>
+                            <li><i class="fas fa-check-circle"></i> High commission tiers for electronics & luxury goods</li>
+                            <li><i class="fas fa-check-circle"></i> Real-time tracking of your referrals and earnings</li>
+                            <li><i class="fas fa-check-circle"></i> Instant payouts via MTN or Airtel Money</li>
                         </ul>
-                        <a href="https://wa.me/256752937558?text=I%20want%20to%20join%20the%20Rattle%20Empire%20affiliate%20program" style="display:inline-flex;align-items:center;gap:8px;padding:10px 24px;border-radius:10px;background:var(--empire);color:#fff;text-decoration:none;font-size:13px;font-weight:700;">
-                            <i class="fas fa-user-plus"></i> Join Affiliate Program
-                        </a>
+                        <a href="https://wa.me/256752937558?text=I%20want%20to%20join%20the%20Rattle%20Empire%20affiliate%20program" class="btn-affiliate"><i class="fas fa-user-plus"></i> Join Affiliate Program</a>
                     </div>
-                    <div style="background:rgba(255,255,255,0.03);border-radius:12px;padding:20px;">
-                        <h3 style="font-size:16px;font-weight:700;margin-bottom:16px;">Commission Structure</h3>
-                        <table style="width:100%;font-size:13px;">
-                            <thead><tr style="border-bottom:1px solid var(--glass-border);color:#555;"><th style="padding:8px 0;text-align:left;">Category</th><th style="padding:8px 0;text-align:right;">Rate</th></tr></thead>
+                    <div class="commission-table-wrap">
+                        <h3>Commission Structure</h3>
+                        <table class="commission-table">
+                            <thead><tr><th>Category</th><th style="text-align:right">Rate</th></tr></thead>
                             <tbody>
-                                <tr style="border-bottom:1px solid rgba(255,255,255,0.03);"><td style="padding:10px 0;color:#ccc;">📱 Electronics</td><td style="padding:10px 0;text-align:right;font-weight:700;color:#4ade80;">5%</td></tr>
-                                <tr style="border-bottom:1px solid rgba(255,255,255,0.03);"><td style="padding:10px 0;color:#ccc;">🛋️ Furniture</td><td style="padding:10px 0;text-align:right;font-weight:700;color:#4ade80;">8%</td></tr>
-                                <tr style="border-bottom:1px solid rgba(255,255,255,0.03);"><td style="padding:10px 0;color:#ccc;">💎 Luxury Items</td><td style="padding:10px 0;text-align:right;font-weight:700;color:#4ade80;">10%</td></tr>
-                                <tr style="border-bottom:1px solid rgba(255,255,255,0.03);"><td style="padding:10px 0;color:#ccc;">🎓 Academy</td><td style="padding:10px 0;text-align:right;font-weight:700;color:#4ade80;">6%</td></tr>
-                                <tr><td style="padding:10px 0;color:#ccc;">⚡ Tigertec</td><td style="padding:10px 0;text-align:right;font-weight:700;color:#4ade80;">7%</td></tr>
+                                <tr><td>📱 Electronics</td><td class="rate">5%</td></tr>
+                                <tr><td>🛋️ Furniture</td><td class="rate">8%</td></tr>
+                                <tr><td>💎 Luxury Items</td><td class="rate">10%</td></tr>
+                                <tr><td>🎓 Academy</td><td class="rate">6%</td></tr>
+                                <tr><td>⚡ Tigertec</td><td class="rate">7%</td></tr>
                             </tbody>
                         </table>
                     </div>
@@ -384,39 +306,37 @@
 
         <!-- CONTACT -->
         <section id="contact">
-            <div class="section-header">
-                <h2><i class="fas fa-headset"></i> Contact & Support</h2>
-            </div>
+            <div class="section-header"><h2><i class="fas fa-headset"></i> Contact & Support</h2></div>
             <div class="contact-grid">
                 <div class="contact-card">
                     <h3><i class="fas fa-phone-volume"></i> Helplines</h3>
                     <a href="https://wa.me/256775374095" class="contact-item">
-                        <div class="contact-icon" style="background:rgba(37,211,102,0.15);color:#25d366;"><i class="fab fa-whatsapp"></i></div>
+                        <div class="contact-icon wa"><i class="fab fa-whatsapp"></i></div>
                         <div class="contact-info"><div class="contact-name">Derrick</div><div class="contact-role">0775 374 095</div></div>
-                        <span class="contact-action" style="background:rgba(37,211,102,0.15);color:#25d366;">WhatsApp</span>
+                        <span class="contact-action wa">WhatsApp</span>
                     </a>
                     <a href="https://wa.me/256744341738" class="contact-item">
-                        <div class="contact-icon" style="background:rgba(37,211,102,0.15);color:#25d366;"><i class="fab fa-whatsapp"></i></div>
+                        <div class="contact-icon wa"><i class="fab fa-whatsapp"></i></div>
                         <div class="contact-info"><div class="contact-name">Shawn</div><div class="contact-role">0744 341 738</div></div>
-                        <span class="contact-action" style="background:rgba(37,211,102,0.15);color:#25d366;">WhatsApp</span>
+                        <span class="contact-action wa">WhatsApp</span>
                     </a>
                 </div>
                 <div class="contact-card">
                     <h3><i class="fas fa-users-gear"></i> Management</h3>
                     <a href="tel:0752937558" class="contact-item">
-                        <div class="contact-icon" style="background:rgba(251,191,36,0.15);color:#fbbf24;"><i class="fas fa-crown"></i></div>
+                        <div class="contact-icon gold"><i class="fas fa-crown"></i></div>
                         <div class="contact-info"><div class="contact-name">Trevor</div><div class="contact-role">CEO • 0752 937 558</div></div>
-                        <span class="contact-action" style="background:rgba(59,130,246,0.15);color:#3b82f6;">Call</span>
+                        <span class="contact-action call">Call</span>
                     </a>
                     <a href="https://wa.me/256782832407" target="_blank" class="contact-item">
-                        <div class="contact-icon" style="background:rgba(168,85,247,0.15);color:#a855f7;"><i class="fas fa-star"></i></div>
+                        <div class="contact-icon purple"><i class="fas fa-star"></i></div>
                         <div class="contact-info"><div class="contact-name">Alexus</div><div class="contact-role">CEO • MrGoViral SMM</div></div>
-                        <span class="contact-action" style="background:rgba(37,211,102,0.15);color:#25d366;">WhatsApp</span>
+                        <span class="contact-action wa">WhatsApp</span>
                     </a>
                     <a href="tel:0703162884" class="contact-item">
-                        <div class="contact-icon" style="background:rgba(168,85,247,0.15);color:#a855f7;"><i class="fas fa-user-tie"></i></div>
+                        <div class="contact-icon purple"><i class="fas fa-user-tie"></i></div>
                         <div class="contact-info"><div class="contact-name">Becca</div><div class="contact-role">Manager • 0703 162 884</div></div>
-                        <span class="contact-action" style="background:rgba(59,130,246,0.15);color:#3b82f6;">Call</span>
+                        <span class="contact-action call">Call</span>
                     </a>
                 </div>
             </div>
@@ -424,9 +344,16 @@
 
         <!-- FOOTER -->
         <footer class="site-footer">
-            <p style="margin-bottom:4px;">👑 Rattle Empire © 2026 — Uganda's #1 Marketplace</p>
-            <p style="font-size:11px;color:#333;">All rights reserved. Quality certified products & SMM services.</p>
-            <p style="font-size:10px;color:#222;margin-top:8px;">Powered by <a href="https://mrgoviral.com" target="_blank" style="color:var(--empire-light);text-decoration:none;">MrGoViral SMM</a></p>
+            <div class="footer-brand">👑 Rattle Empire © 2026 — Uganda's #1 Marketplace</div>
+            <p>All rights reserved. Quality certified products & SMM services.</p>
+            <div class="footer-powered">
+                <span>Powered by</span>
+                <a href="https://mrgoviral.com" target="_blank" class="footer-link">Nova Archon</a>
+                <span class="footer-dot">•</span>
+                <span class="footer-link-alt">In partnership with Trevor Labs</span>
+                <span class="footer-dot">•</span>
+                <a href="https://mrgoviral.com" target="_blank" class="footer-link">MrGoViral SMM</a>
+            </div>
         </footer>
     </div>
 </div>
@@ -434,27 +361,17 @@
 <!-- CART DRAWER -->
 <div class="cart-overlay" id="cart-overlay" onclick="toggleCart()"></div>
 <div class="cart-drawer" id="cart-drawer">
-    <div class="cart-header">
-        <h3><i class="fas fa-cart-shopping"></i> Your Cart</h3>
-        <button onclick="toggleCart()"><i class="fas fa-xmark"></i></button>
-    </div>
+    <div class="cart-header"><h3><i class="fas fa-cart-shopping"></i> Your Cart</h3><button onclick="toggleCart()"><i class="fas fa-xmark"></i></button></div>
     <div class="cart-items" id="cart-items"></div>
     <div class="cart-footer">
-        <div class="cart-total-row">
-            <span>Total</span>
-            <span class="total-price" id="cart-total">UGX 0</span>
-        </div>
-        <a href="#" class="btn-checkout" id="checkout-btn">
-            <i class="fab fa-whatsapp"></i> Checkout via WhatsApp
-        </a>
+        <div class="cart-total-row"><span>Total</span><span class="total-price" id="cart-total">UGX 0</span></div>
+        <a href="#" class="btn-checkout" id="checkout-btn"><i class="fab fa-whatsapp"></i> Checkout via WhatsApp</a>
     </div>
 </div>
 
 <!-- PRODUCT MODAL -->
 <div class="modal-overlay" id="product-modal" onclick="closeProductModal(event)">
-    <div class="modal-box" onclick="event.stopPropagation()">
-        <div id="modal-content"></div>
-    </div>
+    <div class="modal-box" onclick="event.stopPropagation()"><div id="modal-content"></div></div>
 </div>
 
 <!-- SIDEBAR OVERLAY -->
@@ -464,7 +381,7 @@
 <div class="notification-area" id="notification-area"></div>
 
 <!-- TOAST CONTAINER -->
-<div class="toast-container" id="toast-container"></div>
+<div class="toast-container" id="toast-container"></script>
 
 <script src="scripts.js"></script>
 </body>

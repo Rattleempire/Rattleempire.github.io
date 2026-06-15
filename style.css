@@ -1376,3 +1376,264 @@ body {
     .notification-popup .notif-body .notif-text { font-size: 10px; }
     .section-header h2 { font-size: 16px; }
 }
+
+/* ===== NEW SECTION STYLES ===== */
+
+/* Hero slide buttons */
+.btn-slide-primary {
+    padding: 12px 28px;
+    border-radius: 10px;
+    background: var(--empire);
+    color: #fff;
+    border: none;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    transition: opacity 0.2s;
+}
+.btn-slide-primary:hover { opacity: 0.85; }
+.btn-slide-outline {
+    padding: 12px 28px;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.15);
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: background 0.2s;
+}
+.btn-slide-outline:hover { background: rgba(255,255,255,0.12); }
+
+/* Academy courses panel */
+.academy-courses-panel {
+    background: linear-gradient(135deg, rgba(112,0,255,0.08) 0%, rgba(15,15,30,0.9) 50%, rgba(0,100,80,0.05) 100%);
+    border: 1px solid rgba(112,0,255,0.25);
+    border-radius: 16px;
+    padding: 28px;
+    margin-top: 24px;
+    position: relative;
+    overflow: hidden;
+}
+.academy-courses-panel .panel-glow {
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 280px; height: 280px;
+    background: radial-gradient(circle, rgba(112,0,255,0.15) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+}
+.academy-courses-panel .panel-content { position: relative; z-index: 1; }
+.academy-courses-panel .panel-header {
+    display: flex; align-items: center; gap: 14px; margin-bottom: 18px;
+}
+.academy-courses-panel .panel-icon-wrap {
+    width: 44px; height: 44px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #7000ff, #4f46e5);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; color: #fff; flex-shrink: 0;
+}
+.academy-courses-panel .panel-header h3 {
+    font-size: 20px; font-weight: 900;
+    background: linear-gradient(135deg, #7000ff, #00d4ff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+.academy-courses-panel .panel-header p { color: #888; font-size: 12px; margin-top: 2px; }
+
+.course-tags {
+    display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px;
+}
+.course-tags .tag {
+    font-size: 11px; padding: 5px 14px; border-radius: 99px;
+    font-weight: 600; display: inline-flex; align-items: center; gap: 6px;
+}
+.tag-red { background: rgba(239,68,68,0.12); color: #f87171; border: 1px solid rgba(239,68,68,0.2); }
+.tag-pink { background: rgba(236,72,153,0.12); color: #f472b6; border: 1px solid rgba(236,72,153,0.2); }
+.tag-purple { background: rgba(168,85,247,0.12); color: #c084fc; border: 1px solid rgba(168,85,247,0.2); }
+.tag-blue { background: rgba(59,130,246,0.12); color: #60a5fa; border: 1px solid rgba(59,130,246,0.2); }
+.tag-gold { background: rgba(251,191,36,0.12); color: #fbbf24; border: 1px solid rgba(251,191,36,0.2); }
+.tag-green { background: rgba(34,197,94,0.12); color: #4ade80; border: 1px solid rgba(34,197,94,0.2); }
+
+/* Academy coming soon */
+.academy-coming-soon {
+    background: linear-gradient(135deg, rgba(112,0,255,0.06) 0%, rgba(15,15,30,0.9) 100%);
+    border: 1px dashed rgba(112,0,255,0.35);
+    border-radius: 16px;
+    padding: 36px 28px;
+    text-align: center;
+    margin-top: 24px;
+    position: relative;
+    overflow: hidden;
+}
+.academy-coming-soon .rocket-icon {
+    width: 64px; height: 64px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(112,0,255,0.2), rgba(0,212,255,0.1));
+    border: 1px solid rgba(112,0,255,0.3);
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 16px;
+    font-size: 26px;
+    box-shadow: 0 0 30px rgba(112,0,255,0.15);
+}
+.academy-coming-soon h3 {
+    font-size: 20px; font-weight: 900;
+    background: linear-gradient(135deg, #7000ff, #00d4ff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin-bottom: 8px;
+}
+.academy-coming-soon p {
+    color: #888; max-width: 420px; margin: 0 auto 20px;
+    font-size: 13px; line-height: 1.6;
+}
+.academy-coming-soon .notify-row {
+    display: flex; gap: 10px; justify-content: center; max-width: 380px; margin: 0 auto;
+}
+.academy-coming-soon .notify-row input {
+    flex: 1; padding: 10px 16px; border-radius: 10px;
+    background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12);
+    color: #fff; font-size: 13px; outline: none;
+}
+.academy-coming-soon .notify-row input:focus { border-color: var(--empire); }
+.academy-coming-soon .notify-row button {
+    padding: 10px 20px; border-radius: 10px;
+    background: var(--empire); color: #fff; border: none;
+    font-size: 13px; font-weight: 700; cursor: pointer; white-space: nowrap;
+}
+.academy-coming-soon .notify-toast {
+    margin-top: 12px; color: #4ade80; font-size: 13px; font-weight: 600; display: none;
+}
+
+/* Affiliate section */
+.affiliate-section {
+    background: linear-gradient(135deg, rgba(112,0,255,0.1) 0%, rgba(15,15,30,0.95) 60%, rgba(0,50,40,0.08) 100%);
+    border: 1px solid rgba(112,0,255,0.25);
+    border-radius: 16px;
+    padding: 32px;
+    margin-bottom: 40px;
+    position: relative;
+    overflow: hidden;
+}
+.affiliate-section .affiliate-glow {
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(112,0,255,0.12) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+}
+.affiliate-section .affiliate-inner { position: relative; z-index: 1; }
+.affiliate-section h2 {
+    font-size: 24px; font-weight: 900;
+    background: linear-gradient(135deg, #7000ff, #00d4ff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin-bottom: 8px;
+}
+.affiliate-section > .affiliate-inner > p { color: #888; margin-bottom: 24px; font-size: 14px; }
+.affiliate-section .affiliate-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 32px;
+}
+.affiliate-section h3 {
+    font-size: 16px; font-weight: 700; color: #c084fc; margin-bottom: 16px;
+}
+.affiliate-section .affiliate-list {
+    list-style: none; padding: 0; margin-bottom: 20px;
+}
+.affiliate-section .affiliate-list li {
+    display: flex; align-items: flex-start; gap: 10px;
+    margin-bottom: 12px; color: #ccc; font-size: 13px; line-height: 1.5;
+}
+.affiliate-section .affiliate-list li i { color: #a855f7; margin-top: 3px; flex-shrink: 0; }
+.btn-affiliate {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 10px 24px; border-radius: 10px;
+    background: var(--empire); color: #fff; text-decoration: none;
+    font-size: 13px; font-weight: 700;
+}
+.commission-table-wrap {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 12px; padding: 20px;
+}
+.commission-table { width: 100%; font-size: 13px; border-collapse: collapse; }
+.commission-table thead tr { border-bottom: 1px solid rgba(255,255,255,0.08); }
+.commission-table th { padding: 8px 0; text-align: left; color: #666; font-weight: 600; }
+.commission-table td { padding: 12px 0; color: #ccc; border-bottom: 1px solid rgba(255,255,255,0.03); }
+.commission-table .rate { text-align: right; font-weight: 700; color: #4ade80; }
+
+/* Contact icons */
+.contact-icon.wa { background: rgba(37,211,102,0.15); color: #25d366; }
+.contact-icon.gold { background: rgba(251,191,36,0.15); color: #fbbf24; }
+.contact-icon.purple { background: rgba(168,85,247,0.15); color: #a855f7; }
+.contact-action.wa { background: rgba(37,211,102,0.15); color: #25d366; }
+.contact-action.call { background: rgba(59,130,246,0.15); color: #3b82f6; }
+
+/* Footer */
+.site-footer {
+    text-align: center; padding: 32px 20px; color: #555; font-size: 12px;
+    border-top: 1px solid rgba(255,255,255,0.06); margin-top: 40px;
+}
+.site-footer .footer-brand { font-size: 14px; font-weight: 700; color: #888; margin-bottom: 6px; }
+.site-footer p { margin-bottom: 4px; }
+.site-footer .footer-powered {
+    margin-top: 12px; display: flex; align-items: center; justify-content: center;
+    flex-wrap: wrap; gap: 6px; font-size: 11px; color: #444;
+}
+.site-footer .footer-link {
+    color: var(--empire-light); text-decoration: none; font-weight: 600;
+}
+.site-footer .footer-link:hover { color: #fff; }
+.site-footer .footer-link-alt { color: #666; }
+.site-footer .footer-dot { color: #333; }
+
+/* Sort select */
+#sort-select {
+    background: rgba(15,15,30,0.72);
+    border: 1px solid var(--glass-border);
+    padding: 8px 14px; border-radius: 8px;
+    color: #999; font-size: 12px; outline: none; cursor: pointer;
+}
+
+/* Sidebar close button */
+.sidebar-close-btn {
+    display: none !important;
+    margin-left: auto;
+}
+
+/* Responsive for new sections */
+@media (max-width: 1024px) {
+    .affiliate-section .affiliate-grid { grid-template-columns: 1fr; gap: 24px; }
+}
+@media (max-width: 768px) {
+    .academy-courses-panel { padding: 18px; }
+    .academy-courses-panel .panel-header { flex-direction: column; align-items: flex-start; gap: 8px; }
+    .course-tags { gap: 6px; }
+    .course-tags .tag { font-size: 10px; padding: 4px 10px; }
+    .academy-coming-soon { padding: 24px 16px; }
+    .academy-coming-soon .notify-row { flex-direction: column; }
+    .academy-coming-soon .notify-row button { width: 100%; }
+    .affiliate-section { padding: 18px; }
+    .commission-table { font-size: 12px; }
+    .btn-slide-primary, .btn-slide-outline { padding: 10px 18px; font-size: 12px; }
+    .sidebar-close-btn { display: flex !important; }
+}
+@media (max-width: 480px) {
+    .academy-courses-panel { padding: 14px; }
+    .academy-courses-panel .panel-header h3 { font-size: 16px; }
+    .academy-coming-soon h3 { font-size: 16px; }
+    .academy-coming-soon p { font-size: 11px; }
+    .course-tags .tag { font-size: 9px; padding: 3px 8px; }
+}
