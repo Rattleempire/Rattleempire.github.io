@@ -112,15 +112,7 @@ let carouselIndex = 0;
 let carouselInterval;
 
 // ===== INIT =====
-document.addEventListener('DOMContentLoaded', () => {
-    renderCategories();
-    renderProducts();
-    renderAcademy();
-    renderSellers();
-    updateCartUI();
-    startCarousel();
-    startNotificationEngine();
-});
+// (init moved to bottom of file to include all new features)
 
 // ===== CAROUSEL =====
 function startCarousel() {
@@ -762,3 +754,109 @@ function startNotificationEngine() {
     }
     scheduleNext();
 }
+
+// ===== SCROLL ANIMATIONS =====
+function initScrollAnimations() {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+    document.querySelectorAll('.scroll-fade').forEach(el => observer.observe(el));
+}
+
+// ===== STATS COUNT-UP =====
+function initCountUp() {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const counters = entry.target.querySelectorAll('[data-count]');
+                counters.forEach(counter => {
+                    const target = parseFloat(counter.dataset.count);
+                    const isFloat = target % 1 !== 0;
+                    let current = 0;
+                    const increment = target / 40;
+                    const timer = setInterval(() => {
+                        current += increment;
+                        if (current >= target) {
+                            current = target;
+                            clearInterval(timer);
+                        }
+                        counter.textContent = isFloat ? current.toFixed(1) : Math.floor(current) + (target >= 100 ? '+' : '');
+                    }, 40);
+                });
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.3 });
+
+    document.querySelectorAll('.stats-row').forEach(el => observer.observe(el));
+}
+
+// ===== TESTIMONIALS =====
+const testimonials = [
+    { name: "Sarah K.", role: "Kampala", text: "Just received my iPhone X! Amazing quality and fast delivery. Rattle Empire is the real deal! 🔥", stars: 5, color: "#a855f7" },
+    { name: "Brian T.", role: "Entebbe", text: "Ordered a Samsung 4K TV, delivered the next day. The seller was super professional. Will buy again!", stars: 5, color: "#00d4ff" },
+    { name: "Grace M.", role: "Jinja", text: "Best marketplace in Uganda! Found exactly what I was looking for at a great price. Highly recommend!", stars: 5, color: "#fbbf24" },
+    { name: "Daniel O.", role: "Gulu", text: "The KYC Activator platform is brilliant. So easy to get my Airtel UDP activated. Great service!", stars: 5, color: "#4ade80" },
+    { name: "Faith N.", role: "Mbarara", text: "Quality products, fair prices, and excellent customer support. Rattle Empire never disappoints!", stars: 5, color: "#f472b6" },
+    { name: "Michael J.", role: "Kampala", text: "I've ordered 3 times now and every experience has been smooth. The WhatsApp checkout is so convenient!", stars: 5, color: "#f87171" },
+    { name: "Patricia A.", role: "Kira", text: "Found a beautiful Rolex Submariner at an incredible price. Authentic and certified. Love this platform!", stars: 5, color: "#a855f7" },
+    { name: "John D.", role: "Wakiso", text: "The affiliate program is amazing. I've already earned my first commission. Easy to refer and earn!", stars: 5, color: "#00d4ff" },
+];
+
+function renderTestimonials() {
+    const track = document.getElementById('testimonial-track');
+    if (!track) return;
+    const html = testimonials.map(t => `
+        <div class="testimonial-card">
+            <div class="stars">${'<i class="fas fa-star"></i>'.repeat(t.stars)}</div>
+            <p class="quote">"${t.text}"</p>
+            <div class="author">
+                <div class="author-avatar" style="background:${t.color};">${t.name.charAt(0)}</div>
+                <div class="author-info">
+                    <div class="author-name">${t.name}</div>
+                    <div class="author-role">${t.role}</div>
+                </div>
+            </div>
+        </div>`).join('');
+    track.innerHTML = html + html; // Duplicate for seamless loop
+}
+
+// ===== FLOATING PARTICLES =====
+function initParticles() {
+    const container = document.getElementById('particles');
+    if (!container) return;
+    const colors = ['rgba(112,0,255,0.3)', 'rgba(0,212,255,0.25)', 'rgba(157,78,221,0.2)', 'rgba(251,191,36,0.15)'];
+    for (let i = 0; i < 25; i++) {
+        const p = document.createElement('div');
+        p.className = 'particle';
+        const size = Math.random() * 4 + 2;
+        p.style.cssText = `
+            width:${size}px; height:${size}px;
+            left:${Math.random() * 100}%;
+            background:${colors[Math.floor(Math.random() * colors.length)]};
+            animation-duration:${Math.random() * 15 + 10}s;
+            animation-delay:${Math.random() * 10}s;
+        `;
+        container.appendChild(p);
+    }
+}
+
+// ===== INIT ALL =====
+document.addEventListener('DOMContentLoaded', () => {
+    renderCategories();
+    renderProducts();
+    renderAcademy();
+    renderSellers();
+    renderTestimonials();
+    updateCartUI();
+    startCarousel();
+    startNotificationEngine();
+    initScrollAnimations();
+    initCountUp();
+    initParticles();
+});
