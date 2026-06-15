@@ -710,7 +710,14 @@
         function renderCategories() {
             const container = document.getElementById('category-thumbs');
             container.innerHTML = categories.map(c => {
-                const count = c.id === 'all' ? products.length : products.filter(p => p.category === c.id).length;
+                let count;
+                if (c.id === 'all') {
+                    count = products.length + academyResources.length + academyCourses.length;
+                } else if (c.id === 'academy') {
+                    count = academyResources.length + academyCourses.length;
+                } else {
+                    count = products.filter(p => p.category === c.id).length;
+                }
                 const isActive = currentCategory === c.id;
                 return `
                 <button onclick="setCategory('${c.id}')" class="cat-thumb rounded-xl overflow-hidden relative ${isActive ? 'active' : ''}" data-cat="${c.id}">
@@ -1013,6 +1020,15 @@
             currentCategory = cat;
             renderCategories();
             renderProducts();
+            // Show/hide Academy section based on category
+            const academySection = document.getElementById('academy');
+            if (academySection) {
+                if (cat === 'all' || cat === 'academy') {
+                    academySection.classList.remove('hidden');
+                } else {
+                    academySection.classList.add('hidden');
+                }
+            }
         }
 
         function sortProducts(val) {
@@ -1200,9 +1216,7 @@
             document.getElementById('deals').scrollIntoView({ behavior: 'smooth' });
         }
 
-        renderCategories();
-        renderProducts();
-        renderSellers();
+        setCategory('all');
         renderAcademy();
         updateCartUI();
     </script>
