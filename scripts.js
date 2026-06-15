@@ -379,15 +379,34 @@ function renderAcademy() {
             </div>
         </a>`).join('');
 
-    courseGrid.innerHTML = academyCourses.map(c => `
+    courseGrid.innerHTML = academyCourses.map(c => {
+        const iconMap = {
+            '🛡️': 'fa-shield-halved', '🔓': 'fa-lock-open', '📱': 'fa-mobile-screen',
+            '🛒': 'fa-cart-shopping', '🤖': 'fa-robot', '💻': 'fa-code',
+            '₿': 'fa-bitcoin-sign', '🔍': 'fa-magnifying-glass'
+        };
+        const colorMap = {
+            'from-red-500 to-orange-500': '#ef4444,#f97316',
+            'from-red-700 to-rose-600': '#b91c1c,#e11d48',
+            'from-pink-500 to-rose-500': '#ec4899,#f43f5e',
+            'from-fuchsia-500 to-pink-500': '#d946ef,#ec4899',
+            'from-violet-500 to-purple-500': '#8b5cf6,#a855f7',
+            'from-blue-500 to-cyan-500': '#3b82f6,#06b6d4',
+            'from-yellow-500 to-amber-500': '#eab308,#f59e0b',
+            'from-emerald-500 to-green-600': '#10b981,#059669'
+        };
+        const bgColor = colorMap[c.color] || '#7000ff,#00d4ff';
+        const iconClass = iconMap[c.emoji] || 'fa-graduation-cap';
+        const levelColor = c.level === 'Beginner' ? '#4ade80' : c.level === 'Advanced' ? '#f87171' : '#fbbf24';
+        return `
         <div class="course-card">
             <div class="course-top">
-                <div class="course-icon" style="background:linear-gradient(135deg,${c.color.includes('red')?'#ef4444,#f97316':c.color.includes('pink')?'#ec4899,#f43f5e':c.color.includes('violet')?'#8b5cf6,#a855f7':c.color.includes('blue')?'#3b82f6,#06b6d4':c.color.includes('yellow')?'#eab308,#f59e0b':'#10b981,#059669'});">
-                    <i class="fas ${c.emoji === '🛡️' ? 'fa-shield-halved' : c.emoji === '🔓' ? 'fa-lock-open' : c.emoji === '📱' ? 'fa-mobile-screen' : c.emoji === '🛒' ? 'fa-cart-shopping' : c.emoji === '🤖' ? 'fa-robot' : c.emoji === '💻' ? 'fa-code' : c.emoji === '₿' ? 'fa-bitcoin-sign' : 'fa-magnifying-glass'}"></i>
+                <div class="course-icon" style="background:linear-gradient(135deg,${bgColor});">
+                    <i class="fas ${iconClass}"></i>
                 </div>
                 <div class="course-title">
                     <h4>${c.title}</h4>
-                    <span class="level">${c.level}</span>
+                    <span class="level" style="color:${levelColor};border-color:${levelColor}40;">${c.level} • ${c.lessons} lessons</span>
                 </div>
             </div>
             <p class="course-desc">${c.desc}</p>
@@ -395,7 +414,8 @@ function renderAcademy() {
                 <span class="lessons"><i class="fas fa-book-open"></i> ${c.lessons} lessons</span>
                 <span class="coming"><i class="fas fa-clock"></i> Coming Soon</span>
             </div>
-        </div>`).join('');
+        </div>`;
+    }).join('');
 }
 
 function notifyMe() {
