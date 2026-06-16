@@ -259,7 +259,7 @@ function cardHTML(p, i) {
                 <span class="price">UGX ${p.price.toLocaleString()}</span>
                 ${p.originalPrice ? `<span class="original">UGX ${p.originalPrice.toLocaleString()}</span>` : ''}
             </div>
-            <div class="meta"><i class="fas fa-location-dot"></i> ${p.sellerLoc} <span style="margin:0 4px">•</span> <i class="fas fa-user"></i> ${p.seller} <span style="margin:0 4px">•</span> <i class="fas fa-box"></i> ${p.sold} sold</div>
+            <div class="meta"><i class="fas fa-location-dot"></i> ${p.sellerLoc} <span style="margin:0 4px">•</span> <i class="fas fa-user"></i> ${p.seller} <span style="margin:0 4px">•</span> <span class="sold-badge"><i class="fas fa-box"></i> ${p.sold} sold</span></div>
             <div class="card-actions">
                 <button class="btn-add" onclick="addToCart(products.find(x=>x.id===${p.id}))"><i class="fas fa-cart-plus"></i> Add to Cart</button>
                 <a class="btn-wa" href="https://wa.me/256775374095?text=Hi! I'm interested in ${encodeURIComponent(p.name)} (UGX ${p.price.toLocaleString()})"><i class="fab fa-whatsapp"></i></a>
@@ -286,7 +286,7 @@ function eliteCardHTML(items) {
                     <span class="price" style="background:linear-gradient(135deg,#fbbf24,#d97706);-webkit-background-clip:text;background-clip:text;color:transparent;">UGX ${p.price.toLocaleString()}</span>
                     ${p.originalPrice ? `<span class="original">UGX ${p.originalPrice.toLocaleString()}</span>` : ''}
                 </div>
-                <div class="meta"><i class="fas fa-location-dot"></i> ${p.sellerLoc} <span style="margin:0 4px">•</span> <i class="fas fa-user"></i> ${p.seller}</div>
+                <div class="meta"><i class="fas fa-location-dot"></i> ${p.sellerLoc} <span style="margin:0 4px">•</span> <i class="fas fa-user"></i> ${p.seller} <span style="margin:0 4px">•</span> <span class="sold-badge"><i class="fas fa-box"></i> ${p.sold} sold</span></div>
                 <div class="card-actions">
                     <button class="btn-add" style="background:linear-gradient(135deg,#fbbf24,#d97706);color:#000;" onclick="addToCart(products.find(x=>x.id===${p.id}))"><i class="fas fa-cart-plus"></i> Add to Cart</button>
                     <a class="btn-wa" href="https://wa.me/256775374095?text=Hi! I'm interested in ${encodeURIComponent(p.name)}"><i class="fab fa-whatsapp"></i></a>
@@ -314,7 +314,7 @@ function downtownCardHTML(items) {
                     <span class="price" style="background:linear-gradient(135deg,#06b6d4,#3b82f6);-webkit-background-clip:text;background-clip:text;color:transparent;">UGX ${p.price.toLocaleString()}</span>
                     ${p.originalPrice ? `<span class="original">UGX ${p.originalPrice.toLocaleString()}</span>` : ''}
                 </div>
-                <div class="meta"><i class="fas fa-location-dot"></i> ${p.sellerLoc} <span style="margin:0 4px">•</span> <i class="fas fa-user"></i> ${p.seller}</div>
+                <div class="meta"><i class="fas fa-location-dot"></i> ${p.sellerLoc} <span style="margin:0 4px">•</span> <i class="fas fa-user"></i> ${p.seller} <span style="margin:0 4px">•</span> <span class="sold-badge"><i class="fas fa-box"></i> ${p.sold} sold</span></div>
                 <div class="card-actions">
                     <button class="btn-add" style="background:linear-gradient(135deg,#06b6d4,#3b82f6);" onclick="addToCart(products.find(x=>x.id===${p.id}))"><i class="fas fa-cart-plus"></i> Add to Cart</button>
                     <a class="btn-wa" href="https://wa.me/256775374095?text=Hi! I'm interested in ${encodeURIComponent(p.name)}"><i class="fab fa-whatsapp"></i></a>
@@ -342,7 +342,7 @@ function tycoonCardHTML(items) {
                     <span class="price" style="background:linear-gradient(135deg,#fbbf24,#d97706);-webkit-background-clip:text;background-clip:text;color:transparent;font-size:20px;">UGX ${p.price.toLocaleString()}</span>
                     ${p.originalPrice ? `<span class="original">UGX ${p.originalPrice.toLocaleString()}</span>` : ''}
                 </div>
-                <div class="meta"><i class="fas fa-location-dot"></i> ${p.sellerLoc} <span style="margin:0 4px">•</span> <i class="fas fa-user"></i> ${p.seller}</div>
+                <div class="meta"><i class="fas fa-location-dot"></i> ${p.sellerLoc} <span style="margin:0 4px">•</span> <i class="fas fa-user"></i> ${p.seller} <span style="margin:0 4px">•</span> <span class="sold-badge"><i class="fas fa-box"></i> ${p.sold} sold</span></div>
                 <div class="card-actions">
                     <button class="btn-add" style="background:linear-gradient(135deg,#fbbf24,#d97706);color:#000;" onclick="addToCart(products.find(x=>x.id===${p.id}))"><i class="fas fa-cart-plus"></i> Add to Cart</button>
                     <a class="btn-wa" href="https://wa.me/256775374095?text=Hi! I'm interested in ${encodeURIComponent(p.name)}"><i class="fab fa-whatsapp"></i></a>
@@ -1191,10 +1191,10 @@ function initScrollReveal() {
             if (entry.isIntersecting) {
                 setTimeout(() => {
                     entry.target.classList.add('visible');
-                }, i * 100); // Stagger effect
+                }, i * 50); // Reduced stagger for faster appearance
             }
         });
-    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+    }, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' }); // Lower threshold = earlier trigger
 
     document.querySelectorAll('.scroll-reveal, .scroll-reveal-left, .scroll-reveal-right, .scroll-reveal-scale').forEach(el => {
         observer.observe(el);

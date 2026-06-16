@@ -664,14 +664,24 @@ body {
     text-decoration: line-through;
 }
 .product-card .card-body .meta {
-    font-size: 10px;
-    color: #555;
+    font-size: 12px;
+    color: var(--text-secondary);
     margin-bottom: 12px;
     display: flex;
     align-items: center;
-    gap: 4px;
+    gap: 6px;
+    flex-wrap: wrap;
 }
-.product-card .card-body .meta i { font-size: 9px; }
+.product-card .card-body .meta i { font-size: 10px; color: var(--empire); }
+.product-card .card-body .meta .sold-badge {
+    background: rgba(0, 240, 255, 0.12);
+    color: var(--empire);
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 700;
+    border: 1px solid rgba(0, 240, 255, 0.2);
+}
 .product-card .card-body .card-actions {
     display: flex;
     gap: 8px;
@@ -1912,20 +1922,20 @@ body {
 }
 
 
-/* ===== SCROLL REVEAL ANIMATIONS ===== */
+/* ===== SCROLL REVEAL ANIMATIONS — FAST & LIGHT ===== */
 .scroll-reveal {
     opacity: 0;
-    transform: translateY(60px) scale(0.95);
-    transition: opacity 0.8s var(--transition-smooth), transform 0.8s var(--transition-smooth);
+    transform: translateY(20px);
+    transition: opacity 0.4s ease-out, transform 0.4s ease-out;
 }
 .scroll-reveal.visible {
     opacity: 1;
-    transform: translateY(0) scale(1);
+    transform: translateY(0);
 }
 .scroll-reveal-left {
     opacity: 0;
-    transform: translateX(-80px);
-    transition: opacity 0.8s var(--transition-smooth), transform 0.8s var(--transition-smooth);
+    transform: translateX(-30px);
+    transition: opacity 0.4s ease-out, transform 0.4s ease-out;
 }
 .scroll-reveal-left.visible {
     opacity: 1;
@@ -1933,8 +1943,8 @@ body {
 }
 .scroll-reveal-right {
     opacity: 0;
-    transform: translateX(80px);
-    transition: opacity 0.8s var(--transition-smooth), transform 0.8s var(--transition-smooth);
+    transform: translateX(30px);
+    transition: opacity 0.4s ease-out, transform 0.4s ease-out;
 }
 .scroll-reveal-right.visible {
     opacity: 1;
@@ -1942,8 +1952,8 @@ body {
 }
 .scroll-reveal-scale {
     opacity: 0;
-    transform: scale(0.8);
-    transition: opacity 0.8s var(--transition-smooth), transform 0.8s var(--transition-smooth);
+    transform: scale(0.95);
+    transition: opacity 0.4s ease-out, transform 0.4s ease-out;
 }
 .scroll-reveal-scale.visible {
     opacity: 1;
