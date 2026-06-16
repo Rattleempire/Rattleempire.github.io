@@ -72,10 +72,21 @@ body {
     .custom-cursor { display: none; }
 }
 
-/* ===== GAME CANVAS BACKGROUND ===== */
-#game-bg {
-    position: fixed; inset: 0; z-index: 0; pointer-events: none;
-    opacity: 0.9;
+/* ===== LIVE WALLPAPER BACKGROUND ===== */
+#live-wallpaper {
+    position: fixed; inset: 0; z-index: 0; overflow: hidden;
+}
+#live-wallpaper video {
+    position: absolute; top: 50%; left: 50%;
+    min-width: 100%; min-height: 100%;
+    width: auto; height: auto;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+}
+.wallpaper-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(5,5,16,0.75) 0%, rgba(5,5,16,0.55) 40%, rgba(5,5,16,0.85) 100%);
+    pointer-events: none;
 }
 
 /* ===== SCROLLBAR ===== */

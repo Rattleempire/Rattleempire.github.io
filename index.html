@@ -19,8 +19,13 @@
 </head>
 <body>
 
-<!-- Game Canvas Background -->
-<canvas id="game-bg"></canvas>
+<!-- Live Wallpaper Background -->
+<div id="live-wallpaper">
+    <video autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=1920&q=80">
+        <source src="https://cdn.pixabay.com/video/2024/02/23/201547-915908337_large.mp4" type="video/mp4">
+    </video>
+    <div class="wallpaper-overlay"></div>
+</div>
 
 <!-- Haze Background -->
 <div class="haze-bg">
@@ -31,9 +36,6 @@
     <div class="orb orb-5"></div>
     <div class="orb orb-6"></div>
 </div>
-
-<!-- Floating Particles -->
-<div class="particles" id="particles"></div>
 
 <!-- Dark/Light Mode Toggle -->
 <button class="mode-toggle" id="mode-toggle" onclick="toggleMode()" title="Toggle Dark/Light Mode">
