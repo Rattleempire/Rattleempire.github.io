@@ -617,12 +617,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // ===== SCROLL =====
 function scrollToSection(id) {
+    console.log('scrollToSection called with id:', id);
     closeSidebar();
     setTimeout(() => {
         const el = document.getElementById(id);
+        console.log('element found:', !!el, 'id:', id);
         if (el) {
             const top = el.getBoundingClientRect().top + window.scrollY - 80;
+            console.log('scrolling to top:', top);
             window.scrollTo({ top: top, behavior: 'smooth' });
+        } else {
+            console.log('ERROR: element not found for id:', id);
         }
     }, 100);
 }
