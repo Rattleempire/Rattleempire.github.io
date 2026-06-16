@@ -617,16 +617,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // ===== SCROLL =====
 function scrollToSection(id) {
-    // Close sidebar FIRST so body scroll is restored
     closeSidebar();
-    // Small delay to let sidebar transition start, then scroll
-    requestAnimationFrame(() => {
+    setTimeout(() => {
         const el = document.getElementById(id);
         if (el) {
-            el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            updateActiveNav(id);
+            const top = el.getBoundingClientRect().top + window.scrollY - 80;
+            window.scrollTo({ top: top, behavior: 'smooth' });
         }
-    });
+    }, 100);
 }
 
 function updateActiveNav(id) {
