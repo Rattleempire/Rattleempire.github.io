@@ -1,32 +1,81 @@
-/* ===== RATTLE EMPIRE v3.0 — style.css ===== */
-/* Desktop-first, FontAwesome, Sidebar, Dynamic Popups */
+/* ===== RATTLE EMPIRE v4.0 — style.css ===== */
+/* Cyberpunk, Neon, Smooth Scroll, Parallax, Cursor Effects, Dark/Light Mode */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
 :root {
-    --empire: #7000ff;
-    --empire-light: #9d4edd;
-    --empire-glow: rgba(112, 0, 255, 0.25);
+    --empire: #00f0ff;
+    --empire-dark: #0088aa;
+    --empire-glow: rgba(0, 240, 255, 0.3);
     --cyan: #00d4ff;
     --gold: #fbbf24;
-    --glass-bg: rgba(15, 15, 30, 0.72);
-    --glass-border: rgba(255, 255, 255, 0.08);
+    --magenta: #ff00ff;
+    --bg-primary: #050510;
+    --bg-secondary: #0a0a1a;
+    --bg-card: rgba(10, 10, 30, 0.8);
+    --text-primary: #ffffff;
+    --text-secondary: #8888aa;
+    --glass-bg: rgba(10, 10, 30, 0.72);
+    --glass-border: rgba(0, 240, 255, 0.1);
     --sidebar-w: 260px;
+    --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ===== LIGHT MODE OVERRIDES ===== */
+body.light-mode {
+    --bg-primary: #f0f4f8;
+    --bg-secondary: #e2e8f0;
+    --bg-card: rgba(255, 255, 255, 0.9);
+    --text-primary: #1a1a2e;
+    --text-secondary: #4a5568;
+    --glass-bg: rgba(255, 255, 255, 0.8);
+    --glass-border: rgba(0, 100, 150, 0.15);
+    --empire: #0077b6;
+    --empire-dark: #005f8a;
+    --empire-glow: rgba(0, 119, 182, 0.3);
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; -webkit-tap-highlight-color: transparent; }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
-    background: #050510;
-    color: #fff;
+    background: var(--bg-primary);
+    color: var(--text-primary);
     overflow-x: hidden;
     min-height: 100dvh;
+    transition: background 0.5s var(--transition-smooth), color 0.5s var(--transition-smooth);
+}
+
+/* ===== CUSTOM CURSOR ===== */
+.custom-cursor {
+    width: 20px; height: 20px;
+    border: 2px solid var(--empire);
+    border-radius: 50%;
+    position: fixed; top: 0; left: 0;
+    pointer-events: none; z-index: 99999;
+    transition: transform 0.15s var(--transition-smooth), background 0.15s var(--transition-smooth);
+    mix-blend-mode: difference;
+}
+.custom-cursor.hover {
+    transform: scale(2.5);
+    background: rgba(0, 240, 255, 0.3);
+}
+.custom-cursor.clicking {
+    transform: scale(0.6);
+    background: var(--magenta);
+    border-color: var(--magenta);
+}
+@media (max-width: 1024px) {
+    .custom-cursor { display: none; }
 }
 
 /* ===== GAME CANVAS BACKGROUND ===== */
 #game-bg {
     position: fixed; inset: 0; z-index: 0; pointer-events: none;
-    opacity: 0.85;
+    opacity: 0.75;
 }
 
 /* ===== SCROLLBAR ===== */
@@ -1863,12 +1912,135 @@ body {
 }
 
 
-/* ===== SCROLL ANIMATIONS ===== */
-.scroll-fade {
-    opacity: 0; transform: translateY(30px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
+/* ===== SCROLL REVEAL ANIMATIONS ===== */
+.scroll-reveal {
+    opacity: 0;
+    transform: translateY(60px) scale(0.95);
+    transition: opacity 0.8s var(--transition-smooth), transform 0.8s var(--transition-smooth);
 }
-.scroll-fade.visible { opacity: 1; transform: translateY(0); }
+.scroll-reveal.visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+.scroll-reveal-left {
+    opacity: 0;
+    transform: translateX(-80px);
+    transition: opacity 0.8s var(--transition-smooth), transform 0.8s var(--transition-smooth);
+}
+.scroll-reveal-left.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+.scroll-reveal-right {
+    opacity: 0;
+    transform: translateX(80px);
+    transition: opacity 0.8s var(--transition-smooth), transform 0.8s var(--transition-smooth);
+}
+.scroll-reveal-right.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+.scroll-reveal-scale {
+    opacity: 0;
+    transform: scale(0.8);
+    transition: opacity 0.8s var(--transition-smooth), transform 0.8s var(--transition-smooth);
+}
+.scroll-reveal-scale.visible {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* ===== PARALLAX SECTIONS ===== */
+.parallax-section {
+    position: relative;
+    overflow: hidden;
+}
+.parallax-bg {
+    position: absolute; inset: -20%;
+    background-size: cover; background-position: center;
+    transition: transform 0.1s linear;
+    will-change: transform;
+}
+
+/* ===== TEXT REVEAL / TYPING EFFECT ===== */
+.text-reveal {
+    overflow: hidden;
+}
+.text-reveal .char {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(100%);
+    transition: opacity 0.4s var(--transition-smooth), transform 0.4s var(--transition-smooth);
+}
+.text-reveal.visible .char {
+    opacity: 1;
+    transform: translateY(0);
+}
+.typing-cursor {
+    display: inline-block;
+    width: 3px; height: 1em;
+    background: var(--empire);
+    margin-left: 2px;
+    animation: blink-cursor 0.8s infinite;
+    vertical-align: text-bottom;
+}
+@keyframes blink-cursor {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+/* ===== IMAGE HOVER ZOOM ===== */
+.img-zoom {
+    overflow: hidden;
+    border-radius: 12px;
+}
+.img-zoom img {
+    transition: transform 0.6s var(--transition-smooth);
+}
+.img-zoom:hover img {
+    transform: scale(1.08);
+}
+
+/* ===== SMOOTH PAGE TRANSITIONS ===== */
+.page-transition {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: pageFadeIn 0.6s var(--transition-smooth) forwards;
+}
+@keyframes pageFadeIn {
+    to { opacity: 1; transform: translateY(0); }
+}
+.section-transition {
+    transition: opacity 0.4s var(--transition-smooth), transform 0.4s var(--transition-smooth);
+}
+
+/* ===== DARK/LIGHT MODE TOGGLE ===== */
+.mode-toggle {
+    position: fixed;
+    bottom: 24px; left: 24px;
+    z-index: 100;
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    color: var(--empire);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s var(--transition-smooth);
+    backdrop-filter: blur(10px);
+    font-size: 18px;
+}
+.mode-toggle:hover {
+    background: var(--empire);
+    color: var(--bg-primary);
+    transform: scale(1.1) rotate(180deg);
+    box-shadow: 0 0 20px var(--empire-glow);
+}
+@media (max-width: 1024px) {
+    .mode-toggle { bottom: 16px; left: 16px; width: 40px; height: 40px; font-size: 16px; }
+}
+
+/* ===== SCROLL ANIMATIONS (legacy) ===== */
 
 /* ===== ENHANCED CARD HOVER ===== */
 .product-card:hover {

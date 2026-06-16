@@ -1108,8 +1108,120 @@ function initParticles() {
     }
 }
 
+// ===== CUSTOM CURSOR =====
+function initCustomCursor() {
+    const cursor = document.getElementById('custom-cursor');
+    if (!cursor) return;
+
+    let mouseX = 0, mouseY = 0, cursorX = 0, cursorY = 0;
+
+    document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+    });
+
+    function animateCursor() {
+        cursorX += (mouseX - cursorX) * 0.15;
+        cursorY += (mouseY - cursorY) * 0.15;
+        cursor.style.left = cursorX - 10 + 'px';
+        cursor.style.top = cursorY - 10 + 'px';
+        requestAnimationFrame(animateCursor);
+    }
+    animateCursor();
+
+    // Hover effects
+    const hoverElements = document.querySelectorAll('a, button, .product-card, .value-card, .stat-card, .cat-thumb, .book-btn');
+    hoverElements.forEach(el => {
+        el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+        el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+    });
+
+    // Click effect
+    document.addEventListener('mousedown', () => cursor.classList.add('clicking'));
+    document.addEventListener('mouseup', () => cursor.classList.remove('clicking'));
+}
+
+// ===== PARALLAX SCROLLING =====
+function initParallax() {
+    window.addEventListener('scroll', () => {
+        const scrollY = window.scrollY;
+        document.querySelectorAll('.parallax-bg').forEach(bg => {
+            const speed = bg.dataset.speed || 0.3;
+            bg.style.transform = `translateY(${scrollY * speed}px)`;
+        });
+    }, { passive: true });
+}
+
+// ===== TEXT REVEAL / TYPING EFFECT =====
+function initTextReveal() {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const el = entry.target;
+                const text = el.textContent;
+                el.textContent = '';
+                el.classList.add('visible');
+
+                // Split into characters and animate
+                text.split('').forEach((char, i) => {
+                    const span = document.createElement('span');
+                    span.className = 'char';
+                    span.textContent = char === ' ' ? '\u00A0' : char;
+                    span.style.transitionDelay = (i * 0.03) + 's';
+                    el.appendChild(span);
+                });
+
+                // Add blinking cursor
+                const cursor = document.createElement('span');
+                cursor.className = 'typing-cursor';
+                el.appendChild(cursor);
+
+                observer.unobserve(el);
+            }
+        });
+    }, { threshold: 0.5 });
+
+    document.querySelectorAll('.text-reveal').forEach(el => observer.observe(el));
+}
+
+// ===== SCROLL REVEAL (enhanced) =====
+function initScrollReveal() {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry, i) => {
+            if (entry.isIntersecting) {
+                setTimeout(() => {
+                    entry.target.classList.add('visible');
+                }, i * 100); // Stagger effect
+            }
+        });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+    document.querySelectorAll('.scroll-reveal, .scroll-reveal-left, .scroll-reveal-right, .scroll-reveal-scale').forEach(el => {
+        observer.observe(el);
+    });
+}
+
+// ===== DARK/LIGHT MODE TOGGLE =====
+function toggleMode() {
+    document.body.classList.toggle('light-mode');
+    const icon = document.getElementById('mode-icon');
+    const isLight = document.body.classList.contains('light-mode');
+    icon.className = isLight ? 'fas fa-sun' : 'fas fa-moon';
+    localStorage.setItem('theme', isLight ? 'light' : 'dark');
+}
+
+function initMode() {
+    const saved = localStorage.getItem('theme');
+    if (saved === 'light') {
+        document.body.classList.add('light-mode');
+        const icon = document.getElementById('mode-icon');
+        if (icon) icon.className = 'fas fa-sun';
+    }
+}
+
 // ===== INIT ALL =====
 document.addEventListener('DOMContentLoaded', () => {
+    initMode();
     renderCategories();
     renderProducts();
     renderAcademy();
@@ -1119,7 +1231,11 @@ document.addEventListener('DOMContentLoaded', () => {
     startCarousel();
     startNotificationEngine();
     initScrollAnimations();
+    initScrollReveal();
     initCountUp();
     initParticles();
     initGameCanvas();
+    initCustomCursor();
+    initParallax();
+    initTextReveal();
 });
