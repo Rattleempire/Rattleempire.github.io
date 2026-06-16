@@ -546,7 +546,7 @@ function openProductModal(id) {
     content.innerHTML = `
         <div class="modal-header">
             <h3>${p.name}</h3>
-            <button onclick="closeProductModal({target:{id':'product-modal'}})"><i class="fas fa-xmark"></i></button>
+            <button onclick="closeProductModal()"><i class="fas fa-xmark"></i></button>
         </div>
         <img class="modal-img" src="${p.image}" alt="${p.name}" onerror="this.src='https://via.placeholder.com/400x300/1a1a2e/7000ff?text=${encodeURIComponent(p.name)}'">
         <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;">
@@ -565,17 +565,31 @@ function openProductModal(id) {
             <div class="detail-item"><div class="label">Category</div><div class="value" style="text-transform:capitalize;">${p.category}</div></div>
         </div>
         <div class="modal-actions">
-            <button class="btn-add-modal" onclick="addToCart(products.find(x=>x.id===${p.id})); closeProductModal({target:{id:'product-modal'}});"><i class="fas fa-cart-plus"></i> Add to Cart</button>
+            <button class="btn-add-modal" onclick="addToCart(products.find(x=>x.id===${p.id})); closeProductModal();"><i class="fas fa-cart-plus"></i> Add to Cart</button>
             <a class="btn-wa-modal" href="https://wa.me/256775374095?text=Hi! I'm interested in ${encodeURIComponent(p.name)} (UGX ${p.price.toLocaleString()})"><i class="fab fa-whatsapp"></i></a>
         </div>`;
     document.getElementById('product-modal').classList.add('open');
 }
 
 function closeProductModal(e) {
-    if (e.target.id === 'product-modal') document.getElementById('product-modal').classList.remove('open');
+    // Accept both real events and programmatic calls
+    const modal = document.getElementById('product-modal');
+    if (!modal) return;
+    // If called from overlay click, only close if clicking the overlay itself
+    if (e && e.target && e.target !== modal) return;
+    modal.classList.remove('open');
 }
 
 // ===== SIDEBAR TOGGLE =====
+// Close modals on Escape key
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        closeProductModal();
+        closeSidebar();
+        const cartDrawer = document.getElementById('cart-drawer');
+        if (cartDrawer) cartDrawer.classList.remove('open');
+    }
+});
 function openSidebar() {
     const sidebar = document.getElementById('sidebar');
     const overlay = document.getElementById('sidebar-overlay');
@@ -619,11 +633,14 @@ const navSectionMap = {
 };
 function updateActiveNav() {
     const sections = Object.keys(navSectionMap);
-    const scrollY = window.scrollY + 160;
+    const scrollY = window.scrollY + 200;
     let current = 'hero';
     for (const id of sections) {
         const el = document.getElementById(id);
-        if (el && el.offsetTop <= scrollY) current = id;
+        if (el) {
+            const top = el.getBoundingClientRect().top + window.scrollY;
+            if (top <= scrollY) current = id;
+        }
     }
     // Build set of active section IDs (some nav items map to multiple sections)
     const activeIds = new Set(navSectionMap[current] || ['hero']);
