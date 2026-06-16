@@ -105,11 +105,13 @@ const categories = [
 ];
 
 // ===== STATE =====
-let cart = [];
+let cart = JSON.parse(localStorage.getItem('rattle_cart') || '[]');
 let currentCategory = 'all';
 let currentSort = 'random';
 let carouselIndex = 0;
 let carouselInterval;
+
+function saveCart() { localStorage.setItem('rattle_cart', JSON.stringify(cart)); }
 
 // ===== INIT =====
 // (init moved to bottom of file to include all new features)
@@ -455,6 +457,14 @@ function setCategory(cat) {
         if (cat === 'all' || cat === 'academy') academySection.style.display = 'block';
         else academySection.style.display = 'none';
     }
+    // Scroll to products section
+    scrollToSection('products-section');
+    // Close sidebar on mobile
+    if (window.innerWidth <= 1024) {
+        document.getElementById('sidebar').classList.remove('open');
+        document.getElementById('sidebar-overlay').classList.remove('open');
+        document.body.style.overflow = '';
+    }
 }
 
 function sortProducts(val) {
@@ -479,15 +489,16 @@ function addToCart(product) {
     const existing = cart.find(c => c.id === product.id);
     if (existing) existing.quantity++;
     else cart.push({ ...product, quantity: 1 });
+    saveCart();
     updateCartUI();
     showToast(`<i class="fas fa-check-circle" style="color:#4ade80"></i> ${product.name} added to cart!`);
 }
 
-function removeFromCart(id) { cart = cart.filter(c => c.id !== id); updateCartUI(); }
+function removeFromCart(id) { cart = cart.filter(c => c.id !== id); saveCart(); updateCartUI(); }
 
 function updateQuantity(id, delta) {
     const item = cart.find(c => c.id === id);
-    if (item) { item.quantity += delta; if (item.quantity <= 0) removeFromCart(id); else updateCartUI(); }
+    if (item) { item.quantity += delta; if (item.quantity <= 0) removeFromCart(id); else { saveCart(); updateCartUI(); } }
 }
 
 function updateCartUI() {
@@ -572,15 +583,47 @@ function closeProductModal(e) {
 
 // ===== SIDEBAR TOGGLE =====
 function toggleSidebar() {
-    document.getElementById('sidebar').classList.toggle('open');
-    document.getElementById('sidebar-overlay').classList.toggle('open');
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('sidebar-overlay');
+    sidebar.classList.toggle('open');
+    overlay.classList.toggle('open');
+    // Prevent body scroll when sidebar is open on mobile
+    if (sidebar.classList.contains('open')) {
+        document.body.style.overflow = 'hidden';
+    } else {
+        document.body.style.overflow = '';
+    }
 }
 
 // ===== SCROLL =====
 function scrollToSection(id) {
     const el = document.getElementById(id);
     if (el) el.scrollIntoView({ behavior: 'smooth' });
+    // Close sidebar on mobile after navigation
+    if (window.innerWidth <= 1024) {
+        document.getElementById('sidebar').classList.remove('open');
+        document.getElementById('sidebar-overlay').classList.remove('open');
+        document.body.style.overflow = '';
+    }
 }
+
+// Highlight active section in sidebar & bottom nav
+function updateActiveNav() {
+    const sections = ['hero', 'products-section', 'academy', 'sellers', 'contact'];
+    const scrollY = window.scrollY + 120;
+    let current = 'hero';
+    for (const id of sections) {
+        const el = document.getElementById(id);
+        if (el && el.offsetTop <= scrollY) current = id;
+    }
+    // Sidebar
+    document.querySelectorAll('.sidebar-nav a').forEach(a => a.classList.remove('active'));
+    document.querySelectorAll('.sidebar-nav a[onclick*="' + current + '"]').forEach(a => a.classList.add('active'));
+    // Bottom nav
+    document.querySelectorAll('.mobile-bottom-nav .nav-item').forEach(a => a.classList.remove('active'));
+    document.querySelectorAll('.mobile-bottom-nav .nav-item[onclick*="' + current + '"]').forEach(a => a.classList.add('active'));
+}
+window.addEventListener('scroll', updateActiveNav, { passive: true });
 
 // ===== TOAST =====
 function showToast(msg) {
@@ -1100,4 +1143,5 @@ document.addEventListener('DOMContentLoaded', () => {
     initCustomCursor();
     initParallax();
     initTextReveal();
+    updateActiveNav();
 });
