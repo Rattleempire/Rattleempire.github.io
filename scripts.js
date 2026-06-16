@@ -618,9 +618,37 @@ document.addEventListener('DOMContentLoaded', () => {
 // ===== SCROLL =====
 function scrollToSection(id) {
     const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
-    // Close sidebar on mobile after navigation
-    if (window.innerWidth <= 1024) closeSidebar();
+    if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        // Highlight the active nav
+        updateActiveNav(id);
+    }
+    // Close sidebar on mobile AFTER scroll starts (prevents scroll jump)
+    if (window.innerWidth <= 1024) {
+        setTimeout(() => closeSidebar(), 400);
+    }
+}
+
+function updateActiveNav(id) {
+    document.querySelectorAll('.sidebar-nav a').forEach(a => a.classList.remove('active'));
+    const navSectionMap = {
+        'hero': ['hero'],
+        'products-section': ['products-section'],
+        'sellers': ['sellers'],
+        'academy': ['academy'],
+        'contact': ['contact', 'affiliate']
+    };
+    for (const [sectionId, navIds] of Object.entries(navSectionMap)) {
+        if (navIds.includes(id)) {
+            // Find the nav link that scrolls to this section
+            document.querySelectorAll('.sidebar-nav a').forEach(a => {
+                if (a.getAttribute('onclick') && a.getAttribute('onclick').includes(`'${sectionId}'`)) {
+                    a.classList.add('active');
+                }
+            });
+            break;
+        }
+    }
 }
 
 // ===== ACTIVE NAV (IntersectionObserver — no scroll event) =====
