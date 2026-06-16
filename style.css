@@ -1861,10 +1861,7 @@ body {
     background: var(--empire); color: #fff; border-color: var(--empire);
     transform: scale(1.1);
 }
-.book-counter {
-    font-size: 13px; color: #888; font-weight: 600;
-    min-width: 60px; text-align: center;
-}
+
 
 /* ===== SCROLL ANIMATIONS ===== */
 .scroll-fade {
