@@ -174,8 +174,12 @@ body.sidebar-open {
     gap: 12px;
 }
 .sidebar-brand .logo-icon {
-    font-size: 32px;
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
     animation: float 4s ease-in-out infinite;
+    border: 2px solid var(--empire);
+    box-shadow: 0 0 12px var(--empire-glow);
 }
 .sidebar-brand h1 {
     font-size: 20px;
