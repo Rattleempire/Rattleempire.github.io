@@ -617,16 +617,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // ===== SCROLL =====
 function scrollToSection(id) {
-    const el = document.getElementById(id);
-    if (el) {
-        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        // Highlight the active nav
-        updateActiveNav(id);
-    }
-    // Close sidebar on mobile AFTER scroll starts (prevents scroll jump)
-    if (window.innerWidth <= 1024) {
-        setTimeout(() => closeSidebar(), 400);
-    }
+    // Close sidebar FIRST so body scroll is restored
+    closeSidebar();
+    // Small delay to let sidebar transition start, then scroll
+    requestAnimationFrame(() => {
+        const el = document.getElementById(id);
+        if (el) {
+            el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            updateActiveNav(id);
+        }
+    });
 }
 
 function updateActiveNav(id) {
