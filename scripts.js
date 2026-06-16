@@ -1009,27 +1009,27 @@ function initGameCanvas() {
         }
 
         // Main body
-        ctx.globalAlpha = pulse;
+        ctx.globalAlpha = 1.0;
         ctx.strokeStyle = color;
-        ctx.lineWidth = 2.5;
+        ctx.lineWidth = 3;
         ctx.lineCap = 'round';
 
         // Head
-        ctx.beginPath(); ctx.arc(x, y - size * 1.4, size * 0.4, 0, Math.PI * 2); ctx.stroke();
+        ctx.beginPath(); ctx.arc(x, y - size * 1.4, size * 0.45, 0, Math.PI * 2); ctx.stroke();
         // Body
-        ctx.beginPath(); ctx.moveTo(x, y - size); ctx.lineTo(x, y + size * 0.6); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(x, y - size); ctx.lineTo(x, y + size * 0.7); ctx.stroke();
         // Arms
         const armA = Math.sin(phase) * 0.9;
         ctx.beginPath(); ctx.moveTo(x, y - size * 0.6); ctx.lineTo(x - size * 0.7 * Math.cos(armA), y - size * 0.2 - size * 0.5 * Math.sin(armA)); ctx.stroke();
         ctx.beginPath(); ctx.moveTo(x, y - size * 0.6); ctx.lineTo(x + size * 0.7 * Math.cos(-armA), y - size * 0.2 - size * 0.5 * Math.sin(-armA)); ctx.stroke();
         // Legs
         const legA = Math.sin(phase * 1.6) * 0.7;
-        ctx.beginPath(); ctx.moveTo(x, y + size * 0.6); ctx.lineTo(x - size * 0.6 * Math.sin(legA), y + size * 0.6 + size * 0.6 * Math.cos(legA)); ctx.stroke();
-        ctx.beginPath(); ctx.moveTo(x, y + size * 0.6); ctx.lineTo(x + size * 0.6 * Math.sin(-legA), y + size * 0.6 + size * 0.6 * Math.cos(-legA)); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(x, y + size * 0.7); ctx.lineTo(x - size * 0.6 * Math.sin(legA), y + size * 0.7 + size * 0.6 * Math.cos(legA)); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(x, y + size * 0.7); ctx.lineTo(x + size * 0.6 * Math.sin(-legA), y + size * 0.7 + size * 0.6 * Math.cos(-legA)); ctx.stroke();
         // Eyes
         ctx.fillStyle = '#fff';
-        ctx.beginPath(); ctx.arc(x - size*0.13, y - size*1.45, size*0.08, 0, Math.PI*2); ctx.fill();
-        ctx.beginPath(); ctx.arc(x + size*0.13, y - size*1.45, size*0.08, 0, Math.PI*2); ctx.fill();
+        ctx.beginPath(); ctx.arc(x - size*0.15, y - size*1.48, size*0.1, 0, Math.PI*2); ctx.fill();
+        ctx.beginPath(); ctx.arc(x + size*0.15, y - size*1.48, size*0.1, 0, Math.PI*2); ctx.fill();
 
         ctx.restore();
     }
