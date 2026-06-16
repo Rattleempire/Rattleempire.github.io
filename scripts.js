@@ -1186,19 +1186,26 @@ function initTextReveal() {
 
 // ===== SCROLL REVEAL (enhanced) =====
 function initScrollReveal() {
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry, i) => {
-            if (entry.isIntersecting) {
-                setTimeout(() => {
-                    entry.target.classList.add('visible');
-                }, i * 50); // Reduced stagger for faster appearance
+    // Only animate first 3 elements per section — rest appear instantly
+    const sections = document.querySelectorAll('section, .stats-row, .value-section, .testimonial-section');
+    sections.forEach(section => {
+        const children = section.querySelectorAll('.scroll-reveal, .scroll-reveal-left, .scroll-reveal-right, .scroll-reveal-scale');
+        children.forEach((el, i) => {
+            if (i < 3) {
+                el.classList.add('animate'); // Only first 3 get animation
             }
         });
-    }, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' }); // Lower threshold = earlier trigger
-
-    document.querySelectorAll('.scroll-reveal, .scroll-reveal-left, .scroll-reveal-right, .scroll-reveal-scale').forEach(el => {
-        observer.observe(el);
     });
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.05, rootMargin: '0px 0px -10px 0px' });
+
+    document.querySelectorAll('.scroll-reveal.animate').forEach(el => observer.observe(el));
 }
 
 // ===== DARK/LIGHT MODE TOGGLE =====

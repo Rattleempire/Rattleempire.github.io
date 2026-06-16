@@ -1922,40 +1922,22 @@ body {
 }
 
 
-/* ===== SCROLL REVEAL ANIMATIONS — FAST & LIGHT ===== */
-.scroll-reveal {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+/* ===== SCROLL REVEAL — INSTANT WITH SUBTLE FADE ===== */
+.scroll-reveal, .scroll-reveal-left, .scroll-reveal-right, .scroll-reveal-scale {
+    opacity: 1;
+    transform: none;
+    transition: none;
 }
-.scroll-reveal.visible {
+/* Only animate if JS adds .animate class */
+.scroll-reveal.animate {
+    opacity: 0;
+    transform: translateY(15px);
+    transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+}
+.scroll-reveal.animate.visible {
     opacity: 1;
     transform: translateY(0);
 }
-.scroll-reveal-left {
-    opacity: 0;
-    transform: translateX(-30px);
-    transition: opacity 0.4s ease-out, transform 0.4s ease-out;
-}
-.scroll-reveal-left.visible {
-    opacity: 1;
-    transform: translateX(0);
-}
-.scroll-reveal-right {
-    opacity: 0;
-    transform: translateX(30px);
-    transition: opacity 0.4s ease-out, transform 0.4s ease-out;
-}
-.scroll-reveal-right.visible {
-    opacity: 1;
-    transform: translateX(0);
-}
-.scroll-reveal-scale {
-    opacity: 0;
-    transform: scale(0.95);
-    transition: opacity 0.4s ease-out, transform 0.4s ease-out;
-}
-.scroll-reveal-scale.visible {
     opacity: 1;
     transform: scale(1);
 }
