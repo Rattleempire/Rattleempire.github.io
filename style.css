@@ -1395,14 +1395,20 @@ body {
 
 /* ===== SIDEBAR OVERLAY (mobile) ===== */
 .sidebar-overlay {
-    display: none;
-    position: fixed; inset: 0;
-    background: rgba(0,0,0,0.5);
-    z-index: 99;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
     opacity: 0;
-    transition: opacity 0.3s;
+    pointer-events: none;
+    transition: opacity 0.3s ease, pointer-events 0s 0.3s linear;
 }
-.sidebar-overlay.open { opacity: 1; display: block; }
+.sidebar-overlay.open {
+    opacity: 1;
+    pointer-events: auto;
+    transition: opacity 0.3s ease, pointer-events 0s 0s linear;
+}
+
 
 /* ===== COURSE GRID ===== */
 .course-grid {
@@ -1421,7 +1427,7 @@ body {
     .hamburger { display: flex; }
     .sidebar { transform: translateX(-100%); }
     .sidebar.open { transform: translateX(0); }
-    .sidebar-overlay { display: block; }
+    /* .sidebar-overlay { display: block; } -- Handled by opacity/pointer-events */
     .main-content { margin-left: 0; width: 100%; }
     .stats-row { grid-template-columns: repeat(3, 1fr); }
     .hero-carousel .carousel-slide { height: 300px; }
