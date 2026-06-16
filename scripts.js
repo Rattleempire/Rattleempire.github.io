@@ -633,12 +633,6 @@ function updateActiveNav() {
         const match = [...activeIds].some(id => onclick.includes("'" + id + "'"));
         a.classList.toggle('active', match);
     });
-    // Bottom nav
-    document.querySelectorAll('.mobile-bottom-nav .nav-item').forEach(a => {
-        const onclick = a.getAttribute('onclick') || '';
-        const match = [...activeIds].some(id => onclick.includes("'" + id + "'"));
-        a.classList.toggle('active', match);
-    });
 }
 // Use rAF-throttled scroll for active nav (lighter than raw scroll)
 let navTicking = false;
