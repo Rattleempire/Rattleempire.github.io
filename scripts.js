@@ -457,14 +457,8 @@ function setCategory(cat) {
         if (cat === 'all' || cat === 'academy') academySection.style.display = 'block';
         else academySection.style.display = 'none';
     }
-    // Scroll to products section
+    // Scroll to products section (also closes sidebar on mobile via scrollToSection)
     scrollToSection('products-section');
-    // Close sidebar on mobile
-    if (window.innerWidth <= 1024) {
-        document.getElementById('sidebar').classList.remove('open');
-        document.getElementById('sidebar-overlay').classList.remove('open');
-        document.body.style.overflow = '';
-    }
 }
 
 function sortProducts(val) {
@@ -582,48 +576,78 @@ function closeProductModal(e) {
 }
 
 // ===== SIDEBAR TOGGLE =====
-function toggleSidebar() {
+function openSidebar() {
     const sidebar = document.getElementById('sidebar');
     const overlay = document.getElementById('sidebar-overlay');
-    sidebar.classList.toggle('open');
-    overlay.classList.toggle('open');
-    // Prevent body scroll when sidebar is open on mobile
-    if (sidebar.classList.contains('open')) {
-        document.body.style.overflow = 'hidden';
-    } else {
-        document.body.style.overflow = '';
-    }
+    sidebar.classList.add('open');
+    overlay.classList.add('open');
+    document.body.classList.add('sidebar-open');
 }
+function closeSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('sidebar-overlay');
+    sidebar.classList.remove('open');
+    overlay.classList.remove('open');
+    document.body.classList.remove('sidebar-open');
+}
+function toggleSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    if (sidebar.classList.contains('open')) closeSidebar();
+    else openSidebar();
+}
+// Close sidebar on overlay click
+document.addEventListener('DOMContentLoaded', () => {
+    const overlay = document.getElementById('sidebar-overlay');
+    if (overlay) overlay.addEventListener('click', closeSidebar);
+});
 
 // ===== SCROLL =====
 function scrollToSection(id) {
     const el = document.getElementById(id);
     if (el) el.scrollIntoView({ behavior: 'smooth' });
     // Close sidebar on mobile after navigation
-    if (window.innerWidth <= 1024) {
-        document.getElementById('sidebar').classList.remove('open');
-        document.getElementById('sidebar-overlay').classList.remove('open');
-        document.body.style.overflow = '';
-    }
+    if (window.innerWidth <= 1024) closeSidebar();
 }
 
-// Highlight active section in sidebar & bottom nav
+// ===== ACTIVE NAV (IntersectionObserver — no scroll event) =====
+const navSectionMap = {
+    'hero': ['hero'],
+    'products-section': ['products-section'],
+    'academy': ['academy'],
+    'sellers': ['sellers'],
+    'contact': ['contact', 'affiliate']
+};
 function updateActiveNav() {
-    const sections = ['hero', 'products-section', 'academy', 'sellers', 'contact'];
-    const scrollY = window.scrollY + 120;
+    const sections = Object.keys(navSectionMap);
+    const scrollY = window.scrollY + 160;
     let current = 'hero';
     for (const id of sections) {
         const el = document.getElementById(id);
         if (el && el.offsetTop <= scrollY) current = id;
     }
-    // Sidebar
-    document.querySelectorAll('.sidebar-nav a').forEach(a => a.classList.remove('active'));
-    document.querySelectorAll('.sidebar-nav a[onclick*="' + current + '"]').forEach(a => a.classList.add('active'));
+    // Build set of active section IDs (some nav items map to multiple sections)
+    const activeIds = new Set(navSectionMap[current] || ['hero']);
+    // Sidebar nav
+    document.querySelectorAll('.sidebar-nav a').forEach(a => {
+        const onclick = a.getAttribute('onclick') || '';
+        const match = [...activeIds].some(id => onclick.includes("'" + id + "'"));
+        a.classList.toggle('active', match);
+    });
     // Bottom nav
-    document.querySelectorAll('.mobile-bottom-nav .nav-item').forEach(a => a.classList.remove('active'));
-    document.querySelectorAll('.mobile-bottom-nav .nav-item[onclick*="' + current + '"]').forEach(a => a.classList.add('active'));
+    document.querySelectorAll('.mobile-bottom-nav .nav-item').forEach(a => {
+        const onclick = a.getAttribute('onclick') || '';
+        const match = [...activeIds].some(id => onclick.includes("'" + id + "'"));
+        a.classList.toggle('active', match);
+    });
 }
-window.addEventListener('scroll', updateActiveNav, { passive: true });
+// Use rAF-throttled scroll for active nav (lighter than raw scroll)
+let navTicking = false;
+window.addEventListener('scroll', () => {
+    if (!navTicking) {
+        requestAnimationFrame(() => { updateActiveNav(); navTicking = false; });
+        navTicking = true;
+    }
+}, { passive: true });
 
 // ===== TOAST =====
 function showToast(msg) {
