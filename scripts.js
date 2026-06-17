@@ -617,19 +617,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // ===== SCROLL =====
 function scrollToSection(id) {
-    console.log('scrollToSection called with id:', id);
-    closeSidebar();
-    setTimeout(() => {
-        const el = document.getElementById(id);
-        console.log('element found:', !!el, 'id:', id);
-        if (el) {
-            const top = el.getBoundingClientRect().top + window.scrollY - 80;
-            console.log('scrolling to top:', top);
-            window.scrollTo({ top: top, behavior: 'smooth' });
-        } else {
-            console.log('ERROR: element not found for id:', id);
-        }
-    }, 100);
+    const el = document.getElementById(id);
+    if (el) {
+        const top = el.getBoundingClientRect().top + window.scrollY - 80;
+        window.scrollTo({ top: top, behavior: 'smooth' });
+    }
+    // Close sidebar AFTER scroll starts, with delay matching CSS transition (350ms)
+    setTimeout(() => closeSidebar(), 350);
+}
+
+function showDebug(msg) {
+    let dbg = document.getElementById('debug-toast');
+    if (!dbg) {
+        dbg = document.createElement('div');
+        dbg.id = 'debug-toast';
+        dbg.style.cssText = 'position:fixed;bottom:10px;left:10px;right:10px;z-index:99999;background:rgba(0,0,0,0.85);color:#0f0;font-size:12px;padding:8px 12px;border-radius:8px;font-family:monospace;max-height:60px;overflow:auto;';
+        document.body.appendChild(dbg);
+    }
+    dbg.textContent = msg;
+    dbg.style.display = 'block';
+    clearTimeout(dbg._timeout);
+    dbg._timeout = setTimeout(() => { dbg.style.display = 'none'; }, 5000);
 }
 
 function updateActiveNav(id) {
