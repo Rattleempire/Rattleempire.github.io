@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Prince Samuel Tarrazo — Master of Tarrazo Construction, Graves, Grinding & Marbles. Nakasero, Uganda.">
+    <meta name="keywords" content="Prince Samuel, Tarrazo, construction, graves, grinding, marbles, Nakasero, Uganda">
+    <meta name="author" content="Rattle Empire">
+    <meta property="og:title" content="Prince Samuel Tarrazo | Rattle Empire Partner">
+    <meta property="og:description" content="Master of Tarrazo Construction, Graves, Grinding & Marbles — Nakasero, Uganda.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://rattleempire.github.io/vendor/prince-samuel.html">
+    <meta name="theme-color" content="#7000ff">
+    <title>Prince Samuel Tarrazo | Rattle Empire Partner</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="icon" href="../logo.jpg" type="image/jpeg">
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        /* Vendor page specific styles */
+        .vendor-hero {
+            position: relative;
+            min-height: 420px;
+            display: flex;
+            align-items: flex-end;
+            padding: 40px;
+            background: linear-gradient(135deg, #1a0533 0%, #0a0a1a 40%, #001a2e 100%);
+            border-bottom: 1px solid rgba(0, 240, 255, 0.15);
+            overflow: hidden;
+        }
+        .vendor-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at 70% 50%, rgba(112, 0, 255, 0.15) 0%, transparent 60%);
+            pointer-events: none;
+        }
+        .vendor-hero-content {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            gap: 28px;
+            max-width: 900px;
+        }
+        .vendor-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 3px solid var(--empire);
+            box-shadow: 0 0 30px rgba(0, 240, 255, 0.3);
+            object-fit: cover;
+            flex-shrink: 0;
+            background: var(--bg-secondary);
+        }
+        .vendor-info h1 {
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 4px;
+        }
+        .vendor-info h1 .gradient-text {
+            background: linear-gradient(135deg, #00f0ff, #7000ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .vendor-tagline {
+            font-size: 16px;
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+        }
+        .vendor-badges {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .vendor-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 5px 14px;
+            border-radius: 999px;
+            font-size: 13px;
+            font-weight: 600;
+            border: 1px solid rgba(0, 240, 255, 0.2);
+            background: rgba(0, 240, 255, 0.08);
+            color: var(--empire);
+        }
+        .vendor-badge.gold {
+            border-color: rgba(251, 191, 36, 0.3);
+            background: rgba(251, 191, 36, 0.1);
+            color: #fbbf24;
+        }
+        .vendor-badge.green {
+            border-color: rgba(34, 197, 94, 0.3);
+            background: rgba(34, 197, 94, 0.1);
+            color: #4ade80;
+        }
+        .vendor-stats {
+            display: flex;
+            gap: 24px;
+            margin-top: 16px;
+        }
+        .vendor-stat {
+            text-align: center;
+        }
+        .vendor-stat-num {
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--empire);
+        }
+        .vendor-stat-label {
+            font-size: 12px;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Service cards */
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            padding: 0;
+        }
+        .service-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 28px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--empire), var(--magenta));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .service-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 32px rgba(0, 240, 255, 0.15);
+            border-color: rgba(0, 240, 255, 0.3);
+        }
+        .service-card:hover::before {
+            opacity: 1;
+        }
+        .service-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            margin-bottom: 16px;
+            background: rgba(0, 240, 255, 0.1);
+            color: var(--empire);
+            border: 1px solid rgba(0, 240, 255, 0.2);
+        }
+        .service-card h3 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        .service-card p {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Gallery */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 16px;
+        }
+        .gallery-item {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            aspect-ratio: 4/3;
+            border: 1px solid var(--glass-border);
+            background: var(--bg-secondary);
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+        .gallery-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            font-size: 13px;
+            gap: 8px;
+        }
+        .gallery-placeholder i {
+            font-size: 32px;
+            color: rgba(0, 240, 255, 0.3);
+        }
+
+        /* Contact CTA */
+        .vendor-cta {
+            background: linear-gradient(135deg, rgba(112, 0, 255, 0.1) 0%, rgba(0, 240, 255, 0.05) 100%);
+            border: 1px solid rgba(0, 240, 255, 0.2);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+        }
+        .vendor-cta h2 {
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+        .vendor-cta p {
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+            font-size: 15px;
+        }
+        .btn-vendor-wa {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 32px;
+            background: linear-gradient(135deg, #25d366, #1da851);
+            color: #fff;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.3);
+        }
+        .btn-vendor-wa:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 28px rgba(37, 211, 102, 0.4);
+        }
+        .btn-vendor-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: rgba(0, 240, 255, 0.1);
+            border: 1px solid rgba(0, 240, 255, 0.2);
+            color: var(--empire);
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background 0.2s ease;
+            margin-top: 16px;
+        }
+        .btn-vendor-back:hover {
+            background: rgba(0, 240, 255, 0.2);
+        }
+
+        /* Rattle partner badge */
+        .partner-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 16px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 600;
+            background: rgba(112, 0, 255, 0.1);
+            border: 1px solid rgba(112, 0, 255, 0.25);
+            color: #a78bfa;
+            margin-top: 12px;
+        }
+        .partner-badge img {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+        }
+
+        /* Section spacing */
+        .vendor-section {
+            padding: 40px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .vendor-section-title {
+            font-size: 22px;
+            font-weight: 800;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .vendor-section-title i {
+            color: var(--empire);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .vendor-hero {
+                min-height: auto;
+                padding: 24px;
+            }
+            .vendor-hero-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 16px;
+            }
+            .vendor-avatar {
+                width: 90px;
+                height: 90px;
+            }
+            .vendor-info h1 {
+                font-size: 24px;
+            }
+            .vendor-badges {
+                justify-content: center;
+            }
+            .vendor-stats {
+                justify-content: center;
+            }
+            .vendor-section {
+                padding: 24px;
+            }
+            .service-grid {
+                grid-template-columns: 1fr;
+            }
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Live Wallpaper Background -->
+<div id="live-wallpaper">
+    <video autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=1920&q=80">
+        <source src="https://cdn.pixabay.com/video/2024/02/23/201547-915908337_large.mp4" type="video/mp4">
+    </video>
+    <div class="wallpaper-overlay"></div>
+</div>
+
+<!-- Haze Background -->
+<div class="haze-bg">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="orb orb-4"></div>
+</div>
+
+<!-- Dark/Light Mode Toggle -->
+<button class="mode-toggle" id="mode-toggle" onclick="toggleMode()" title="Toggle Dark/Light Mode">
+    <i class="fas fa-moon" id="mode-icon"></i>
+</button>
+
+<!-- Custom Cursor -->
+<div class="custom-cursor" id="custom-cursor"></div>
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+        <img src="../logo.jpg" alt="Rattle Empire" class="logo-icon" width="36" height="36">
+        <div>
+            <h1>Rattle Empire</h1>
+            <p class="tagline">Uganda's #1 Marketplace</p>
+        </div>
+        <button class="hamburger sidebar-close-btn" id="sidebar-close" onclick="toggleSidebar()"><i class="fas fa-xmark"></i></button>
+    </div>
+    <nav class="sidebar-nav">
+        <div class="nav-section-title">Main</div>
+        <a href="../index.html" onclick="window.location.href='../index.html'; return false;"><i class="fas fa-home"></i> Home</a>
+        <a href="../index.html#products-section" onclick="window.location.href='../index.html#products-section'; return false;"><i class="fas fa-fire"></i> Products</a>
+        <a href="../index.html#sellers" onclick="window.location.href='../index.html#sellers'; return false;"><i class="fas fa-trophy"></i> Top Sellers</a>
+        <a href="../index.html#academy" onclick="window.location.href='../index.html#academy'; return false;"><i class="fas fa-graduation-cap"></i> Academy</a>
+        <div class="nav-section-title">Vendors</div>
+        <a href="#" class="active" onclick="return false;"><i class="fas fa-hard-hat"></i> Prince Samuel <span class="badge" style="background:#25d366">Partner</span></a>
+        <div class="nav-section-title">Services</div>
+        <a href="https://mrgoviral.com" target="_blank"><i class="fas fa-share-nodes"></i> SMM Panel <span class="badge" style="background:#25d366">New</span></a>
+        <a href="../index.html#affiliate" onclick="window.location.href='../index.html#affiliate'; return false;"><i class="fas fa-handshake"></i> Affiliate</a>
+        <a href="../index.html#contact" onclick="window.location.href='../index.html#contact'; return false;"><i class="fas fa-headset"></i> Contact</a>
+    </nav>
+    <div class="sidebar-footer">
+        <div class="social-links">
+            <a href="https://wa.me/256752937558" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            <a href="https://t.me/mrgoviral" title="Telegram"><i class="fab fa-telegram"></i></a>
+            <a href="https://mrgoviral.com" title="SMM Panel"><i class="fas fa-bolt"></i></a>
+        </div>
+    </div>
+</aside>
+
+<!-- SIDEBAR OVERLAY -->
+<div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+<!-- MAIN CONTENT -->
+<div class="main-content" style="margin-left:0;">
+
+    <!-- TOP BAR -->
+    <div class="top-bar">
+        <button class="hamburger" id="hamburger" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
+        <div class="search-box">
+            <i class="fas fa-search"></i>
+            <input type="text" placeholder="Search products, sellers, locations...">
+        </div>
+        <div class="top-actions">
+            <a href="https://mrgoviral.com" target="_blank" title="SMM Panel"><i class="fas fa-share-nodes"></i></a>
+        </div>
+    </div>
+
+    <!-- VENDOR HERO -->
+    <section class="vendor-hero" id="vendor-hero">
+        <div class="vendor-hero-content">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Crect fill='%231a0533' width='120' height='120'/%3E%3Ctext x='60' y='68' text-anchor='middle' fill='%2300f0ff' font-size='40' font-family='Arial'%3E%F0%9F%91%A8%3C/text%3E%3C/svg%3E" alt="Prince Samuel Tarrazo" class="vendor-avatar" id="vendor-avatar">
+            <div class="vendor-info">
+                <h1><span class="gradient-text">Prince Samuel Tarrazo</span></h1>
+                <p class="vendor-tagline">Master Craftsman — Tarrazo Construction, Graves, Grinding & Marbles</p>
+                <div class="vendor-badges">
+                    <span class="vendor-badge gold"><i class="fas fa-crown"></i> Verified Partner</span>
+                    <span class="vendor-badge green"><i class="fas fa-map-marker-alt"></i> Nakasero, Kampala</span>
+                    <span class="vendor-badge"><i class="fas fa-star"></i> 4.9 Rating</span>
+                </div>
+                <div class="vendor-stats">
+                    <div class="vendor-stat">
+                        <div class="vendor-stat-num">50+</div>
+                        <div class="vendor-stat-label">Projects</div>
+                    </div>
+                    <div class="vendor-stat">
+                        <div class="vendor-stat-num">8+</div>
+                        <div class="vendor-stat-label">Years Exp.</div>
+                    </div>
+                    <div class="vendor-stat">
+                        <div class="vendor-stat-num">100%</div>
+                        <div class="vendor-stat-label">Satisfaction</div>
+                    </div>
+                </div>
+                <div class="partner-badge">
+                    <img src="../logo.jpg" alt="Rattle Empire"> Rattle Empire Partner
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="vendor-section" id="about" style="scroll-margin-top:80px">
+        <h2 class="vendor-section-title"><i class="fas fa-user-tie"></i> About Prince Samuel</h2>
+        <div style="background:var(--glass-bg);border:1px solid var(--glass-border);border-radius:16px;padding:28px;">
+            <p style="color:var(--text-secondary);line-height:1.8;font-size:15px;">
+                Prince Samuel Tarrazo is a master craftsman based in <strong style="color:var(--empire);">Nakasero, Kampala</strong>, specializing in 
+                <strong>tarrazo construction</strong>, <strong>grave excavation & finishing</strong>, <strong>floor grinding</strong>, and 
+                <strong>marble installation</strong>. With over 8 years of hands-on experience, Samuel has built a reputation for precision, 
+                reliability, and quality craftsmanship across residential and commercial projects in Uganda.
+            </p>
+            <p style="color:var(--text-secondary);line-height:1.8;font-size:15px;margin-top:12px;">
+                As a verified Rattle Empire partner, Samuel offers his services through our platform — ensuring transparent pricing, 
+                quality assurance, and professional project management from consultation to completion.
+            </p>
+        </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section class="vendor-section" id="services" style="scroll-margin-top:80px">
+        <h2 class="vendor-section-title"><i class="fas fa-tools"></i> Services</h2>
+        <div class="service-grid">
+            <div class="service-card">
+                <div class="service-icon"><i class="fas fa-hard-hat"></i></div>
+                <h3>Tarrazo Construction</h3>
+                <p>Professional tarrazo (terrazzo) flooring — grinding, polishing, and finishing for homes, offices, and commercial spaces. Durable, elegant, and built to last.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon" style="background:rgba(251,191,36,0.1);color:#fbbf24;border-color:rgba(251,191,36,0.2);"><i class="fas fa-cross"></i></div>
+                <h3>Graves & Excavation</h3>
+                <p>Respectful and professional grave excavation, headstone installation, and cemetery finishing. Precision work with care and dignity.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon" style="background:rgba(255,0,255,0.1);color:#ff00ff;border-color:rgba(255,0,255,0.2);"><i class="fas fa-gem"></i></div>
+                <h3>Floor Grinding</h3>
+                <p>Industrial and residential floor grinding — surface preparation, leveling, smoothing, and polishing. Concrete, marble, and stone floors.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon" style="background:rgba(34,197,94,0.1);color:#4ade80;border-color:rgba(34,197,94,0.2);"><i class="fas fa-th-large"></i></div>
+                <h3>Marble Installation</h3>
+                <p>Premium marble supply and installation for floors, walls, countertops, and decorative features. Sourced from the finest quarries.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- GALLERY -->
+    <section class="vendor-section" id="gallery" style="scroll-margin-top:80px">
+        <h2 class="vendor-section-title"><i class="fas fa-images"></i> Work Gallery</h2>
+        <div class="gallery-grid" id="vendor-gallery">
+            <div class="gallery-item">
+                <div class="gallery-placeholder">
+                    <i class="fas fa-hard-hat"></i>
+                    <span>Tarrazo Project</span>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <div class="gallery-placeholder">
+                    <i class="fas fa-gem"></i>
+                    <span>Marble Installation</span>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <div class="gallery-placeholder">
+                    <i class="fas fa-th-large"></i>
+                    <span>Floor Grinding</span>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <div class="gallery-placeholder">
+                    <i class="fas fa-cross"></i>
+                    <span>Grave & Finishing</span>
+                </div>
+            </div>
+        </div>
+        <p style="color:var(--text-secondary);font-size:13px;margin-top:16px;text-align:center;">
+            <i class="fas fa-info-circle"></i> Real project photos coming soon. Contact Samuel for portfolio and references.
+        </p>
+    </section>
+
+    <!-- CONTACT CTA -->
+    <section class="vendor-section" id="contact" style="scroll-margin-top:80px">
+        <div class="vendor-cta">
+            <h2><i class="fas fa-phone-volume" style="color:#25d366;margin-right:8px;"></i> Get In Touch</h2>
+            <p>Interested in Samuel's services? Contact us through Rattle Empire — we'll connect you directly.</p>
+            <a href="https://wa.me/256752937558?text=Hi%20Rattle%20Empire!%20I'm%20interested%20in%20Prince%20Samuel's%20services%20(Tarrazo%20/%20Graves%20/%20Grinding%20/%20Marble).%20Please%20share%20more%20details." class="btn-vendor-wa" target="_blank">
+                <i class="fab fa-whatsapp"></i> Inquire on WhatsApp
+            </a>
+            <br>
+            <a href="../index.html" class="btn-vendor-back">
+                <i class="fas fa-arrow-left"></i> Back to Rattle Empire
+            </a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+        <div class="footer-brand"><img src="../logo.jpg" alt="Rattle Empire" width="28" height="28" style="vertical-align:middle;margin-right:6px;border-radius:50%"> Rattle Empire © 2026 — Uganda's #1 Marketplace</div>
+        <p>All rights reserved. Quality certified products & SMM services.</p>
+        <div class="footer-powered">
+            <span>Powered by</span>
+            <a href="https://mrgoviral.com" target="_blank" class="footer-link">Nova Archon</a>
+            <span class="footer-dot">•</span>
+            <span class="footer-link-alt">In partnership with Trevor Labs</span>
+            <span class="footer-dot">•</span>
+            <a href="https://mrgoviral.com" target="_blank" class="footer-link">MrGoViral SMM</a>
+        </div>
+    </footer>
+</div>
+
+<!-- NOTIFICATION AREA -->
+<div class="notification-area" id="notification-area"></div>
+
+<script>
+    // Sidebar toggle
+    function toggleSidebar() {
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('sidebar-overlay');
+        sidebar.classList.toggle('open');
+        overlay.classList.toggle('open');
+    }
+    document.getElementById('sidebar-overlay').addEventListener('click', toggleSidebar);
+    document.getElementById('sidebar-close').addEventListener('click', toggleSidebar);
+    document.getElementById('hamburger').addEventListener('click', toggleSidebar);
+
+    // Dark/Light mode
+    function toggleMode() {
+        document.body.classList.toggle('light-mode');
+        const icon = document.getElementById('mode-icon');
+        icon.className = document.body.classList.contains('light-mode') ? 'fas fa-sun' : 'fas fa-moon';
+        localStorage.setItem('rattle-mode', document.body.classList.contains('light-mode') ? 'light' : 'dark');
+    }
+    if (localStorage.getItem('rattle-mode') === 'light') {
+        document.body.classList.add('light-mode');
+        document.getElementById('mode-icon').className = 'fas fa-sun';
+    }
+
+    // Custom cursor
+    const cursor = document.getElementById('custom-cursor');
+    document.addEventListener('mousemove', e => {
+        cursor.style.left = e.clientX - 10 + 'px';
+        cursor.style.top = e.clientY - 10 + 'px';
+    });
+    document.querySelectorAll('a, button').forEach(el => {
+        el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+        el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+        el.addEventListener('mousedown', () => cursor.classList.add('clicking'));
+        el.addEventListener('mouseup', () => cursor.classList.remove('clicking'));
+    });
+
+    // Track vendor page view (placeholder for future notification system)
+    // _0x3a2f: encrypted endpoint — will be activated in Phase 2
+    const _0x3a2f = {
+        _0x8b1c: 'aHR0cHM6Ly9yYXR0bGUtZW1waXJlLWFwaS5vcmcvL3YxL25vdGlmeQ==',
+        _0x9d2e: function(_0x1a3b) {
+            // Decrypt and send notification
+            // Currently inactive — Phase 2 activation
+            console.log('[RE] Vendor page viewed:', _0x1a3b);
+        }
+    };
+    // Fire page view event
+    window.addEventListener('load', () => {
+        _0x3a2e._0x9d2e('prince-samuel-tarrazo');
+    });
+</script>
+<script src="../scripts.js"></script>
+</body>
+</html>

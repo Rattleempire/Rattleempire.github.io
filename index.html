@@ -61,6 +61,8 @@
         <a href="#" onclick="scrollToSection('products-section'); return false;"><i class="fas fa-fire"></i> Products <span class="badge">54</span></a>
         <a href="#" onclick="scrollToSection('sellers'); return false;"><i class="fas fa-trophy"></i> Top Sellers</a>
         <a href="#" onclick="scrollToSection('academy'); return false;"><i class="fas fa-graduation-cap"></i> Academy</a>
+        <div class="nav-section-title">Partners</div>
+        <a href="vendor/prince-samuel.html" onclick="window.location.href='vendor/prince-samuel.html'; return false;"><i class="fas fa-hard-hat"></i> Prince Samuel <span class="badge" style="background:#fbbf24;color:#000">New</span></a>
         <div class="nav-section-title">Categories</div>
         <a href="#" onclick="setCategory('all'); return false;"><i class="fas fa-border-all"></i> All Products</a>
         <a href="#" onclick="setCategory('electronics'); return false;"><i class="fas fa-mobile-screen"></i> Electronics</a>
@@ -343,6 +345,24 @@
         <section id="sellers" style="scroll-margin-top:80px">
             <div class="section-header"><h2><i class="fas fa-trophy"></i> Top Sellers</h2></div>
             <div class="sellers-grid" id="seller-list"></div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- FEATURED PARTNERS -->
+        <section id="partners" style="scroll-margin-top:80px">
+            <div class="section-header"><h2><i class="fas fa-handshake"></i> Featured Partners</h2></div>
+            <div class="service-grid" style="grid-template-columns:repeat(auto-fill,minmax(320px,1fr));">
+                <a href="vendor/prince-samuel.html" class="service-card" style="text-decoration:none;color:inherit;display:block;" onclick="window.location.href='vendor/prince-samuel.html'; return false;">
+                    <div class="service-icon" style="background:rgba(251,191,36,0.1);color:#fbbf24;border-color:rgba(251,191,36,0.2);"><i class="fas fa-hard-hat"></i></div>
+                    <h3>Prince Samuel Tarrazo</h3>
+                    <p>Master of Tarrazo Construction, Graves, Grinding & Marbles. Nakasero, Kampala.</p>
+                    <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap;">
+                        <span class="vendor-badge gold" style="font-size:11px;padding:3px 10px;"><i class="fas fa-crown" style="font-size:10px;"></i> Verified</span>
+                        <span class="vendor-badge green" style="font-size:11px;padding:3px 10px;"><i class="fas fa-map-marker-alt" style="font-size:10px;"></i> Nakasero</span>
+                    </div>
+                </a>
+            </div>
         </section>
 
         <div class="section-divider"></div>
