@@ -90,7 +90,7 @@ const academyCourses = [
 const sellers = [
     { name:"Derrick", location:"Kampala", rank:1, sales:150, rating:4.9, verified:true, specialty:"Electronics & Luxury" },
     { name:"Shawn", location:"Entebbe", rank:2, sales:120, rating:4.8, verified:true, specialty:"Electronics & Furniture" },
-    { name:"Trevor", location:"Kampala", rank:3, sales:85, rating:4.7, verified:true, specialty:"CEO — Management" },
+    { name:"Trevor", location:"Kampala", rank:3, sales:85, rating:4.7, verified:true, specialty:"Management" },
     { name:"Alexus", location:"Kampala", rank:4, sales:200, rating:4.9, verified:true, specialty:"CEO — MrGoViral SMM" },
     { name:"Becca", location:"Kampala", rank:5, sales:60, rating:4.6, verified:true, specialty:"Operations" },
 ];
@@ -427,7 +427,7 @@ function renderSellers() {
     const sorted = [...sellers].sort((a, b) => a.rank - b.rank);
     list.innerHTML = sorted.map(s => {
         const rankClass = s.rank === 1 ? 'r1' : s.rank === 2 ? 'r2' : s.rank === 3 ? 'r3' : 'r4';
-        const waNum = s.name === 'Derrick' ? '256775374095' : s.name === 'Shawn' ? '256744341738' : s.name === 'Trevor' ? '256775374095' : s.name === 'Alexus' ? '256782832407' : '256703162884';
+        const waNum = s.name === 'Derrick' ? '256775374095' : s.name === 'Shawn' ? '256744341738' : s.name === 'Trevor' ? '256775374095' : s.name === 'Alexus' ? '256782832407' : '256744341738';
         return `
         <div class="seller-card">
             <div class="rank-badge ${rankClass}">#${s.rank}</div>
