@@ -427,7 +427,7 @@ function renderSellers() {
     const sorted = [...sellers].sort((a, b) => a.rank - b.rank);
     list.innerHTML = sorted.map(s => {
         const rankClass = s.rank === 1 ? 'r1' : s.rank === 2 ? 'r2' : s.rank === 3 ? 'r3' : 'r4';
-        const waNum = s.name === 'Derrick' ? '256775374095' : s.name === 'Shawn' ? '256744341738' : s.name === 'Trevor' ? '256752937558' : s.name === 'Alexus' ? '256782832407' : '256703162884';
+        const waNum = s.name === 'Derrick' ? '256775374095' : s.name === 'Shawn' ? '256744341738' : s.name === 'Trevor' ? '256775374095' : s.name === 'Alexus' ? '256782832407' : '256703162884';
         return `
         <div class="seller-card">
             <div class="rank-badge ${rankClass}">#${s.rank}</div>
@@ -529,7 +529,7 @@ function updateCartUI() {
         </div>`).join('');
 
     const msg = cart.map(c => `${c.name} x${c.quantity} = UGX ${(c.price * c.quantity).toLocaleString()}`).join('%0a');
-    checkoutBtn.href = `https://wa.me/256752937558?text=Hi! I'd like to order:%0a${msg}%0a%0aTotal: UGX ${totalPrice.toLocaleString()}`;
+    checkoutBtn.href = `https://wa.me/256775374095?text=Hi! I'd like to order:%0a${msg}%0a%0aTotal: UGX ${totalPrice.toLocaleString()}`;
 }
 
 function toggleCart() {
