@@ -192,19 +192,41 @@
             <div class="stat-card"><div class="stat-number" data-count="500">0</div><div class="stat-label">Orders</div></div>
         </div>
 
-        <!-- FEATURED PARTNERS (top of page — first thing after hero) -->
-        <section id="partners" style="scroll-margin-top:80px">
-            <div class="section-header"><h2><i class="fas fa-handshake"></i> Our Partners</h2></div>
-            <div class="service-grid" style="grid-template-columns:repeat(auto-fill,minmax(320px,1fr));">
-                <a href="vendor/prince-samuel.html" class="service-card" style="text-decoration:none;color:inherit;display:block;" onclick="window.location.href='vendor/prince-samuel.html'; return false;">
-                    <div class="service-icon" style="background:rgba(251,191,36,0.1);color:#fbbf24;border-color:rgba(251,191,36,0.2);"><i class="fas fa-hard-hat"></i></div>
-                    <h3>Prince Samuel Tarrazo</h3>
-                    <p>Master of Tarrazo Construction, Graves, Grinding & Marbles. Nakasero, Kampala.</p>
-                    <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap;">
-                        <span class="vendor-badge gold" style="font-size:11px;padding:3px 10px;"><i class="fas fa-crown" style="font-size:10px;"></i> Verified</span>
-                        <span class="vendor-badge green" style="font-size:11px;padding:3px 10px;"><i class="fas fa-map-marker-alt" style="font-size:10px;"></i> Nakasero</span>
+        <!-- FEATURED PARTNER SPOTLIGHT — full-width, impossible to miss -->
+        <section id="partners" class="partner-spotlight" style="scroll-margin-top:80px">
+            <div class="partner-spotlight-bg"></div>
+            <div class="partner-spotlight-inner">
+                <div class="partner-spotlight-left">
+                    <div class="partner-avatar-wrap">
+                        <div class="partner-avatar-glow"></div>
+                        <img src="vendor/photos/IMG-20260618-WA0004.jpg" alt="Prince Samuel Tarrazo" class="partner-avatar">
+                        <div class="partner-verified"><i class="fas fa-check-circle"></i></div>
                     </div>
-                </a>
+                </div>
+                <div class="partner-spotlight-center">
+                    <div class="partner-spotlight-label"><i class="fas fa-star"></i> Featured Partner</div>
+                    <h2 class="partner-spotlight-name">Prince Samuel Tarrazo</h2>
+                    <p class="partner-spotlight-title">Master of Tarrazo Construction, Graves, Grinding & Marbles</p>
+                    <div class="partner-spotlight-meta">
+                        <span class="partner-meta-item"><i class="fas fa-map-marker-alt"></i> Nakasero, Kampala</span>
+                        <span class="partner-meta-item"><i class="fas fa-briefcase"></i> 50+ Projects</span>
+                        <span class="partner-meta-item"><i class="fas fa-star"></i> 4.9 Rating</span>
+                    </div>
+                    <div class="partner-spotlight-tags">
+                        <span class="partner-tag gold"><i class="fas fa-crown"></i> Verified</span>
+                        <span class="partner-tag"><i class="fas fa-hard-hat"></i> Construction</span>
+                        <span class="partner-tag"><i class="fas fa-gem"></i> Marbles</span>
+                        <span class="partner-tag"><i class="fas fa-cross"></i> Graves</span>
+                    </div>
+                </div>
+                <div class="partner-spotlight-right">
+                    <a href="vendor/prince-samuel.html" class="btn-partner-view" onclick="window.location.href='vendor/prince-samuel.html'; return false;">
+                        View Profile <i class="fas fa-arrow-right"></i>
+                    </a>
+                    <a href="https://wa.me/256752937558?text=Hi%20Rattle%20Empire!%20I'm%20interested%20in%20Prince%20Samuel's%20services." class="btn-partner-wa" target="_blank">
+                        <i class="fab fa-whatsapp"></i> Inquire Now
+                    </a>
+                </div>
             </div>
         </section>
 
