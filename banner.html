@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rattle Empire — WhatsApp Status Banner</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap');
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: #050510;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Banner — WhatsApp Status optimized (1080x1920 = 9:16) */
+        .banner {
+            width: 540px;
+            height: 960px;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(180deg, #050510 0%, #0a0a1a 30%, #1a0533 70%, #050510 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 48px 36px;
+        }
+
+        /* Animated background orbs */
+        .banner-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            pointer-events: none;
+        }
+        .banner-orb-1 {
+            width: 400px; height: 400px;
+            background: rgba(112, 0, 255, 0.15);
+            top: -100px; left: -100px;
+            animation: orbFloat1 8s ease-in-out infinite alternate;
+        }
+        .banner-orb-2 {
+            width: 350px; height: 350px;
+            background: rgba(0, 240, 255, 0.1);
+            bottom: -80px; right: -80px;
+            animation: orbFloat2 10s ease-in-out infinite alternate;
+        }
+        .banner-orb-3 {
+            width: 250px; height: 250px;
+            background: rgba(251, 191, 36, 0.08);
+            top: 40%; right: -50px;
+            animation: orbFloat3 12s ease-in-out infinite alternate;
+        }
+
+        @keyframes orbFloat1 {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(40px, 30px) scale(1.15); }
+        }
+        @keyframes orbFloat2 {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(-30px, -40px) scale(1.1); }
+        }
+        @keyframes orbFloat3 {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(-20px, 20px) scale(1.2); }
+        }
+
+        /* Top glow line */
+        .banner-glow-line {
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #00f0ff, #7000ff, #fbbf24, #7000ff, #00f0ff, transparent);
+            background-size: 200% 100%;
+            animation: glowSlide 3s linear infinite;
+        }
+        @keyframes glowSlide {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 200% 0%; }
+        }
+
+        /* Logo area */
+        .banner-logo {
+            position: relative;
+            z-index: 2;
+            width: 72px; height: 72px;
+            border-radius: 50%;
+            border: 3px solid #fbbf24;
+            box-shadow: 0 0 30px rgba(251, 191, 36, 0.4), 0 0 60px rgba(251, 191, 36, 0.15);
+            margin-bottom: 20px;
+            animation: logoGlow 3s ease-in-out infinite alternate;
+        }
+        @keyframes logoGlow {
+            0% { box-shadow: 0 0 30px rgba(251, 191, 36, 0.4), 0 0 60px rgba(251, 191, 36, 0.15); }
+            100% { box-shadow: 0 0 40px rgba(251, 191, 36, 0.6), 0 0 80px rgba(251, 191, 36, 0.25); }
+        }
+
+        /* Brand name */
+        .banner-brand {
+            position: relative;
+            z-index: 2;
+            font-size: 28px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #00f0ff, #7000ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 4px;
+            letter-spacing: -0.5px;
+        }
+
+        .banner-tagline {
+            position: relative;
+            z-index: 2;
+            font-size: 12px;
+            color: #8888aa;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 32px;
+        }
+
+        /* Divider */
+        .banner-divider {
+            position: relative;
+            z-index: 2;
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #fbbf24, transparent);
+            margin-bottom: 28px;
+        }
+
+        /* Main headline */
+        .banner-headline {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            margin-bottom: 8px;
+        }
+        .banner-headline-line1 {
+            font-size: 38px;
+            font-weight: 900;
+            color: #ffffff;
+            line-height: 1.1;
+        }
+        .banner-headline-line2 {
+            font-size: 38px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            line-height: 1.1;
+        }
+
+        /* Sub headline */
+        .banner-sub {
+            position: relative;
+            z-index: 2;
+            font-size: 14px;
+            color: #aaaacc;
+            text-align: center;
+            margin-bottom: 28px;
+            line-height: 1.5;
+            max-width: 400px;
+        }
+
+        /* Dual CTA boxes */
+        .banner-ctas {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            gap: 12px;
+            margin-bottom: 28px;
+            width: 100%;
+            max-width: 440px;
+        }
+        .banner-cta {
+            flex: 1;
+            padding: 16px 16px;
+            border-radius: 14px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        .banner-cta-buyer {
+            background: linear-gradient(135deg, rgba(0, 240, 255, 0.12), rgba(112, 0, 255, 0.12));
+            border: 1px solid rgba(0, 240, 255, 0.25);
+        }
+        .banner-cta-seller {
+            background: linear-gradient(135deg, rgba(251, 191, 36, 0.12), rgba(245, 158, 11, 0.08));
+            border: 1px solid rgba(251, 191, 36, 0.25);
+        }
+        .banner-cta-icon {
+            font-size: 24px;
+            margin-bottom: 6px;
+        }
+        .banner-cta-buyer .banner-cta-icon { color: #00f0ff; }
+        .banner-cta-seller .banner-cta-icon { color: #fbbf24; }
+        .banner-cta-label {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+        .banner-cta-buyer .banner-cta-label { color: #00f0ff; }
+        .banner-cta-seller .banner-cta-label { color: #fbbf24; }
+        .banner-cta-text {
+            font-size: 13px;
+            color: #ccc;
+            line-height: 1.4;
+        }
+
+        /* Services strip */
+        .banner-services {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 28px;
+        }
+        .banner-service {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 6px 14px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 600;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #aaa;
+        }
+        .banner-service i { font-size: 11px; color: #fbbf24; }
+
+        /* Bottom CTA */
+        .banner-bottom-cta {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 28px;
+            background: linear-gradient(135deg, #25d366, #1da851);
+            border-radius: 14px;
+            box-shadow: 0 4px 24px rgba(37, 211, 102, 0.3);
+            animation: ctaPulse 3s ease-in-out infinite;
+        }
+        @keyframes ctaPulse {
+            0%, 100% { box-shadow: 0 4px 24px rgba(37, 211, 102, 0.3); }
+            50% { box-shadow: 0 4px 32px rgba(37, 211, 102, 0.5); }
+        }
+        .banner-bottom-cta i {
+            font-size: 22px;
+            color: #fff;
+        }
+        .banner-bottom-cta-text {
+            color: #fff;
+            font-size: 15px;
+            font-weight: 700;
+        }
+        .banner-bottom-cta-num {
+            color: rgba(255,255,255,0.8);
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        /* Trust badges */
+        .banner-trust {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            gap: 16px;
+            margin-top: 20px;
+        }
+        .banner-trust-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 11px;
+            color: #666;
+        }
+        .banner-trust-item i { color: #4ade80; font-size: 10px; }
+
+        /* Bottom glow line */
+        .banner-glow-line-bottom {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #fbbf24, #7000ff, #00f0ff, transparent);
+            background-size: 200% 100%;
+            animation: glowSlide 4s linear infinite;
+        }
+
+        /* Scanning line effect */
+        .banner-scan {
+            position: absolute;
+            left: 0; right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.3), transparent);
+            animation: scanDown 6s linear infinite;
+            pointer-events: none;
+        }
+        @keyframes scanDown {
+            0% { top: -2px; }
+            100% { top: 100%; }
+        }
+
+        /* QR placeholder */
+        .banner-qr {
+            position: relative;
+            z-index: 2;
+            width: 64px;
+            height: 64px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 16px;
+        }
+        .banner-qr i {
+            font-size: 28px;
+            color: rgba(255,255,255,0.2);
+        }
+        .banner-qr-text {
+            position: relative;
+            z-index: 2;
+            font-size: 10px;
+            color: #555;
+            margin-top: 4px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="banner" id="banner">
+    <!-- Background effects -->
+    <div class="banner-glow-line"></div>
+    <div class="banner-glow-line-bottom"></div>
+    <div class="banner-orb banner-orb-1"></div>
+    <div class="banner-orb banner-orb-2"></div>
+    <div class="banner-orb banner-orb-3"></div>
+    <div class="banner-scan"></div>
+
+    <!-- Logo -->
+    <img src="https://rattleempire.github.io/logo.jpg" alt="Rattle Empire" class="banner-logo" onerror="this.style.display='none'">
+
+    <!-- Brand -->
+    <div class="banner-brand">RATTLE EMPIRE</div>
+    <div class="banner-tagline">Uganda's #1 Marketplace</div>
+
+    <div class="banner-divider"></div>
+
+    <!-- Headline -->
+    <div class="banner-headline">
+        <div class="banner-headline-line1">Need Quality</div>
+        <div class="banner-headline-line2">Construction Services?</div>
+    </div>
+    <div class="banner-sub">
+        Verified craftsmen. Transparent pricing.<br>
+        We connect you with the best in Kampala.
+    </div>
+
+    <!-- Dual CTAs -->
+    <div class="banner-ctas">
+        <div class="banner-cta banner-cta-buyer">
+            <div class="banner-cta-icon"><i class="fas fa-hard-hat"></i></div>
+            <div class="banner-cta-label">I'm a Buyer</div>
+            <div class="banner-cta-text">Find verified craftsmen for your project</div>
+        </div>
+        <div class="banner-cta banner-cta-seller">
+            <div class="banner-cta-icon"><i class="fas fa-store"></i></div>
+            <div class="banner-cta-label">I'm a Business</div>
+            <div class="banner-cta-text">List your services & get customers</div>
+        </div>
+    </div>
+
+    <!-- Services -->
+    <div class="banner-services">
+        <span class="banner-service"><i class="fas fa-check-circle"></i> Tarrazo</span>
+        <span class="banner-service"><i class="fas fa-check-circle"></i> Graves</span>
+        <span class="banner-service"><i class="fas fa-check-circle"></i> Grinding</span>
+        <span class="banner-service"><i class="fas fa-check-circle"></i> Marbles</span>
+        <span class="banner-service"><i class="fas fa-check-circle"></i> Construction</span>
+    </div>
+
+    <!-- WhatsApp CTA -->
+    <div class="banner-bottom-cta">
+        <i class="fab fa-whatsapp"></i>
+        <div>
+            <div class="banner-bottom-cta-text">Tap to Connect</div>
+            <div class="banner-bottom-cta-num">0752 937 558</div>
+        </div>
+    </div>
+
+    <!-- Trust -->
+    <div class="banner-trust">
+        <span class="banner-trust-item"><i class="fas fa-shield-halved"></i> Verified</span>
+        <span class="banner-trust-item"><i class="fas fa-truck"></i> Delivery</span>
+        <span class="banner-trust-item"><i class="fas fa-headset"></i> 24/7 Support</span>
+    </div>
+
+    <!-- QR placeholder -->
+    <div class="banner-qr"><i class="fas fa-qrcode"></i></div>
+    <div class="banner-qr-text">Scan or screenshot to share</div>
+</div>
+
+</body>
+</html>
