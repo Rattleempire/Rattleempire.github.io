@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rattle Empire — WhatsApp Status Banner</title>
-    <meta property="og:title" content="Rattle Empire — Verified Construction Services in Kampala">
-    <meta property="og:description" content="Tarrazo • Graves • Grinding • Marbles — Connect with verified craftsmen. List your business free.">
+    <title>Rattle Empire — Uganda's #1 Marketplace</title>
+    <meta property="og:title" content="Rattle Empire — Uganda's #1 Marketplace | Buy. Sell. Connect.">
+    <meta property="og:description" content="Verified sellers. Transparent pricing. Delivered to your doorstep. From construction to fashion, electronics to hospitality — find it all on Rattle Empire.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://rattleempire.github.io/banner.html">
     <meta name="theme-color" content="#7000ff">
@@ -25,7 +25,6 @@
             font-family: 'Inter', sans-serif;
         }
 
-        /* Banner — WhatsApp Status optimized (1080x1920 = 9:16) */
         .banner {
             width: 540px;
             height: 960px;
@@ -39,7 +38,6 @@
             padding: 48px 36px;
         }
 
-        /* Animated background orbs */
         .banner-orb {
             position: absolute;
             border-radius: 50%;
@@ -78,7 +76,6 @@
             100% { transform: translate(-20px, 20px) scale(1.2); }
         }
 
-        /* Top glow line */
         .banner-glow-line {
             position: absolute;
             top: 0; left: 0; right: 0;
@@ -92,7 +89,6 @@
             100% { background-position: 200% 0%; }
         }
 
-        /* Logo area */
         .banner-logo {
             position: relative;
             z-index: 2;
@@ -108,7 +104,6 @@
             100% { box-shadow: 0 0 40px rgba(251, 191, 36, 0.6), 0 0 80px rgba(251, 191, 36, 0.25); }
         }
 
-        /* Brand name */
         .banner-brand {
             position: relative;
             z-index: 2;
@@ -133,7 +128,6 @@
             margin-bottom: 32px;
         }
 
-        /* Divider */
         .banner-divider {
             position: relative;
             z-index: 2;
@@ -143,7 +137,6 @@
             margin-bottom: 28px;
         }
 
-        /* Main headline */
         .banner-headline {
             position: relative;
             z-index: 2;
@@ -151,40 +144,38 @@
             margin-bottom: 8px;
         }
         .banner-headline-line1 {
-            font-size: 38px;
+            font-size: 36px;
             font-weight: 900;
             color: #ffffff;
-            line-height: 1.1;
+            line-height: 1.15;
         }
         .banner-headline-line2 {
-            font-size: 38px;
+            font-size: 36px;
             font-weight: 900;
             background: linear-gradient(135deg, #fbbf24, #f59e0b);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            line-height: 1.1;
+            line-height: 1.15;
         }
 
-        /* Sub headline */
         .banner-sub {
             position: relative;
             z-index: 2;
             font-size: 14px;
             color: #aaaacc;
             text-align: center;
-            margin-bottom: 28px;
-            line-height: 1.5;
-            max-width: 400px;
+            margin-bottom: 24px;
+            line-height: 1.6;
+            max-width: 420px;
         }
 
-        /* Dual CTA boxes */
         .banner-ctas {
             position: relative;
             z-index: 2;
             display: flex;
             gap: 12px;
-            margin-bottom: 28px;
+            margin-bottom: 24px;
             width: 100%;
             max-width: 440px;
         }
@@ -224,31 +215,44 @@
             line-height: 1.4;
         }
 
-        /* Services strip */
-        .banner-services {
+        /* Category icons strip */
+        .banner-categories {
             position: relative;
             z-index: 2;
             display: flex;
-            gap: 8px;
+            gap: 12px;
             flex-wrap: wrap;
             justify-content: center;
-            margin-bottom: 28px;
+            margin-bottom: 24px;
         }
-        .banner-service {
-            display: inline-flex;
+        .banner-cat {
+            display: flex;
+            flex-direction: column;
             align-items: center;
-            gap: 5px;
-            padding: 6px 14px;
-            border-radius: 999px;
-            font-size: 12px;
-            font-weight: 600;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            gap: 4px;
+            width: 60px;
+        }
+        .banner-cat-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
             color: #aaa;
         }
-        .banner-service i { font-size: 11px; color: #fbbf24; }
+        .banner-cat-label {
+            font-size: 9px;
+            color: #666;
+            font-weight: 600;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
 
-        /* Bottom CTA */
         .banner-bottom-cta {
             position: relative;
             z-index: 2;
@@ -280,7 +284,6 @@
             font-weight: 600;
         }
 
-        /* Trust badges */
         .banner-trust {
             position: relative;
             z-index: 2;
@@ -297,7 +300,6 @@
         }
         .banner-trust-item i { color: #4ade80; font-size: 10px; }
 
-        /* Bottom glow line */
         .banner-glow-line-bottom {
             position: absolute;
             bottom: 0; left: 0; right: 0;
@@ -307,7 +309,6 @@
             animation: glowSlide 4s linear infinite;
         }
 
-        /* Scanning line effect */
         .banner-scan {
             position: absolute;
             left: 0; right: 0;
@@ -320,38 +321,11 @@
             0% { top: -2px; }
             100% { top: 100%; }
         }
-
-        /* QR placeholder */
-        .banner-qr {
-            position: relative;
-            z-index: 2;
-            width: 64px;
-            height: 64px;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-top: 16px;
-        }
-        .banner-qr i {
-            font-size: 28px;
-            color: rgba(255,255,255,0.2);
-        }
-        .banner-qr-text {
-            position: relative;
-            z-index: 2;
-            font-size: 10px;
-            color: #555;
-            margin-top: 4px;
-        }
     </style>
 </head>
 <body>
 
 <div class="banner" id="banner">
-    <!-- Background effects -->
     <div class="banner-glow-line"></div>
     <div class="banner-glow-line-bottom"></div>
     <div class="banner-orb banner-orb-1"></div>
@@ -359,49 +333,67 @@
     <div class="banner-orb banner-orb-3"></div>
     <div class="banner-scan"></div>
 
-    <!-- Logo -->
     <img src="https://rattleempire.github.io/logo.jpg" alt="Rattle Empire" class="banner-logo" onerror="this.style.display='none'">
 
-    <!-- Brand -->
     <div class="banner-brand">RATTLE EMPIRE</div>
     <div class="banner-tagline">Uganda's #1 Marketplace</div>
 
     <div class="banner-divider"></div>
 
-    <!-- Headline -->
     <div class="banner-headline">
-        <div class="banner-headline-line1">Need Quality</div>
-        <div class="banner-headline-line2">Construction Services?</div>
+        <div class="banner-headline-line1">Quality Products</div>
+        <div class="banner-headline-line2">&amp; Services — All Here</div>
     </div>
     <div class="banner-sub">
-        Verified craftsmen. Transparent pricing.<br>
-        We connect you with the best in Kampala.
+        Verified sellers. Transparent pricing. Delivered to you.<br>
+        From construction to fashion, electronics to hospitality.
     </div>
 
-    <!-- Dual CTAs -->
     <div class="banner-ctas">
         <div class="banner-cta banner-cta-buyer">
-            <div class="banner-cta-icon"><i class="fas fa-hard-hat"></i></div>
+            <div class="banner-cta-icon"><i class="fas fa-shopping-bag"></i></div>
             <div class="banner-cta-label">I'm a Buyer</div>
-            <div class="banner-cta-text">Find verified craftsmen for your project</div>
+            <div class="banner-cta-text">Browse verified sellers & get the best deals</div>
         </div>
         <div class="banner-cta banner-cta-seller">
             <div class="banner-cta-icon"><i class="fas fa-store"></i></div>
             <div class="banner-cta-label">I'm a Business</div>
-            <div class="banner-cta-text">List your services & get customers</div>
+            <div class="banner-cta-text">List your products & get customers fast</div>
         </div>
     </div>
 
-    <!-- Services -->
-    <div class="banner-services">
-        <span class="banner-service"><i class="fas fa-check-circle"></i> Tarrazo</span>
-        <span class="banner-service"><i class="fas fa-check-circle"></i> Graves</span>
-        <span class="banner-service"><i class="fas fa-check-circle"></i> Grinding</span>
-        <span class="banner-service"><i class="fas fa-check-circle"></i> Marbles</span>
-        <span class="banner-service"><i class="fas fa-check-circle"></i> Construction</span>
+    <!-- Category icons — universal, not hardcoded -->
+    <div class="banner-categories">
+        <div class="banner-cat">
+            <div class="banner-cat-icon"><i class="fas fa-hard-hat"></i></div>
+            <div class="banner-cat-label">Construction</div>
+        </div>
+        <div class="banner-cat">
+            <div class="banner-cat-icon" style="color:#fbbf24;"><i class="fas fa-gem"></i></div>
+            <div class="banner-cat-label">Luxury</div>
+        </div>
+        <div class="banner-cat">
+            <div class="banner-cat-icon" style="color:#00f0ff;"><i class="fas fa-mobile-screen"></i></div>
+            <div class="banner-cat-label">Electronics</div>
+        </div>
+        <div class="banner-cat">
+            <div class="banner-cat-icon" style="color:#4ade80;"><i class="fas fa-couch"></i></div>
+            <div class="banner-cat-label">Furniture</div>
+        </div>
+        <div class="banner-cat">
+            <div class="banner-cat-icon" style="color:#ff6b9d;"><i class="fas fa-tshirt"></i></div>
+            <div class="banner-cat-label">Fashion</div>
+        </div>
+        <div class="banner-cat">
+            <div class="banner-cat-icon" style="color:#a78bfa;"><i class="fas fa-hotel"></i></div>
+            <div class="banner-cat-label">Hospitality</div>
+        </div>
+        <div class="banner-cat">
+            <div class="banner-cat-icon" style="color:#f97316;"><i class="fas fa-bottle-water"></i></div>
+            <div class="banner-cat-label">Beverages</div>
+        </div>
     </div>
 
-    <!-- WhatsApp CTA -->
     <div class="banner-bottom-cta">
         <i class="fab fa-whatsapp"></i>
         <div>
@@ -410,16 +402,12 @@
         </div>
     </div>
 
-    <!-- Trust -->
     <div class="banner-trust">
-        <span class="banner-trust-item"><i class="fas fa-shield-halved"></i> Verified</span>
+        <span class="banner-trust-item"><i class="fas fa-shield-halved"></i> Verified Sellers</span>
+        <span class="banner-trust-item"><i class="fas fa-tag"></i> Best Prices</span>
         <span class="banner-trust-item"><i class="fas fa-truck"></i> Delivery</span>
         <span class="banner-trust-item"><i class="fas fa-headset"></i> 24/7 Support</span>
     </div>
-
-    <!-- QR placeholder -->
-    <div class="banner-qr"><i class="fas fa-qrcode"></i></div>
-    <div class="banner-qr-text">Scan or screenshot to share</div>
 </div>
 
 </body>
