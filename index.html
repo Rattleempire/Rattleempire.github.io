@@ -16,7 +16,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="icon" href="logo.jpg" type="image/jpeg">
     <link rel="stylesheet" href="style.css">
-</head><!-- HERO CAROUSEL -->
+</head>
+<body><!-- HERO CAROUSEL -->
         <section class="hero-carousel" id="hero">
             <div class="carousel-track" id="carousel-track">
                 <!-- Slide 1: Uganda's #1 -->
@@ -115,7 +116,134 @@
             </div>
         </section>
 
-        <div class="section-divider"></div><!-- VALUE CARDS -->
+        <div class="section-divider"></div>
+
+<!-- Live Wallpaper Background -->
+<div id="live-wallpaper">
+    <video autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=1920&q=80">
+        <source src="https://cdn.pixabay.com/video/2024/02/23/201547-915908337_large.mp4" type="video/mp4">
+    </video>
+    <div class="wallpaper-overlay"></div>
+</div>
+
+<!-- Haze Background -->
+<div class="haze-bg">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="orb orb-4"></div>
+    <div class="orb orb-5"></div>
+    <div class="orb orb-6"></div>
+</div>
+
+<!-- Dark/Light Mode Toggle -->
+<button class="mode-toggle" id="mode-toggle" onclick="toggleMode()" title="Toggle Dark/Light Mode">
+    <i class="fas fa-moon" id="mode-icon"></i>
+</button>
+
+<!-- Custom Cursor -->
+<div class="custom-cursor" id="custom-cursor"></div>
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+        <img src="logo.jpg" alt="Rattle Empire" class="logo-icon" width="36" height="36">
+        <div>
+            <h1>Rattle Empire</h1>
+            <p class="tagline">Uganda's #1 Marketplace</p>
+        </div>
+        <button class="hamburger sidebar-close-btn" id="sidebar-close" onclick="toggleSidebar()"><i class="fas fa-xmark"></i></button>
+    </div>
+    <nav class="sidebar-nav">
+        <div class="nav-section-title">Main</div>
+        <a href="#" class="active" onclick="scrollToSection('hero'); return false;"><i class="fas fa-home"></i> Home</a>
+        <a href="#" onclick="scrollToSection('products-section'); return false;"><i class="fas fa-fire"></i> Products <span class="badge">54</span></a>
+        <a href="#" onclick="scrollToSection('sellers'); return false;"><i class="fas fa-trophy"></i> Top Sellers</a>
+        <a href="#" onclick="scrollToSection('academy'); return false;"><i class="fas fa-graduation-cap"></i> Academy</a>
+        <div class="nav-section-title">Partners</div>
+        <a href="vendor/prince-samuel.html" onclick="window.location.href='vendor/prince-samuel.html'; return false;"><i class="fas fa-hard-hat"></i> Prince Samuel <span class="badge" style="background:#fbbf24;color:#000">New</span></a>
+        <div class="nav-section-title">Categories</div>
+        <a href="#" onclick="setCategory('all'); return false;"><i class="fas fa-border-all"></i> All Products</a>
+        <a href="#" onclick="setCategory('electronics'); return false;"><i class="fas fa-mobile-screen"></i> Electronics</a>
+        <a href="#" onclick="setCategory('furniture'); return false;"><i class="fas fa-couch"></i> Furniture</a>
+        <a href="#" onclick="setCategory('luxury'); return false;"><i class="fas fa-gem"></i> Luxury</a>
+        <a href="#" onclick="setCategory('tigertec'); return false;"><i class="fas fa-bolt"></i> Tigertec</a>
+        <div class="nav-section-title">Services</div>
+        <a href="https://mrgoviral.com" target="_blank"><i class="fas fa-share-nodes"></i> SMM Panel <span class="badge" style="background:#25d366">New</span></a>
+        <a href="banner.html" onclick="window.location.href='banner.html'; return false;"><i class="fas fa-bullhorn"></i> Share <span class="badge" style="background:#fbbf24;color:#000">Free</span></a>
+        <a href="#" onclick="scrollToSection('affiliate'); return false;"><i class="fas fa-handshake"></i> Affiliate</a>
+        <a href="#" onclick="scrollToSection('contact'); return false;"><i class="fas fa-headset"></i> Contact</a>
+    </nav>
+    <div class="sidebar-footer">
+        <div class="social-links">
+            <a href="https://wa.me/256775374095" title="WhatsApp — Derrick"><i class="fab fa-whatsapp"></i></a>
+            <a href="https://t.me/mrgoviral" title="Telegram"><i class="fab fa-telegram"></i></a>
+            <a href="https://mrgoviral.com" title="SMM Panel"><i class="fas fa-bolt"></i></a>
+        </div>
+    </div>
+</aside>
+
+<!-- MAIN CONTENT -->
+<div class="main-content">
+
+    <!-- TOP BAR -->
+    <div class="top-bar">
+        <button class="hamburger" id="hamburger" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
+        <div class="search-box">
+            <i class="fas fa-search"></i>
+            <input type="text" id="search-input" placeholder="Search products, sellers, locations..." oninput="filterProducts(this.value)">
+        </div>
+        <div class="top-actions">
+            <a href="https://mrgoviral.com" target="_blank" title="SMM Panel"><i class="fas fa-share-nodes"></i></a>
+            <button onclick="toggleCart()" title="Cart"><i class="fas fa-cart-shopping"></i><span class="cart-count" id="cart-count">0</span></button>
+        </div>
+    </div>
+
+    <!-- CONTENT AREA -->
+    <div id="content-area">
+
+        
+
+        <!-- TRUST MARQUEE -->
+        
+                <div class="marquee-item"><i class="fas fa-couch"></i> Furniture</div>
+                <div class="marquee-item"><i class="fas fa-gem"></i> Luxury</div>
+                <div class="marquee-item"><i class="fas fa-graduation-cap"></i> Academy</div>
+                <div class="marquee-item"><i class="fas fa-bolt"></i> Tigertec</div>
+                <div class="marquee-item"><i class="fas fa-share-nodes"></i> SMM Panel</div>
+                <div class="marquee-item"><i class="fas fa-star" style="color:#fbbf24"></i> 4.8 Rating</div>
+                <div class="marquee-item"><i class="fas fa-box"></i> 54+ Products</div>
+                <div class="marquee-item"><i class="fas fa-badge-check" style="color:#3b82f6"></i> Verified</div>
+                <div class="marquee-item"><i class="fas fa-truck"></i> Free Delivery</div>
+                <div class="marquee-item"><i class="fas fa-lock"></i> Secure</div>
+                <div class="marquee-item"><i class="fas fa-headset"></i> 24/7 Support</div>
+                <!-- Duplicate for loop -->
+                <div class="marquee-item"><i class="fas fa-mobile-screen"></i> Electronics</div>
+                <div class="marquee-item"><i class="fas fa-couch"></i> Furniture</div>
+                <div class="marquee-item"><i class="fas fa-gem"></i> Luxury</div>
+                <div class="marquee-item"><i class="fas fa-graduation-cap"></i> Academy</div>
+                <div class="marquee-item"><i class="fas fa-bolt"></i> Tigertec</div>
+                <div class="marquee-item"><i class="fas fa-share-nodes"></i> SMM Panel</div>
+                <div class="marquee-item"><i class="fas fa-star" style="color:#fbbf24"></i> 4.8 Rating</div>
+                <div class="marquee-item"><i class="fas fa-box"></i> 54+ Products</div>
+                <div class="marquee-item"><i class="fas fa-badge-check" style="color:#3b82f6"></i> Verified</div>
+                <div class="marquee-item"><i class="fas fa-truck"></i> Free Delivery</div>
+                <div class="marquee-item"><i class="fas fa-lock"></i> Secure</div>
+                <div class="marquee-item"><i class="fas fa-headset"></i> 24/7 Support</div>
+            </div>
+        </div>
+
+        <!-- STATS -->
+        <div class="stat-label">Products</div></div>
+            <div class="stat-card"><div class="stat-number" data-count="6">0</div><div class="stat-label">Sellers</div></div>
+            <div class="stat-card"><div class="stat-number" data-count="19">0</div><div class="stat-label">Reviews</div></div>
+            <div class="stat-card"><div class="stat-number" data-count="4.8">0</div><div class="stat-label">Avg Rating</div></div>
+            <div class="stat-card"><div class="stat-number" data-count="500">0</div><div class="stat-label">Orders</div></div>
+        </div>
+
+        
+
+        <!-- VALUE CARDS -->
         <section class="value-section scroll-fade;">
             <div class="section-header">
                 <h2>Why Rattle Empire?</h2>
@@ -185,17 +313,7 @@
             <div class="cat-grid" id="category-thumbs"></div>
         </section>
 
-        <!-- ===== ACADEMY SECTION ===== -->
-        <section id="academy" class="academy-section" style="scroll-margin-top:80px">
-            <div class="section-header">
-                <h2><i class="fas fa-graduation-cap"></i> Academy Resource Hub</h2>
-            </div>
-            <p style="color:#999;font-size:14px;margin-bottom:24px;">Free tools & platforms to level up your skills. Click any card to explore.</p>
-            <div class="resource-grid" id="resource-grid"></div>
-
-            <div class="section-divider"></div>
-
-            <!-- Rattle Academy Courses -->
+        <!-- Rattle Academy Courses -->
             <div class="academy-courses-panel">
                 <div class="panel-glow"></div>
                 <div class="panel-content">
@@ -393,5 +511,5 @@
 </a>
 
 <script src="scripts.js"></script>
-
+</body>
 </html>
