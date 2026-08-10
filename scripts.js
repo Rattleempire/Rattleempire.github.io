@@ -1,4 +1,4 @@
-my// ===== RATTLE EMPIRE v5.0 — scripts.js =====
+// ===== RATTLE EMPIRE v5.0 — scripts.js =====
 // Premium Digital Marketplace Engine
 
 // ===== PREMIUM DIGITAL PRODUCTS =====
