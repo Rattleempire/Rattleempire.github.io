@@ -962,13 +962,16 @@ function renderEnhancedSellers() {
     }).join('');
 }
 
-// ===== INIT ALL =====
 document.addEventListener('DOMContentLoaded', () => {
     initMode();
-    renderCategories();
+    renderCategoryRow();
+    renderFeatured();
+    renderQuickDeals();
+    renderHotDeals();
     renderProducts();
     renderCourses();
-    renderSellers();
+    renderCommunity();
+    renderEnhancedSellers();
     updateCartUI();
     startCarousel();
     startNotificationEngine();
