@@ -619,6 +619,104 @@ function startNotificationEngine() {
     scheduleNext();
 }
 
+// ===== v6.0 — APP-STYLE UPGRADE =====
+
+// Extra categories for the row
+categories.push(
+    { id:"ai-tools", name:"AI Tools", emoji:"🧠", color:"from-violet-600 to-purple-600", icon:"fa-wand-magic-sparkles", image:"https://images.unsplash.com/photo-1677442136019-21780ecad995?w=200&h=150&fit=crop" },
+    { id:"productivity", name:"Productivity", emoji:"📝", color:"from-teal-600 to-cyan-600", icon:"fa-list-check", image:"https://images.unsplash.com/photo-1455390582262-044cdead3037?w=200&h=150&fit=crop" }
+);
+
+// ===== CATEGORY ROW =====
+function renderCategoryRow() {
+    const row = document.getElementById('cat-row');
+    if (!row) return;
+    row.innerHTML = categories.map(c => {
+        const count = c.id === 'all' ? products.length : products.filter(p => p.category === c.id).length;
+        return `<div class="cat-row-card ${currentCategory === c.id ? 'active' : ''}" onclick="setCategory('${c.id}')">
+            <span class="crc-emoji">${c.emoji}</span>
+            <span class="crc-name">${c.name}</span>
+            <span class="crc-count">${count} items</span>
+        </div>`;
+    }).join('');
+}
+
+// ===== FEATURED (hand-picked top 4) =====
+function renderFeatured() {
+    const grid = document.getElementById('featured-grid');
+    if (!grid) return;
+    const feats = [...products].sort((a, b) => (b.rating * b.sold) - (a.rating * a.sold)).slice(0, 4);
+    grid.innerHTML = feats.map((p, i) => productCardHTML(p, i)).join('');
+}
+
+// ===== QUICK DEALS (biggest discounts) =====
+function renderQuickDeals() {
+    const grid = document.getElementById('quick-deals-grid');
+    if (!grid) return;
+    const deals = [...products]
+        .map(p => ({ ...p, disc: p.originalPrice ? Math.round(((p.originalPrice - p.price) / p.originalPrice) * 100) : 0 }))
+        .sort((a, b) => b.disc - a.disc).slice(0, 6);
+    grid.innerHTML = deals.map((p, i) => productCardHTML(p, i)).join('');
+}
+
+// ===== HOT DEALS (best sellers, horizontal) =====
+function renderHotDeals() {
+    const row = document.getElementById('hot-deals-row');
+    if (!row) return;
+    const hot = [...products].sort((a, b) => b.sold - a.sold).slice(0, 8);
+    row.innerHTML = hot.map((p, i) => productCardHTML(p, i)).join('');
+}
+
+// ===== TRENDING CHIP SEARCH =====
+function trendSearch(q) {
+    const input = document.getElementById('search-input');
+    if (input) { input.value = q; filterProducts(q); }
+    scrollToSection('products-section');
+}
+
+// ===== BOTTOM NAV =====
+function bnGo(tab) {
+    document.querySelectorAll('.bn-btn').forEach(b => b.classList.toggle('active', b.dataset.tab === tab));
+    if (tab === 'home') scrollToSection('hero');
+    if (tab === 'shop') scrollToSection('categories-section');
+    if (tab === 'community') scrollToSection('community');
+}
+
+function openAccountSheet() {
+    document.getElementById('account-sheet').classList.add('open');
+    document.getElementById('sheet-overlay').classList.add('open');
+}
+function closeAccountSheet() {
+    document.getElementById('account-sheet').classList.remove('open');
+    document.getElementById('sheet-overlay').classList.remove('open');
+}
+
+// Sync cart badge on bottom nav (patch updateCartUI)
+function syncBnCart() {
+    const badge = document.getElementById('bn-cart-badge');
+    if (!badge) return;
+    const count = cart.reduce((s, c) => s + c.quantity, 0);
+    badge.textContent = count;
+    badge.style.display = count > 0 ? 'flex' : 'none';
+}
+const _origUpdateCartUI = updateCartUI;
+updateCartUI = function () { _origUpdateCartUI(); syncBnCart(); };
+
+// Keep category row active state in sync (patch setCategory)
+const _origSetCategory = setCategory;
+setCategory = function (cat) { _origSetCategory(cat); renderCategoryRow(); };
+
+// Bottom nav scroll-spy
+window.addEventListener('scroll', () => {
+    const comm = document.getElementById('community');
+    let tab = window.scrollY < 300 ? 'home' : 'shop';
+    if (comm && comm.getBoundingClientRect().top < window.innerHeight / 2) tab = 'community';
+    document.querySelectorAll('.bn-btn').forEach(b => {
+        if (['home', 'shop', 'community'].includes(b.dataset.tab))
+            b.classList.toggle('active', b.dataset.tab === tab);
+    });
+}, { passive: true });
+
 // ===== STATS COUNT-UP =====
 function initCountUp() {
     const observer = new IntersectionObserver((entries) => {
