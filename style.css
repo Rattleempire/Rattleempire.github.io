@@ -282,6 +282,8 @@ body.sidebar-open {
     position: relative;
     z-index: 1;
     width: calc(100% - var(--sidebar-w));
+    display: flex;
+    flex-direction: column;
 }
 
 /* ===== TOP BAR ===== */
