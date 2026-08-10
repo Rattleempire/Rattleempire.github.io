@@ -1,4 +1,4 @@
-// ===== RATTLE EMPIRE v5.0 — scripts.js =====
+my// ===== RATTLE EMPIRE v5.0 — scripts.js =====
 // Premium Digital Marketplace Engine
 
 // ===== PREMIUM DIGITAL PRODUCTS =====
@@ -694,6 +694,174 @@ function initMode() {
         const icon = document.getElementById('mode-icon');
         if (icon) icon.className = 'fas fa-sun';
     }
+}
+
+// ===== TOP PICKS =====
+function renderTopPick() {
+    const container = document.getElementById('top-pick-card');
+    if (!container) return;
+    
+    // Get the featured product (highest rating + sales)
+    const topPick = [...products].sort((a, b) => (b.rating * b.sold) - (a.rating * a.sold))[0];
+    const discount = topPick.originalPrice ? Math.round(((topPick.originalPrice - topPick.price) / topPick.originalPrice) * 100) : 0;
+    
+    container.innerHTML = `
+        <div class="pick-image">
+            <img src="${topPick.image}" alt="${topPick.name}" onerror="this.src='https://via.placeholder.com/400x300/1a1a2e/7000ff?text=${encodeURIComponent(topPick.name)}'">
+            <span class="pick-badge"><i class="fas fa-fire"></i> Today's Pick</span>
+        </div>
+        <div class="pick-content">
+            <span class="pick-tag"><i class="fas fa-bolt"></i> Instant Delivery</span>
+            <h3>${topPick.name}</h3>
+            <p class="pick-desc">${topPick.description}</p>
+            <div class="pick-meta">
+                <div class="meta-item"><i class="fas fa-star"></i> ${topPick.rating} (${topPick.reviews} reviews)</div>
+                <div class="meta-item"><i class="fas fa-box"></i> ${topPick.sold} sold</div>
+                <div class="meta-item"><i class="fas fa-shield-halved"></i> Lifetime Warranty</div>
+            </div>
+            <div class="pick-price">
+                UGX ${topPick.price.toLocaleString()}
+                ${topPick.originalPrice ? `<span class="original">UGX ${topPick.originalPrice.toLocaleString()}</span>` : ''}
+            </div>
+            <div class="pick-actions">
+                <button class="btn-slide-primary" onclick="addToCart(products.find(x=>x.id===${topPick.id}))"><i class="fas fa-cart-plus"></i> Add to Cart</button>
+                <a href="https://wa.me/256775374095?text=Hi! I want: ${encodeURIComponent(topPick.name)} (UGX ${topPick.price.toLocaleString()})" class="btn-slide-outline" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+            </div>
+        </div>`;
+}
+
+// ===== RECENTLY ADDED =====
+function renderRecentlyAdded() {
+    const grid = document.getElementById('recently-added-grid');
+    if (!grid) return;
+    
+    // Get the 4 newest products (by ID descending)
+    const recent = [...products].sort((a, b) => b.id - a.id).slice(0, 4);
+    grid.innerHTML = recent.map((p, i) => productCardHTML(p, i)).join('');
+}
+
+// ===== COMMUNITY REQUESTS =====
+const communityRequests = [
+    { id: 1, user: "Grace M.", location: "Kampala", text: "Looking for ChatGPT Plus with GPT-4 Turbo access. Need it for my research work.", time: "2 hours ago", replies: 5, avatar: "#7000ff", whatsapp: "256775123456" },
+    { id: 2, user: "Daniel O.", location: "Entebbe", text: "Anyone selling Midjourney accounts with fast mode? I'm a designer and need it for client work.", time: "4 hours ago", replies: 3, avatar: "#00d4ff", whatsapp: "256775234567" },
+    { id: 3, user: "Faith N.", location: "Kampala", text: "Need Netflix Premium 4K with 5 screens for family sharing. Looking for long-term subscription.", time: "6 hours ago", replies: 8, avatar: "#fbbf24", whatsapp: "256775345678" },
+    { id: 4, user: "Brian T.", location: "Jinja", text: "Looking for TikTok Monetization course. Want to learn how to grow and earn from my account.", time: "8 hours ago", replies: 4, avatar: "#4ade80", whatsapp: "256775456789" },
+    { id: 5, user: "Esther W.", location: "Kampala", text: "Anyone have Claude Pro accounts? Need it for coding and research. Prefer 3+ months subscription.", time: "12 hours ago", replies: 6, avatar: "#f472b6", whatsapp: "256775567890" },
+];
+
+function renderCommunity() {
+    const container = document.getElementById('community-requests');
+    if (!container) return;
+    
+    container.innerHTML = communityRequests.map(r => `
+        <div class="community-request-card">
+            <div class="request-header">
+                <div class="request-user">
+                    <div class="request-avatar" style="background:${r.avatar}">${r.user.charAt(0)}</div>
+                    <div class="request-user-info">
+                        <div class="name">${r.user}</div>
+                        <div class="location"><i class="fas fa-map-marker-alt"></i> ${r.location}</div>
+                    </div>
+                </div>
+                <div class="request-time">${r.time}</div>
+            </div>
+            <div class="request-text">${r.text}</div>
+            <div class="request-footer">
+                <div class="request-stats">
+                    <span class="stat"><i class="fas fa-comment"></i> ${r.replies} replies</span>
+                    <span class="stat"><i class="fas fa-eye"></i> ${Math.floor(Math.random() * 50) + 20} views</span>
+                </div>
+                <a href="https://wa.me/${r.whatsapp}?text=Hi ${r.user}! I can help with your request: ${encodeURIComponent(r.text)}" class="btn-have-this" target="_blank">
+                    <i class="fas fa-hand-holding-heart"></i> I have this
+                </a>
+            </div>
+        </div>`).join('');
+}
+
+function openPostModal() {
+    document.getElementById('post-modal').classList.add('open');
+}
+
+function closePostModal(e) {
+    const modal = document.getElementById('post-modal');
+    if (!modal) return;
+    if (e && e.target && e.target !== modal) return;
+    modal.classList.remove('open');
+}
+
+function submitPost() {
+    const text = document.getElementById('post-text').value.trim();
+    const location = document.getElementById('post-location').value;
+    const whatsapp = document.getElementById('post-whatsapp').value.trim();
+    
+    if (!text) {
+        showToast('<i class="fas fa-exclamation-circle" style="color:#f87171"></i> Please describe what you need');
+        return;
+    }
+    if (!whatsapp) {
+        showToast('<i class="fas fa-exclamation-circle" style="color:#f87171"></i> Please enter your WhatsApp number');
+        return;
+    }
+    
+    // Add to community requests
+    communityRequests.unshift({
+        id: Date.now(),
+        user: "You",
+        location: location,
+        text: text,
+        time: "just now",
+        replies: 0,
+        avatar: "#7000ff",
+        whatsapp: whatsapp
+    });
+    
+    // Clear form
+    document.getElementById('post-text').value = '';
+    document.getElementById('post-whatsapp').value = '';
+    
+    // Re-render and close modal
+    renderCommunity();
+    closePostModal();
+    showToast('<i class="fas fa-check-circle" style="color:#4ade80"></i> Request posted! Sellers will contact you on WhatsApp.');
+    
+    // Scroll to community section
+    scrollToSection('community');
+}
+
+// ===== ENHANCED SELLERS (with followers) =====
+const enhancedSellers = sellers.map((s, i) => ({
+    ...s,
+    followers: Math.floor(Math.random() * 200) + 50,
+    listings: Math.floor(Math.random() * 15) + 5
+}));
+
+function renderEnhancedSellers() {
+    const list = document.getElementById('seller-list');
+    if (!list) return;
+    
+    const sorted = [...enhancedSellers].sort((a, b) => a.rank - b.rank);
+    list.innerHTML = sorted.map(s => {
+        const tierClass = s.tier === 'diamond' ? 'diamond' : s.tier === 'platinum' ? 'platinum' : 'gold';
+        const waNum = '256775374095';
+        return `
+        <div class="seller-card">
+            <div class="rank-badge ${tierClass}"><i class="fas fa-crown"></i></div>
+            <img src="${s.avatar}" alt="${s.name}" style="width:44px;height:44px;border-radius:50%;object-fit:cover;" onerror="this.style.display='none'">
+            <div class="seller-info">
+                <div class="name-row">
+                    <span class="name">${s.name}</span>
+                    ${s.verified ? '<span class="verified"><i class="fas fa-badge-check"></i> Verified</span>' : ''}
+                </div>
+                <div class="location"><i class="fas fa-location-dot"></i> ${s.location}</div>
+                <div class="seller-stats">
+                    <span class="stat"><i class="fas fa-star" style="color:#fbbf24"></i> ${s.rating}</span>
+                    <span class="stat listings"><i class="fas fa-box"></i> ${s.listings} listings</span>
+                    <span class="stat followers"><i class="fas fa-users"></i> ${s.followers} followers</span>
+                </div>
+            </div>
+            <a href="https://wa.me/${waNum}?text=Hi ${s.name}! I'm interested in your products on Rattle Empire" class="btn-contact" target="_blank"><i class="fab fa-whatsapp"></i> Contact</a>
+        </div>`;
+    }).join('');
 }
 
 // ===== INIT ALL =====
