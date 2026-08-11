@@ -1161,6 +1161,92 @@ function renderAccountSheet() {
         <button class="sheet-item" onclick="logout()"><i style="background:rgba(239,68,68,0.15);color:#ef4444;"><i class="fas fa-right-from-bracket"></i></i> Sign Out</button>`;
 }
 
+// ===== v7.2 — TELEGRAM + EMAIL PIPELINE =====
+const TG_TOKEN = "";   // ← paste BotFather token
+const TG_CHAT  = "";   // ← paste your chat id
+const FORM_EMAIL = ""; // ← optional: your email for backup copies
+
+function tgSend(text) {
+    if (!TG_TOKEN || !TG_CHAT) return;
+    fetch(`https://api.telegram.com/bot${TG_TOKEN}/sendMessage`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ chat_id: TG_CHAT, text })
+    }).catch(() => {});
+}
+function emailSend(obj) {
+    if (!FORM_EMAIL) return;
+    fetch('https://formsubmit.co/ajax/' + FORM_EMAIL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(obj)
+    }).catch(() => {});
+    // NOTE: the very first submission sends an activation email to FORM_EMAIL — tap "Activate" once, then all future submissions flow automatically.
+}
+
+// 🏪 Seller applications → Telegram + Email + WhatsApp (as before)
+const _pSeller = submitSellerApp;
+submitSellerApp = function () {
+    const name = document.getElementById('sa-name').value.trim();
+    const phone = document.getElementById('sa-phone').value.trim();
+    if (name && phone) {
+        const app = {
+            type: 'Seller Application', name, phone,
+            location: document.getElementById('sa-location').value,
+            category: document.getElementById('sa-category').value,
+            store: document.getElementById('sa-store').value.trim() || '—',
+            experience: document.getElementById('sa-exp').value.trim()
+        };
+        tgSend(`🏪 <b>SELLER APPLICATION</b>\n👤 ${app.name} • ${app.phone}\n📍 ${app.location} • ${app.category}\n🏬 ${app.store}\n📝 ${app.experience}`);
+        emailSend(app);
+    }
+    _pSeller();
+};
+
+// 🛒 Orders → Telegram + Email
+const _pConfirm = confirmOrder;
+confirmOrder = function () {
+    const name = document.getElementById('co-name').value.trim();
+    const phone = document.getElementById('co-phone').value.trim();
+    if (cart.length && name && phone) {
+        const total = cart.reduce((s, c) => s + c.price * c.quantity, 0);
+        const items = cart.map(c => `• ${c.name} x${c.quantity}`).join('\n');
+        const order = {
+            type: 'New Order', order_id: 'RE-' + String(Date.now()).slice(-6),
+            customer: name, phone,
+            payment: document.getElementById('co-payment').value,
+            delivery: document.getElementById('co-delivery').value,
+            items, total_ugx: total
+        };
+        tgSend(`🛒 <b>NEW ORDER ${order.order_id}</b>\n👤 ${name} • ${phone}\n💳 ${order.payment} • 📦 ${order.delivery}\n${items}\n💰 TOTAL: UGX ${total.toLocaleString()}`);
+        emailSend(order);
+    }
+    _pConfirm();
+};
+
+// 💬 Community requests → Telegram
+const _pPost = submitPost;
+submitPost = function () {
+    const text = document.getElementById('post-text').value.trim();
+    const wa = document.getElementById('post-whatsapp').value.trim();
+    if (text && wa) {
+        tgSend(`💬 <b>NEW COMMUNITY REQUEST</b>\n📍 ${document.getElementById('post-location').value}\n📞 ${wa}\n📝 ${text}`);
+        emailSend({ type: 'Community Request', phone: wa, location: document.getElementById('post-location').value, request: text });
+    }
+    _pPost();
+};
+
+// 👤 Sign-ins → Telegram ping (know when customers return)
+const _pLogin = loginSubmit;
+loginSubmit = function () {
+    const before = getSession();
+    _pLogin();
+    const after = getSession();
+    if (after && (!before || before.phone !== after.phone)) {
+        tgSend(`👤 <b>CUSTOMER SIGNED IN</b>\n${after.name} • ${after.phone}\n ${after.orders ? after.orders.length : 0} past order(s)`);
+    }
+};
+
 // ===== 3-STEP CHECKOUT =====
 function setCoStep(n) { [1, 2, 3].forEach(i => document.getElementById('cos-' + i).classList.toggle('active', i <= n)); }
 function startCheckout() {
@@ -1279,23 +1365,5 @@ document.addEventListener('DOMContentLoaded', () => {
     initCountUp();
     if (!DEVICE.isTouch && !DEVICE.saveData) initCustomCursor();
     initCoursePreviews();
-    updateActiveNav();
-});
-
-document.addEventListener('DOMContentLoaded', () => {
-    initMode();
-    renderCategoryRow();
-    renderFeatured();
-    renderQuickDeals();
-    renderHotDeals();
-    renderProducts();
-    renderCourses();
-    renderCommunity();
-    renderEnhancedSellers();
-    updateCartUI();
-    startCarousel();
-    startNotificationEngine();
-    initCountUp();
-    initCustomCursor();
     updateActiveNav();
 });
