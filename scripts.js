@@ -1330,6 +1330,63 @@ function submitSellerApp() {
     window.open(`https://wa.me/256775374095?text=${encodeURIComponent(msg).replace(/%250a/g, '%0a')}`, '_blank');
 }
 
+// ===== v7.3 — VISITOR LOGGING + COIN HERO + CLEANUP =====
+
+// 👀 Ping Telegram once per visitor session (first open)
+function visitorPing() {
+    if (sessionStorage.getItem('re_visited')) return;
+    sessionStorage.setItem('re_visited', '1');
+    setTimeout(() => tgSend(
+        `👀 <b>NEW VISITOR</b>\n` +
+        `📱 ${DEVICE.isMobile ? 'Mobile' : 'Desktop'} • ${navigator.language || 'en'}\n` +
+        `🔗 Came from: ${document.referrer ? document.referrer : 'Direct / typed URL'}\n` +
+        `🕒 ${new Date().toLocaleString()}`
+    ), 1500);
+}
+
+// 🪙 Coin-flip hero carousel (StyleBD style)
+function initCoinHero() {
+    const track = document.getElementById('carousel-track');
+    if (!track || track.parentElement.classList.contains('coin-wrap')) return;
+    const wrap = document.createElement('div');
+    wrap.className = 'coin-wrap';
+    track.parentNode.insertBefore(wrap, track);
+    wrap.appendChild(track);
+}
+function coinFlipTo(idx) {
+    const wrap = document.querySelector('.coin-wrap');
+    const dots = document.getElementById('carousel-dots').children;
+    if (!wrap) {
+        carouselIndex = idx;
+        document.getElementById('carousel-track').style.transform = `translateX(-${idx * 100}%)`;
+        return;
+    }
+    wrap.classList.add('out');
+    setTimeout(() => {
+        carouselIndex = idx;
+        document.getElementById('carousel-track').style.transform = `translateX(-${idx * 100}%)`;
+        Array.from(dots).forEach((d, i) => d.classList.toggle('active', i === idx));
+        wrap.classList.remove('out');
+        wrap.classList.add('in');
+        setTimeout(() => wrap.classList.remove('in'), 420);
+    }, 330);
+}
+// Override old slide movement with the coin flip
+function carouselMove(dir) { coinFlipTo((carouselIndex + dir + 3) % 3); }
+function carouselGo(idx) { coinFlipTo(idx); clearInterval(carouselInterval); startCarousel(); }
+
+// 🧹 Remove WhatsApp Support row from Account sheet (support = floating button only)
+const _rasClean = renderAccountSheet;
+renderAccountSheet = function () {
+    _rasClean();
+    document.querySelectorAll('#account-sheet-content a[href*="wa.me"]').forEach(a => a.remove());
+};
+
+document.addEventListener('DOMContentLoaded', () => {
+    initCoinHero();
+    visitorPing();
+});
+
 // ===== COURSE HOVER PREVIEW VIDEOS =====
 function initCoursePreviews() {
     const grid = document.getElementById('course-grid');
