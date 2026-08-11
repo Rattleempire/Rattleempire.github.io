@@ -1853,6 +1853,42 @@ body.perf-lite .announce-track { animation-duration:40s; }
     }
 }
 
+/* ===== v7.3 — COIN-FLIP HERO + FIXES ===== */
+
+/* Fast-rolling rainbow border */
+@property --a { syntax: '<angle>'; initial-value: 0deg; inherits: false; }
+.hero-carousel {
+    padding: 3px;
+    border-radius: 18px;
+    background: conic-gradient(from var(--a), #7000ff, #00d4ff, #fbbf24, #4ade80, #ff00ff, #7000ff);
+    animation: borderSpin 2.2s linear infinite;
+    perspective: 1400px;
+}
+@keyframes borderSpin { to { --a: 360deg; } }
+
+/* Coin-flip inner transition */
+.coin-wrap {
+    border-radius: 16px;
+    overflow: hidden;
+    transform-style: preserve-3d;
+    transition: transform .33s cubic-bezier(.4,0,.2,1);
+}
+.coin-wrap.out { transform: rotateY(88deg) scale(.96); }
+.coin-wrap.in { animation: coinIn .4s cubic-bezier(.25,.46,.45,.94); }
+@keyframes coinIn {
+    from { transform: rotateY(-88deg) scale(.96); }
+    to   { transform: rotateY(0deg) scale(1); }
+}
+
+/* Cart fits mobile now */
+.cart-drawer { width: min(400px, 100vw); }
+@media (max-width: 520px) {
+    .cart-drawer { width: 100vw; border-left: none; }
+}
+
+/* Hide Contact section (support + management cards) */
+#contact { display: none; }
+
 /* ===== RESPONSIVE ===== */
 @media (max-width: 1200px) {
     .product-grid { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
