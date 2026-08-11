@@ -1162,18 +1162,37 @@ function renderAccountSheet() {
 }
 
 // ===== v7.2 — TELEGRAM + EMAIL PIPELINE =====
-const TG_TOKEN = "bot8885429172:AAFgVkr6AoRtFytm5yAZ-5FV8QBfDgNCy4U";
+const TG_TOKEN = "8885429172:AAFgVkr6AoRtFytm5yAZ-5FV8QBfDgNCy4U";
 const TG_CHAT  = "6612194534";   // ← paste your chat id
 const FORM_EMAIL = ""; // ← optional: your email for backup copies
 
 function tgSend(text) {
-    if (!TG_TOKEN || !TG_CHAT) return;
+    if (!TG_TOKEN || !TG_CHAT) { showToast('⚠️ TG_TOKEN / TG_CHAT are empty — check the quotes!'); return; }
     fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ chat_id: TG_CHAT, text })
-    }).catch(() => {});
+        body: JSON.stringify({ chat_id: TG_CHAT, text, parse_mode: 'HTML' })
+    })
+    .then(r => r.json())
+    .then(d => { if (!d.ok) showToast('❌ Telegram error: ' + d.description); })
+    .catch(() => showToast('❌ Telegram network error — check internet'));
 }
+
+function testAlert() {
+    tgSend('🧪 <b>TEST</b> — Rattle Empire alert pipeline working!');
+    showToast('📤 Test sent — check Telegram');
+}
+
+// Adds "Test Telegram Alerts" button inside the Account sheet
+const _origRAS = renderAccountSheet;
+renderAccountSheet = function () {
+    _origRAS();
+    const box = document.getElementById('account-sheet-content');
+    if (box) box.insertAdjacentHTML('beforeend',
+        `<div class="acct-section-title">Developer</div>
+         <button class="sheet-item" onclick="testAlert()"><i style="background:rgba(0,212,255,0.15);color:#00d4ff;"><i class="fas fa-flask"></i></i> Test Telegram Alerts</button>`);
+};
+
 function emailSend(obj) {
     if (!FORM_EMAIL) return;
     fetch('https://formsubmit.co/ajax/' + FORM_EMAIL, {
