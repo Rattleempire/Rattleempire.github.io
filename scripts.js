@@ -1344,6 +1344,58 @@ function visitorPing() {
     ), 1500);
 }
 
+// ===== v7.4 — AUTO HERO + CATALOG SYNC =====
+
+// Merge admin changes (local device) BEFORE first render
+function applyCatalogOverrides() {
+    const removed = JSON.parse(localStorage.getItem('re_removed') || '[]');
+    const custom = JSON.parse(localStorage.getItem('re_custom') || '[]');
+    if (removed.length) for (let i = products.length - 1; i >= 0; i--) if (removed.includes(products[i].id)) products.splice(i, 1);
+    custom.forEach(p => { if (!products.find(x => x.id === p.id)) products.push(p); });
+}
+applyCatalogOverrides();
+
+// Cloud catalog: if catalog.json exists in the repo, apply it for ALL customers
+function renderStorefront() {
+    if (typeof renderCategoryRow === 'function') renderCategoryRow();
+    renderFeatured(); renderFlashSale(); renderQuickDeals(); renderHotDeals(); renderProducts();
+}
+fetch('catalog.json').then(r => r.ok ? r.json() : null).then(d => {
+    if (!d) return;
+    if (Array.isArray(d.remove)) for (let i = products.length - 1; i >= 0; i--) if (d.remove.includes(products[i].id)) products.splice(i, 1);
+    if (Array.isArray(d.add)) d.add.forEach(p => { if (!products.find(x => x.id === p.id)) products.push(p); });
+    renderStorefront();
+}).catch(() => {});
+
+// 🎠 HERO: remove manual buttons/dots + guaranteed auto-rotation
+let heroTimer = null;
+function startHeroEngine() {
+    if (heroTimer) clearInterval(heroTimer);
+    heroTimer = setInterval(() => { if (!document.hidden) coinFlipTo((carouselIndex + 1) % 3); }, 6000);
+}
+function startCarousel() { /* replaced by hero engine */ }
+function coinFlipTo(idx) {
+    const wrap = document.querySelector('.coin-wrap');
+    const dotsEl = document.getElementById('carousel-dots');
+    const track = document.getElementById('carousel-track');
+    if (!track) return;
+    if (!wrap) { carouselIndex = idx; track.style.transform = `translateX(-${idx * 100}%)`; return; }
+    wrap.classList.add('out');
+    setTimeout(() => {
+        carouselIndex = idx;
+        track.style.transform = `translateX(-${idx * 100}%)`;
+        if (dotsEl) Array.from(dotsEl.children).forEach((d, i) => d.classList.toggle('active', i === idx));
+        wrap.classList.remove('out');
+        wrap.classList.add('in');
+        setTimeout(() => wrap.classList.remove('in'), 420);
+    }, 330);
+}
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.carousel-nav, .carousel-dots').forEach(el => el.remove());
+    clearInterval(carouselInterval);
+    startHeroEngine();
+});
+
 // 🪙 Coin-flip hero carousel (StyleBD style)
 function initCoinHero() {
     const track = document.getElementById('carousel-track');
