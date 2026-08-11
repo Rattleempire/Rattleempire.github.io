@@ -1162,8 +1162,8 @@ function renderAccountSheet() {
 }
 
 // ===== v7.2 — TELEGRAM + EMAIL PIPELINE =====
-const TG_TOKEN = "";bot8885429172:AAED9ek8P7yJBhgKvZ3tRqZZy2GbfnETJgg
-const TG_CHAT  = "";6612194534   // ← paste your chat id
+const TG_TOKEN = "bot8885429172:AAED9ek8P7yJBhgKvZ3tRqZZy2GbfnETJgg";
+const TG_CHAT  = "6612194534";   // ← paste your chat id
 const FORM_EMAIL = ""; // ← optional: your email for backup copies
 
 function tgSend(text) {
