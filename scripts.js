@@ -962,6 +962,326 @@ function renderEnhancedSellers() {
     }).join('');
 }
 
+// ================= v7.0 ENGINE =================
+
+// ===== MORE AI MODELS & DIGITAL PRODUCTS =====
+products.push(
+    { id:21, name:"Gemini Advanced (1 Month)", price:50000, originalPrice:90000, category:"gemini", condition:"Instant", seller:"AI Masters", sellerLoc:"Kampala", rating:4.8, reviews:56, sold:134, featured:true, warranty:"lifetime", delivery:"instant", image:"https://images.unsplash.com/photo-1677442136019-21780ecad995?w=400&h=300&fit=crop", description:"Google Gemini Advanced with 1M token context & Workspace integration." },
+    { id:22, name:"Grok Premium (1 Month)", price:55000, originalPrice:95000, category:"ai-tools", condition:"Instant", seller:"AI Masters", sellerLoc:"Kampala", rating:4.7, reviews:34, sold:67, featured:true, warranty:"lifetime", delivery:"instant", image:"https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=400&h=300&fit=crop", description:"X AI Grok Premium — real-time knowledge & unfiltered intelligence." },
+    { id:23, name:"Suno AI Pro (1 Month)", price:40000, originalPrice:70000, category:"creative", condition:"Instant", seller:"AI Creators", sellerLoc:"Kampala", rating:4.7, reviews:28, sold:54, featured:false, warranty:"lifetime", delivery:"instant", image:"https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=400&h=300&fit=crop", description:"Suno Pro — generate full songs with vocals. 2,500 credits/month." },
+    { id:24, name:"Leonardo AI (1 Month)", price:45000, originalPrice:80000, category:"midjourney", condition:"Instant", seller:"AI Creators", sellerLoc:"Kampala", rating:4.6, reviews:22, sold:41, featured:false, warranty:"lifetime", delivery:"instant", image:"https://images.unsplash.com/photo-1633419461250-d1d1a3d1d1d1?w=400&h=300&fit=crop", description:"Leonardo AI — game-ready art, 8,500 tokens/month." },
+    { id:25, name:"CapCut Pro (1 Month)", price:25000, originalPrice:45000, category:"creative", condition:"Instant", seller:"Creative Pro", sellerLoc:"Kampala", rating:4.8, reviews:89, sold:210, featured:true, warranty:"lifetime", delivery:"instant", image:"https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=400&h=300&fit=crop", description:"CapCut Pro — premium effects, no watermark, cloud storage." },
+    { id:26, name:"Discord Nitro (1 Month)", price:35000, originalPrice:60000, category:"productivity", condition:"Instant", seller:"Productivity Hub", sellerLoc:"Entebbe", rating:4.6, reviews:45, sold:98, featured:false, warranty:"lifetime", delivery:"instant", image:"https://images.unsplash.com/photo-1614680376573-df3480f0c6ff?w=400&h=300&fit=crop", description:"Discord Nitro — HD streaming, big uploads, custom emoji anywhere." },
+    { id:27, name:"Telegram Premium (1 Year)", price:65000, originalPrice:120000, category:"productivity", condition:"Instant", seller:"Productivity Hub", sellerLoc:"Entebbe", rating:4.7, reviews:67, sold:145, featured:true, warranty:"lifetime", delivery:"instant", image:"https://images.unsplash.com/photo-1611162616475-46b635cb6868?w=400&h=300&fit=crop", description:"Telegram Premium — 4GB uploads, faster downloads, no ads." },
+    { id:28, name:"Zoom Pro (1 Month)", price:50000, originalPrice:90000, category:"productivity", condition:"Instant", seller:"Productivity Hub", sellerLoc:"Entebbe", rating:4.5, reviews:18, sold:32, featured:false, warranty:"lifetime", delivery:"instant", image:"https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?w=400&h=300&fit=crop", description:"Zoom Pro — 30h meetings, cloud recording, 100 participants." },
+    { id:29, name:"Google One 2TB (1 Month)", price:40000, originalPrice:70000, category:"productivity", condition:"Instant", seller:"DevTools Pro", sellerLoc:"Kampala", rating:4.7, reviews:31, sold:76, featured:false, warranty:"lifetime", delivery:"instant", image:"https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&h=300&fit=crop", description:"2TB cloud storage shared across Drive, Gmail & Photos." },
+    { id:30, name:"iCloud+ 200GB (1 Month)", price:30000, originalPrice:55000, category:"productivity", condition:"Instant", seller:"DevTools Pro", sellerLoc:"Kampala", rating:4.6, reviews:26, sold:64, featured:false, warranty:"lifetime", delivery:"instant", image:"https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400&h=300&fit=crop", description:"iCloud+ 200GB with Private Relay & Hide My Email." },
+    { id:31, name:"Perplexity Pro (1 Year)", price:420000, originalPrice:720000, category:"ai-tools", condition:"Instant", seller:"AI Masters", sellerLoc:"Kampala", rating:4.9, reviews:41, sold:58, featured:true, warranty:"lifetime", delivery:"instant", image:"https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=400&h=300&fit=crop", description:"Full year of Perplexity Pro — GPT-4, Claude 3 & file analysis." },
+    { id:32, name:"ElevenLabs Creator (1 Month)", price:85000, originalPrice:150000, category:"ai-tools", condition:"Instant", seller:"AI Creators", sellerLoc:"Kampala", rating:4.8, reviews:33, sold:47, featured:false, warranty:"lifetime", delivery:"instant", image:"https://images.unsplash.com/photo-1478737270239-2f02b77fc618?w=400&h=300&fit=crop", description:"ElevenLabs Creator — 100k credits, commercial license, voice cloning." },
+    { id:33, name:"Adobe CC Single App (1 Month)", price:95000, originalPrice:170000, category:"creative", condition:"Instant", seller:"Creative Pro", sellerLoc:"Kampala", rating:4.6, reviews:21, sold:38, featured:false, warranty:"lifetime", delivery:"instant", image:"https://images.unsplash.com/photo-1626785774573-4b799315345d?w=400&h=300&fit=crop", description:"Pick one Adobe app — Photoshop, Illustrator or Premiere Pro." },
+    { id:34, name:"ChatGPT Team Seat (1 Month)", price:95000, originalPrice:160000, category:"chatgpt", condition:"Instant", seller:"Trevor Labs", sellerLoc:"Kampala", rating:4.9, reviews:19, sold:27, featured:true, warranty:"lifetime", delivery:"instant", image:"https://images.unsplash.com/photo-1677442136019-21780ecad995?w=400&h=300&fit=crop", description:"ChatGPT Team seat — higher GPT-4 limits & workspace features." }
+);
+categories.push({ id:"gemini", name:"Gemini", emoji:"✨", color:"from-blue-500 to-indigo-600", icon:"fa-gem", image:"https://images.unsplash.com/photo-1677442136019-21780ecad995?w=200&h=150&fit=crop" });
+
+// Course preview videos
+courses.forEach((c, i) => { c.preview = [ "https://cdn.pixabay.com/video/2022-06-24/121065-723121498_large.mp4", "https://cdn.pixabay.com/video/2021-08-04/83770-581058915_large.mp4", "https://cdn.pixabay.com/video/2020-08-12/47885-448212830_large.mp4" ][i % 3]; });
+
+// ===== DEVICE DETECTION & PERFORMANCE MODE =====
+const DEVICE = {
+    isMobile: /Mobi|Android|iPhone/i.test(navigator.userAgent) || window.innerWidth < 1024,
+    isTouch: 'ontouchstart' in window,
+    saveData: !!(navigator.connection && (navigator.connection.saveData || /(^|\b)2g/.test(navigator.connection.effectiveType || ''))),
+    lowPower: (navigator.hardwareConcurrency || 8) <= 4
+};
+document.body.classList.add(DEVICE.isMobile ? 'device-mobile' : 'device-desktop');
+
+function applyPerformanceMode() {
+    if (DEVICE.saveData || (DEVICE.isMobile && DEVICE.lowPower)) {
+        document.body.classList.add('perf-lite');
+        const v = document.getElementById('wallpaper-video');
+        if (v) { v.pause(); v.removeAttribute('src'); v.load(); }
+    }
+    if (DEVICE.isMobile) {
+        const v = document.getElementById('wallpaper-video');
+        if (v) v.muted = true;
+    }
+}
+
+// Debounced search (performance)
+let _searchTimer;
+function debouncedSearch(q) { clearTimeout(_searchTimer); _searchTimer = setTimeout(() => filterProducts(q), 200); }
+
+// Flash sale countdown (resets daily at midnight)
+function startFlashCountdown() {
+    const el = document.getElementById('flash-countdown');
+    if (!el) return;
+    const tick = () => {
+        const now = new Date(), end = new Date(); end.setHours(23, 59, 59, 999);
+        let s = Math.max(0, Math.floor((end - now) / 1000));
+        const h = String(Math.floor(s / 3600)).padStart(2, '0'), m = String(Math.floor(s % 3600 / 60)).padStart(2, '0'), sec = String(s % 60).padStart(2, '0');
+        el.textContent = `${h}:${m}:${sec}`;
+    };
+    tick(); setInterval(tick, 1000);
+}
+function renderFlashSale() {
+    const row = document.getElementById('flash-row');
+    if (!row) return;
+    row.innerHTML = [...products].map(p => ({ ...p, disc: p.originalPrice ? Math.round(((p.originalPrice - p.price) / p.originalPrice) * 100) : 0 })).sort((a, b) => b.disc - a.disc).slice(0, 6).map((p, i) => productCardHTML(p, i)).join('');
+}
+
+// ===== REAL-TIME ENGINE (cross-tab + simulated live activity) =====
+const rtChannel = ('BroadcastChannel' in window) ? new BroadcastChannel('rattle_rt') : null;
+if (rtChannel) rtChannel.onmessage = e => handleRT(e.data);
+function rtSend(ev) { if (rtChannel) rtChannel.postMessage(ev); }
+function handleRT(ev) {
+    if (ev.type === 'reply') showToast(`<i class="fas fa-comment-dots" style="color:#4ade80"></i> ${ev.seller} replied to a request: "${ev.text}"`);
+    if (ev.type === 'order') showToast(`<i class="fas fa-bag-shopping" style="color:#fbbf24"></i> Someone just ordered ${ev.item}!`);
+}
+
+function spawnVisitor() {
+    const area = document.getElementById('notification-area');
+    if (!area || document.hidden) return;
+    const name = pick(notifNames), p = pick(products);
+    const n = document.createElement('div');
+    n.className = 'notification-popup';
+    n.innerHTML = `<div class="notif-icon message"><i class="fas fa-eye"></i></div><div class="notif-body"><div class="notif-title">${name} is viewing</div><div class="notif-text">${p.name}</div><div class="notif-time">just now • ${pick(notifLocations)}</div></div><button class="notif-close" onclick="this.parentElement.remove()"><i class="fas fa-xmark"></i></button>`;
+    area.appendChild(n);
+    setTimeout(() => { n.classList.add('removing'); setTimeout(() => n.remove(), 400); }, 5000);
+}
+function startVisitorEngine() {
+    const loop = () => setTimeout(() => { spawnVisitor(); loop(); }, (DEVICE.isMobile ? 35000 : 18000) + Math.random() * 20000);
+    loop();
+}
+
+// Persistent user posts + simulated real-time replies
+function getMyPosts() { return JSON.parse(localStorage.getItem('re_myposts') || '[]'); }
+function saveMyPosts(p) { localStorage.setItem('re_myposts', JSON.stringify(p)); }
+
+const _origSubmitPost = submitPost;
+submitPost = function () {
+    const text = document.getElementById('post-text').value.trim();
+    const loc = document.getElementById('post-location').value;
+    const wa = document.getElementById('post-whatsapp').value.trim();
+    if (!text || !wa) { showToast('<i class="fas fa-exclamation-circle" style="color:#f87171"></i> Fill all fields'); return; }
+    const post = { id: Date.now(), user: (getSession() ? getSession().name : 'You'), location: loc, text, time: 'just now', replies: 0, avatar: '#7000ff', whatsapp: wa, mine: true };
+    const posts = getMyPosts(); posts.unshift(post); saveMyPosts(posts);
+    communityRequests.unshift(post);
+    document.getElementById('post-text').value = ''; document.getElementById('post-whatsapp').value = '';
+    renderCommunity(); closePostModal();
+    showToast('<i class="fas fa-check-circle" style="color:#4ade80"></i> Request posted live!');
+    rtSend({ type: 'post', text });
+    // Simulated real-time seller replies
+    const seller = pick(sellers);
+    setTimeout(() => {
+        post.replies++; renderCommunity();
+        showToast(`<i class="fas fa-comment-dots" style="color:#4ade80"></i> 💬 ${seller.name} replied to YOUR request: "I have this in stock — instant delivery!"`);
+        rtSend({ type: 'reply', seller: seller.name, text });
+        spawnReplyNotifInList(post, seller);
+    }, 15000 + Math.random() * 25000);
+};
+function spawnReplyNotifInList(post, seller) {
+    const card = document.querySelector(`[data-post-id="${post.id}"]`);
+    if (card) { const st = card.querySelector('.stat i.fa-comment'); if (st) st.parentElement.innerHTML = `<i class="fas fa-comment"></i> ${post.replies} replies`; }
+}
+const _origRenderCommunity = renderCommunity;
+renderCommunity = function () {
+    _origRenderCommunity();
+    // re-render with data-post-id + mine highlight
+    const container = document.getElementById('community-requests');
+    if (!container) return;
+    const all = [...getMyPosts().map(p => ({ ...p, mine: true })), ...communityRequests.filter(r => !r.mine)];
+    container.innerHTML = all.slice(0, 8).map(r => `
+        <div class="community-request-card" data-post-id="${r.id}" ${r.mine ? 'style="border-color:rgba(74,222,128,0.35)"' : ''}>
+            <div class="request-header">
+                <div class="request-user"><div class="request-avatar" style="background:${r.avatar}">${r.user.charAt(0)}</div>
+                <div class="request-user-info"><div class="name">${r.user} ${r.mine ? '<span style="color:#4ade80;font-size:10px">(you)</span>' : ''}</div><div class="location"><i class="fas fa-map-marker-alt"></i> ${r.location}</div></div></div>
+                <div class="request-time">${r.time}</div>
+            </div>
+            <div class="request-text">${r.text}</div>
+            <div class="request-footer">
+                <div class="request-stats"><span class="stat"><i class="fas fa-comment"></i> ${r.replies} replies</span></div>
+                <a href="https://wa.me/${r.whatsapp}?text=Hi! I can help with: ${encodeURIComponent(r.text)}" class="btn-have-this" target="_blank"><i class="fas fa-hand-holding-heart"></i> I have this</a>
+            </div>
+        </div>`).join('');
+};
+
+// ===== USER LOGIN + HISTORY =====
+const CUSTOMER_DB = {
+    "256775123456": { name: "Sarah K.", joined: "Mar 2026", orders: [ { id: "RE-1042", item: "ChatGPT Plus (1 Month)", price: 45000, date: "2026-07-14", status: "Delivered" }, { id: "RE-0921", item: "Netflix Premium 4K", price: 25000, date: "2026-06-30", status: "Delivered" } ] },
+    "256775234567": { name: "Daniel O.", joined: "May 2026", orders: [ { id: "RE-1187", item: "Midjourney Standard", price: 85000, date: "2026-08-02", status: "Delivered" } ] }
+};
+function getUsers() { return JSON.parse(localStorage.getItem('re_users') || '{}'); }
+function getSession() { const p = localStorage.getItem('re_session'); if (!p) return null; const u = getUsers()[p] || CUSTOMER_DB[p]; return u ? { phone: p, ...u } : null; }
+function openLogin() { document.getElementById('login-modal').classList.add('open'); const s = getSession(); if (s) { document.getElementById('login-phone').value = s.phone; document.getElementById('login-name-group').style.display = 'none'; } }
+function closeLogin(e) { const m = document.getElementById('login-modal'); if (!m) return; if (e && e.target && e.target !== m) return; m.classList.remove('open'); }
+function loginSubmit() {
+    const phone = document.getElementById('login-phone').value.trim();
+    if (!phone) { showToast('<i class="fas fa-exclamation-circle" style="color:#f87171"></i> Enter your WhatsApp number'); return; }
+    const users = getUsers();
+    let user = users[phone] || CUSTOMER_DB[phone];
+    if (!user) {
+        const name = document.getElementById('login-name').value.trim();
+        if (!name) { showToast('<i class="fas fa-exclamation-circle" style="color:#f87171"></i> Enter your name to create account'); return; }
+        user = { name, joined: "Aug 2026", orders: [] };
+        users[phone] = user; localStorage.setItem('re_users', JSON.stringify(users));
+        showToast('<i class="fas fa-check-circle" style="color:#4ade80"></i> Account created — welcome!');
+    } else {
+        showToast(`<i class="fas fa-check-circle" style="color:#4ade80"></i> Welcome back, ${user.name}!`);
+    }
+    localStorage.setItem('re_session', phone);
+    closeLogin(); renderAccountSheet();
+}
+function logout() { localStorage.removeItem('re_session'); renderAccountSheet(); showToast('<i class="fas fa-right-from-bracket" style="color:#888"></i> Signed out'); }
+
+// ===== ACCOUNT SHEET (profile + history) =====
+const _origOpenAccountSheet = openAccountSheet;
+openAccountSheet = function () { renderAccountSheet(); _origOpenAccountSheet(); };
+function renderAccountSheet() {
+    const box = document.getElementById('account-sheet-content');
+    if (!box) return;
+    const s = getSession();
+    if (!s) {
+        box.innerHTML = `
+            <div class="acct-profile"><div class="acct-avatar"><i class="fas fa-user"></i></div><div class="acct-name">Guest</div><div class="acct-meta">Sign in to see orders & saved details</div></div>
+            <button class="sheet-item" onclick="closeAccountSheet(); openLogin();"><i style="background:rgba(0,212,255,0.15);color:#00d4ff;"><i class="fas fa-right-to-bracket"></i></i> Sign In / Create Account</button>
+            <button class="sheet-item" onclick="closeAccountSheet(); openSellerApp();"><i style="background:rgba(251,191,36,0.15);color:#fbbf24;"><i class="fas fa-store"></i></i> Become a Seller</button>
+            <button class="sheet-item" onclick="toggleMode()"><i style="background:rgba(168,85,247,0.15);color:#a855f7;"><i class="fas fa-moon"></i></i> Dark / Light Mode</button>
+            <a class="sheet-item" href="https://wa.me/256775374095" target="_blank"><i style="background:rgba(37,211,102,0.15);color:#25d366;"><i class="fab fa-whatsapp"></i></i> WhatsApp Support</a>`;
+        return;
+    }
+    const orders = s.orders || [];
+    box.innerHTML = `
+        <div class="acct-profile"><div class="acct-avatar">${s.name.charAt(0)}</div><div class="acct-name">${s.name}</div><div class="acct-meta">Customer since ${s.joined} • ${orders.length} order${orders.length === 1 ? '' : 's'}</div></div>
+        <div class="acct-section-title">Order History</div>
+        ${orders.length ? orders.map(o => `<div class="order-row"><span>${o.item}</span><span class="o-price">UGX ${o.price.toLocaleString()}</span><span class="o-status">${o.status}</span></div>`).join('') : '<div class="order-row" style="color:#666">No orders yet — your history appears here.</div>'}
+        <div class="acct-section-title">Account</div>
+        <button class="sheet-item" onclick="toggleMode()"><i style="background:rgba(168,85,247,0.15);color:#a855f7;"><i class="fas fa-moon"></i></i> Dark / Light Mode</button>
+        <button class="sheet-item" onclick="closeAccountSheet(); openSellerApp();"><i style="background:rgba(251,191,36,0.15);color:#fbbf24;"><i class="fas fa-store"></i></i> Become a Seller</button>
+        <a class="sheet-item" href="https://wa.me/256775374095" target="_blank"><i style="background:rgba(37,211,102,0.15);color:#25d366;"><i class="fab fa-whatsapp"></i></i> WhatsApp Support</a>
+        <button class="sheet-item" onclick="logout()"><i style="background:rgba(239,68,68,0.15);color:#ef4444;"><i class="fas fa-right-from-bracket"></i></i> Sign Out</button>`;
+}
+
+// ===== 3-STEP CHECKOUT =====
+function setCoStep(n) { [1, 2, 3].forEach(i => document.getElementById('cos-' + i).classList.toggle('active', i <= n)); }
+function startCheckout() {
+    if (cart.length === 0) { showToast('<i class="fas fa-exclamation-circle" style="color:#f87171"></i> Your cart is empty'); return; }
+    const s = getSession();
+    if (s) { document.getElementById('co-name').value = s.name; document.getElementById('co-phone').value = s.phone; }
+    document.getElementById('cart-items').style.display = 'none';
+    document.getElementById('cart-footer').style.display = 'none';
+    document.getElementById('co-success').style.display = 'none';
+    document.getElementById('co-details').style.display = 'block';
+    setCoStep(2);
+}
+function confirmOrder() {
+    const name = document.getElementById('co-name').value.trim();
+    const phone = document.getElementById('co-phone').value.trim();
+    const payment = document.getElementById('co-payment').value;
+    const delivery = document.getElementById('co-delivery').value;
+    if (!name || !phone) { showToast('<i class="fas fa-exclamation-circle" style="color:#f87171"></i> Enter name & WhatsApp number'); return; }
+    const orderId = 'RE-' + String(Date.now()).slice(-6);
+    const total = cart.reduce((s, c) => s + c.price * c.quantity, 0);
+    // Save to customer history
+    const users = getUsers();
+    if (!users[phone]) users[phone] = { name, joined: "Aug 2026", orders: [] };
+    users[phone].orders = users[phone].orders || [];
+    cart.forEach(c => users[phone].orders.unshift({ id: orderId, item: c.name, price: c.price * c.quantity, date: new Date().toISOString().slice(0, 10), status: "Processing" }));
+    localStorage.setItem('re_users', JSON.stringify(users));
+    localStorage.setItem('re_session', phone);
+    // Build WhatsApp confirmation
+    const msg = `🛒 NEW ORDER ${orderId}%0a👤 ${name} (${phone})%0a💳 ${payment} • 📦 ${delivery}%0a%0a${cart.map(c => `• ${c.name} x${c.quantity} = UGX ${(c.price * c.quantity).toLocaleString()}`).join('%0a')}%0a%0aTOTAL: UGX ${total.toLocaleString()}`;
+    document.getElementById('co-order-id').textContent = `Order ${orderId} • ${payment}`;
+    document.getElementById('co-summary').textContent = `${cart.reduce((s, c) => s + c.quantity, 0)} item(s) • UGX ${total.toLocaleString()} • Deliver via ${delivery}`;
+    document.getElementById('co-wa-link').href = `https://wa.me/256775374095?text=${msg}`;
+    document.getElementById('co-details').style.display = 'none';
+    document.getElementById('co-success').style.display = 'block';
+    setCoStep(3);
+    rtSend({ type: 'order', item: cart[0].name });
+    cart = []; saveCart(); updateCartUI();
+}
+function resetCheckout() {
+    document.getElementById('co-success').style.display = 'none';
+    document.getElementById('co-details').style.display = 'none';
+    document.getElementById('cart-items').style.display = 'block';
+    document.getElementById('cart-footer').style.display = 'block';
+    setCoStep(1);
+    toggleCart();
+}
+
+// ===== SELLER APPLICATION =====
+function openSellerApp() { document.getElementById('seller-modal').classList.add('open'); }
+function closeSellerApp(e) { const m = document.getElementById('seller-modal'); if (!m) return; if (e && e.target && e.target !== m) return; m.classList.remove('open'); }
+function submitSellerApp() {
+    const name = document.getElementById('sa-name').value.trim(), phone = document.getElementById('sa-phone').value.trim();
+    const loc = document.getElementById('sa-location').value, cat = document.getElementById('sa-category').value;
+    const store = document.getElementById('sa-store').value.trim(), exp = document.getElementById('sa-exp').value.trim();
+    if (!name || !phone || !exp) { showToast('<i class="fas fa-exclamation-circle" style="color:#f87171"></i> Fill name, WhatsApp & experience'); return; }
+    const apps = JSON.parse(localStorage.getItem('re_seller_apps') || '[]');
+    apps.unshift({ name, phone, loc, cat, store, exp, date: new Date().toISOString().slice(0, 10) });
+    localStorage.setItem('re_seller_apps', JSON.stringify(apps));
+    const msg = `🏪 SELLER APPLICATION%0a👤 ${name} • ${phone}%0a📍 ${loc} • ${cat}${store ? `%0a🏬 Store: ${store}` : ''}%0a%0a${exp}`;
+    closeSellerApp();
+    showToast('<i class="fas fa-check-circle" style="color:#4ade80"></i> Application received! We reply within 24h.');
+    window.open(`https://wa.me/256775374095?text=${encodeURIComponent(msg).replace(/%250a/g, '%0a')}`, '_blank');
+}
+
+// ===== COURSE HOVER PREVIEW VIDEOS =====
+function initCoursePreviews() {
+    const grid = document.getElementById('course-grid');
+    if (!grid) return;
+    grid.addEventListener('mouseenter', e => {
+        const card = e.target.closest('.course-card');
+        if (!card || DEVICE.isTouch || DEVICE.saveData) return;
+        const imgWrap = card.querySelector('.course-img');
+        if (!imgWrap || imgWrap.querySelector('video')) return;
+        const idx = [...grid.children].indexOf(card);
+        const v = document.createElement('video');
+        v.src = courses[idx] ? courses[idx].preview : ''; v.muted = true; v.loop = true; v.autoplay = true; v.playsInline = true;
+        imgWrap.appendChild(v);
+    }, true);
+    grid.addEventListener('mouseleave', e => {
+        const card = e.target.closest('.course-card');
+        if (!card) return;
+        const v = card.querySelector('.course-img video');
+        if (v) v.remove();
+    }, true);
+}
+
+// ===== TESTIMONIALS: 35s rotation, pause when hidden =====
+function startTestimonialAutoFlip() {
+    if (testimonialInterval) clearInterval(testimonialInterval);
+    testimonialInterval = setInterval(() => flipTestimonial(1), 35000);
+}
+document.addEventListener('visibilitychange', () => {
+    if (document.hidden) { if (testimonialInterval) clearInterval(testimonialInterval); }
+    else startTestimonialAutoFlip();
+});
+
+// ===== INIT v7 =====
+document.addEventListener('DOMContentLoaded', () => {
+    applyPerformanceMode();
+    initMode();
+    renderCategoryRow();
+    renderFeatured();
+    renderFlashSale();
+    renderQuickDeals();
+    renderHotDeals();
+    renderProducts();
+    renderCourses();
+    renderCommunity();
+    renderEnhancedSellers();
+    renderTestimonials();
+    updateCartUI();
+    startCarousel();
+    startFlashCountdown();
+    startNotificationEngine();
+    startVisitorEngine();
+    initCountUp();
+    if (!DEVICE.isTouch && !DEVICE.saveData) initCustomCursor();
+    initCoursePreviews();
+    updateActiveNav();
+});
+
 document.addEventListener('DOMContentLoaded', () => {
     initMode();
     renderCategoryRow();
