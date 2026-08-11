@@ -525,6 +525,151 @@ window.addEventListener('scroll', () => {
     }
 }, { passive: true });
 
+// ===== v7.5 — NAV +, HARDENING, BRAND LOGOS, COLOR BG =====
+
+// Remove video wallpaper entirely (colors only + faster load)
+(function () { const v = document.getElementById('wallpaper-video'); if (v) v.remove(); })();
+
+// Bottom nav: Home | Community | [+] | Cart | Account
+document.addEventListener('DOMContentLoaded', () => {
+    const nav = document.getElementById('bottom-nav');
+    if (!nav) return;
+    nav.innerHTML = `
+        <button class="bn-btn active" data-tab="home" onclick="bnGo('home')"><span class="bn-icon"><i class="fas fa-home"></i></span>Home</button>
+        <button class="bn-btn" data-tab="community" onclick="bnGo('community')"><span class="bn-icon"><i class="fas fa-comments"></i></span>Community</button>
+        <a class="bn-plus" href="admin.html" title="Admin Panel"><i class="fas fa-plus"></i></a>
+        <button class="bn-btn" data-tab="cart" onclick="toggleCart()"><span class="bn-icon"><i class="fas fa-cart-shopping"></i><span class="bn-badge" id="bn-cart-badge" style="display:none">0</span></span>Cart</button>
+        <button class="bn-btn" data-tab="account" onclick="openAccountSheet()"><span class="bn-icon"><i class="fas fa-user"></i></span>Account</button>`;
+});
+
+// Hardening: deter casual inspection (pros can't be stopped — secrets stay on GitHub)
+document.addEventListener('contextmenu', e => e.preventDefault());
+document.addEventListener('keydown', e => {
+    if (e.key === 'F12') e.preventDefault();
+    if ((e.ctrlKey || e.metaKey) && ['u', 's', 'i', 'c'].includes(e.key.toLowerCase())) e.preventDefault();
+    if (e.ctrlKey && e.shiftKey && ['i', 'j', 'c'].includes(e.key.toLowerCase())) e.preventDefault();
+});
+
+// ===== REAL BRAND LOGOS =====
+function brandDomain(p) {
+    const n = (p.name || '').toLowerCase();
+    const map = [
+        ['chatgpt', 'openai.com'], ['claude', 'anthropic.com'], ['gemini', 'google.com'], ['grok', 'x.ai'],
+        ['netflix', 'netflix.com'], ['spotify', 'spotify.com'], ['youtube', 'youtube.com'],
+        ['midjourney', 'midjourney.com'], ['adobe', 'adobe.com'], ['canva', 'canva.com'],
+        ['copilot', 'github.com'], ['cursor', 'cursor.com'], ['notion', 'notion.so'],
+        ['grammarly', 'grammarly.com'], ['perplexity', 'perplexity.ai'], ['runway', 'runwayml.com'],
+        ['elevenlabs', 'elevenlabs.io'], ['suno', 'suno.com'], ['leonardo', 'leonardo.ai'],
+        ['capcut', 'capcut.com'], ['discord', 'discord.com'], ['telegram', 'telegram.org'],
+        ['zoom', 'zoom.us'], ['icloud', 'apple.com'], ['google one', 'google.com']
+    ];
+    for (const [k, d] of map) if (n.includes(k)) return d;
+    const cat = { chatgpt:'openai.com', claude:'anthropic.com', gemini:'google.com', netflix:'netflix.com', spotify:'spotify.com', youtube:'youtube.com', midjourney:'midjourney.com', 'ai-tools':'perplexity.ai', creative:'canva.com', developer:'github.com', productivity:'notion.so' };
+    return cat[p.category] || 'openai.com';
+}
+
+// Product cards with brand tiles
+function productCardHTML(p, i) {
+    const discount = p.originalPrice ? Math.round(((p.originalPrice - p.price) / p.originalPrice) * 100) : 0;
+    const emoji = (categories.find(c => c.id === p.category) || {}).emoji || '⚡';
+    return `
+    <div class="product-card" style="animation-delay:${i * 0.05}s">
+        <div class="card-img brand" onclick="openProductModal(${p.id})">
+            <img src="https://logo.clearbit.com/${brandDomain(p)}" alt="${p.name}" loading="lazy" decoding="async"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <div class="brand-fallback">${emoji}</div>
+            ${discount > 0 ? `<span class="badge-discount">-${discount}%</span>` : ''}
+            ${p.warranty === 'lifetime' ? '<span class="badge-lifetime"><i class="fas fa-shield-halved"></i> Lifetime</span>` : ''}
+            <span class="badge-verified"><i class="fas fa-badge-check"></i> Verified</span>
+        </div>
+        <div class="card-body">
+            <h3>${p.name}</h3>
+            <div class="stars">${starsHTML(p.rating)}<span>(${p.reviews})</span></div>
+            <div class="price-row">
+                <span class="price">UGX ${p.price.toLocaleString()}</span>
+                ${p.originalPrice ? `<span class="original">UGX ${p.originalPrice.toLocaleString()}</span>` : ''}
+            </div>
+            <div class="meta">
+                <i class="fas fa-bolt"></i> ${p.delivery === 'instant' ? 'Instant' : 'Fast'} Delivery
+                <span style="margin:0 4px">•</span>
+                <span class="sold-badge"><i class="fas fa-box"></i> ${p.sold} sold</span>
+            </div>
+            <div class="card-actions">
+                <button class="btn-add" onclick="addToCart(products.find(x=>x.id===${p.id}))"><i class="fas fa-cart-plus"></i> Add to Cart</button>
+                <a class="btn-wa" href="https://wa.me/256775374095?text=Hi! I want to buy: ${encodeURIComponent(p.name)} (UGX ${p.price.toLocaleString()})" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            </div>
+        </div>
+    </div>`;
+}
+
+// Modal with brand tile
+function openProductModal(id) {
+    const p = products.find(x => x.id === id);
+    if (!p) return;
+    const discount = p.originalPrice ? Math.round(((p.originalPrice - p.price) / p.originalPrice) * 100) : 0;
+    const emoji = (categories.find(c => c.id === p.category) || {}).emoji || '⚡';
+    document.getElementById('modal-content').innerHTML = `
+        <div class="modal-header"><h3>${p.name}</h3><button onclick="closeProductModal()"><i class="fas fa-xmark"></i></button></div>
+        <div class="modal-brand">
+            <img src="https://logo.clearbit.com/${brandDomain(p)}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <div class="brand-fallback" style="position:static;font-size:52px">${emoji}</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;">
+            <div class="stars" style="display:flex;gap:2px;">${starsHTML(p.rating)}</div>
+            <span style="font-size:12px;color:#666;">${p.rating} (${p.reviews} reviews) • ${p.sold} sold</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
+            <span style="font-size:24px;font-weight:900;background:linear-gradient(135deg,#7000ff,#00d4ff);-webkit-background-clip:text;background-clip:text;color:transparent;">UGX ${p.price.toLocaleString()}</span>
+            ${p.originalPrice ? `<span style="font-size:14px;color:#555;text-decoration:line-through;">UGX ${p.originalPrice.toLocaleString()}</span>` : ''}
+            ${discount > 0 ? `<span style="background:rgba(239,68,68,0.15);color:#f87171;font-size:12px;font-weight:700;padding:3px 10px;border-radius:6px;">-${discount}%</span>` : ''}
+        </div>
+        <p style="color:#888;font-size:13px;line-height:1.6;margin-bottom:16px;">${p.description}</p>
+        <div class="modal-details">
+            <div class="detail-item"><div class="label">Delivery</div><div class="value">⚡ Instant</div></div>
+            <div class="detail-item"><div class="label">Warranty</div><div class="value">♾️ Lifetime</div></div>
+            <div class="detail-item"><div class="label">Seller</div><div class="value">${p.seller}</div></div>
+            <div class="detail-item"><div class="label">Category</div><div class="value" style="text-transform:capitalize;">${p.category}</div></div>
+        </div>
+        <div class="modal-actions">
+            <button class="btn-add-modal" onclick="addToCart(products.find(x=>x.id===${p.id})); closeProductModal();"><i class="fas fa-cart-plus"></i> Add to Cart</button>
+            <a class="btn-wa-modal" href="https://wa.me/256775374095?text=Hi! I want to buy: ${encodeURIComponent(p.name)}" target="_blank"><i class="fab fa-whatsapp"></i></a>
+        </div>`;
+    document.getElementById('product-modal').classList.add('open');
+}
+
+// Courses with real platform logos
+const COURSE_BRAND = { 'course-1':'openai.com','course-2':'tiktok.com','course-3':'github.com','course-4':'cisco.com','course-5':'coinbase.com','course-6':'instagram.com','course-7':'youtube.com','course-8':'shopify.com','course-9':'python.org','course-10':'upwork.com' };
+function renderCourses() {
+    const grid = document.getElementById('course-grid');
+    if (!grid) return;
+    grid.innerHTML = courses.map(c => {
+        const discount = c.originalPrice ? Math.round(((c.originalPrice - c.price) / c.originalPrice) * 100) : 0;
+        return `
+        <div class="course-card" onclick="openCourseModal('${c.id}')">
+            <div class="course-img">
+                <img class="logo" src="https://logo.clearbit.com/${COURSE_BRAND[c.id] || 'openai.com'}" alt="${c.title}" loading="lazy" decoding="async"
+                     onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                <div class="brand-fallback">${c.emoji}</div>
+                ${c.bestseller ? '<span class="badge-bestseller">🔥 Bestseller</span>' : ''}
+            </div>
+            <div class="course-body">
+                <div class="course-category">${c.category}</div>
+                <h4>${c.title}</h4>
+                <div class="course-instructor"><i class="fas fa-user"></i> ${c.instructor}</div>
+                <div class="course-meta">
+                    <span><i class="fas fa-book"></i> ${c.lessons} lessons</span>
+                    <span><i class="fas fa-clock"></i> ${c.duration}</span>
+                    <span><i class="fas fa-signal"></i> ${c.level}</span>
+                </div>
+                <div class="course-footer">
+                    <div class="course-price">UGX ${c.price.toLocaleString()}${c.originalPrice ? `<span class="original">UGX ${c.originalPrice.toLocaleString()}</span>` : ''}</div>
+                    <div class="course-rating"><i class="fas fa-star"></i> ${c.rating} (${c.reviews})</div>
+                </div>
+            </div>
+        </div>`;
+    }).join('');
+}
+
 // ===== TOAST =====
 function showToast(msg) {
     const container = document.getElementById('toast-container');
