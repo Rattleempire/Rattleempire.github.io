@@ -83,8 +83,8 @@
 
 <script src="scripts.js"></script>
 <script>
-const DEFAULT_PASS = "RATTLE2026"; // ← change after first login!
-const getPass = () => localStorage.getItem('re_admin_pass') || DEFAULT_PASS;
+const ADMIN_PASS = "RATTLE2026"; // ← master key, same in every browser. Change it here.
+const getPass = () => ADMIN_PASS;
 const getRemoved = () => JSON.parse(localStorage.getItem('re_removed') || '[]');
 const getCustom = () => JSON.parse(localStorage.getItem('re_custom') || '[]');
 const CAT_IMG = {
