@@ -1168,7 +1168,7 @@ const FORM_EMAIL = ""; // ← optional: your email for backup copies
 
 function tgSend(text) {
     if (!TG_TOKEN || !TG_CHAT) return;
-    fetch(`https://api.telegram.com/bot${TG_TOKEN}/sendMessage`, {
+    fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ chat_id: TG_CHAT, text })
