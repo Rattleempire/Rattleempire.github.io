@@ -81,6 +81,49 @@
 </div>
 </div>
 
+ <script>
+// SHA-256 hash of your passcode. Generate new ones at: https://emn178.github.io/online-tools/sha256.html
+const ADMIN_HASH = "YOUR_HASH_HERE"; // ← paste your hash
+const LOCKOUT_KEY = 're_admin_lockout';
+
+async function sha256(text) {
+    const buf = new TextEncoder().encode(text);
+    const hash = await crypto.subtle.digest('SHA-256', buf);
+    return Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+async function unlock() {
+    const lockout = JSON.parse(localStorage.getItem(LOCKOUT_KEY) || '{"fails":0,"until":0}');
+    if (Date.now() < lockout.until) {
+        const mins = Math.ceil((lockout.until - Date.now()) / 60000);
+        showToast(`<i class="fas fa-lock" style="color:#f87171"></i> Locked for ${mins} min`);
+        return;
+    }
+    const pass = document.getElementById('pass').value;
+    const hash = await sha256(pass);
+    if (hash === ADMIN_HASH) {
+        sessionStorage.setItem('re_admin', '1');
+        showDash();
+    } else {
+        lockout.fails++;
+        if (lockout.fails >= 5) {
+            lockout.until = Date.now() + 600000; // 10 min lockout
+            lockout.fails = 0;
+        }
+        localStorage.setItem(LOCKOUT_KEY, JSON.stringify(lockout));
+        showToast(`<i class="fas fa-exclamation-circle" style="color:#f87171"></i> Wrong passcode (${5 - lockout.fails} attempts left)`);
+    }
+}
+
+function generateHash() {
+    const pass = prompt('Enter new passcode to hash:');
+    if (pass) sha256(pass).then(h => alert('Your hash: ' + h + '\n\nPaste this into ADMIN_HASH in admin.html'));
+}
+</script>
+
+<!-- Add this button inside the #gate card -->
+<button class="btn ghost" onclick="generateHash()">🔐 Generate New Hash</button>
+
 <script src="scripts.js"></script>
 <script>
 const ADMIN_PASS = "RATTLE2026"; // ← master key, same in every browser. Change it here.
