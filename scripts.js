@@ -1616,6 +1616,17 @@ document.addEventListener('visibilitychange', () => {
     else startTestimonialAutoFlip();
 });
 
+(function(){
+    const nav = document.getElementById('bottom-nav');
+    if (!nav) return;
+    nav.innerHTML = `
+        <button class="bn-btn active" data-tab="home" onclick="bnGo('home')"><span class="bn-icon"><i class="fas fa-home"></i></span>Home</button>
+        <button class="bn-btn" data-tab="community" onclick="bnGo('community')"><span class="bn-icon"><i class="fas fa-comments"></i></span>Community</button>
+        <a class="bn-plus" href="admin.html" title="Staff"><i class="fas fa-plus"></i></a>
+        <button class="bn-btn" data-tab="cart" onclick="toggleCart()"><span class="bn-icon"><i class="fas fa-cart-shopping"></i><span class="bn-badge" id="bn-cart-badge" style="display:none">0</span></span>Cart</button>
+        <button class="bn-btn" data-tab="account" onclick="openAccountSheet()"><span class="bn-icon"><i class="fas fa-user"></i></span>Account</button>`;
+})();
+
 // ===== INIT v7 =====
 document.addEventListener('DOMContentLoaded', () => {
     applyPerformanceMode();
