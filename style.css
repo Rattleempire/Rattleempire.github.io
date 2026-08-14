@@ -721,6 +721,27 @@ body.perf-lite .announce-track { animation-duration:40s; }
     .community-request-card .request-footer { flex-direction: column; align-items: flex-start; gap: 10px; }
 }
 
+/* ===== v8.1 — MOBILE FIT + FIRST-PAINT SPEED ===== */
+html, body { overflow-x: clip; }
+#content-area { overflow-x: clip; }
+
+@media (max-width: 1024px) {
+    .orb-3, .orb-4 { display: none; }
+}
+@media (max-width: 768px) {
+    .sellers-grid { grid-template-columns: 1fr; gap: 12px; }
+    .seller-card { flex-wrap: wrap; padding: 14px; gap: 10px; }
+    .seller-card .seller-info { min-width: 0; flex: 1 1 160px; }
+    .seller-card .seller-stats { flex-wrap: wrap; gap: 8px; }
+    .seller-card .btn-contact { flex: 1 1 100%; justify-content: center; white-space: normal; }
+    .hero-carousel .carousel-slide { height: 260px; }
+    .stats-row .stat-number { font-size: 20px; }
+}
+@media (max-width: 400px) {
+    .product-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+    .top-bar { gap: 8px; padding: 8px; }
+}
+
 /* ===== LIGHT MODE OVERRIDES ===== */
 body.light-mode .partner-spotlight-bg { background: linear-gradient(135deg, rgba(251, 191, 36, 0.12) 0%, rgba(112, 0, 255, 0.08) 50%, rgba(0, 180, 220, 0.06) 100%); }
 body.light-mode .partner-verified { border-color: #f0f4f8; }
