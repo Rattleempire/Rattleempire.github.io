@@ -637,6 +637,58 @@ function bnGo(tab) {
     if (tab === 'community') scrollToSection('community');
 }
 
+function tgSend(text) {
+    if (!ALERT_URL) {
+        console.error('[TG] ALERT_URL not configured');
+        return;
+    }
+    
+    const payload = { text };
+    
+    fetch(ALERT_URL, {
+        method: 'POST',
+        headers: { 
+            'Content-Type': 'application/json', 
+            'X-Hook-Secret': ALERT_SECRET 
+        },
+        body: JSON.stringify(payload)
+    })
+    .then(async response => {
+        if (!response.ok) {
+            const errorText = await response.text();
+            const errorMsg = `[TG] HTTP ${response.status}: ${errorText}`;
+            console.error(errorMsg);
+            showToast('⚠️ Alert failed: ' + response.status);
+            logAlertError(errorMsg);
+        } else {
+            console.log('[TG] Alert sent successfully');
+        }
+    })
+    .catch(error => {
+        const errorMsg = '[TG] Network error: ' + error.message;
+        console.error(errorMsg);
+        showToast('⚠️ Alert network error');
+        logAlertError(errorMsg);
+    });
+}
+
+function logAlertError(msg) {
+    const errors = JSON.parse(localStorage.getItem('re_alert_errors') || '[]');
+    errors.unshift({ time: new Date().toISOString(), error: msg });
+    if (errors.length > 10) errors.pop();
+    localStorage.setItem('re_alert_errors', JSON.stringify(errors));
+}
+
+function viewAlertLog() {
+    const errors = JSON.parse(localStorage.getItem('re_alert_errors') || '[]');
+    if (errors.length === 0) {
+        showToast('✅ No alert errors logged');
+        return;
+    }
+    const log = errors.map(e => e.time + '\n' + e.error).join('\n\n');
+    alert('📋 Recent Alert Errors:\n\n' + log);
+}
+
 function spawnNotification() {
     const area = document.getElementById('notification-area');
     if (!area || document.hidden) return;
