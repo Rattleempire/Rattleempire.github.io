@@ -922,30 +922,37 @@ applyCatalogOverrides();
 // ===== PERFORMANCE MODE =====
 if (DEVICE.saveData || (DEVICE.isMobile && DEVICE.lowPower)) document.body.classList.add('perf-lite');
 
-// ===== SINGLE DOMCONTENTLOADED INIT =====
 document.addEventListener('DOMContentLoaded', () => {
+    // STAGE 1 — instant first paint
     initMode();
     initCoinHero();
     renderCategoryRow();
     renderFeatured();
     renderFlashSale();
-    renderQuickDeals();
-    renderHotDeals();
     renderProducts();
-    renderCourses();
-    renderCommunity();
-    renderEnhancedSellers();
-    renderTestimonials();
     updateCartUI();
     startHeroEngine();
     startFlashCountdown();
-    startNotificationEngine();
-    startVisitorEngine();
-    initCountUp();
-    if (!DEVICE.isTouch && !DEVICE.saveData) initCustomCursor();
-    initCoursePreviews();
     visitorPing();
 
+    // STAGE 2 — below-the-fold, when CPU is idle
+    const later = () => {
+        renderQuickDeals();
+        renderHotDeals();
+        renderCourses();
+        renderCommunity();
+        renderEnhancedSellers();
+        renderTestimonials();
+        initCountUp();
+        startNotificationEngine();
+        startVisitorEngine();
+        if (!DEVICE.isTouch && !DEVICE.saveData) initCustomCursor();
+        initCoursePreviews();
+    };
+    if ('requestIdleCallback' in window) requestIdleCallback(later, { timeout: 1500 });
+    else setTimeout(later, 400);
+});
+    
     // Async cloud catalog: if catalog.json exists, override for all customers
     fetch('catalog.json').then(r => r.ok ? r.json() : null).then(d => {
         if (!d) return;
