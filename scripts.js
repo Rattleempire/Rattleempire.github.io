@@ -361,6 +361,8 @@ function renderAccountSheet() {
             '<button class="sheet-item" onclick="toggleMode()"><i style="background:rgba(168,85,247,0.15);color:#a855f7;"><i class="fas fa-moon"></i></i> Dark / Light Mode</button>' +
             '<button class="sheet-item" onclick="closeAccountSheet(); openSellerApp();"><i style="background:rgba(251,191,36,0.15);color:#fbbf24;"><i class="fas fa-store"></i></i> Become a Seller</button>' +
             '<button class="sheet-item" onclick="testAlert()"><i style="background:rgba(0,212,255,0.15);color:#00d4ff;"><i class="fas fa-flask"></i></i> Test Telegram Alerts</button>' +
+            '<button class="sheet-item" onclick="testAlert()"><i style="background:rgba(0,212,255,0.15);color:#00d4ff;"><i class="fas fa-flask"></i></i> Test Telegram Alerts</button>' +
+            '<button class="sheet-item" onclick="viewAlertLog()"><i style="background:rgba(239,68,68,0.15);color:#ef4444;"><i class="fas fa-bug"></i></i> View Alert Errors</button>' +
             '<button class="sheet-item" onclick="logout()"><i style="background:rgba(239,68,68,0.15);color:#ef4444;"><i class="fas fa-right-from-bracket"></i></i> Sign Out</button>';
     }
 }
