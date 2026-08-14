@@ -260,6 +260,17 @@
             <div class="deals-row" id="hot-deals-row"></div>
         </section>
 
+        <section id="products-section" style="scroll-margin-top:80px">
+            <div class="section-header"><h2 id="products-heading"><i class="fas fa-crown"></i> Premium Accounts</h2>
+        <select id="sort-select" onchange="sortProducts(this.value)">
+            <option value="popular">🔥 Most Popular</option>
+            <option value="rating">⭐ Top Rated</option>
+            <option value="price-low">💰 Low → High</option>
+            <option value="price-high">💰 High → Low</option>
+        </select></div>
+        <div class="product-grid" id="product-grid"></div>
+    </section>
+
         <!-- STATS -->
         <div class="stats-row">
             <div class="stat-card"><div class="stat-number" data-count="34">0</div><div class="stat-label">Products</div></div>
