@@ -1,6 +1,248 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap');
 
 :root {
+    /* 🏔️ GLACIER PALETTE */
+    --glacier-deep: #020817;
+    --glacier-mid: #0f172a;
+    --glacier-surface: rgba(15, 23, 42, 0.6);
+    
+    --ice-cyan: #22d3ee;
+    --ice-frost: #a5f3fc;
+    --ice-blue: #0284c7;
+    --ice-glow: rgba(34, 211, 238, 0.5);
+    --ice-glare: rgba(255, 255, 255, 0.4);
+    
+    /* 🛡️ METALLIC & GRADIENTS */
+    --chrome-grad: linear-gradient(135deg, #e2e8f0 0%, #ffffff 25%, #94a3b8 50%, #ffffff 75%, #cbd5e1 100%);
+    --glacier-text: linear-gradient(135deg, #ffffff 0%, #a5f3fc 40%, #22d3ee 100%);
+    
+    /* 🔄 LEGACY MAPPINGS (Shifted to Ice) */
+    --empire: #22d3ee;
+    --empire-dark: #0891b2;
+    --empire-glow: rgba(34, 211, 238, 0.5);
+    --cyan: #67e8f9;
+    --gold: #fbbf24;
+    --magenta: #c084fc;
+    --bg-primary: #020817;
+    --bg-secondary: #0f172a;
+    --bg-card: rgba(8, 25, 45, 0.65);
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --glass-bg: rgba(15, 23, 42, 0.55);
+    --glass-border: rgba(165, 243, 252, 0.15);
+    --glass-inner-glare: rgba(255, 255, 255, 0.08);
+    
+    --sidebar-w: 260px;
+    --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+body.light-mode {
+    --bg-primary: #f0f9ff;
+    --bg-secondary: #e0f2fe;
+    --bg-card: rgba(255, 255, 255, 0.75);
+    --text-primary: #0c4a6e;
+    --text-secondary: #0369a1;
+    --glass-bg: rgba(255, 255, 255, 0.65);
+    --glass-border: rgba(2, 132, 199, 0.2);
+    --glass-inner-glare: rgba(255, 255, 255, 0.8);
+    --empire: #0284c7;
+    --empire-dark: #075985;
+    --empire-glow: rgba(2, 132, 199, 0.3);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; -webkit-tap-highlight-color: transparent; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+
+body {
+    background: 
+        radial-gradient(circle at 10% 20%, rgba(34, 211, 238, 0.05) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(2, 132, 199, 0.08) 0%, transparent 40%),
+        linear-gradient(168deg, #020817 0%, #081424 55%, #041524 100%);
+    color: var(--text-primary);
+    overflow-x: hidden;
+    min-height: 100dvh;
+    transition: background 0.5s var(--transition-smooth), color 0.5s var(--transition-smooth);
+}
+body.light-mode { 
+    background: linear-gradient(168deg, #f0f9ff 0%, #e0f2fe 55%, #bae6fd 100%); 
+}
+body.sidebar-open { overflow: hidden; }
+
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: linear-gradient(180deg, var(--ice-cyan), var(--ice-blue)); border-radius: 999px; border: 2px solid transparent; background-clip: padding-box; }
+
+/* =========================================
+   🧊 GLOBAL GLASSMORPHISM INJECTION
+   ========================================= */
+.sidebar, .top-bar, .cart-drawer, .modal-box, .product-card, .value-card, 
+.feature-item, .cat-row-card, .community-request-card, .seller-card, .course-card, 
+.account-sheet, .notification-popup, .toast, .seo-text, .stats-row .stat-card,
+.promo-banner, .affiliate-section, .cart-item, .commission-table-wrap {
+    background: var(--glass-bg) !important;
+    backdrop-filter: blur(16px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(16px) saturate(180%) !important;
+    border: 1px solid var(--glass-border) !important;
+    box-shadow: 
+        0 8px 32px 0 rgba(2, 8, 23, 0.4),
+        inset 0 1px 0 0 var(--glass-inner-glare) !important;
+}
+
+/* =========================================
+   ✨ REFLECTIVE GLARE & SHIMMER ON HOVER
+   ========================================= */
+.product-card, .value-card, .promo-banner, .btn-slide-primary, .btn-affiliate, .btn-submit-post, .stat-card, .course-card, .seller-card {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+}
+.product-card::after, .value-card::after, .promo-banner::after, .btn-slide-primary::after, .btn-affiliate::after, .btn-submit-post::after, .stat-card::after, .course-card::after, .seller-card::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -60%;
+    width: 40%;
+    height: 200%;
+    background: linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.25) 50%,
+        rgba(255, 255, 255, 0) 100%
+    );
+    transform: rotate(25deg);
+    transition: left 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+    pointer-events: none;
+    z-index: 1;
+}
+.product-card:hover::after, .value-card:hover::after, .promo-banner:hover::after, .btn-slide-primary:hover::after, .btn-affiliate:hover::after, .btn-submit-post:hover::after, .stat-card:hover::after, .course-card:hover::after, .seller-card:hover::after {
+    left: 120%;
+}
+
+/* =========================================
+   🏔️ METALLIC TEXT & GLACIER GRADIENTS
+   ========================================= */
+.sidebar-brand h1, .stats-row .stat-number {
+    background: var(--chrome-grad) !important;
+    background-size: 200% auto !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    animation: chrome-shift 6s linear infinite !important;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+}
+
+.section-header h2, .product-card .card-body .price-row .price, .value-section .section-header h2, .affiliate-section h2, .testimonial-section .section-header h2 {
+    background: var(--glacier-text) !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    filter: drop-shadow(0 0 12px var(--ice-glow)) !important;
+}
+
+@keyframes chrome-shift {
+    0% { background-position: 0% center; }
+    100% { background-position: 200% center; }
+}
+
+/* =========================================
+   💧 SUBZERO CYBER GLOWS
+   ========================================= */
+.btn-slide-primary, .btn-submit-post, .btn-affiliate, .floating-wa, .btn-community-post {
+    box-shadow: 0 0 15px var(--empire-glow), 0 4px 15px rgba(0,0,0,0.3) !important;
+    transition: all 0.3s ease;
+}
+.btn-slide-primary:hover, .btn-submit-post:hover, .btn-affiliate:hover, .floating-wa:hover, .btn-community-post:hover {
+    box-shadow: 0 0 25px var(--empire-glow), 0 0 45px var(--empire-glow), 0 8px 20px rgba(0,0,0,0.4) !important;
+    transform: translateY(-3px);
+}
+
+.product-card:hover, .value-card:hover, .course-card:hover, .seller-card:hover {
+    border-color: var(--ice-cyan) !important;
+    box-shadow: 
+        0 16px 50px rgba(34, 211, 238, 0.15), 
+        0 0 0 1px rgba(34, 211, 238, 0.3),
+        inset 0 1px 0 0 var(--glass-inner-glare) !important;
+}
+
+/* =========================================
+   💧 LIQUID DRIPPING ANIMATION
+   ========================================= */
+.announce-bar {
+    position: relative;
+    overflow: visible !important;
+    background: linear-gradient(90deg, var(--ice-blue), var(--ice-cyan)) !important;
+}
+.announce-bar::after {
+    content: '';
+    position: absolute;
+    bottom: -12px;
+    left: 5%;
+    width: 90%;
+    height: 15px;
+    background: 
+        radial-gradient(circle at 10% 0, var(--ice-frost) 4px, transparent 5px),
+        radial-gradient(circle at 35% 0, var(--ice-frost) 6px, transparent 7px),
+        radial-gradient(circle at 65% 0, var(--ice-frost) 3px, transparent 4px),
+        radial-gradient(circle at 85% 0, var(--ice-frost) 5px, transparent 6px);
+    background-repeat: no-repeat;
+    filter: drop-shadow(0 4px 6px var(--empire-glow));
+    animation: drip-fall 3s infinite ease-in;
+    pointer-events: none;
+    z-index: 61;
+}
+@keyframes drip-fall {
+    0% { transform: translateY(0) scaleY(1); opacity: 0.9; }
+    70% { transform: translateY(12px) scaleY(1.8); opacity: 0.9; }
+    100% { transform: translateY(18px) scaleY(0.5); opacity: 0; }
+}
+
+/* =========================================
+   🧪 GOOEY ICE EFFECT (Requires SVG Filter)
+   ========================================= */
+.gooey-ice-container {
+    filter: url('#gooey-ice-filter');
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.goo-blob {
+    position: absolute;
+    border-radius: 50%;
+    background: var(--ice-cyan);
+    box-shadow: 0 0 20px var(--ice-glow);
+    transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.gooey-ice-container:hover .goo-blob-1 { transform: translate(15px, -15px) scale(1.2); }
+.gooey-ice-container:hover .goo-blob-2 { transform: translate(-15px, 15px) scale(1.3); }
+.gooey-ice-container:hover .goo-blob-3 { transform: translate(0, 20px) scale(1.1); }
+
+/* =========================================
+   🌌 HAZE ORBS (Updated to Glacier Colors)
+   ========================================= */
+.haze-bg .orb-1 { background: radial-gradient(circle, rgba(34,211,238,0.15) 0%, transparent 70%); }
+.haze-bg .orb-2 { background: radial-gradient(circle, rgba(2,132,199,0.12) 0%, transparent 70%); }
+.haze-bg .orb-3 { background: radial-gradient(circle, rgba(165,243,252,0.1) 0%, transparent 70%); }
+.haze-bg .orb-4 { background: radial-gradient(circle, rgba(192,132,252,0.08) 0%, transparent 70%); }
+
+/* =========================================
+   📱 PERFORMANCE & RESPONSIVE ADJUSTMENTS
+   ========================================= */
+@media (max-width: 768px) {
+    .sidebar, .top-bar, .product-card, .modal-box, .cart-drawer {
+        backdrop-filter: blur(10px) saturate(150%) !important; /* Reduce blur for mobile performance */
+    }
+    .announce-bar::after { display: none; } /* Hide drips on small screens to prevent overflow */
+}
+
+/* =========================================
+   🛠️ ORIGINAL LAYOUT PRESERVATION
+   (Keep all your original structural CSS below this line)
+   ========================================= */
+/* ... [Paste the rest of your original CSS here, omitting the variables and body backgrounds we already updated] ... */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap');
+
+:root {
     --empire: #00f0ff;
     --empire-dark: #0088aa;
     --empire-glow: rgba(0, 240, 255, 0.3);
