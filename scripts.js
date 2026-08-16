@@ -159,9 +159,6 @@ function starsHTML(rating) {
     return h;
 }
 
-/* =========================================
-   🧊 SUBZERO SPLASH MICRO-INTERACTION
-   ========================================= */
 function subzeroSplash(targetEl) {
     if (!targetEl) return;
     const rect = targetEl.getBoundingClientRect();
@@ -188,9 +185,6 @@ function subzeroSplash(targetEl) {
     setTimeout(() => splash.remove(), 600);
 }
 
-/* =========================================
-   🔒 A11Y FOCUS TRAP FOR MODALS
-   ========================================= */
 function trapFocus(element) {
     const focusableEls = element.querySelectorAll('a[href]:not([disabled]), button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled])');
     if (focusableEls.length === 0) return;
@@ -213,7 +207,7 @@ function tgSend(text) {
     if (!ALERT_URL) return;
     fetch(ALERT_URL, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'X-Hook-Secret': ALERT_SECRET },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ text })
     }).catch(() => {});
 }
@@ -431,7 +425,6 @@ function filterProducts(q) {
 }
 let _searchTimer;
 function debouncedSearch(q) {
-    // 🕵️ SECRET ADMIN SHORTCUT
     const secretCmd = q.trim().toLowerCase();
     if (secretCmd === 'admin' || secretCmd === 'ops' || secretCmd === 'rattle') {
         document.getElementById('search-input').value = ''; // Clear the box
@@ -439,7 +432,6 @@ function debouncedSearch(q) {
         return;
     }
     
-    // Normal search logic
     clearTimeout(_searchTimer);
     _searchTimer = setTimeout(() => filterProducts(q), 200);
 }
@@ -830,9 +822,6 @@ function startFlashCountdown() {
     tick(); setInterval(tick, 1000);
 }
 
-/* =========================================
-   🌊 SCROLL REVEAL OBSERVER
-   ========================================= */
 function initRevealObserver() {
     const reveals = document.querySelectorAll('.reveal');
     if (!reveals.length) return;
@@ -875,7 +864,7 @@ document.addEventListener('keydown', e => {
 document.addEventListener('DOMContentLoaded', () => {
     initMode();
     initCoinHero();
-    initRevealObserver(); // Trigger CSS .reveal animations
+    initRevealObserver();
     renderCategoryRow();
     renderFeatured();
     renderFlashSale();
@@ -902,7 +891,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if ('requestIdleCallback' in window) requestIdleCallback(later, { timeout: 1500 });
     else setTimeout(later, 400);
     
-    // Safe fallback for external catalog fetching
     fetch('catalog.json')
         .then(r => r.ok ? r.json() : null)
         .then(data => {
