@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Rattle Empire — a modern marketplace for authorized AI subscriptions, streaming memberships, software licenses and digital products.">
+  <title>Rattle Empire — Digital Marketplace</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+  <div class="announcement">⚡ Rattle Empire is live — verified digital products, clean checkout, fast delivery.</div>
+
+  <header class="site-header">
+    <a class="brand" href="#"><span class="brand-mark">R</span><span>Rattle<span class="accent">Empire</span></span></a>
+    <nav>
+      <a href="#market">Marketplace</a>
+      <a href="#categories">Categories</a>
+      <a href="#how">How it works</a>
+    </nav>
+    <div class="header-actions">
+      <button class="ghost-btn" id="themeBtn" aria-label="Toggle theme">◐</button>
+      <button class="ghost-btn cart-btn" id="cartBtn">Cart <span id="cartCount">0</span></button>
+      <button class="primary-btn" id="loginBtn">Sign in</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <div class="eyebrow">THE DIGITAL MARKETPLACE</div>
+        <h1>Everything digital.<br><span>One marketplace.</span></h1>
+        <p>Discover authorized subscriptions, memberships, software licenses and digital products from verified sellers.</p>
+        <div class="hero-actions">
+          <a class="primary-btn large" href="#market">Explore marketplace →</a>
+          <a class="text-link" href="#how">How it works</a>
+        </div>
+        <div class="trust-row">
+          <span>✓ Verified sellers</span>
+          <span>✓ Secure checkout</span>
+          <span>✓ Buyer protection</span>
+        </div>
+      </div>
+      <div class="hero-card">
+        <div class="hero-card-top"><span>Featured today</span><span class="live-dot">● Live</span></div>
+        <div class="featured-product">
+          <div class="product-logo ai">AI</div>
+          <div>
+            <strong>AI Pro Membership</strong>
+            <small>1 month • authorized</small>
+          </div>
+          <b>$19.99</b>
+        </div>
+        <div class="featured-product">
+          <div class="product-logo stream">▶</div>
+          <div>
+            <strong>Streaming Membership</strong>
+            <small>1 month • authorized</small>
+          </div>
+          <b>$11.99</b>
+        </div>
+        <div class="hero-card-foot">New drops every week</div>
+      </div>
+    </section>
+
+    <section class="category-strip" id="categories">
+      <button class="category active" data-filter="all">All products</button>
+      <button class="category" data-filter="ai">AI & Productivity</button>
+      <button class="category" data-filter="streaming">Streaming</button>
+      <button class="category" data-filter="software">Software</button>
+      <button class="category" data-filter="gaming">Gaming</button>
+      <button class="category" data-filter="gift">Gift cards</button>
+    </section>
+
+    <section class="market" id="market">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">MARKETPLACE</div>
+          <h2>Popular right now</h2>
+        </div>
+        <div class="market-tools">
+          <label class="search-box"><span>⌕</span><input id="searchInput" placeholder="Search products..." autocomplete="off"></label>
+          <select id="sortSelect" aria-label="Sort products">
+            <option value="featured">Featured</option>
+            <option value="price-asc">Price: low to high</option>
+            <option value="price-desc">Price: high to low</option>
+            <option value="rating">Top rated</option>
+          </select>
+        </div>
+      </div>
+      <div class="product-grid" id="productGrid"></div>
+      <div class="empty-state" id="emptyState" hidden>No products matched your search.</div>
+    </section>
+
+    <section class="how" id="how">
+      <div class="eyebrow">SIMPLE BY DESIGN</div>
+      <h2>Buy digital products without the mess.</h2>
+      <div class="how-grid">
+        <article><span>01</span><h3>Choose</h3><p>Browse products from verified sellers and compare the details before buying.</p></article>
+        <article><span>02</span><h3>Checkout</h3><p>Use a secure payment flow. Your order stays attached to your Rattle Empire account.</p></article>
+        <article><span>03</span><h3>Receive</h3><p>Get your authorized activation code, invite, license or delivery instructions.</p></article>
+      </div>
+    </section>
+
+    <section class="seller-banner">
+      <div><div class="eyebrow">FOR SELLERS</div><h2>Have digital products to sell?</h2><p>Apply to become a verified seller and manage inventory from one dashboard.</p></div>
+      <button class="primary-btn" id="sellerBtn">Become a seller</button>
+    </section>
+  </main>
+
+  <footer>
+    <div><a class="brand" href="#"><span class="brand-mark">R</span><span>Rattle<span class="accent">Empire</span></span></a><p>Digital marketplace concept • v0.1</p></div>
+    <div class="footer-links"><a href="#">Terms</a><a href="#">Privacy</a><a href="#">Refunds</a><a href="#">Seller rules</a></div>
+  </footer>
+
+  <div class="modal-backdrop" id="modalBackdrop" hidden>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button class="close-btn" id="closeModal" aria-label="Close">×</button>
+      <h2 id="modalTitle">Sign in</h2>
+      <p id="modalText">Authentication will connect to the production backend in the next phase.</p>
+      <button class="primary-btn full" id="modalAction">Got it</button>
+    </div>
+  </div>
+
+  <script src="assets/app.js" defer></script>
+</body>
+</html>
