@@ -1,8 +1,0 @@
-User-agent: *
-Allow: /
-
-User-agent: Googlebot
-Allow: /
-Crawl-delay: 0
-
-Sitemap: https://rattleempire.github.io/sitemap.xml
