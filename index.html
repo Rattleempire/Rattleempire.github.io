@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Rattle Empire — digital marketplace platform">
+<title>Rattle Empire — Marketplace</title>
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+<div class="announcement">RATTLE EMPIRE • VERIFIED DIGITAL MARKETPLACE</div>
+<header class="site-header">
+<a class="brand" href="index.html"><span class="brand-mark">R</span><span>Rattle<span class="accent">Empire</span></span></a>
+<nav><a href="#marketplace">Marketplace</a><a href="#categories">Categories</a><a href="pages/sell.html">Sell</a><a href="pages/dashboard.html">Dashboard</a></nav>
+<div class="header-actions"><button class="icon-btn" id="themeBtn" aria-label="Toggle theme">◐</button><a class="ghost-btn" href="pages/cart.html">Cart <span id="cartCount">0</span></a><a class="primary-btn" href="pages/login.html">Sign in</a></div>
+</header>
+<main>
+<section class="hero container">
+<div class="hero-copy"><div class="eyebrow">A MARKETPLACE, NOT A MESS</div><h1>Buy. Sell. <span>Build.</span></h1><p>Rattle Empire is becoming a full digital marketplace for authorized subscriptions, licenses, gift codes and other legitimate digital products.</p><div class="hero-actions"><a class="primary-btn large" href="#marketplace">Browse products →</a><a class="text-link" href="pages/sell.html">Become a seller</a></div><div class="stats-row"><div><strong>Verified</strong><span>Sellers</span></div><div><strong>Secure</strong><span>Checkout flow</span></div><div><strong>Fast</strong><span>Digital delivery</span></div></div></div>
+<div class="hero-panel"><div class="panel-head"><span>Platform status</span><span class="status-dot">● Online</span></div><div class="metric"><span>Marketplace</span><strong>Open</strong></div><div class="metric"><span>Seller applications</span><strong>Enabled</strong></div><div class="metric"><span>Order engine</span><strong>Ready</strong></div><div class="metric"><span>Payments</span><strong>Backend phase</strong></div></div>
+</section>
+
+<section class="container section" id="categories"><div class="section-head"><div><div class="eyebrow">CATEGORIES</div><h2>Shop by category</h2></div></div><div class="category-grid">
+<a href="#marketplace" class="category-card" data-filter-link="ai"><b>AI & Productivity</b><span>Subscriptions, tools, credits</span></a>
+<a href="#marketplace" class="category-card" data-filter-link="streaming"><b>Streaming</b><span>Authorized memberships</span></a>
+<a href="#marketplace" class="category-card" data-filter-link="software"><b>Software</b><span>Licenses and activation</span></a>
+<a href="#marketplace" class="category-card" data-filter-link="gaming"><b>Gaming</b><span>Codes and digital goods</span></a>
+</div></section>
+
+<section class="container section" id="marketplace">
+<div class="section-head"><div><div class="eyebrow">MARKETPLACE</div><h2>Featured products</h2></div><div class="market-tools"><input class="search" id="searchInput" placeholder="Search products..." autocomplete="off"><select id="sortSelect"><option value="featured">Featured</option><option value="price-asc">Lowest price</option><option value="price-desc">Highest price</option><option value="rating">Top rated</option></select></div></div>
+<div class="filter-row" id="filterRow"><button class="filter active" data-filter="all">All</button><button class="filter" data-filter="ai">AI</button><button class="filter" data-filter="streaming">Streaming</button><button class="filter" data-filter="software">Software</button><button class="filter" data-filter="gaming">Gaming</button></div>
+<div id="productGrid" class="product-grid"></div><div id="emptyState" class="empty-state" hidden>No products match your search.</div>
+</section>
+
+<section class="container section platform-grid">
+<article class="info-card"><div class="eyebrow">BUYERS</div><h3>One account, every order</h3><p>Track purchases, receipts, delivery status and support requests from your dashboard.</p><a href="pages/login.html">Create account →</a></article>
+<article class="info-card"><div class="eyebrow">SELLERS</div><h3>Run your inventory</h3><p>Create listings, manage stock, monitor orders and submit products for marketplace approval.</p><a href="pages/sell.html">Seller onboarding →</a></article>
+<article class="info-card"><div class="eyebrow">ADMIN</div><h3>Control the platform</h3><p>Review sellers and listings, manage reports, inspect order activity and audit platform events.</p><a href="pages/admin.html">Admin area →</a></article>
+</section>
+</main>
+<footer class="footer container"><div><a class="brand" href="index.html"><span class="brand-mark">R</span><span>Rattle<span class="accent">Empire</span></span></a><p>Marketplace platform • v0.2</p></div><div class="footer-links"><a href="pages/terms.html">Terms</a><a href="pages/privacy.html">Privacy</a><a href="pages/refunds.html">Refunds</a></div></footer>
+<script src="assets/app.js" defer></script>
+</body></html>
