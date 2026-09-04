@@ -1,1 +1,20 @@
-
+[
+  {
+    "id": "1",
+    "name": "ChatGPT Plus Subscription",
+    "price": 20.00,
+    "category": "ai",
+    "stock": "In Stock",
+    "rating": 4.8,
+    "image": "/assets/images/chatgpt.jpg"
+  },
+  {
+    "id": "2",
+    "name": "Netflix Gift Card",
+    "price": 15.00,
+    "category": "streaming",
+    "stock": "Out of Stock",
+    "rating": 4.5,
+    "image": "/assets/images/netflix.jpg"
+  }
+]
