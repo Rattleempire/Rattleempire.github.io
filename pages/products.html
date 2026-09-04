@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Browse all digital products on Rattle Empire">
+  <title>Products • Rattle Empire</title>
+  <link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+
+  <div id="menu-placeholder"></div>
+
+  <main>
+    <section class="container section" style="padding-top:30px">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">MARKETPLACE</div>
+          <h2>All products</h2>
+        </div>
+        <div class="market-tools">
+          <input class="search" id="searchInput" placeholder="Search products..." autocomplete="off">
+          <select id="sortSelect">
+            <option value="featured">Featured</option>
+            <option value="price-asc">Lowest price</option>
+            <option value="price-desc">Highest price</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="filter-row" id="filterRow">
+        <button class="filter active" data-filter="all">All</button>
+        <button class="filter" data-filter="ai">AI</button>
+        <button class="filter" data-filter="streaming">Streaming</button>
+        <button class="filter" data-filter="software">Software</button>
+        <button class="filter" data-filter="gaming">Gaming</button>
+      </div>
+
+      <div id="productGrid" class="product-grid"></div>
+      <div id="emptyState" class="empty-state" hidden>No products match your search.</div>
+    </section>
+  </main>
+
+  <div id="footer-placeholder"></div>
+
+  <script src="../assets/app.js" defer></script>
+
+  <script>
+    fetch('../partials/menu.html')
+      .then(res => res.text())
+      .then(data => document.getElementById('menu-placeholder').innerHTML = data)
+      .catch(() => console.warn('Menu not found'));
+
+    fetch('../partials/footer.html')
+      .then(res => res.text())
+      .then(data => document.getElementById('footer-placeholder').innerHTML = data)
+      .catch(() => console.warn('Footer not found'));
+  </script>
+
+</body>
+</html>
