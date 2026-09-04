@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Page not found • Rattle Empire</title>
+  <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+  <div id="menu-placeholder"></div>
+  <main class="container section" style="padding-top:80px;text-align:center">
+    <h1 style="font-size:80px;margin:0">404</h1>
+    <p style="font-size:24px;color:#9aa4b5">Page not found</p>
+    <a class="primary-btn large" href="/" style="margin-top:20px">Go home →</a>
+  </main>
+  <div id="footer-placeholder"></div>
+  <script>
+    fetch('/partials/menu.html').then(r=>r.text()).then(d=>document.getElementById('menu-placeholder').innerHTML=d);
+    fetch('/partials/footer.html').then(r=>r.text()).then(d=>document.getElementById('footer-placeholder').innerHTML=d);
+  </script>
+</body>
+</html>
