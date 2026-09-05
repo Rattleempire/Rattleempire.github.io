@@ -1,36 +1,43 @@
+// ============================================================
+// RATTLE EMPIRE - MAIN APPLICATION ENGINE
+// ============================================================
+
+// ---------- GLOBAL STATE ----------
 let products = [];
 let filter = "all";
 let cart = JSON.parse(localStorage.getItem("rattle_cart") || "[]");
 
+// ---------- DOM REFERENCES ----------
 const grid = document.getElementById("productGrid");
 const searchInput = document.getElementById("searchInput");
 const sortSelect = document.getElementById("sortSelect");
 const emptyState = document.getElementById("emptyState");
 const cartCount = document.getElementById("cartCount");
 
+// ---------- LOAD PRODUCTS FROM JSON FILE ----------
 async function loadProducts() {
   try {
-    const response = await fetch('/data/products.json');
+    const response = await fetch('/data/products.json?v=' + Date.now());
     if (!response.ok) throw new Error('Products file not found');
     products = await response.json();
-    render(); 
+    render();
   } catch (error) {
     console.warn('Could not load products from JSON. Using sample data.');
-  
     products = [
-      {id:1,name:"AI Pro Membership",meta:"1 month • authorized",category:"ai",price:19.99,rating:4.9,badge:"Best seller",icon:"AI"},
-      {id:2,name:"AI Productivity Bundle",meta:"1 month • authorized",category:"ai",price:12.99,rating:4.8,badge:"Popular",icon:"✦"},
-      {id:3,name:"Streaming Membership",meta:"1 month • authorized",category:"streaming",price:11.99,rating:4.8,badge:"Trending",icon:"▶"},
-      {id:4,name:"Music Premium",meta:"1 month • authorized",category:"streaming",price:7.99,rating:4.7,badge:"Popular",icon:"♫"},
-      {id:5,name:"Cloud Pro License",meta:"30 days • license",category:"software",price:9.99,rating:4.9,badge:"Verified",icon:"☁"},
-      {id:6,name:"Design Toolkit",meta:"Digital license",category:"software",price:14.99,rating:4.6,badge:"New",icon:"◇"},
-      {id:7,name:"Game Wallet Code",meta:"Digital code",category:"gaming",price:24.99,rating:4.8,badge:"Top rated",icon:"⌁"},
-      {id:8,name:"Gift Card",meta:"Digital delivery",category:"gift",price:25.00,rating:4.9,badge:"Instant",icon:"$"}
+      {id:1,name:"AI Pro Membership",meta:"1 month • authorized",category:"ai",price:19.99,rating:4.9,badge:"Best seller",icon:"AI",image:"https://picsum.photos/400/300?random=1"},
+      {id:2,name:"AI Productivity Bundle",meta:"1 month • authorized",category:"ai",price:12.99,rating:4.8,badge:"Popular",icon:"✦",image:"https://picsum.photos/400/300?random=2"},
+      {id:3,name:"Streaming Membership",meta:"1 month • authorized",category:"streaming",price:11.99,rating:4.8,badge:"Trending",icon:"▶",image:"https://picsum.photos/400/300?random=3"},
+      {id:4,name:"Music Premium",meta:"1 month • authorized",category:"streaming",price:7.99,rating:4.7,badge:"Popular",icon:"♫",image:"https://picsum.photos/400/300?random=4"},
+      {id:5,name:"Cloud Pro License",meta:"30 days • license",category:"software",price:9.99,rating:4.9,badge:"Verified",icon:"☁",image:"https://picsum.photos/400/300?random=5"},
+      {id:6,name:"Design Toolkit",meta:"Digital license",category:"software",price:14.99,rating:4.6,badge:"New",icon:"◇",image:"https://picsum.photos/400/300?random=6"},
+      {id:7,name:"Game Wallet Code",meta:"Digital code",category:"gaming",price:24.99,rating:4.8,badge:"Top rated",icon:"⌁",image:"https://picsum.photos/400/300?random=7"},
+      {id:8,name:"Gift Card",meta:"Digital delivery",category:"gift",price:25.00,rating:4.9,badge:"Instant",icon:"$",image:"https://picsum.photos/400/300?random=8"}
     ];
     render();
   }
 }
 
+// ---------- RENDER PRODUCTS ----------
 function render() {
   if (!products.length) {
     grid.innerHTML = '<p style="text-align:center;color:#8d97a8;padding:40px 0">Loading products...</p>';
@@ -51,9 +58,10 @@ function render() {
 
   grid.innerHTML = visible.map(p => `
     <article class="product-card">
-      <div class="product-art">
-        <div class="product-logo ${p.category}">${p.icon}</div>
-        <span class="pill">${p.badge}</span>
+      <div class="product-art" style="background-image:url('${p.image || 'https://picsum.photos/400/300?random=' + p.id}');background-size:cover;background-position:center;position:relative">
+        <div class="product-logo ${p.category}" style="position:relative;z-index:2">${p.icon}</div>
+        <span class="pill" style="position:relative;z-index:2">${p.badge}</span>
+        <div style="position:absolute;inset:0;background:rgba(7,9,14,0.5)"></div>
       </div>
       <div class="product-body">
         <strong>${p.name}</strong>
@@ -68,12 +76,12 @@ function render() {
   `).join("");
 
   emptyState.hidden = visible.length > 0;
-
   grid.querySelectorAll("[data-add]").forEach(btn => 
     btn.addEventListener("click", () => addToCart(Number(btn.dataset.add)))
   );
 }
 
+// ---------- CART FUNCTIONS ----------
 function addToCart(id) {
   cart.push(id);
   localStorage.setItem("rattle_cart", JSON.stringify(cart));
@@ -85,6 +93,7 @@ function updateCart() {
   cartCount.textContent = cart.length;
 }
 
+// ---------- MODAL ----------
 function openModal(title, text) {
   document.getElementById("modalTitle").textContent = title;
   document.getElementById("modalText").textContent = text;
@@ -95,6 +104,9 @@ function closeModal() {
   document.getElementById("modalBackdrop").hidden = true;
 }
 
+// ---------- EVENT LISTENERS ----------
+
+// Category filter buttons
 document.querySelectorAll(".filter").forEach(btn => {
   btn.addEventListener("click", () => {
     document.querySelectorAll(".filter").forEach(x => x.classList.remove("active"));
@@ -104,33 +116,35 @@ document.querySelectorAll(".filter").forEach(btn => {
   });
 });
 
+// Category cards
 document.querySelectorAll(".category-card").forEach(card => {
   card.addEventListener("click", (e) => {
     e.preventDefault();
     const filterValue = card.dataset.filterLink;
     if (filterValue) {
-      
       document.querySelectorAll(".filter").forEach(btn => {
         btn.classList.remove("active");
         if (btn.dataset.filter === filterValue) btn.classList.add("active");
       });
       filter = filterValue;
       render();
-      
       document.getElementById("marketplace").scrollIntoView({ behavior: "smooth" });
     }
   });
 });
 
+// Search & Sort
 searchInput.addEventListener("input", render);
 sortSelect.addEventListener("change", render);
 
+// Modal controls
 document.getElementById("closeModal").addEventListener("click", closeModal);
 document.getElementById("modalBackdrop").addEventListener("click", (e) => {
   if (e.target.id === "modalBackdrop") closeModal();
 });
 document.getElementById("modalAction").addEventListener("click", closeModal);
 
+// ---------- HEADER BUTTONS ----------
 document.getElementById("loginBtn")?.addEventListener("click", () => 
   openModal("Sign in", "Authentication will connect to the production backend in the next phase.")
 );
@@ -139,18 +153,16 @@ document.getElementById("cartBtn")?.addEventListener("click", () =>
   openModal("Your cart", cart.length ? `${cart.length} item(s) are saved in this browser.` : "Your cart is empty.")
 );
 
-document.querySelector("a[href='/pages/sell.html']")?.addEventListener("click", (e) => {
-  
-});
-
 document.getElementById("themeBtn")?.addEventListener("click", () => {
   document.body.classList.toggle("light");
   localStorage.setItem("rattle_theme", document.body.classList.contains("light") ? "light" : "dark");
 });
 
+// ---------- LOAD THEME PREFERENCE ----------
 if (localStorage.getItem("rattle_theme") === "light") {
   document.body.classList.add("light");
 }
 
+// ---------- START THE APP ----------
 updateCart();
 loadProducts();
