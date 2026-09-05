@@ -1,1 +1,92 @@
-<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Terms • Rattle Empire</title><link rel="stylesheet" href="../assets/styles.css"></head><body><main class="container" style="padding-top:60px;padding-bottom:90px"><h1>Marketplace terms</h1><div class="info-card"><p style="color:#8d97a8">Placeholder. Replace with reviewed buyer/seller terms before launch.</p></div></main></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Terms of Service for Rattle Empire">
+  <title>Terms of Service • Rattle Empire</title>
+  <link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+
+  <div id="menu-placeholder"></div>
+
+  <main class="container" style="padding-top:60px;padding-bottom:90px;max-width:800px;margin-left:auto;margin-right:auto">
+    <div class="eyebrow">LEGAL</div>
+    <h1>Terms of Service</h1>
+    <p style="color:#8d97a8;margin-top:-8px;margin-bottom:32px;font-size:14px">
+      Last updated: September 2026
+    </p>
+
+    <div class="info-card" style="padding:28px;display:flex;flex-direction:column;gap:20px">
+
+      <section>
+        <h3 style="margin:0 0 8px">1. Acceptance of Terms</h3>
+        <p style="color:#8d97a8;font-size:14px;margin:0">
+          By using Rattle Empire, you agree to these Terms of Service. If you do not agree, please do not use our platform.
+        </p>
+      </section>
+
+      <section>
+        <h3 style="margin:0 0 8px">2. User Accounts</h3>
+        <p style="color:#8d97a8;font-size:14px;margin:0">
+          You are responsible for maintaining the security of your account. You must provide accurate information when creating an account.
+        </p>
+      </section>
+
+      <section>
+        <h3 style="margin:0 0 8px">3. Buying and Selling</h3>
+        <p style="color:#8d97a8;font-size:14px;margin:0">
+          All digital products sold on Rattle Empire must be legitimate, authorized, and legal. Sellers are responsible for the accuracy of their listings.
+        </p>
+      </section>
+
+      <section>
+        <h3 style="margin:0 0 8px">4. Prohibited Items</h3>
+        <p style="color:#8d97a8;font-size:14px;margin:0">
+          The following items are strictly prohibited: pirated software, stolen accounts, illegal content, and any product that violates intellectual property laws.
+        </p>
+      </section>
+
+      <section>
+        <h3 style="margin:0 0 8px">5. Termination</h3>
+        <p style="color:#8d97a8;font-size:14px;margin:0">
+          We reserve the right to suspend or terminate accounts that violate these terms, engage in fraudulent activity, or harm the marketplace community.
+        </p>
+      </section>
+
+      <section>
+        <h3 style="margin:0 0 8px">6. Disclaimer</h3>
+        <p style="color:#8d97a8;font-size:14px;margin:0">
+          Rattle Empire provides a platform for buyers and sellers. We are not responsible for disputes between users. All digital products are provided "as-is."
+        </p>
+      </section>
+
+      <section style="border-top:1px solid #1d2430;padding-top:16px">
+        <p style="color:#687184;font-size:12px;margin:0">
+          These terms are a placeholder. Replace with reviewed buyer/seller terms before launch.
+        </p>
+      </section>
+
+    </div>
+  </main>
+
+  <div id="footer-placeholder"></div>
+
+  <script src="../assets/app.js" defer></script>
+
+  <script>
+    
+    fetch('../partials/menu.html')
+      .then(res => res.text())
+      .then(data => document.getElementById('menu-placeholder').innerHTML = data)
+      .catch(() => console.warn('Menu not found'));
+
+    fetch('../partials/footer.html')
+      .then(res => res.text())
+      .then(data => document.getElementById('footer-placeholder').innerHTML = data)
+      .catch(() => console.warn('Footer not found'));
+  </script>
+
+</body>
+</html>
