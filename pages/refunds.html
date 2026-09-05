@@ -1,1 +1,75 @@
-<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Refunds • Rattle Empire</title><link rel="stylesheet" href="../assets/styles.css"></head><body><main class="container" style="padding-top:60px;padding-bottom:90px"><h1>Refund policy</h1><div class="info-card"><p style="color:#8d97a8">Placeholder. Define refund eligibility and digital-delivery disputes before accepting real payments.</p></div></main></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Refund Policy for Rattle Empire">
+  <title>Refund Policy • Rattle Empire</title>
+  <link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+
+  <div id="menu-placeholder"></div>
+
+  <main class="container" style="padding-top:60px;padding-bottom:90px;max-width:800px;margin-left:auto;margin-right:auto">
+    <div class="eyebrow">LEGAL</div>
+    <h1>Refund Policy</h1>
+    <p style="color:#8d97a8;margin-top:-8px;margin-bottom:32px;font-size:14px">
+      Last updated: September 2026
+    </p>
+
+    <div class="info-card" style="padding:28px;display:flex;flex-direction:column;gap:20px">
+      <section>
+        <h3 style="margin:0 0 8px">1. Digital Products</h3>
+        <p style="color:#8d97a8;font-size:14px;margin:0">
+          All digital products (subscriptions, licenses, gift codes, and software keys) are delivered electronically. Due to the nature of digital goods, <strong>all sales are final</strong> once the product has been delivered.
+        </p>
+      </section>
+
+      <section>
+        <h3 style="margin:0 0 8px">2. Delivery Issues</h3>
+        <p style="color:#8d97a8;font-size:14px;margin:0">
+          If you did not receive your digital product within 24 hours of purchase, please contact our support team at <a href="mailto:support@rattleempire.com" style="color:#7c3aed;text-decoration:none">support@rattleempire.com</a>. We will investigate and resolve the issue promptly.
+        </p>
+      </section>
+
+      <section>
+        <h3 style="margin:0 0 8px">3. Defective Products</h3>
+        <p style="color:#8d97a8;font-size:14px;margin:0">
+          If a digital product is defective or not as described, you may be eligible for a replacement or refund. Please provide proof of purchase and a description of the issue.
+        </p>
+      </section>
+
+      <section>
+        <h3 style="margin:0 0 8px">4. Chargebacks</h3>
+        <p style="color:#8d97a8;font-size:14px;margin:0">
+          Unauthorized chargebacks will result in account suspension. If you have a dispute, please contact us directly before initiating a chargeback.
+        </p>
+      </section>
+
+      <section style="border-top:1px solid #1d2430;padding-top:16px">
+        <p style="color:#687184;font-size:12px;margin:0">
+          This refund policy is a placeholder. Define refund eligibility and digital-delivery disputes before accepting real payments.
+        </p>
+      </section>
+    </div>
+  </main>
+
+  <div id="footer-placeholder"></div>
+
+  <script src="../assets/app.js" defer></script>
+
+  <script>
+    fetch('../partials/menu.html')
+      .then(res => res.text())
+      .then(data => document.getElementById('menu-placeholder').innerHTML = data)
+      .catch(() => console.warn('Menu not found'));
+
+    fetch('../partials/footer.html')
+      .then(res => res.text())
+      .then(data => document.getElementById('footer-placeholder').innerHTML = data)
+      .catch(() => console.warn('Footer not found'));
+  </script>
+
+</body>
+</html>
