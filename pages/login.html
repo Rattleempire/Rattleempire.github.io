@@ -1,1 +1,83 @@
-<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Sign in • Rattle Empire</title><link rel="stylesheet" href="../assets/styles.css"></head><body><header class="site-header"><a class="brand" href="../index.html"><span class="brand-mark">R</span><span>Rattle<span class="accent">Empire</span></span></a></header><main class="container" style="padding-top:60px;padding-bottom:90px"><div class="eyebrow">ACCOUNT</div><h1>Sign in to Rattle Empire</h1><div class="info-card" style="margin-top:24px"><p style="color:#8d97a8">This is the account shell. Connect a real identity provider before collecting credentials. Never store passwords or private API keys in GitHub Pages.</p><a class="primary-btn" href="../index.html">Back to marketplace</a></div></main></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Sign in to your Rattle Empire account">
+  <title>Sign in • Rattle Empire</title>
+  <link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+
+  <div id="menu-placeholder"></div>
+
+  <main class="container" style="padding-top:60px;padding-bottom:90px;max-width:480px;margin-left:auto;margin-right:auto">
+    <div class="eyebrow" style="text-align:center">WELCOME BACK</div>
+    <h1 style="text-align:center;font-size:32px">Sign in</h1>
+    <p style="text-align:center;color:#8d97a8;font-size:14px;margin-top:-8px;margin-bottom:32px">
+      Access your account, orders, and digital deliveries.
+    </p>
+
+    <form id="loginForm" style="display:flex;flex-direction:column;gap:20px">
+      <div>
+        <label style="font-weight:600;display:block;margin-bottom:4px">Email address</label>
+        <input type="email" placeholder="you@example.com" required style="width:100%;padding:12px;border-radius:8px;border:1px solid #2e3440;background:transparent;color:#f4f6fb">
+      </div>
+
+      <div>
+        <label style="font-weight:600;display:block;margin-bottom:4px">Password</label>
+        <input type="password" placeholder="••••••••" required style="width:100%;padding:12px;border-radius:8px;border:1px solid #2e3440;background:transparent;color:#f4f6fb">
+      </div>
+
+      <button type="submit" class="primary-btn large" style="width:100%;text-align:center;justify-content:center">
+        Sign in →
+      </button>
+    </form>
+
+    <div id="loginMessage" style="margin-top:16px"></div>
+
+    <p style="text-align:center;color:#8d97a8;font-size:13px;margin-top:24px">
+      Don't have an account? <a href="#" style="color:#7c3aed;text-decoration:none">Create one</a>
+    </p>
+
+    <div class="info-card" style="margin-top:20px;border-color:#7c3aed40">
+      <p style="color:#8d97a8;font-size:12px;margin:0">
+        🔐 Authentication will connect to the production backend in the next phase.
+        For now, this is a UI demo.
+      </p>
+    </div>
+  </main>
+
+  <div id="footer-placeholder"></div>
+
+  <script src="../assets/app.js" defer></script>
+
+  <script>
+   
+    fetch('../partials/menu.html')
+      .then(res => res.text())
+      .then(data => document.getElementById('menu-placeholder').innerHTML = data)
+      .catch(() => console.warn('Menu not found'));
+
+    fetch('../partials/footer.html')
+      .then(res => res.text())
+      .then(data => document.getElementById('footer-placeholder').innerHTML = data)
+      .catch(() => console.warn('Footer not found'));
+
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+      e.preventDefault(); 
+      const messageEl = document.getElementById('loginMessage');
+      messageEl.innerHTML = `
+        <div class="info-card" style="background:#00ff9d10;border-color:#00ff9d40;padding:16px">
+          <p style="color:#00ff9d;margin:0">✅ Sign-in successful! (Demo mode)</p>
+          <p style="color:#8d97a8;font-size:12px;margin:4px 0 0">
+            Authentication will be connected to the backend in the production phase.
+          </p>
+        </div>
+      `;
+
+    });
+  </script>
+
+</body>
+</html>
