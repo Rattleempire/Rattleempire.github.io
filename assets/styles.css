@@ -730,3 +730,26 @@ body.light .footer {
     flex-direction: column;
   }
 }
+
+/* ---------- PRODUCT IMAGE SUPPORT ---------- */
+.product-art {
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  height: 160px;
+}
+
+.product-art .product-logo,
+.product-art .pill {
+  position: relative;
+  z-index: 2;
+}
+
+.product-art .product-logo {
+  background: rgba(7, 9, 14, 0.7);
+  backdrop-filter: blur(4px);
+}
+
+body.light .product-art .product-logo {
+  background: rgba(255, 255, 255, 0.7);
+}
