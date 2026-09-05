@@ -1,1 +1,86 @@
-<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Seller onboarding • Rattle Empire</title><link rel="stylesheet" href="../assets/styles.css"></head><body><header class="site-header"><a class="brand" href="../index.html"><span class="brand-mark">R</span><span>Rattle<span class="accent">Empire</span></span></a></header><main class="container" style="padding-top:60px;padding-bottom:90px"><div class="eyebrow">SELLERS</div><h1>Become a verified seller</h1><div class="info-card" style="margin-top:24px"><p style="color:#8d97a8">Seller onboarding will collect seller details, categories and verification information in a secure backend. Products must be authorized and legitimate digital goods.</p><a class="primary-btn" href="../index.html">Browse marketplace</a></div></main></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Apply to become a seller on Rattle Empire">
+  <title>Become a Seller • Rattle Empire</title>
+  <link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+
+  <div id="menu-placeholder"></div>
+
+  <main>
+    <section class="container section" style="padding-top:60px;max-width:700px;margin-left:auto;margin-right:auto">
+      <div class="eyebrow">SELLER ONBOARDING</div>
+      <h1>Run your inventory</h1>
+      <p style="color:#8d97a8;margin-bottom:32px">
+        Create listings, manage stock, monitor orders and submit products for marketplace approval.
+      </p>
+
+      <form id="sellerApplication" style="display:flex;flex-direction:column;gap:20px">
+        <div>
+          <label style="font-weight:600;display:block;margin-bottom:4px">Business / Display name</label>
+          <input type="text" placeholder="e.g. GameKeys Shop" required style="width:100%;padding:12px;border-radius:8px;border:1px solid #2e3440;background:transparent;color:#f4f6fb">
+        </div>
+
+        <div>
+          <label style="font-weight:600;display:block;margin-bottom:4px">Email address</label>
+          <input type="email" placeholder="you@example.com" required style="width:100%;padding:12px;border-radius:8px;border:1px solid #2e3440;background:transparent;color:#f4f6fb">
+        </div>
+
+        <div>
+          <label style="font-weight:600;display:block;margin-bottom:4px">Product type</label>
+          <select required style="width:100%;padding:12px;border-radius:8px;border:1px solid #2e3440;background:transparent;color:#f4f6fb">
+            <option value="">Select category...</option>
+            <option value="AI">AI & Productivity</option>
+            <option value="Streaming">Streaming</option>
+            <option value="Software">Software</option>
+            <option value="Gaming">Gaming</option>
+          </select>
+        </div>
+
+        <div>
+          <label style="font-weight:600;display:block;margin-bottom:4px">Brief description of your inventory</label>
+          <textarea rows="4" placeholder="What digital products will you offer?" style="width:100%;padding:12px;border-radius:8px;border:1px solid #2e3440;background:transparent;color:#f4f6fb;resize:vertical"></textarea>
+        </div>
+
+        <button type="submit" class="primary-btn large" style="width:fit-content">Submit application →</button>
+      </form>
+      
+      <div id="formMessage" style="margin-top:16px"></div>
+    </section>
+  </main>
+
+  <div id="footer-placeholder"></div>
+
+  <script src="../assets/app.js" defer></script>
+
+  <script>
+    
+    fetch('../partials/menu.html')
+      .then(res => res.text())
+      .then(data => document.getElementById('menu-placeholder').innerHTML = data)
+      .catch(() => console.warn('Menu not found'));
+
+    fetch('../partials/footer.html')
+      .then(res => res.text())
+      .then(data => document.getElementById('footer-placeholder').innerHTML = data)
+      .catch(() => console.warn('Footer not found'));
+
+    document.getElementById('sellerApplication').addEventListener('submit', function(e) {
+      e.preventDefault(); 
+      
+      document.getElementById('formMessage').innerHTML = 
+        '<div class="info-card" style="background:#00ff9d10;border-color:#00ff9d40;padding:16px">' +
+        '<p style="color:#00ff9d;margin:0">✅ Application received! Our admin team will review your request.</p>' +
+        '<p style="color:#8d97a8;font-size:12px;margin:4px 0 0">We will contact you at the email you provided.</p>' +
+        '</div>';
+
+      this.reset();
+    });
+  </script>
+
+</body>
+</html>
