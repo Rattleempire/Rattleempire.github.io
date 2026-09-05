@@ -9,20 +9,14 @@
 </head>
 <body>
 
-  <!-- ============================================ -->
-  <!-- MENU LOADED FROM PARTIALS                    -->
-  <!-- ============================================ -->
   <div id="menu-placeholder"></div>
 
-  <!-- ============================================ -->
-  <!-- MAIN CONTENT (UNIQUE TO CART PAGE)          -->
-  <!-- ============================================ -->
   <main class="container" style="padding-top:60px;padding-bottom:90px">
     <div class="eyebrow">CART</div>
     <h1>Your cart</h1>
 
     <div class="info-card" style="margin-top:24px">
-      <!-- Cart items will be displayed here -->
+     
       <div id="cartItems"></div>
       <div style="margin-top:16px;display:flex;gap:12px;flex-wrap:wrap">
         <a class="primary-btn" href="/">Continue shopping →</a>
@@ -30,7 +24,6 @@
       </div>
     </div>
 
-    <!-- Checkout section (placeholder for now) -->
     <div class="info-card" style="margin-top:20px;border-color:#7c3aed40">
       <h3 style="margin:0">💳 Checkout</h3>
       <p style="color:#8d97a8;font-size:13px">
@@ -39,18 +32,12 @@
     </div>
   </main>
 
-  <!-- ============================================ -->
-  <!-- FOOTER LOADED FROM PARTIALS                 -->
-  <!-- ============================================ -->
   <div id="footer-placeholder"></div>
 
-  <!-- ============================================ -->
-  <!-- SCRIPTS                                      -->
-  <!-- ============================================ -->
   <script src="../assets/app.js" defer></script>
 
   <script>
-    // ---------- LOAD MENU & FOOTER ----------
+    
     fetch('../partials/menu.html')
       .then(res => res.text())
       .then(data => document.getElementById('menu-placeholder').innerHTML = data)
@@ -61,11 +48,9 @@
       .then(data => document.getElementById('footer-placeholder').innerHTML = data)
       .catch(() => console.warn('Footer not found'));
 
-    // ---------- CART LOGIC ----------
     const cart = JSON.parse(localStorage.getItem('rattle_cart') || '[]');
     const cartContainer = document.getElementById('cartItems');
 
-    // Try to load product names from products.json
     async function loadCartItems() {
       try {
         const response = await fetch('/data/products.json');
@@ -76,13 +61,11 @@
           return;
         }
 
-        // Build a list of items with product details
         const cartItems = cart.map(id => {
           const product = products.find(p => p.id === id);
           return product || { name: 'Unknown product', price: 0, id: id };
         });
 
-        // Group by product ID to show quantities
         const grouped = {};
         cartItems.forEach(item => {
           if (grouped[item.id]) {
@@ -118,7 +101,7 @@
         cartContainer.innerHTML = html;
 
       } catch (error) {
-        // Fallback: show simple count if products can't be loaded
+        
         cartContainer.innerHTML = `
           <p style="color:#8d97a8">You have ${cart.length} item(s) in your cart.</p>
           <p style="color:#8d97a8;font-size:12px;margin-top:4px">(Product details will appear when product data is loaded.)</p>
@@ -126,16 +109,14 @@
       }
     }
 
-    // ---------- CLEAR CART ----------
     document.getElementById('clearCartBtn')?.addEventListener('click', () => {
       localStorage.removeItem('rattle_cart');
       cartContainer.innerHTML = '<p style="color:#8d97a8">Your cart is empty.</p>';
-      // Update cart count badge in the menu (if it exists)
+     
       const cartCount = document.getElementById('cartCount');
       if (cartCount) cartCount.textContent = '0';
     });
 
-    // ---------- LOAD THE CART ----------
     loadCartItems();
   </script>
 
