@@ -1,20 +1,178 @@
 [
   {
-    "id": "1",
-    "name": "ChatGPT Plus Subscription",
-    "price": 20.00,
+    "id": 1,
+    "name": "ChatGPT Pro Subscription",
+    "meta": "1 month • authorized",
     "category": "ai",
-    "stock": "In Stock",
-    "rating": 4.8,
-    "image": "/assets/images/chatgpt.jpg"
+    "price": 24.99,
+    "rating": 4.9,
+    "badge": "Best seller",
+    "icon": "AI",
+    "image": "https://placehold.co/400x300/1a1a2e/8b5cf6?text=AI+Pro"
   },
   {
-    "id": "2",
-    "name": "Netflix Gift Card",
-    "price": 15.00,
+    "id": 2,
+    "name": "Midjourney AI Credits",
+    "meta": "100 credits • instant delivery",
+    "category": "ai",
+    "price": 14.99,
+    "rating": 4.8,
+    "badge": "Popular",
+    "icon": "✦",
+    "image": "https://placehold.co/400x300/1a1a2e/8b5cf6?text=AI+Credits"
+  },
+  {
+    "id": 3,
+    "name": "Claude Pro Access",
+    "meta": "1 month • authorized",
+    "category": "ai",
+    "price": 19.99,
+    "rating": 4.7,
+    "badge": "Verified",
+    "icon": "⚡",
+    "image": "https://placehold.co/400x300/1a1a2e/8b5cf6?text=Claude+Pro"
+  },
+  {
+    "id": 4,
+    "name": "Canva Pro License",
+    "meta": "1 month • authorized",
+    "category": "ai",
+    "price": 12.99,
+    "rating": 4.6,
+    "badge": "New",
+    "icon": "◇",
+    "image": "https://placehold.co/400x300/1a1a2e/8b5cf6?text=Canva+Pro"
+  },
+  {
+    "id": 5,
+    "name": "Netflix Premium Gift Code",
+    "meta": "Digital code • 1 month",
     "category": "streaming",
-    "stock": "Out of Stock",
+    "price": 15.99,
+    "rating": 4.9,
+    "badge": "Top rated",
+    "icon": "▶",
+    "image": "https://placehold.co/400x300/1a1a2e/dc2626?text=Netflix"
+  },
+  {
+    "id": 6,
+    "name": "Spotify Premium Code",
+    "meta": "Digital code • 1 month",
+    "category": "streaming",
+    "price": 9.99,
+    "rating": 4.8,
+    "badge": "Popular",
+    "icon": "♫",
+    "image": "https://placehold.co/400x300/1a1a2e/22c55e?text=Spotify"
+  },
+  {
+    "id": 7,
+    "name": "Disney+ Annual Subscription",
+    "meta": "12 months • authorized",
+    "category": "streaming",
+    "price": 89.99,
+    "rating": 4.7,
+    "badge": "Best value",
+    "icon": "▲",
+    "image": "https://placehold.co/400x300/1a1a2e/3b82f6?text=Disney+"
+  },
+  {
+    "id": 8,
+    "name": "HBO Max Gift Card",
+    "meta": "Digital code • 1 month",
+    "category": "streaming",
+    "price": 14.99,
     "rating": 4.5,
-    "image": "/assets/images/netflix.jpg"
+    "badge": "Trending",
+    "icon": "◆",
+    "image": "https://placehold.co/400x300/1a1a2e/8b5cf6?text=HBO+Max"
+  },
+  {
+    "id": 9,
+    "name": "Windows 11 Pro License",
+    "meta": "Digital license • lifetime",
+    "category": "software",
+    "price": 19.99,
+    "rating": 4.9,
+    "badge": "Verified",
+    "icon": "⊞",
+    "image": "https://placehold.co/400x300/1a1a2e/00bcd4?text=Windows+11"
+  },
+  {
+    "id": 10,
+    "name": "Adobe Creative Cloud Key",
+    "meta": "Digital license • 1 month",
+    "category": "software",
+    "price": 34.99,
+    "rating": 4.8,
+    "badge": "Popular",
+    "icon": "⬡",
+    "image": "https://placehold.co/400x300/1a1a2e/dc2626?text=Adobe+CC"
+  },
+  {
+    "id": 11,
+    "name": "Microsoft Office 365",
+    "meta": "Digital license • 1 year",
+    "category": "software",
+    "price": 29.99,
+    "rating": 4.7,
+    "badge": "Best seller",
+    "icon": "⬢",
+    "image": "https://placehold.co/400x300/1a1a2e/f97316?text=Office+365"
+  },
+  {
+    "id": 12,
+    "name": "VPN Premium License",
+    "meta": "Digital license • 1 year",
+    "category": "software",
+    "price": 24.99,
+    "rating": 4.6,
+    "badge": "New",
+    "icon": "☁",
+    "image": "https://placehold.co/400x300/1a1a2e/8b5cf6?text=VPN+Pro"
+  },
+  {
+    "id": 13,
+    "name": "Steam Wallet Code",
+    "meta": "Digital code • $50 value",
+    "category": "gaming",
+    "price": 45.99,
+    "rating": 4.9,
+    "badge": "Top rated",
+    "icon": "⌁",
+    "image": "https://placehold.co/400x300/1a1a2e/6c3ce0?text=Steam"
+  },
+  {
+    "id": 14,
+    "name": "PlayStation Gift Card",
+    "meta": "Digital code • $25 value",
+    "category": "gaming",
+    "price": 22.99,
+    "rating": 4.8,
+    "badge": "Popular",
+    "icon": "▣",
+    "image": "https://placehold.co/400x300/1a1a2e/3b82f6?text=PlayStation"
+  },
+  {
+    "id": 15,
+    "name": "Xbox Game Pass Code",
+    "meta": "Digital code • 3 months",
+    "category": "gaming",
+    "price": 34.99,
+    "rating": 4.7,
+    "badge": "Best value",
+    "icon": "⌂",
+    "image": "https://placehold.co/400x300/1a1a2e/22c55e?text=Xbox+Game+Pass"
+  },
+  {
+    "id": 16,
+    "name": "Nintendo eShop Card",
+    "meta": "Digital code • $20 value",
+    "category": "gaming",
+    "price": 18.99,
+    "rating": 4.6,
+    "badge": "Trending",
+    "icon": "◈",
+    "image": "https://placehold.co/400x300/1a1a2e/dc2626?text=Nintendo"
   }
 ]
