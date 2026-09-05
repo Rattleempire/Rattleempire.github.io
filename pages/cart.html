@@ -1,1 +1,143 @@
-<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Cart • Rattle Empire</title><link rel="stylesheet" href="../assets/styles.css"></head><body><header class="site-header"><a class="brand" href="../index.html"><span class="brand-mark">R</span><span>Rattle<span class="accent">Empire</span></span></a></header><main class="container" style="padding-top:60px;padding-bottom:90px"><div class="eyebrow">CART</div><h1>Your cart</h1><div class="info-card" style="margin-top:24px"><p id="cartView" style="color:#8d97a8"></p><a class="primary-btn" href="../index.html">Continue shopping</a></div></main><script>const c=JSON.parse(localStorage.getItem('rattle_cart')||'[]');document.getElementById('cartView').textContent=c.length?`You have ${c.length} item(s) in the prototype cart.`:'Your cart is empty.';</script></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Your shopping cart on Rattle Empire">
+  <title>Cart • Rattle Empire</title>
+  <link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+
+  <!-- ============================================ -->
+  <!-- MENU LOADED FROM PARTIALS                    -->
+  <!-- ============================================ -->
+  <div id="menu-placeholder"></div>
+
+  <!-- ============================================ -->
+  <!-- MAIN CONTENT (UNIQUE TO CART PAGE)          -->
+  <!-- ============================================ -->
+  <main class="container" style="padding-top:60px;padding-bottom:90px">
+    <div class="eyebrow">CART</div>
+    <h1>Your cart</h1>
+
+    <div class="info-card" style="margin-top:24px">
+      <!-- Cart items will be displayed here -->
+      <div id="cartItems"></div>
+      <div style="margin-top:16px;display:flex;gap:12px;flex-wrap:wrap">
+        <a class="primary-btn" href="/">Continue shopping →</a>
+        <button class="ghost-btn" id="clearCartBtn" style="border-color:#dc2626;color:#dc2626">Clear cart</button>
+      </div>
+    </div>
+
+    <!-- Checkout section (placeholder for now) -->
+    <div class="info-card" style="margin-top:20px;border-color:#7c3aed40">
+      <h3 style="margin:0">💳 Checkout</h3>
+      <p style="color:#8d97a8;font-size:13px">
+        Secure backend checkout will be connected in the production phase.
+      </p>
+    </div>
+  </main>
+
+  <!-- ============================================ -->
+  <!-- FOOTER LOADED FROM PARTIALS                 -->
+  <!-- ============================================ -->
+  <div id="footer-placeholder"></div>
+
+  <!-- ============================================ -->
+  <!-- SCRIPTS                                      -->
+  <!-- ============================================ -->
+  <script src="../assets/app.js" defer></script>
+
+  <script>
+    // ---------- LOAD MENU & FOOTER ----------
+    fetch('../partials/menu.html')
+      .then(res => res.text())
+      .then(data => document.getElementById('menu-placeholder').innerHTML = data)
+      .catch(() => console.warn('Menu not found'));
+
+    fetch('../partials/footer.html')
+      .then(res => res.text())
+      .then(data => document.getElementById('footer-placeholder').innerHTML = data)
+      .catch(() => console.warn('Footer not found'));
+
+    // ---------- CART LOGIC ----------
+    const cart = JSON.parse(localStorage.getItem('rattle_cart') || '[]');
+    const cartContainer = document.getElementById('cartItems');
+
+    // Try to load product names from products.json
+    async function loadCartItems() {
+      try {
+        const response = await fetch('/data/products.json');
+        const products = await response.json();
+
+        if (cart.length === 0) {
+          cartContainer.innerHTML = '<p style="color:#8d97a8">Your cart is empty.</p>';
+          return;
+        }
+
+        // Build a list of items with product details
+        const cartItems = cart.map(id => {
+          const product = products.find(p => p.id === id);
+          return product || { name: 'Unknown product', price: 0, id: id };
+        });
+
+        // Group by product ID to show quantities
+        const grouped = {};
+        cartItems.forEach(item => {
+          if (grouped[item.id]) {
+            grouped[item.id].quantity += 1;
+          } else {
+            grouped[item.id] = { ...item, quantity: 1 };
+          }
+        });
+
+        const itemsList = Object.values(grouped);
+        const total = itemsList.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+
+        let html = '<div style="display:flex;flex-direction:column;gap:12px">';
+        itemsList.forEach(item => {
+          html += `
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid #1d2430">
+              <div>
+                <strong>${item.name}</strong>
+                <span style="color:#8d97a8;font-size:12px;margin-left:10px">× ${item.quantity}</span>
+              </div>
+              <span style="font-weight:700">$${(item.price * item.quantity).toFixed(2)}</span>
+            </div>
+          `;
+        });
+        html += `
+          <div style="display:flex;justify-content:space-between;padding-top:12px;font-size:18px;font-weight:800;border-top:2px solid #7c3aed">
+            <span>Total</span>
+            <span>$${total.toFixed(2)}</span>
+          </div>
+        `;
+        html += '</div>';
+
+        cartContainer.innerHTML = html;
+
+      } catch (error) {
+        // Fallback: show simple count if products can't be loaded
+        cartContainer.innerHTML = `
+          <p style="color:#8d97a8">You have ${cart.length} item(s) in your cart.</p>
+          <p style="color:#8d97a8;font-size:12px;margin-top:4px">(Product details will appear when product data is loaded.)</p>
+        `;
+      }
+    }
+
+    // ---------- CLEAR CART ----------
+    document.getElementById('clearCartBtn')?.addEventListener('click', () => {
+      localStorage.removeItem('rattle_cart');
+      cartContainer.innerHTML = '<p style="color:#8d97a8">Your cart is empty.</p>';
+      // Update cart count badge in the menu (if it exists)
+      const cartCount = document.getElementById('cartCount');
+      if (cartCount) cartCount.textContent = '0';
+    });
+
+    // ---------- LOAD THE CART ----------
+    loadCartItems();
+  </script>
+
+</body>
+</html>
