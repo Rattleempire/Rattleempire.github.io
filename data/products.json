@@ -8,7 +8,7 @@
     "rating": 4.9,
     "badge": "Best seller",
     "icon": "AI",
-    "image": "https://placehold.co/400x300/1a1a2e/8b5cf6?text=AI+Pro"
+    "image": "https://picsum.photos/400/300?random=1"
   },
   {
     "id": 2,
@@ -19,7 +19,7 @@
     "rating": 4.8,
     "badge": "Popular",
     "icon": "✦",
-    "image": "https://placehold.co/400x300/1a1a2e/8b5cf6?text=AI+Credits"
+    "image": "https://picsum.photos/400/300?random=2"
   },
   {
     "id": 3,
@@ -30,7 +30,7 @@
     "rating": 4.7,
     "badge": "Verified",
     "icon": "⚡",
-    "image": "https://placehold.co/400x300/1a1a2e/8b5cf6?text=Claude+Pro"
+    "image": "https://picsum.photos/400/300?random=3"
   },
   {
     "id": 4,
@@ -41,7 +41,7 @@
     "rating": 4.6,
     "badge": "New",
     "icon": "◇",
-    "image": "https://placehold.co/400x300/1a1a2e/8b5cf6?text=Canva+Pro"
+    "image": "https://picsum.photos/400/300?random=4"
   },
   {
     "id": 5,
@@ -52,7 +52,7 @@
     "rating": 4.9,
     "badge": "Top rated",
     "icon": "▶",
-    "image": "https://placehold.co/400x300/1a1a2e/dc2626?text=Netflix"
+    "image": "https://picsum.photos/400/300?random=5"
   },
   {
     "id": 6,
@@ -63,7 +63,7 @@
     "rating": 4.8,
     "badge": "Popular",
     "icon": "♫",
-    "image": "https://placehold.co/400x300/1a1a2e/22c55e?text=Spotify"
+    "image": "https://picsum.photos/400/300?random=6"
   },
   {
     "id": 7,
@@ -74,7 +74,7 @@
     "rating": 4.7,
     "badge": "Best value",
     "icon": "▲",
-    "image": "https://placehold.co/400x300/1a1a2e/3b82f6?text=Disney+"
+    "image": "https://picsum.photos/400/300?random=7"
   },
   {
     "id": 8,
@@ -85,7 +85,7 @@
     "rating": 4.5,
     "badge": "Trending",
     "icon": "◆",
-    "image": "https://placehold.co/400x300/1a1a2e/8b5cf6?text=HBO+Max"
+    "image": "https://picsum.photos/400/300?random=8"
   },
   {
     "id": 9,
@@ -96,7 +96,7 @@
     "rating": 4.9,
     "badge": "Verified",
     "icon": "⊞",
-    "image": "https://placehold.co/400x300/1a1a2e/00bcd4?text=Windows+11"
+    "image": "https://picsum.photos/400/300?random=9"
   },
   {
     "id": 10,
@@ -107,7 +107,7 @@
     "rating": 4.8,
     "badge": "Popular",
     "icon": "⬡",
-    "image": "https://placehold.co/400x300/1a1a2e/dc2626?text=Adobe+CC"
+    "image": "https://picsum.photos/400/300?random=10"
   },
   {
     "id": 11,
@@ -118,7 +118,7 @@
     "rating": 4.7,
     "badge": "Best seller",
     "icon": "⬢",
-    "image": "https://placehold.co/400x300/1a1a2e/f97316?text=Office+365"
+    "image": "https://picsum.photos/400/300?random=11"
   },
   {
     "id": 12,
@@ -129,7 +129,7 @@
     "rating": 4.6,
     "badge": "New",
     "icon": "☁",
-    "image": "https://placehold.co/400x300/1a1a2e/8b5cf6?text=VPN+Pro"
+    "image": "https://picsum.photos/400/300?random=12"
   },
   {
     "id": 13,
@@ -140,7 +140,7 @@
     "rating": 4.9,
     "badge": "Top rated",
     "icon": "⌁",
-    "image": "https://placehold.co/400x300/1a1a2e/6c3ce0?text=Steam"
+    "image": "https://picsum.photos/400/300?random=13"
   },
   {
     "id": 14,
@@ -151,7 +151,7 @@
     "rating": 4.8,
     "badge": "Popular",
     "icon": "▣",
-    "image": "https://placehold.co/400x300/1a1a2e/3b82f6?text=PlayStation"
+    "image": "https://picsum.photos/400/300?random=14"
   },
   {
     "id": 15,
@@ -162,7 +162,7 @@
     "rating": 4.7,
     "badge": "Best value",
     "icon": "⌂",
-    "image": "https://placehold.co/400x300/1a1a2e/22c55e?text=Xbox+Game+Pass"
+    "image": "https://picsum.photos/400/300?random=15"
   },
   {
     "id": 16,
@@ -173,6 +173,6 @@
     "rating": 4.6,
     "badge": "Trending",
     "icon": "◈",
-    "image": "https://placehold.co/400x300/1a1a2e/dc2626?text=Nintendo"
+    "image": "https://picsum.photos/400/300?random=16"
   }
 ]
