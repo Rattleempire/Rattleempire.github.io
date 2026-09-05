@@ -1,1 +1,85 @@
-<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Dashboard • Rattle Empire</title><link rel="stylesheet" href="../assets/styles.css"></head><body><header class="site-header"><a class="brand" href="../index.html"><span class="brand-mark">R</span><span>Rattle<span class="accent">Empire</span></span></a></header><main class="container" style="padding-top:60px;padding-bottom:90px"><div class="eyebrow">BUYER DASHBOARD</div><h1>Your account</h1><div class="platform-grid" style="margin-top:24px"><article class="info-card"><h3>Orders</h3><p>Order history and statuses will appear here.</p></article><article class="info-card"><h3>Delivery</h3><p>Digital delivery instructions will appear here.</p></article><article class="info-card"><h3>Support</h3><p>Support tickets will be linked to your account.</p></article></div></main></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Your account dashboard on Rattle Empire">
+  <title>Dashboard • Rattle Empire</title>
+  <link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+
+  <div id="menu-placeholder"></div>
+
+  <main class="container" style="padding-top:60px;padding-bottom:90px">
+    <div class="eyebrow">BUYER DASHBOARD</div>
+    <h1>Your account</h1>
+
+    <p style="color:#8d97a8;margin-top:-8px;margin-bottom:24px">
+      Manage your orders, deliveries, and support tickets.
+    </p>
+
+    <div class="platform-grid" style="margin-top:24px">
+      <article class="info-card">
+        <div style="font-size:24px;margin-bottom:4px">📦</div>
+        <h3>Orders</h3>
+        <p>Order history and statuses will appear here.</p>
+        <a href="#" style="font-size:12px;color:#7c3aed">View all →</a>
+      </article>
+
+      <article class="info-card">
+        <div style="font-size:24px;margin-bottom:4px">📬</div>
+        <h3>Delivery</h3>
+        <p>Digital delivery instructions will appear here.</p>
+        <a href="#" style="font-size:12px;color:#7c3aed">Track deliveries →</a>
+      </article>
+
+      <article class="info-card">
+        <div style="font-size:24px;margin-bottom:4px">🛟</div>
+        <h3>Support</h3>
+        <p>Support tickets will be linked to your account.</p>
+        <a href="#" style="font-size:12px;color:#7c3aed">Contact support →</a>
+      </article>
+    </div>
+
+    <div class="info-card" style="margin-top:20px;border-color:#7c3aed40">
+      <h3 style="margin:0">Recent activity</h3>
+      <p style="color:#8d97a8;font-size:13px;margin-top:8px">
+        Your recent orders and activity will appear here once you start shopping.
+      </p>
+    </div>
+  </main>
+
+  <div id="footer-placeholder"></div>
+
+  <script src="../assets/app.js" defer></script>
+
+  <script>
+  
+    fetch('../partials/menu.html')
+      .then(res => res.text())
+      .then(data => document.getElementById('menu-placeholder').innerHTML = data)
+      .catch(() => console.warn('Menu not found'));
+
+    fetch('../partials/footer.html')
+      .then(res => res.text())
+      .then(data => document.getElementById('footer-placeholder').innerHTML = data)
+      .catch(() => console.warn('Footer not found'));
+
+    const cartCount = document.getElementById('cartCount');
+    if (cartCount) {
+      const cart = JSON.parse(localStorage.getItem('rattle_cart') || '[]');
+      cartCount.textContent = cart.length;
+    }
+
+    const cart = JSON.parse(localStorage.getItem('rattle_cart') || '[]');
+    if (cart.length > 0) {
+      const welcomeEl = document.querySelector('.info-card:last-child p');
+      if (welcomeEl) {
+        welcomeEl.textContent = `You have ${cart.length} item(s) in your cart. Complete your purchase to see order history here.`;
+      }
+    }
+  </script>
+
+</body>
+</html>
