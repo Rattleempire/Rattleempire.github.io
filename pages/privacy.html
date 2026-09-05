@@ -1,1 +1,75 @@
-<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Privacy • Rattle Empire</title><link rel="stylesheet" href="../assets/styles.css"></head><body><main class="container" style="padding-top:60px;padding-bottom:90px"><h1>Privacy</h1><div class="info-card"><p style="color:#8d97a8">Placeholder. Add actual data handling, retention and contact information before launch.</p></div></main></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Privacy Policy for Rattle Empire">
+  <title>Privacy Policy • Rattle Empire</title>
+  <link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
+
+  <div id="menu-placeholder"></div>
+
+  <main class="container" style="padding-top:60px;padding-bottom:90px;max-width:800px;margin-left:auto;margin-right:auto">
+    <div class="eyebrow">LEGAL</div>
+    <h1>Privacy Policy</h1>
+    <p style="color:#8d97a8;margin-top:-8px;margin-bottom:32px;font-size:14px">
+      Last updated: September 2026
+    </p>
+
+    <div class="info-card" style="padding:28px;display:flex;flex-direction:column;gap:20px">
+      <section>
+        <h3 style="margin:0 0 8px">1. Information We Collect</h3>
+        <p style="color:#8d97a8;font-size:14px;margin:0">
+          Rattle Empire collects information you provide directly, such as your name, email address, and payment details when you create an account, make a purchase, or apply to become a seller.
+        </p>
+      </section>
+
+      <section>
+        <h3 style="margin:0 0 8px">2. How We Use Your Information</h3>
+        <p style="color:#8d97a8;font-size:14px;margin:0">
+          We use your information to process orders, deliver digital products, communicate with you about your account, and improve our marketplace platform.
+        </p>
+      </section>
+
+      <section>
+        <h3 style="margin:0 0 8px">3. Data Security</h3>
+        <p style="color:#8d97a8;font-size:14px;margin:0">
+          We implement appropriate technical and organizational measures to protect your personal data. However, no method of transmission over the internet is 100% secure.
+        </p>
+      </section>
+
+      <section>
+        <h3 style="margin:0 0 8px">4. Your Rights</h3>
+        <p style="color:#8d97a8;font-size:14px;margin:0">
+          You have the right to access, correct, or delete your personal data. Contact us at <a href="mailto:support@rattleempire.com" style="color:#7c3aed;text-decoration:none">support@rattleempire.com</a> for any privacy-related requests.
+        </p>
+      </section>
+
+      <section style="border-top:1px solid #1d2430;padding-top:16px">
+        <p style="color:#687184;font-size:12px;margin:0">
+          This privacy policy is a placeholder. Update it with your actual policies before launching.
+        </p>
+      </section>
+    </div>
+  </main>
+
+  <div id="footer-placeholder"></div>
+
+  <script src="../assets/app.js" defer></script>
+
+  <script>
+    fetch('../partials/menu.html')
+      .then(res => res.text())
+      .then(data => document.getElementById('menu-placeholder').innerHTML = data)
+      .catch(() => console.warn('Menu not found'));
+
+    fetch('../partials/footer.html')
+      .then(res => res.text())
+      .then(data => document.getElementById('footer-placeholder').innerHTML = data)
+      .catch(() => console.warn('Footer not found'));
+  </script>
+
+</body>
+</html>
