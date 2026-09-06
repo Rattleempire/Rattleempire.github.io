@@ -753,3 +753,59 @@ body.light .footer {
 body.light .product-art .product-logo {
   background: rgba(255, 255, 255, 0.7);
 }
+
+/* ===== CLICKABLE ELEMENT INDICATORS ===== */
+
+/* All interactive elements get pointer + transition */
+a, button, .product-card, .category-card,
+.add-btn, .primary-btn, .text-link,
+[role="button"], [data-clickable] {
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+/* Product cards lift on hover */
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+}
+
+/* Buttons get a subtle press effect */
+.primary-btn:hover, .add-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+.primary-btn:active, .add-btn:active {
+  transform: translateY(0);
+}
+
+/* Links get underline slide-in */
+.text-link {
+  position: relative;
+}
+.text-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--accent);
+  transition: width 0.25s ease;
+}
+.text-link:hover::after {
+  width: 100%;
+}
+
+/* Category cards glow border on hover */
+.category-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-3px);
+}
+
+/* Focus visible for accessibility (keyboard users) */
+a:focus-visible, button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
