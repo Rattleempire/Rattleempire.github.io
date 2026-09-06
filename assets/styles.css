@@ -809,3 +809,25 @@ a:focus-visible, button:focus-visible {
   outline-offset: 3px;
   border-radius: 6px;
 }
+
+.theme-toggle {
+  position: relative;
+  width: 52px;
+  height: 28px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: var(--bg-elevated);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 0 4px;
+}
+.theme-toggle span {
+  font-size: 14px;
+  transition: opacity 0.3s, transform 0.3s;
+}
+.theme-toggle .icon-moon { opacity: 0; position: absolute; right: 6px; }
+.theme-toggle .icon-sun  { opacity: 1; position: absolute; left: 6px; }
+
+[data-theme="dark"] .theme-toggle .icon-moon { opacity: 1; }
+[data-theme="dark"] .theme-toggle .icon-sun  { opacity: 0; }
