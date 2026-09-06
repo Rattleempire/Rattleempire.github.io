@@ -232,3 +232,23 @@ body {
   border-color: var(--border-hover);
   box-shadow: var(--shadow-md);
 }
+
+// ===== THEME ENGINE =====
+(function() {
+  const saved = localStorage.getItem('rattle_theme');
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const theme = saved || (prefersDark ? 'dark' : 'light');
+  document.documentElement.setAttribute('data-theme', theme);
+})();
+
+document.addEventListener('DOMContentLoaded', () => {
+  const toggle = document.getElementById('theme-toggle');
+  if (!toggle) return;
+
+  toggle.addEventListener('click', () => {
+    const current = document.documentElement.getAttribute('data-theme');
+    const next = current === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    localStorage.setItem('rattle_theme', next);
+  });
+});
