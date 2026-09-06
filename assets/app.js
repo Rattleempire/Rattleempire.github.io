@@ -166,3 +166,69 @@ if (localStorage.getItem("rattle_theme") === "light") {
 // ---------- START THE APP ----------
 updateCart();
 loadProducts();
+
+/* ===== THEME SYSTEM — No Neon, Muted & Professional ===== */
+
+:root {
+  /* --- Light Theme (default) --- */
+  --bg: #f8f9fb;
+  --bg-card: #ffffff;
+  --bg-elevated: #ffffff;
+  --text-primary: #1a1d23;
+  --text-secondary: #5a6170;
+  --text-muted: #8b92a0;
+  --border: #e2e5ea;
+  --border-hover: #c8ccd4;
+  --accent: #3d5af1;
+  --accent-hover: #2d46c9;
+  --accent-soft: rgba(61, 90, 241, 0.08);
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.04);
+  --shadow-md: 0 4px 16px rgba(0,0,0,0.06);
+  --shadow-lg: 0 12px 40px rgba(0,0,0,0.08);
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+[data-theme="dark"] {
+  --bg: #0f1117;
+  --bg-card: #1a1d27;
+  --bg-elevated: #22262f;
+  --text-primary: #e8eaf0;
+  --text-secondary: #a0a7b5;
+  --text-muted: #6b7280;
+  --border: #2a2e3a;
+  --border-hover: #3d4250;
+  --accent: #6b8afd;
+  --accent-hover: #8ba3ff;
+  --accent-soft: rgba(107, 138, 253, 0.1);
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.2);
+  --shadow-md: 0 4px 16px rgba(0,0,0,0.3);
+  --shadow-lg: 0 12px 40px rgba(0,0,0,0.4);
+}
+
+/* Smooth theme transition */
+* {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Base resets using variables */
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text-primary);
+  margin: 0;
+  line-height: 1.6;
+}
+
+.product-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+}
+
+.product-card:hover {
+  border-color: var(--border-hover);
+  box-shadow: var(--shadow-md);
+}
