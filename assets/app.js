@@ -53,6 +53,7 @@ async function initLayout() {
   updateCart();
 }
 
+function artworkFor(p) {
   const palettes = {
     ai: ["#2e6b57", "#1c4536"],
     streaming: ["#7e2f38", "#521f26"],
