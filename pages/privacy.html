@@ -3,83 +3,65 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="Privacy Policy for Rattle Empire">
+  <meta name="description" content="Privacy policy of Rattle Empire">
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
   <meta http-equiv="X-Frame-Options" content="DENY">
   <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
-  <meta http-equiv="Content-Security-Policy" 
-    content="default-src 'self'; 
-        img-src 'self' data:; 
-        style-src 'self' 'unsafe-inline'; 
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self';
+        img-src 'self' data:;
+        style-src 'self' 'unsafe-inline';
         script-src 'self';
         font-src 'self';
         connect-src 'self';">
-  <title>Privacy Policy • Rattle Empire</title>
-  <link rel="stylesheet" href="../assets/styles.css">
+  <title>Privacy • Rattle Empire</title>
+  <link rel="icon" type="image/jpeg" href="/logo.jpg">
+  <link rel="stylesheet" href="../assets/styles.css?v=3.0">
+  <style>
+    .legal { max-width: 760px; }
+    .legal h2 { font-size: 18px; margin: 28px 0 8px; }
+    .legal p, .legal li { color: var(--text-secondary); font-size: 14px; }
+    .legal ul { padding-left: 20px; }
+  </style>
 </head>
 <body>
 
   <div id="menu-placeholder"></div>
 
-  <main class="container" style="padding-top:60px;padding-bottom:90px;max-width:800px;margin-left:auto;margin-right:auto">
+  <main class="container section legal">
     <div class="eyebrow">LEGAL</div>
-    <h1>Privacy Policy</h1>
-    <p style="color:#8d97a8;margin-top:-8px;margin-bottom:32px;font-size:14px">
-      Last updated: September 2026
-    </p>
+    <h1>Privacy policy</h1>
+    <p>Last updated: September 2026</p>
 
-    <div class="info-card" style="padding:28px;display:flex;flex-direction:column;gap:20px">
-      <section>
-        <h3 style="margin:0 0 8px">1. Information We Collect</h3>
-        <p style="color:#8d97a8;font-size:14px;margin:0">
-          Rattle Empire collects information you provide directly, such as your name, email address, and payment details when you create an account, make a purchase, or apply to become a seller.
-        </p>
-      </section>
+    <h2>1. What we collect</h2>
+    <p>During the current demo phase, Rattle Empire stores data only in your own browser
+    (local storage): your cart contents and your theme preference. No personal data is
+    transmitted to our servers.</p>
 
-      <section>
-        <h3 style="margin:0 0 8px">2. How We Use Your Information</h3>
-        <p style="color:#8d97a8;font-size:14px;margin:0">
-          We use your information to process orders, deliver digital products, communicate with you about your account, and improve our marketplace platform.
-        </p>
-      </section>
+    <h2>2. What we will collect in production</h2>
+    <ul>
+      <li>Account details you provide (email, password hash).</li>
+      <li>Order records required for delivery and receipts.</li>
+      <li>Seller verification documents, handled confidentially.</li>
+    </ul>
 
-      <section>
-        <h3 style="margin:0 0 8px">3. Data Security</h3>
-        <p style="color:#8d97a8;font-size:14px;margin:0">
-          We implement appropriate technical and organizational measures to protect your personal data. However, no method of transmission over the internet is 100% secure.
-        </p>
-      </section>
+    <h2>3. What we never do</h2>
+    <ul>
+      <li>We never sell personal data to third parties.</li>
+      <li>We never store full payment card details; payments are processed by licensed payment providers.</li>
+      <li>We never track you across other websites.</li>
+    </ul>
 
-      <section>
-        <h3 style="margin:0 0 8px">4. Your Rights</h3>
-        <p style="color:#8d97a8;font-size:14px;margin:0">
-          You have the right to access, correct, or delete your personal data. Contact us at <a href="mailto:support@rattleempire.com" style="color:#7c3aed;text-decoration:none">support@rattleempire.com</a> for any privacy-related requests.
-        </p>
-      </section>
+    <h2>4. Your controls</h2>
+    <p>You can clear your cart and theme preference at any time from your browser settings.
+    In production you will be able to export or delete your account data by contacting support.</p>
 
-      <section style="border-top:1px solid #1d2430;padding-top:16px">
-        <p style="color:#687184;font-size:12px;margin:0">
-          This privacy policy is a placeholder. Update it with your actual policies before launching.
-        </p>
-      </section>
-    </div>
+    <h2>5. Contact</h2>
+    <p>Privacy questions: support@rattleempire.example (production contact will be published at launch).</p>
   </main>
 
   <div id="footer-placeholder"></div>
 
-  <script src="../assets/app.js" defer></script>
-
-  <script>
-    fetch('../partials/menu.html')
-      .then(res => res.text())
-      .then(data => document.getElementById('menu-placeholder').innerHTML = data)
-      .catch(() => console.warn('Menu not found'));
-
-    fetch('../partials/footer.html')
-      .then(res => res.text())
-      .then(data => document.getElementById('footer-placeholder').innerHTML = data)
-      .catch(() => console.warn('Footer not found'));
-  </script>
-
+  <script src="../assets/app.js?v=3.0" defer></script>
 </body>
 </html>
