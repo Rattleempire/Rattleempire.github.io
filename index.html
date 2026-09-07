@@ -95,29 +95,8 @@
     </section>
   </main>
 
-  <!-- ============================================ -->
-  <!-- FOOTER LOADED FROM PARTIALS                  -->
-  <!-- ============================================ -->
-  <div id="footer-placeholder"></div>
-
-  <!-- ============================================ -->
-  <!-- SCRIPTS                                      -->
-  <!-- ============================================ -->
-  <script src="assets/app.js?v=2.0" defer></script>
-
-  <script>
-    // Load the menu from the partials folder
-    fetch('/partials/menu.html')
-      .then(response => response.text())
-      .then(data => document.getElementById('menu-placeholder').innerHTML = data)
-      .catch(() => console.warn('Menu could not be loaded.'));
-
-    // Load the footer from the partials folder
-    fetch('/partials/footer.html')
-      .then(response => response.text())
-      .then(data => document.getElementById('footer-placeholder').innerHTML = data)
-      .catch(() => console.warn('Footer could not be loaded.'));
-  </script>
+  <link rel="stylesheet" href="assets/styles.css?v=3.0">      <!-- use ../assets/... in /pages/ -->
+  <script src="assets/app.js?v=3.0" defer></script>
 
 </body>
 </html>
