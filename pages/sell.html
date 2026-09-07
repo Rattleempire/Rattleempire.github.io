@@ -3,94 +3,70 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="Apply to become a seller on Rattle Empire">
+  <meta name="description" content="Become a verified seller on Rattle Empire">
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
   <meta http-equiv="X-Frame-Options" content="DENY">
   <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
-  <meta http-equiv="Content-Security-Policy" 
-    content="default-src 'self'; 
-        img-src 'self' data:; 
-        style-src 'self' 'unsafe-inline'; 
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self';
+        img-src 'self' data:;
+        style-src 'self' 'unsafe-inline';
         script-src 'self';
         font-src 'self';
         connect-src 'self';">
-  <title>Become a Seller • Rattle Empire</title>
-  <link rel="stylesheet" href="../assets/styles.css">
+  <title>Become a seller • Rattle Empire</title>
+  <link rel="icon" type="image/jpeg" href="/logo.jpg">
+  <link rel="stylesheet" href="../assets/styles.css?v=3.0">
 </head>
 <body>
 
   <div id="menu-placeholder"></div>
 
-  <main>
-    <section class="container section" style="padding-top:60px;max-width:700px;margin-left:auto;margin-right:auto">
-      <div class="eyebrow">SELLER ONBOARDING</div>
-      <h1>Run your inventory</h1>
-      <p style="color:#8d97a8;margin-bottom:32px">
-        Create listings, manage stock, monitor orders and submit products for marketplace approval.
-      </p>
+  <main class="container" style="padding-top:60px;padding-bottom:90px">
+    <div class="eyebrow">SELLERS</div>
+    <h1>Run your inventory</h1>
+    <p style="color:var(--text-secondary);max-width:640px">
+      Rattle Empire only accepts authorized sellers. Every application is reviewed
+      before listings go live, keeping the marketplace clean and trusted.
+    </p>
 
-      <form id="sellerApplication" style="display:flex;flex-direction:column;gap:20px">
-        <div>
-          <label style="font-weight:600;display:block;margin-bottom:4px">Business / Display name</label>
-          <input type="text" placeholder="e.g. GameKeys Shop" required style="width:100%;padding:12px;border-radius:8px;border:1px solid #2e3440;background:transparent;color:#f4f6fb">
-        </div>
+    <div class="platform-grid" style="margin-top:28px">
+      <article class="info-card"><div class="eyebrow">STEP 1</div><h3>Apply</h3><p>Submit your shop details and the product categories you intend to sell.</p></article>
+      <article class="info-card"><div class="eyebrow">STEP 2</div><h3>Get verified</h3><p>Our team reviews authorization documents and supply-chain proof.</p></article>
+      <article class="info-card"><div class="eyebrow">STEP 3</div><h3>List & sell</h3><p>Approved sellers publish listings, manage stock and receive orders.</p></article>
+    </div>
 
-        <div>
-          <label style="font-weight:600;display:block;margin-bottom:4px">Email address</label>
-          <input type="email" placeholder="you@example.com" required style="width:100%;padding:12px;border-radius:8px;border:1px solid #2e3440;background:transparent;color:#f4f6fb">
-        </div>
-
-        <div>
-          <label style="font-weight:600;display:block;margin-bottom:4px">Product type</label>
-          <select required style="width:100%;padding:12px;border-radius:8px;border:1px solid #2e3440;background:transparent;color:#f4f6fb">
-            <option value="">Select category...</option>
-            <option value="AI">AI & Productivity</option>
-            <option value="Streaming">Streaming</option>
-            <option value="Software">Software</option>
-            <option value="Gaming">Gaming</option>
-          </select>
-        </div>
-
-        <div>
-          <label style="font-weight:600;display:block;margin-bottom:4px">Brief description of your inventory</label>
-          <textarea rows="4" placeholder="What digital products will you offer?" style="width:100%;padding:12px;border-radius:8px;border:1px solid #2e3440;background:transparent;color:#f4f6fb;resize:vertical"></textarea>
-        </div>
-
-        <button type="submit" class="primary-btn large" style="width:fit-content">Submit application →</button>
+    <div class="info-card" style="max-width:560px;margin-top:24px;padding:26px">
+      <h3 style="margin:0 0 16px">Seller application</h3>
+      <form data-demo
+            data-demo-title="Application submitted"
+            data-demo-message="Our verification team will review your application. This demo stores nothing on the server yet.">
+        <label for="shop">Shop name</label>
+        <input id="shop" type="text" placeholder="e.g. GameKeys Shop" required>
+        <div style="height:14px"></div>
+        <label for="email">Contact email</label>
+        <input id="email" type="email" placeholder="you@example.com" required>
+        <div style="height:14px"></div>
+        <label for="category">Primary category</label>
+        <select id="category" required>
+          <option value="">Select a category…</option>
+          <option>AI & Productivity</option>
+          <option>Streaming</option>
+          <option>Software</option>
+          <option>Gaming</option>
+        </select>
+        <div style="height:14px"></div>
+        <label for="plans">What will you offer?</label>
+        <textarea id="plans" rows="4" placeholder="What digital products will you offer?" required></textarea>
+        <div style="height:18px"></div>
+        <button class="primary-btn" type="submit" style="width:100%">Submit application →</button>
       </form>
-      
-      <div id="formMessage" style="margin-top:16px"></div>
-    </section>
+    </div>
   </main>
 
   <div id="footer-placeholder"></div>
 
-  <script src="../assets/app.js" defer></script>
-
-  <script>
-    
-    fetch('../partials/menu.html')
-      .then(res => res.text())
-      .then(data => document.getElementById('menu-placeholder').innerHTML = data)
-      .catch(() => console.warn('Menu not found'));
-
-    fetch('../partials/footer.html')
-      .then(res => res.text())
-      .then(data => document.getElementById('footer-placeholder').innerHTML = data)
-      .catch(() => console.warn('Footer not found'));
-
-    document.getElementById('sellerApplication').addEventListener('submit', function(e) {
-      e.preventDefault(); 
-      
-      document.getElementById('formMessage').innerHTML = 
-        '<div class="info-card" style="background:#00ff9d10;border-color:#00ff9d40;padding:16px">' +
-        '<p style="color:#00ff9d;margin:0">✅ Application received! Our admin team will review your request.</p>' +
-        '<p style="color:#8d97a8;font-size:12px;margin:4px 0 0">We will contact you at the email you provided.</p>' +
-        '</div>';
-
-      this.reset();
-    });
-  </script>
-
+  <script src="../assets/app.js?v=3.0" defer></script>
+  <script src="../assets/page-forms.js?v=3.0" defer></script>
 </body>
 </html>
