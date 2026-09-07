@@ -3,24 +3,59 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta http-equiv="refresh" content="0; url=sell.html">
+  <meta name="description" content="Seller dashboard on Rattle Empire">
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
   <meta http-equiv="X-Frame-Options" content="DENY">
   <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
-  <meta http-equiv="Content-Security-Policy" 
-    content="default-src 'self'; 
-        img-src 'self' data:; 
-        style-src 'self' 'unsafe-inline'; 
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self';
+        img-src 'self' data:;
+        style-src 'self' 'unsafe-inline';
         script-src 'self';
         font-src 'self';
         connect-src 'self';">
-  <title>Redirecting • Rattle Empire</title>
-  <link rel="stylesheet" href="../assets/styles.css">
+  <title>Seller dashboard • Rattle Empire</title>
+  <link rel="icon" type="image/jpeg" href="/logo.jpg">
+  <link rel="stylesheet" href="../assets/styles.css?v=3.0">
 </head>
 <body>
-  <main class="container" style="padding-top:80px;text-align:center">
-    <p style="color:#8d97a8">Redirecting to seller application...</p>
-    <p><a href="sell.html" style="color:#7c3aed">Click here if you are not redirected.</a></p>
+
+  <div id="menu-placeholder"></div>
+
+  <main class="container" style="padding-top:60px;padding-bottom:90px">
+    <div class="eyebrow">SELLER DASHBOARD</div>
+    <h1>Your shop</h1>
+
+    <div class="platform-grid" style="margin-top:24px">
+      <article class="info-card">
+        <div class="eyebrow">LISTINGS</div>
+        <h3>Active listings</h3>
+        <p>No live listings yet. Approved sellers can publish products here.</p>
+        <a href="/pages/sell.html">Create a listing →</a>
+      </article>
+      <article class="info-card">
+        <div class="eyebrow">STOCK</div>
+        <h3>Stock monitor</h3>
+        <p>Track code inventory, low-stock alerts and delivery counts per product.</p>
+      </article>
+      <article class="info-card">
+        <div class="eyebrow">ORDERS</div>
+        <h3>Order queue</h3>
+        <p>Incoming orders, delivery status and buyer support requests in one place.</p>
+      </article>
+    </div>
+
+    <div class="info-card" style="margin-top:20px">
+      <h3 style="margin:0">🛡 Verification status</h3>
+      <p style="color:var(--text-secondary);font-size:13px;margin:8px 0 0">
+        Seller tools unlock after verification. Inventory, orders and payouts connect
+        to the secure backend in the production phase.
+      </p>
+    </div>
   </main>
+
+  <div id="footer-placeholder"></div>
+
+  <script src="../assets/app.js?v=3.0" defer></script>
 </body>
 </html>
