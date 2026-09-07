@@ -1,112 +1,177 @@
-// ============================================================
-// RATTLE EMPIRE - MAIN APPLICATION ENGINE
-// ============================================================
+"use strict";
 
-// ---------- GLOBAL STATE ----------
+function applyTheme(theme) {
+  document.documentElement.setAttribute("data-theme", theme);
+}
+(function initTheme() {
+  const saved = localStorage.getItem("rattle_theme");
+  const system = window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+  applyTheme(saved === "light" || saved === "dark" ? saved : system);
+})();
+
 let products = [];
 let filter = "all";
 let cart = JSON.parse(localStorage.getItem("rattle_cart") || "[]");
 
-// ---------- DOM REFERENCES ----------
-const grid = document.getElementById("productGrid");
-const searchInput = document.getElementById("searchInput");
-const sortSelect = document.getElementById("sortSelect");
-const emptyState = document.getElementById("emptyState");
-const cartCount = document.getElementById("cartCount");
+const $ = (id) => document.getElementById(id);
+const grid = $("productGrid");
+const searchInput = $("searchInput");
+const sortSelect = $("sortSelect");
+const emptyState = $("emptyState");
 
-// ---------- LOAD PRODUCTS FROM JSON FILE ----------
-async function loadProducts() {
+function esc(value) {
+  const div = document.createElement("div");
+  div.textContent = value == null ? "" : String(value);
+  return div.innerHTML;
+}
+
+async function loadPartial(placeholderId, url) {
   try {
-    const response = await fetch('/data/products.json?v=' + Date.now());
-    if (!response.ok) throw new Error('Products file not found');
-    products = await response.json();
-    render();
-  } catch (error) {
-    console.warn('Could not load products from JSON. Using sample data.');
-    products = [
-      {id:1,name:"AI Pro Membership",meta:"1 month • authorized",category:"ai",price:19.99,rating:4.9,badge:"Best seller",icon:"AI",image:"https://picsum.photos/400/300?random=1"},
-      {id:2,name:"AI Productivity Bundle",meta:"1 month • authorized",category:"ai",price:12.99,rating:4.8,badge:"Popular",icon:"✦",image:"https://picsum.photos/400/300?random=2"},
-      {id:3,name:"Streaming Membership",meta:"1 month • authorized",category:"streaming",price:11.99,rating:4.8,badge:"Trending",icon:"▶",image:"https://picsum.photos/400/300?random=3"},
-      {id:4,name:"Music Premium",meta:"1 month • authorized",category:"streaming",price:7.99,rating:4.7,badge:"Popular",icon:"♫",image:"https://picsum.photos/400/300?random=4"},
-      {id:5,name:"Cloud Pro License",meta:"30 days • license",category:"software",price:9.99,rating:4.9,badge:"Verified",icon:"☁",image:"https://picsum.photos/400/300?random=5"},
-      {id:6,name:"Design Toolkit",meta:"Digital license",category:"software",price:14.99,rating:4.6,badge:"New",icon:"◇",image:"https://picsum.photos/400/300?random=6"},
-      {id:7,name:"Game Wallet Code",meta:"Digital code",category:"gaming",price:24.99,rating:4.8,badge:"Top rated",icon:"⌁",image:"https://picsum.photos/400/300?random=7"},
-      {id:8,name:"Gift Card",meta:"Digital delivery",category:"gift",price:25.00,rating:4.9,badge:"Instant",icon:"$",image:"https://picsum.photos/400/300?random=8"}
-    ];
-    render();
+    const res = await fetch(url);
+    if (!res.ok) throw new Error(res.status);
+    const host = $(placeholderId);
+    if (host) host.innerHTML = await res.text();
+  } catch (err) {
+    console.warn("Partial not loaded:", url);
   }
 }
 
-// ---------- RENDER PRODUCTS ----------
+async function initLayout() {
+  await Promise.all([
+    loadPartial("menu-placeholder", "/partials/menu.html"),
+    loadPartial("footer-placeholder", "/partials/footer.html")
+  ]);
+
+  const toggle = $("theme-toggle");
+  if (toggle) {
+    toggle.addEventListener("click", () => {
+      const next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
+      applyTheme(next);
+      localStorage.setItem("rattle_theme", next);
+    });
+  }
+  updateCart();
+}
+
+  const palettes = {
+    ai: ["#2e6b57", "#1c4536"],
+    streaming: ["#7e2f38", "#521f26"],
+    software: ["#2e4a86", "#1e3159"],
+    gaming: ["#3c4250", "#242933"]
+  };
+  const c = palettes[p.category] || ["#4a5160", "#2c313c"];
+  const svg =
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">' +
+    '<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1">' +
+    '<stop offset="0" stop-color="' + c[0] + '"/><stop offset="1" stop-color="' + c[1] + '"/>' +
+    '</linearGradient></defs>' +
+    '<rect width="400" height="300" fill="url(#g)"/>' +
+    '<circle cx="310" cy="90" r="80" fill="rgba(255,255,255,0.08)"/>' +
+    '<circle cx="90" cy="250" r="110" fill="rgba(255,255,255,0.05)"/>' +
+    '</svg>';
+  return "data:image/svg+xml;base64," + btoa(svg);
+}
+
+async function loadProducts() {
+  if (!grid) return;
+  try {
+    const res = await fetch("/data/products.json?v=" + Date.now());
+    if (!res.ok) throw new Error(res.status);
+    products = await res.json();
+  } catch (err) {
+    console.warn("Could not load products.json");
+    products = [];
+  }
+  render();
+}
+
 function render() {
+  if (!grid) return;
+
   if (!products.length) {
-    grid.innerHTML = '<p style="text-align:center;color:#8d97a8;padding:40px 0">Loading products...</p>';
+    grid.innerHTML = "";
+    if (emptyState) { emptyState.hidden = false; emptyState.textContent = "Products are being prepared. Check back soon."; }
     return;
   }
 
   let visible = products.filter(p => {
     const matchFilter = filter === "all" || p.category === filter;
-    const q = searchInput.value.trim().toLowerCase();
-    const matchSearch = !q || `${p.name} ${p.meta} ${p.category}`.toLowerCase().includes(q);
+    const q = searchInput ? searchInput.value.trim().toLowerCase() : "";
+    const matchSearch = !q || (p.name + " " + p.meta + " " + p.category).toLowerCase().includes(q);
     return matchFilter && matchSearch;
   });
 
-  const sort = sortSelect.value;
-  if (sort === "price-asc") visible.sort((a,b)=>a.price-b.price);
-  if (sort === "price-desc") visible.sort((a,b)=>b.price-a.price);
-  if (sort === "rating") visible.sort((a,b)=>b.rating-a.rating);
+  if (sortSelect) {
+    const sort = sortSelect.value;
+    if (sort === "price-asc") visible.sort((a, b) => a.price - b.price);
+    if (sort === "price-desc") visible.sort((a, b) => b.price - a.price);
+    if (sort === "rating") visible.sort((a, b) => b.rating - a.rating);
+  }
 
   grid.innerHTML = visible.map(p => `
     <article class="product-card">
-      <div class="product-art" style="background-image:url('${p.image || 'https://picsum.photos/400/300?random=' + p.id}');background-size:cover;background-position:center;position:relative">
-        <div class="product-logo ${p.category}" style="position:relative;z-index:2">${p.icon}</div>
-        <span class="pill" style="position:relative;z-index:2">${p.badge}</span>
-        <div style="position:absolute;inset:0;background:rgba(7,9,14,0.5)"></div>
+      <div class="product-art" style="background-image:url('${p.image || artworkFor(p)}')">
+        <div class="product-logo">${esc(p.icon)}</div>
+        <span class="pill">${esc(p.badge)}</span>
       </div>
       <div class="product-body">
-        <strong>${p.name}</strong>
-        <small>${p.meta}</small>
-        <div class="rating">★ ${p.rating}</div>
+        <strong>${esc(p.name)}</strong>
+        <small>${esc(p.meta)}</small>
+        <div class="rating">★ ${esc(p.rating)}</div>
         <div class="price-row">
-          <span class="price">$${p.price.toFixed(2)}</span>
+          <span class="price">$${Number(p.price).toFixed(2)}</span>
           <button class="add-btn" data-add="${p.id}">Add to cart</button>
         </div>
       </div>
     </article>
   `).join("");
 
-  emptyState.hidden = visible.length > 0;
-  grid.querySelectorAll("[data-add]").forEach(btn => 
+  if (emptyState) emptyState.hidden = visible.length > 0;
+
+  grid.querySelectorAll("[data-add]").forEach(btn =>
     btn.addEventListener("click", () => addToCart(Number(btn.dataset.add)))
   );
 }
 
-// ---------- CART FUNCTIONS ----------
 function addToCart(id) {
   cart.push(id);
   localStorage.setItem("rattle_cart", JSON.stringify(cart));
   updateCart();
   openModal("Added to cart", "This demo stores your cart in your browser. A secure backend checkout will be connected in the production phase.");
 }
-
 function updateCart() {
-  cartCount.textContent = cart.length;
+  const el = $("cartCount");
+  if (el) el.textContent = cart.length;
 }
 
-// ---------- MODAL ----------
+function buildModal() {
+  if ($("modalBackdrop")) return;
+  document.body.insertAdjacentHTML("beforeend", `
+    <div class="modal-backdrop" id="modalBackdrop" hidden>
+      <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <h3 id="modalTitle"></h3>
+        <p id="modalText"></p>
+        <div class="modal-actions">
+          <button class="ghost-btn" id="closeModal">Close</button>
+          <button class="primary-btn" id="modalAction">OK</button>
+        </div>
+      </div>
+    </div>`);
+  $("closeModal").addEventListener("click", closeModal);
+  $("modalAction").addEventListener("click", closeModal);
+  $("modalBackdrop").addEventListener("click", e => { if (e.target.id === "modalBackdrop") closeModal(); });
+}
 function openModal(title, text) {
-  document.getElementById("modalTitle").textContent = title;
-  document.getElementById("modalText").textContent = text;
-  document.getElementById("modalBackdrop").hidden = false;
+  buildModal();
+  $("modalTitle").textContent = title;
+  $("modalText").textContent = text;
+  $("modalBackdrop").hidden = false;
 }
-
 function closeModal() {
-  document.getElementById("modalBackdrop").hidden = true;
+  const m = $("modalBackdrop");
+  if (m) m.hidden = true;
 }
 
-// ---------- EVENT LISTENERS ----------
-
-// Category filter buttons
 document.querySelectorAll(".filter").forEach(btn => {
   btn.addEventListener("click", () => {
     document.querySelectorAll(".filter").forEach(x => x.classList.remove("active"));
@@ -116,139 +181,23 @@ document.querySelectorAll(".filter").forEach(btn => {
   });
 });
 
-// Category cards
 document.querySelectorAll(".category-card").forEach(card => {
-  card.addEventListener("click", (e) => {
+  card.addEventListener("click", e => {
     e.preventDefault();
-    const filterValue = card.dataset.filterLink;
-    if (filterValue) {
-      document.querySelectorAll(".filter").forEach(btn => {
-        btn.classList.remove("active");
-        if (btn.dataset.filter === filterValue) btn.classList.add("active");
-      });
-      filter = filterValue;
-      render();
-      document.getElementById("marketplace").scrollIntoView({ behavior: "smooth" });
-    }
+    const value = card.dataset.filterLink;
+    if (!value) return;
+    document.querySelectorAll(".filter").forEach(btn => {
+      btn.classList.toggle("active", btn.dataset.filter === value);
+    });
+    filter = value;
+    render();
+    const target = $("marketplace");
+    if (target) target.scrollIntoView({ behavior: "smooth" });
   });
 });
 
-// Search & Sort
-searchInput.addEventListener("input", render);
-sortSelect.addEventListener("change", render);
+if (searchInput) searchInput.addEventListener("input", render);
+if (sortSelect) sortSelect.addEventListener("change", render);
 
-// Modal controls
-document.getElementById("closeModal").addEventListener("click", closeModal);
-document.getElementById("modalBackdrop").addEventListener("click", (e) => {
-  if (e.target.id === "modalBackdrop") closeModal();
-});
-document.getElementById("modalAction").addEventListener("click", closeModal);
-
-// ---------- HEADER BUTTONS ----------
-document.getElementById("loginBtn")?.addEventListener("click", () => 
-  openModal("Sign in", "Authentication will connect to the production backend in the next phase.")
-);
-
-document.getElementById("cartBtn")?.addEventListener("click", () => 
-  openModal("Your cart", cart.length ? `${cart.length} item(s) are saved in this browser.` : "Your cart is empty.")
-);
-
-document.getElementById("themeBtn")?.addEventListener("click", () => {
-  document.body.classList.toggle("light");
-  localStorage.setItem("rattle_theme", document.body.classList.contains("light") ? "light" : "dark");
-});
-
-// ---------- LOAD THEME PREFERENCE ----------
-if (localStorage.getItem("rattle_theme") === "light") {
-  document.body.classList.add("light");
-}
-
-// ---------- START THE APP ----------
-updateCart();
+initLayout();
 loadProducts();
-
-/* ===== THEME SYSTEM — No Neon, Muted & Professional ===== */
-
-:root {
-  /* --- Light Theme (default) --- */
-  --bg: #f8f9fb;
-  --bg-card: #ffffff;
-  --bg-elevated: #ffffff;
-  --text-primary: #1a1d23;
-  --text-secondary: #5a6170;
-  --text-muted: #8b92a0;
-  --border: #e2e5ea;
-  --border-hover: #c8ccd4;
-  --accent: #3d5af1;
-  --accent-hover: #2d46c9;
-  --accent-soft: rgba(61, 90, 241, 0.08);
-  --shadow-sm: 0 1px 3px rgba(0,0,0,0.04);
-  --shadow-md: 0 4px 16px rgba(0,0,0,0.06);
-  --shadow-lg: 0 12px 40px rgba(0,0,0,0.08);
-  --radius: 12px;
-  --radius-sm: 8px;
-  --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-}
-
-[data-theme="dark"] {
-  --bg: #0f1117;
-  --bg-card: #1a1d27;
-  --bg-elevated: #22262f;
-  --text-primary: #e8eaf0;
-  --text-secondary: #a0a7b5;
-  --text-muted: #6b7280;
-  --border: #2a2e3a;
-  --border-hover: #3d4250;
-  --accent: #6b8afd;
-  --accent-hover: #8ba3ff;
-  --accent-soft: rgba(107, 138, 253, 0.1);
-  --shadow-sm: 0 1px 3px rgba(0,0,0,0.2);
-  --shadow-md: 0 4px 16px rgba(0,0,0,0.3);
-  --shadow-lg: 0 12px 40px rgba(0,0,0,0.4);
-}
-
-/* Smooth theme transition */
-* {
-  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-}
-
-/* Base resets using variables */
-body {
-  font-family: var(--font);
-  background: var(--bg);
-  color: var(--text-primary);
-  margin: 0;
-  line-height: 1.6;
-}
-
-.product-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow-sm);
-}
-
-.product-card:hover {
-  border-color: var(--border-hover);
-  box-shadow: var(--shadow-md);
-}
-
-// ===== THEME ENGINE =====
-(function() {
-  const saved = localStorage.getItem('rattle_theme');
-  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  const theme = saved || (prefersDark ? 'dark' : 'light');
-  document.documentElement.setAttribute('data-theme', theme);
-})();
-
-document.addEventListener('DOMContentLoaded', () => {
-  const toggle = document.getElementById('theme-toggle');
-  if (!toggle) return;
-
-  toggle.addEventListener('click', () => {
-    const current = document.documentElement.getAttribute('data-theme');
-    const next = current === 'dark' ? 'light' : 'dark';
-    document.documentElement.setAttribute('data-theme', next);
-    localStorage.setItem('rattle_theme', next);
-  });
-});
