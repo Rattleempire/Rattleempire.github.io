@@ -3,83 +3,62 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="Refund Policy for Rattle Empire">
+  <meta name="description" content="Refund policy of Rattle Empire">
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
   <meta http-equiv="X-Frame-Options" content="DENY">
   <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
-  <meta http-equiv="Content-Security-Policy" 
-    content="default-src 'self'; 
-        img-src 'self' data:; 
-        style-src 'self' 'unsafe-inline'; 
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self';
+        img-src 'self' data:;
+        style-src 'self' 'unsafe-inline';
         script-src 'self';
         font-src 'self';
         connect-src 'self';">
-  <title>Refund Policy • Rattle Empire</title>
-  <link rel="stylesheet" href="../assets/styles.css">
+  <title>Refunds • Rattle Empire</title>
+  <link rel="icon" type="image/jpeg" href="/logo.jpg">
+  <link rel="stylesheet" href="../assets/styles.css?v=3.0">
+  <style>
+    .legal { max-width: 760px; }
+    .legal h2 { font-size: 18px; margin: 28px 0 8px; }
+    .legal p, .legal li { color: var(--text-secondary); font-size: 14px; }
+    .legal ul { padding-left: 20px; }
+  </style>
 </head>
 <body>
 
   <div id="menu-placeholder"></div>
 
-  <main class="container" style="padding-top:60px;padding-bottom:90px;max-width:800px;margin-left:auto;margin-right:auto">
+  <main class="container section legal">
     <div class="eyebrow">LEGAL</div>
-    <h1>Refund Policy</h1>
-    <p style="color:#8d97a8;margin-top:-8px;margin-bottom:32px;font-size:14px">
-      Last updated: September 2026
-    </p>
+    <h1>Refund policy</h1>
+    <p>Last updated: September 2026</p>
 
-    <div class="info-card" style="padding:28px;display:flex;flex-direction:column;gap:20px">
-      <section>
-        <h3 style="margin:0 0 8px">1. Digital Products</h3>
-        <p style="color:#8d97a8;font-size:14px;margin:0">
-          All digital products (subscriptions, licenses, gift codes, and software keys) are delivered electronically. Due to the nature of digital goods, <strong>all sales are final</strong> once the product has been delivered.
-        </p>
-      </section>
+    <h2>1. When refunds apply</h2>
+    <ul>
+      <li>The delivered code or license does not work and the seller cannot replace it.</li>
+      <li>The product delivered materially differs from the listing description.</li>
+      <li>Delivery never arrives within the timeframe stated on the listing.</li>
+    </ul>
 
-      <section>
-        <h3 style="margin:0 0 8px">2. Delivery Issues</h3>
-        <p style="color:#8d97a8;font-size:14px;margin:0">
-          If you did not receive your digital product within 24 hours of purchase, please contact our support team at <a href="mailto:support@rattleempire.com" style="color:#7c3aed;text-decoration:none">support@rattleempire.com</a>. We will investigate and resolve the issue promptly.
-        </p>
-      </section>
+    <h2>2. When refunds do not apply</h2>
+    <ul>
+      <li>A working code was already redeemed or shared by the buyer.</li>
+      <li>The buyer changed their mind after a successful delivery of a working product.</li>
+      <li>Account bans caused by breaking the end-provider's own terms of service.</li>
+    </ul>
 
-      <section>
-        <h3 style="margin:0 0 8px">3. Defective Products</h3>
-        <p style="color:#8d97a8;font-size:14px;margin:0">
-          If a digital product is defective or not as described, you may be eligible for a replacement or refund. Please provide proof of purchase and a description of the issue.
-        </p>
-      </section>
+    <h2>3. How to request</h2>
+    <p>Open a support request from your dashboard within 14 days of delivery. Include the
+    order ID and a short description of the issue. Verified sellers must respond within
+    48 hours; otherwise the platform steps in.</p>
 
-      <section>
-        <h3 style="margin:0 0 8px">4. Chargebacks</h3>
-        <p style="color:#8d97a8;font-size:14px;margin:0">
-          Unauthorized chargebacks will result in account suspension. If you have a dispute, please contact us directly before initiating a chargeback.
-        </p>
-      </section>
-
-      <section style="border-top:1px solid #1d2430;padding-top:16px">
-        <p style="color:#687184;font-size:12px;margin:0">
-          This refund policy is a placeholder. Define refund eligibility and digital-delivery disputes before accepting real payments.
-        </p>
-      </section>
-    </div>
+    <h2>4. Processing</h2>
+    <p>Approved refunds are returned through the original payment method. Processing time
+    depends on the payment provider, typically 5–10 business days.</p>
   </main>
 
   <div id="footer-placeholder"></div>
 
-  <script src="../assets/app.js" defer></script>
-
-  <script>
-    fetch('../partials/menu.html')
-      .then(res => res.text())
-      .then(data => document.getElementById('menu-placeholder').innerHTML = data)
-      .catch(() => console.warn('Menu not found'));
-
-    fetch('../partials/footer.html')
-      .then(res => res.text())
-      .then(data => document.getElementById('footer-placeholder').innerHTML = data)
-      .catch(() => console.warn('Footer not found'));
-  </script>
-
+  <script src="../assets/app.js?v=3.0" defer></script>
 </body>
 </html>
