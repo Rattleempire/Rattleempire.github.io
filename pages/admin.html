@@ -1,10 +1,60 @@
-<!doctype html><html><head><<meta http-equiv="X-Content-Type-Options" content="nosniff">
-<meta http-equiv="X-Frame-Options" content="DENY">
-<meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
-<meta http-equiv="Content-Security-Policy" 
-      content="default-src 'self'; 
-               img-src 'self' data:; 
-               style-src 'self' 'unsafe-inline'; 
-               script-src 'self';
-               font-src 'self';
-               connect-src 'self';">meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Admin • Rattle Empire</title><link rel="stylesheet" href="../assets/styles.css"></head><body><header class="site-header"><a class="brand" href="../index.html"><span class="brand-mark">R</span><span>Rattle<span class="accent">Empire</span></span></a></header><main class="container" style="padding-top:60px;padding-bottom:90px"><div class="eyebrow">ADMIN</div><h1>Control center</h1><div class="info-card" style="margin-top:24px"><p style="color:#8d97a8">Production admin access must be server-side, role-restricted and protected with MFA and audit logging. This page is only a UI shell.</p></div></main></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Platform administration on Rattle Empire">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="X-Frame-Options" content="DENY">
+  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self';
+        img-src 'self' data:;
+        style-src 'self' 'unsafe-inline';
+        script-src 'self';
+        font-src 'self';
+        connect-src 'self';">
+  <title>Admin • Rattle Empire</title>
+  <link rel="icon" type="image/jpeg" href="/logo.jpg">
+  <link rel="stylesheet" href="../assets/styles.css?v=3.0">
+</head>
+<body>
+
+  <div id="menu-placeholder"></div>
+
+  <main class="container" style="padding-top:60px;padding-bottom:90px">
+    <div class="eyebrow">ADMIN</div>
+    <h1>Control the platform</h1>
+
+    <div class="platform-grid" style="margin-top:24px">
+      <article class="info-card">
+        <div class="eyebrow">SELLERS</div>
+        <h3>Verification queue</h3>
+        <p>Review seller applications, authorization documents and supply-chain proof.</p>
+      </article>
+      <article class="info-card">
+        <div class="eyebrow">LISTINGS</div>
+        <h3>Marketplace approval</h3>
+        <p>Approve, pause or remove listings before they reach buyers.</p>
+      </article>
+      <article class="info-card">
+        <div class="eyebrow">REPORTS</div>
+        <h3>Reports & disputes</h3>
+        <p>Inspect buyer reports, delivery disputes and refund requests.</p>
+      </article>
+    </div>
+
+    <div class="info-card" style="margin-top:20px">
+      <h3 style="margin:0"> Audit log</h3>
+      <p style="color:var(--text-secondary);font-size:13px;margin:8px 0 0">
+        Order activity, admin actions and platform events will stream here once the
+        secure backend is connected. Access is restricted to platform administrators.
+      </p>
+    </div>
+  </main>
+
+  <div id="footer-placeholder"></div>
+
+  <script src="../assets/app.js?v=3.0" defer></script>
+</body>
+</html>
