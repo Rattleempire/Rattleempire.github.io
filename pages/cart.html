@@ -7,15 +7,16 @@
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
   <meta http-equiv="X-Frame-Options" content="DENY">
   <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
-  <meta http-equiv="Content-Security-Policy" 
-    content="default-src 'self'; 
-        img-src 'self' data:; 
-        style-src 'self' 'unsafe-inline'; 
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self';
+        img-src 'self' data:;
+        style-src 'self' 'unsafe-inline';
         script-src 'self';
         font-src 'self';
         connect-src 'self';">
   <title>Cart • Rattle Empire</title>
-  <link rel="stylesheet" href="../assets/styles.css">
+  <link rel="icon" type="image/jpeg" href="/logo.jpg">
+  <link rel="stylesheet" href="../assets/styles.css?v=3.0">
 </head>
 <body>
 
@@ -26,17 +27,16 @@
     <h1>Your cart</h1>
 
     <div class="info-card" style="margin-top:24px">
-     
       <div id="cartItems"></div>
       <div style="margin-top:16px;display:flex;gap:12px;flex-wrap:wrap">
         <a class="primary-btn" href="/">Continue shopping →</a>
-        <button class="ghost-btn" id="clearCartBtn" style="border-color:#dc2626;color:#dc2626">Clear cart</button>
+        <button class="ghost-btn" id="clearCartBtn" style="border-color:#c0504e;color:#c0504e">Clear cart</button>
       </div>
     </div>
 
-    <div class="info-card" style="margin-top:20px;border-color:#7c3aed40">
+    <div class="info-card" style="margin-top:20px">
       <h3 style="margin:0">💳 Checkout</h3>
-      <p style="color:#8d97a8;font-size:13px">
+      <p style="color:var(--text-secondary);font-size:13px;margin:8px 0 0">
         Secure backend checkout will be connected in the production phase.
       </p>
     </div>
@@ -44,91 +44,7 @@
 
   <div id="footer-placeholder"></div>
 
-  <script src="../assets/app.js" defer></script>
-
-  <script>
-    
-    fetch('../partials/menu.html')
-      .then(res => res.text())
-      .then(data => document.getElementById('menu-placeholder').innerHTML = data)
-      .catch(() => console.warn('Menu not found'));
-
-    fetch('../partials/footer.html')
-      .then(res => res.text())
-      .then(data => document.getElementById('footer-placeholder').innerHTML = data)
-      .catch(() => console.warn('Footer not found'));
-
-    const cart = JSON.parse(localStorage.getItem('rattle_cart') || '[]');
-    const cartContainer = document.getElementById('cartItems');
-
-    async function loadCartItems() {
-      try {
-        const response = await fetch('/data/products.json');
-        const products = await response.json();
-
-        if (cart.length === 0) {
-          cartContainer.innerHTML = '<p style="color:#8d97a8">Your cart is empty.</p>';
-          return;
-        }
-
-        const cartItems = cart.map(id => {
-          const product = products.find(p => p.id === id);
-          return product || { name: 'Unknown product', price: 0, id: id };
-        });
-
-        const grouped = {};
-        cartItems.forEach(item => {
-          if (grouped[item.id]) {
-            grouped[item.id].quantity += 1;
-          } else {
-            grouped[item.id] = { ...item, quantity: 1 };
-          }
-        });
-
-        const itemsList = Object.values(grouped);
-        const total = itemsList.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-
-        let html = '<div style="display:flex;flex-direction:column;gap:12px">';
-        itemsList.forEach(item => {
-          html += `
-            <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid #1d2430">
-              <div>
-                <strong>${item.name}</strong>
-                <span style="color:#8d97a8;font-size:12px;margin-left:10px">× ${item.quantity}</span>
-              </div>
-              <span style="font-weight:700">$${(item.price * item.quantity).toFixed(2)}</span>
-            </div>
-          `;
-        });
-        html += `
-          <div style="display:flex;justify-content:space-between;padding-top:12px;font-size:18px;font-weight:800;border-top:2px solid #7c3aed">
-            <span>Total</span>
-            <span>$${total.toFixed(2)}</span>
-          </div>
-        `;
-        html += '</div>';
-
-        cartContainer.innerHTML = html;
-
-      } catch (error) {
-        
-        cartContainer.innerHTML = `
-          <p style="color:#8d97a8">You have ${cart.length} item(s) in your cart.</p>
-          <p style="color:#8d97a8;font-size:12px;margin-top:4px">(Product details will appear when product data is loaded.)</p>
-        `;
-      }
-    }
-
-    document.getElementById('clearCartBtn')?.addEventListener('click', () => {
-      localStorage.removeItem('rattle_cart');
-      cartContainer.innerHTML = '<p style="color:#8d97a8">Your cart is empty.</p>';
-     
-      const cartCount = document.getElementById('cartCount');
-      if (cartCount) cartCount.textContent = '0';
-    });
-
-    loadCartItems();
-  </script>
-
+  <script src="../assets/app.js?v=3.0" defer></script>
+  <script src="../assets/cart.js?v=3.0" defer></script>
 </body>
 </html>
