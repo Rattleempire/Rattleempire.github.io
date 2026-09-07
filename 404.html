@@ -6,23 +6,28 @@
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
   <meta http-equiv="X-Frame-Options" content="DENY">
   <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
-  <meta http-equiv="Content-Security-Policy" 
-    content="default-src 'self'; 
-        img-src 'self' data:; 
-        style-src 'self' 'unsafe-inline'; 
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self';
+        img-src 'self' data:;
+        style-src 'self' 'unsafe-inline';
         script-src 'self';
         font-src 'self';
         connect-src 'self';">
   <title>Page not found • Rattle Empire</title>
-  <link rel="stylesheet" href="assets/styles.css">
+  <link rel="icon" type="image/jpeg" href="logo.jpg">
+  <link rel="stylesheet" href="assets/styles.css?v=3.0">
 </head>
 <body>
   <div id="menu-placeholder"></div>
+
   <main class="container section" style="padding-top:80px;text-align:center">
     <h1 style="font-size:80px;margin:0">404</h1>
-    <p style="font-size:24px;color:#9aa4b5">Page not found</p>
+    <p style="font-size:24px;color:var(--text-secondary)">Page not found</p>
     <a class="primary-btn large" href="/" style="margin-top:20px">Go home →</a>
   </main>
+
   <div id="footer-placeholder"></div>
+
+  <script src="assets/app.js?v=3.0" defer></script>
 </body>
 </html>
