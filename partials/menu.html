@@ -19,16 +19,9 @@
 
 <header class="site-header">
   <a href="/" class="brand">
-    <img src="/logo.jpg" alt="Rattle Empire" class="brand-logo">
+    <img src="/logo.jpg" alt="Rattle Empire" class="brand-logo" width="34" height="34">
     <span class="brand-name">Rattle Empire</span>
   </a>
-
-  <nav>
-    <a href="/#marketplace">Marketplace</a>
-    <a href="/#categories">Categories</a>
-    <a href="/pages/sell.html">Sell</a>
-    <a href="/pages/dashboard.html">Dashboard</a>
-  </nav>
 
   <div class="header-actions">
     <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark / light theme">
@@ -38,5 +31,34 @@
     </button>
     <a class="ghost-btn" href="/pages/cart.html">Cart <span id="cartCount">0</span></a>
     <a class="primary-btn" href="/pages/login.html">Sign in</a>
+    <button id="menuBtn" class="menu-btn" aria-label="Open navigation menu">☰</button>
   </div>
 </header>
+
+<div class="drawer-backdrop" id="drawerBackdrop"></div>
+
+<nav class="drawer" id="drawer" aria-label="Main navigation">
+  <div class="drawer-head">
+    <a href="/" class="brand">
+      <img src="/logo.jpg" alt="" class="brand-logo" width="34" height="34">
+      <span class="brand-name">Rattle Empire</span>
+    </a>
+    <button id="drawerClose" class="menu-btn" aria-label="Close menu">✕</button>
+  </div>
+
+  <div class="drawer-label">NAVIGATE</div>
+  <a href="/#marketplace">Marketplace <small>deals</small></a>
+  <a href="/#categories">Categories <small>4 groups</small></a>
+  <a href="/pages/products.html">All products <small>full catalog</small></a>
+  <a href="/pages/community.html">Community <small>reviews</small></a>
+  <a href="/pages/dashboard.html">Dashboard <small>orders</small></a>
+  <a href="/pages/cart.html">Cart <small id="drawerCartCount">0 items</small></a>
+
+  <div class="drawer-sep"></div>
+  <div class="drawer-label">SELL & SUPPORT</div>
+  <a href="https://wa.me/256775374095?text=Hello%20Rattle%20Empire!%20I%20want%20to%20become%20a%20verified%20seller." target="_blank" rel="noopener">Become a seller <small>WhatsApp</small></a>
+  <a href="https://wa.me/256775374095?text=Hello%20Rattle%20Empire!%20I%20need%20help." target="_blank" rel="noopener">Helpline 1 <small>0775 374 095</small></a>
+  <a href="https://wa.me/256782832407?text=Hello%20Rattle%20Empire!%20I%20need%20help." target="_blank" rel="noopener">Helpline 2 <small>+256 782 832407</small></a>
+</nav>
+
+<button id="helpFab" class="help-fab" aria-label="Customer helpline">💬</button>
