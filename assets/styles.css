@@ -461,3 +461,154 @@ form textarea { resize: vertical; min-height: 100px; }
   .market-tools { flex-direction: column; }
   .footer { flex-direction: column; align-items: flex-start; }
 }
+/* ============================================================
+   MARQUEES + LIVE PROMO BANNER v3.2
+   ============================================================ */
+
+/* ---------- Scrolling marquees ---------- */
+.marquee {
+  overflow: hidden;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-inset);
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 38s linear infinite;
+}
+.marquee:hover .marquee-track { animation-play-state: paused; }
+.marquee-group { display: flex; align-items: center; }
+.marquee-group span {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  padding: 9px 0;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--text-secondary);
+}
+.marquee-group span::after {
+  content: "✦";
+  margin: 0 26px;
+  color: var(--accent);
+  font-size: 9px;
+}
+
+/* Variant: top offers strip */
+.marquee-top { border-top: 0; }
+
+/* Variant: payments strip */
+.marquee-pay { background: var(--bg-card); }
+.marquee-pay .marquee-group span { color: var(--text-primary); }
+
+/* Variant: latest accounts (tinted, reversed, faster) */
+.marquee-new { background: var(--accent-soft); border-color: transparent; }
+.marquee-new .marquee-group span { color: var(--text-primary); }
+.marquee-rev .marquee-track { animation-direction: reverse; animation-duration: 30s; }
+
+@keyframes marquee-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.promo-banner-wrap { padding: 12px 24px; }
+.promo-banner {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius);
+  background: linear-gradient(120deg, #3f57b5 0%, #5b4aa8 55%, #7a3f8f 100%);
+  color: #ffffff;
+  padding: 26px 28px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  box-shadow: var(--shadow-md);
+}
+[data-theme="dark"] .promo-banner {
+  background: linear-gradient(120deg, #2c3d85 0%, #463a86 55%, #5e3270 100%);
+}
+.promo-banner::after {
+  content: "";
+  position: absolute;
+  top: 0; bottom: 0; left: -60%;
+  width: 40%;
+  background: linear-gradient(100deg, transparent, rgba(255,255,255,0.16), transparent);
+  animation: promo-shine 6s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes promo-shine {
+  0%, 55% { left: -60%; }
+  100%    { left: 130%; }
+}
+
+.promo-copy { display: flex; flex-direction: column; gap: 8px; }
+.promo-badge {
+  align-self: flex-start;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  background: rgba(255,255,255,0.16);
+  border: 1px solid rgba(255,255,255,0.35);
+  border-radius: 999px;
+  padding: 4px 10px;
+}
+.promo-head {
+  margin: 0;
+  font-size: clamp(24px, 4vw, 38px);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+}
+.promo-head em { font-style: normal; color: #f6c667; }
+
+/* Rotating offer lines (pure CSS, no JS) */
+.promo-offers {
+  position: relative;
+  height: 1.5em;
+  font-size: 13px;
+  color: rgba(255,255,255,0.92);
+  overflow: hidden;
+}
+.promo-offers span {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  animation: offer-cycle 16s linear infinite;
+}
+.promo-offers span:nth-child(1) { animation-delay: 0s; }
+.promo-offers span:nth-child(2) { animation-delay: 4s; }
+.promo-offers span:nth-child(3) { animation-delay: 8s; }
+.promo-offers span:nth-child(4) { animation-delay: 12s; }
+@keyframes offer-cycle {
+  0%   { opacity: 0; transform: translateY(10px); }
+  4%   { opacity: 1; transform: translateY(0); }
+  21%  { opacity: 1; }
+  25%  { opacity: 0; transform: translateY(-10px); }
+  100% { opacity: 0; }
+}
+
+.promo-banner .primary-btn {
+  position: relative;
+  z-index: 2;
+  background: #ffffff;
+  color: #232a45;
+}
+.promo-banner .primary-btn:hover { background: #eef1fb; }
+
+@media (max-width: 560px) {
+  .promo-banner { padding: 20px; }
+  .promo-banner-wrap { padding: 10px 15px; }
+}
+
+/* Accessibility: calm everything for reduced-motion users */
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track { animation: none; }
+  .promo-offers span { animation: none; opacity: 0; }
+  .promo-offers span:first-child { opacity: 1; }
+  .promo-banner::after { display: none; }
+}
+
