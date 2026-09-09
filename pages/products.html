@@ -16,35 +16,140 @@
         connect-src 'self';">
   <title>All products • Rattle Empire</title>
   <link rel="icon" type="image/jpeg" href="/logo.jpg">
-  <link rel="stylesheet" href="../assets/styles.css?v=3.1">
+  <link rel="stylesheet" href="../assets/styles.css?v=3.3">
 </head>
 <body>
 
   <div id="menu-placeholder"></div>
 
-  <main class="container" style="padding-top:60px;padding-bottom:90px">
-    <section class="section" id="marketplace" style="padding-top:0">
-      <div class="section-head">
-        <div><div class="eyebrow">MARKETPLACE</div><h2>All products</h2></div>
-        <div class="market-tools">
-          <input class="search" id="searchInput" placeholder="Search products..." autocomplete="off">
-          <select id="sortSelect">
-            <option value="featured">Featured</option>
-            <option value="price-asc">Lowest price</option>
-            <option value="price-desc">Highest price</option>
-            <option value="rating">Top rated</option>
-          </select>
+  <!-- Promo block: payments marquee + live banner + latest accounts marquee -->
+  <section aria-label="Promotions and payment options">
+    <div class="marquee marquee-pay">
+      <div class="marquee-track">
+        <div class="marquee-group">
+          <span>💳 Mobile Money (MTN • Airtel • Vodacom)</span>
+          <span>💳 Mastercard</span>
+          <span>💳 Visa</span>
+          <span>💳 PayPal</span>
+          <span>💳 Apple Pay</span>
+          <span>💳 Google Pay</span>
+          <span>₿ Bitcoin • USDT</span>
+          <span>🏦 Bank Transfer</span>
+        </div>
+        <div class="marquee-group" aria-hidden="true">
+          <span>💳 Mobile Money (MTN • Airtel • Vodacom)</span>
+          <span>💳 Mastercard</span>
+          <span>💳 Visa</span>
+          <span>💳 PayPal</span>
+          <span>💳 Apple Pay</span>
+          <span>💳 Google Pay</span>
+          <span>₿ Bitcoin • USDT</span>
+          <span>🏦 Bank Transfer</span>
         </div>
       </div>
-      <div class="filter-row" id="filterRow">
-        <button class="filter active" data-filter="all">All</button>
-        <button class="filter" data-filter="ai">AI</button>
-        <button class="filter" data-filter="streaming">Streaming</button>
-        <button class="filter" data-filter="software">Software</button>
-        <button class="filter" data-filter="gaming">Gaming</button>
+    </div>
+
+    <div class="container promo-banner-wrap">
+      <div class="promo-banner">
+        <div class="promo-copy">
+          <span class="promo-badge">LIMITED TIME OFFER</span>
+          <h2 class="promo-head">MEGA DEAL — UP TO <em>50% OFF</em></h2>
+          <div class="promo-offers">
+            <span>ChatGPT Pro 1 month — half price this week only</span>
+            <span>Netflix Premium 4K — 50% off your first month</span>
+            <span>Windows 11 Pro keys — fresh batch from $9.99</span>
+            <span>Spotify Premium — 3 months for the price of 1</span>
+          </div>
+        </div>
+        <a class="primary-btn large" href="#marketplace">Browse deals →</a>
       </div>
-      <div id="productGrid" class="product-grid"></div>
-      <div id="emptyState" class="empty-state" hidden>No products match your search.</div>
+    </div>
+
+    <div class="marquee marquee-new marquee-rev">
+      <div class="marquee-track">
+        <div class="marquee-group">
+          <span>🆕 JUST LANDED: Netflix Premium 4K — 12 months</span>
+          <span>🆕 RESTOCK: ChatGPT Pro accounts (batch #52)</span>
+          <span>🆕 NEW: Spotify Premium family slots</span>
+          <span>🆕 JUST IN: Disney+ bundle codes — 12 months</span>
+          <span>🆕 FRESH: Xbox Game Pass Ultimate 3 months</span>
+          <span>🆕 NEW: Adobe CC full-suite keys</span>
+        </div>
+        <div class="marquee-group" aria-hidden="true">
+          <span>🆕 JUST LANDED: Netflix Premium 4K — 12 months</span>
+          <span>🆕 RESTOCK: ChatGPT Pro accounts (batch #52)</span>
+          <span>🆕 NEW: Spotify Premium family slots</span>
+          <span>🆕 JUST IN: Disney+ bundle codes — 12 months</span>
+          <span>🆕 FRESH: Xbox Game Pass Ultimate 3 months</span>
+          <span>🆕 NEW: Adobe CC full-suite keys</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main class="container" style="padding-bottom:90px">
+    <section class="section" id="marketplace">
+      <div class="market-layout">
+        <div>
+          <div class="section-head">
+            <div><div class="eyebrow">MARKETPLACE</div><h2>All products</h2></div>
+            <div class="market-tools">
+              <input class="search" id="searchInput" placeholder="Search products..." autocomplete="off">
+              <select id="sortSelect">
+                <option value="featured">Featured</option>
+                <option value="price-asc">Lowest price</option>
+                <option value="price-desc">Highest price</option>
+                <option value="rating">Top rated</option>
+              </select>
+            </div>
+          </div>
+          <div class="filter-row" id="filterRow">
+            <button class="filter active" data-filter="all">All</button>
+            <button class="filter" data-filter="ai">AI</button>
+            <button class="filter" data-filter="streaming">Streaming</button>
+            <button class="filter" data-filter="software">Software</button>
+            <button class="filter" data-filter="gaming">Gaming</button>
+          </div>
+          <div id="productGrid" class="product-grid"></div>
+          <div id="emptyState" class="empty-state" hidden>No products match your search.</div>
+        </div>
+
+        <!-- PASTE THE COMMUNITY SIDEBAR BLOCK HERE -->
+        <aside class="community-side" aria-label="Community live feed">
+          <div class="side-card">
+            <div class="side-head"><b>💬 COMMUNITY LIVE</b><span class="live-dot">● 128 online</span></div>
+            <div class="thread">
+              <div class="who">Alex T. <span>• 3m ago</span></div>
+              <p>"Netflix 4K code worked instantly. Delivered in under 2 minutes!"</p>
+              <div class="stars">★★★★★</div>
+            </div>
+            <div class="thread">
+              <div class="who">Marta K. <span>• 18m ago</span></div>
+              <p>"ChatGPT Pro renewal was smooth. Second purchase here — trusted."</p>
+              <div class="stars">★★★★★</div>
+            </div>
+            <div class="thread">
+              <div class="who">Devnath <span>• 41m ago</span></div>
+              <p>"Any advice on Office 365 family vs personal?"</p>
+            </div>
+            <a class="side-link" href="/pages/community.html">Open community →</a>
+          </div>
+
+          <div class="side-card">
+            <div class="side-head"><b>📢 BUYER REQUESTS</b></div>
+            <div class="request-row"><span>Windows 11 Pro under $15</span><span class="replies">4 replies</span></div>
+            <div class="request-row"><span>Spotify family slot (EU)</span><span class="replies">2 replies</span></div>
+            <div class="request-row"><span>Adobe CC student key</span><span class="replies">6 replies</span></div>
+          </div>
+
+          <div class="side-card">
+            <div class="side-head"><b>🏆 TOP REVIEWERS</b></div>
+            <div class="request-row"><span>Luminar</span><span class="replies">22 reviews</span></div>
+            <div class="request-row"><span>Knox B.</span><span class="replies">12 reviews</span></div>
+          </div>
+        </aside>
+
+      </div>
     </section>
   </main>
 
