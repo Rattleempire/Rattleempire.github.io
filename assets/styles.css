@@ -695,4 +695,136 @@ form textarea { resize: vertical; min-height: 100px; }
 
 @media (max-width: 400px) {
   .product-grid { grid-template-columns: 1fr; }
+}/* ============================================================
+   SIDE DRAWER • HELP FAB • DISCOUNTS • MOST-SOLD • SKELETONS v3.4
+   ============================================================ */
+
+/* ---------- Side drawer ---------- */
+.drawer-backdrop {
+  position: fixed; inset: 0; z-index: 40;
+  background: rgba(8, 10, 15, 0.5);
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.25s ease;
 }
+body.drawer-open .drawer-backdrop { opacity: 1; pointer-events: auto; }
+
+.drawer {
+  position: fixed; top: 0; left: 0; bottom: 0;
+  width: 280px; max-width: 85vw;
+  background: var(--bg-card);
+  border-right: 1px solid var(--border);
+  z-index: 50;
+  transform: translateX(-105%);
+  transition: transform 0.28s ease;
+  display: flex; flex-direction: column;
+  padding: 16px; gap: 4px;
+  overflow-y: auto;
+  box-shadow: var(--shadow-lg);
+}
+body.drawer-open .drawer { transform: translateX(0); }
+
+.drawer-head {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 4px 8px 12px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 8px;
+}
+.drawer-label {
+  font-size: 10px; letter-spacing: 0.14em;
+  color: var(--text-muted); font-weight: 800;
+  padding: 10px 12px 4px;
+}
+.drawer a {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 12px; border-radius: 10px;
+  color: var(--text-primary); text-decoration: none;
+  font-size: 14px; font-weight: 600;
+}
+.drawer a:hover { background: var(--accent-soft); color: var(--accent); }
+.drawer a small { color: var(--text-muted); font-weight: 500; font-size: 10px; }
+.drawer-sep { height: 1px; background: var(--border); margin: 8px 0; }
+
+.menu-btn {
+  border: 1px solid var(--border-strong);
+  background: transparent; color: var(--text-primary);
+  border-radius: 10px; padding: 8px 11px;
+  font-size: 16px; line-height: 1; cursor: pointer;
+}
+.menu-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+/* ---------- Help floating button ---------- */
+.help-fab {
+  position: fixed; right: 18px; bottom: 18px; z-index: 45;
+  width: 54px; height: 54px; border-radius: 50%; border: 0;
+  background: var(--accent); color: #fff; font-size: 22px;
+  display: grid; place-items: center;
+  box-shadow: var(--shadow-lg);
+  transition: transform 0.15s ease;
+}
+[data-theme="dark"] .help-fab { color: #10131c; }
+.help-fab:hover { transform: scale(1.07); }
+.help-actions { display: flex; flex-direction: column; gap: 10px; }
+.help-actions a { text-align: center; text-decoration: none; }
+
+/* ---------- Discount + WhatsApp on cards ---------- */
+.discount-badge {
+  position: absolute; bottom: 10px; right: 10px; z-index: 2;
+  background: #b3423f; color: #fff;
+  font-size: 10px; font-weight: 800; letter-spacing: 0.04em;
+  border-radius: 999px; padding: 4px 9px;
+}
+.old-price {
+  color: var(--text-muted); text-decoration: line-through;
+  font-size: 11px; font-weight: 500; margin-right: 6px;
+}
+.price-actions { display: flex; align-items: center; gap: 6px; }
+.wa-btn {
+  display: inline-grid; place-items: center;
+  width: 28px; height: 28px; border-radius: 8px;
+  border: 1px solid var(--border-strong);
+  background: var(--bg-inset); color: var(--success);
+  font-size: 13px; text-decoration: none;
+  transition: background 0.15s, border-color 0.15s;
+}
+.wa-btn:hover { background: var(--success); border-color: var(--success); color: #fff; }
+
+/* ---------- Most sold strip ---------- */
+.most-sold-row {
+  display: grid; grid-auto-flow: column;
+  grid-auto-columns: 230px; gap: 12px;
+  overflow-x: auto; padding-bottom: 10px;
+}
+.ms-card {
+  border: 1px solid var(--border); background: var(--bg-card);
+  border-radius: var(--radius); padding: 12px;
+  display: flex; gap: 10px; align-items: center;
+  transition: border-color 0.15s, transform 0.15s;
+}
+.ms-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+.ms-art {
+  width: 46px; height: 46px; border-radius: 10px; flex: none;
+  background-size: cover; background-position: center;
+}
+.ms-card b { font-size: 12px; display: block; }
+.ms-card span { font-size: 10px; color: var(--text-muted); }
+.ms-sold { margin-left: auto; font-size: 10px; font-weight: 800; color: var(--success); white-space: nowrap; }
+
+/* ---------- Skeleton loaders (visual polish while fetching) ---------- */
+.skeleton {
+  border: 1px solid var(--border); border-radius: var(--radius);
+  overflow: hidden; background: var(--bg-card);
+}
+.sk-art { height: 150px; }
+.sk-line { height: 12px; margin: 12px 15px; border-radius: 6px; }
+.sk-line.short { width: 55%; }
+.sk-art, .sk-line {
+  background: linear-gradient(90deg, var(--bg-inset) 25%, var(--border) 50%, var(--bg-inset) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.2s infinite;
+}
+@keyframes shimmer { to { background-position: -200% 0; } }
+
+/* ---------- Performance: skip painting offscreen sections ---------- */
+.section, .footer { content-visibility: auto; }
+
+
