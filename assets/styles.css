@@ -612,3 +612,87 @@ form textarea { resize: vertical; min-height: 100px; }
   .promo-banner::after { display: none; }
 }
 
+/* ============================================================
+   COMMUNITY SIDEBAR + MOBILE "FULL FEEL" v3.3
+   ============================================================ */
+
+/* ---------- Marketplace + sidebar layout ---------- */
+.market-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 300px;
+  gap: 20px;
+  align-items: start;
+}
+.community-side {
+  position: sticky;
+  top: 84px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.side-card {
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  padding: 16px;
+  box-shadow: var(--shadow-sm);
+}
+.side-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.side-head b { font-size: 10px; letter-spacing: 0.12em; color: var(--text-muted); }
+.live-dot { color: var(--success); font-size: 10px; font-weight: 700; }
+
+.thread { padding: 10px 0; border-top: 1px solid var(--border); }
+.side-card .thread:first-of-type { border-top: 0; padding-top: 0; }
+.thread .who { font-size: 11px; font-weight: 700; color: var(--text-primary); }
+.thread .who span { color: var(--text-muted); font-weight: 500; margin-left: 6px; }
+.thread p { margin: 4px 0 0; font-size: 12px; color: var(--text-secondary); }
+.thread .stars { color: var(--warning); font-size: 10px; margin-top: 4px; }
+
+.request-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  align-items: center;
+  padding: 8px 0;
+  border-top: 1px solid var(--border);
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+.side-card .request-row:first-of-type { border-top: 0; }
+.request-row .replies { color: var(--accent); font-size: 10px; font-weight: 800; white-space: nowrap; }
+.side-link { display: inline-block; margin-top: 10px; font-size: 11px; font-weight: 700; color: var(--accent); text-decoration: none; }
+.side-link:hover { text-decoration: underline; }
+
+/* ---------- Mobile: keep EVERYTHING visible ---------- */
+@media (max-width: 900px) {
+  .market-layout { grid-template-columns: 1fr; }
+  .community-side { position: static; }
+  .site-header { flex-wrap: wrap; gap: 10px; padding: 10px 15px; }
+  .site-header nav {
+    display: flex;
+    order: 3;
+    width: 100%;
+    overflow-x: auto;
+    gap: 18px;
+    padding-bottom: 4px;
+    scrollbar-width: none;
+  }
+  .site-header nav::-webkit-scrollbar { display: none; }
+  .site-header nav a { white-space: nowrap; }
+}
+
+@media (max-width: 560px) {
+  .category-grid,
+  .product-grid { grid-template-columns: repeat(2, 1fr); }
+  .hero { padding-top: 40px; gap: 24px; }
+  .hero h1 { font-size: 40px; }
+}
+
+@media (max-width: 400px) {
+  .product-grid { grid-template-columns: 1fr; }
+}
