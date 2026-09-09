@@ -114,19 +114,13 @@
           <div id="emptyState" class="empty-state" hidden>No products match your search.</div>
         </div>
 
-        <!-- PASTE THE COMMUNITY SIDEBAR BLOCK HERE -->
         <aside class="community-side" aria-label="Community live feed">
           <div class="side-card">
             <div class="side-head"><b>💬 COMMUNITY LIVE</b><span class="live-dot" id="communityOnline">● 128 online</span></div>
-            <div id="communityThreads">
+            <div id="communityThreads" data-limit="2">
               <div class="thread">
                 <div class="who">Alex T. <span>• 3m ago</span></div>
                 <p>"Netflix 4K code worked instantly. Delivered in under 2 minutes!"</p>
-                <div class="stars">★★★★★</div>
-              </div>
-              <div class="thread">
-                <div class="who">Marta K. <span>• 18m ago</span></div>
-                <p>"ChatGPT Pro renewal was smooth. Second purchase here — trusted."</p>
                 <div class="stars">★★★★★</div>
               </div>
             </div>
@@ -135,17 +129,15 @@
 
           <div class="side-card">
             <div class="side-head"><b>📢 BUYER REQUESTS</b></div>
-            <div id="communityRequests">
+            <div id="communityRequests" data-limit="3">
               <div class="request-row"><span>Windows 11 Pro under $15</span><span class="replies">4 replies</span></div>
-              <div class="request-row"><span>Spotify family slot (EU)</span><span class="replies">2 replies</span></div>
             </div>
           </div>
 
           <div class="side-card">
-            <div class="side-head"><b>🏆 TOP REVIEWERS</b></div>
-            <div id="communityReviewers">
-              <div class="request-row"><span>Luminar</span><span class="replies">22 reviews</span></div>
-              <div class="request-row"><span>Knox B.</span><span class="replies">12 reviews</span></div>
+            <div class="side-head"><b>🔥 MOST SOLD THIS WEEK</b></div>
+            <div id="mostSoldList">
+              <div class="request-row"><span>Loading…</span><span class="replies">—</span></div>
             </div>
           </div>
         </aside>
