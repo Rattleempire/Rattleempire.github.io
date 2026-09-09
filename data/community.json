@@ -1,0 +1,20 @@
+{
+  "online": 128,
+  "threads": [
+    { "who": "Alex T.", "time": "3m ago", "text": "Netflix 4K code worked instantly. Delivered in under 2 minutes!", "stars": 5 },
+    { "who": "Marta K.", "time": "18m ago", "text": "ChatGPT Pro renewal was smooth. Second purchase here — trusted.", "stars": 5 },
+    { "who": "Devnath", "time": "41m ago", "text": "Any advice on Office 365 family vs personal?", "stars": 0 },
+    { "who": "CodeVault (verified seller)", "time": "52m ago", "text": "@Devnath Family covers 6 accounts — better value if you share with friends.", "stars": 0 }
+  ],
+  "requests": [
+    { "text": "Windows 11 Pro under $15", "replies": 4 },
+    { "text": "Spotify family slot (EU)", "replies": 2 },
+    { "text": "Adobe CC student key", "replies": 6 },
+    { "text": "Disney+ 12 months bundle", "replies": 1 }
+  ],
+  "reviewers": [
+    { "name": "Luminar", "reviews": 22 },
+    { "name": "Knox B.", "reviews": 12 },
+    { "name": "Temp Guy", "reviews": 7 }
+  ]
+}
